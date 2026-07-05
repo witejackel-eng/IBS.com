@@ -16,6 +16,7 @@ export const services: Service[] = [
     intro:
       "Our UC solutions streamline communication across channels and devices with a cohesive interface that lifts efficiency. Scalable and adaptable, they integrate with existing systems so businesses of any size can stay ahead of an evolving technology landscape.",
     icon: "phone-call",
+    image: "/images/services/voice-communication.jpg",
     capabilities: [
       {
         title: "IP-PBX / KTS",
@@ -158,6 +159,7 @@ export const services: Service[] = [
     intro:
       "Our solutions cover the full stack of a modern contact center, from the agent's headset to predictive dialing and compliance-grade call recording.",
     icon: "headset",
+    image: "/images/services/call-center-solutions.jpg",
     capabilities: [
       {
         title: "Call Center Headset",
@@ -220,6 +222,7 @@ export const amcService = {
     "Specialized Annual Maintenance Contract (AMC) services that keep mission-critical systems operating at peak performance, backed by certified technicians and industry-standard SLAs.",
   intro:
     "Structured service protocols and industry-standard SLAs ensure reliability, responsiveness, and compliance across diverse technical infrastructures.",
+  image: "/images/services/annual-maintenance-service.jpg",
   categories: [
     {
       title: "Communication Technologies",

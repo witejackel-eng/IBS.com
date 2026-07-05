@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
@@ -7,6 +8,9 @@ import { Section } from "@/components/layout/section";
 import { SplitText } from "@/components/motion/split-text";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { CtaSection } from "@/components/sections/cta-section";
+import { segmentIllustrationMap } from "@/components/illustrations/segments";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { blurMap } from "@/lib/image-blur-map";
 import { segments, services, amcService } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -23,6 +27,7 @@ function serviceLabel(slug: string) {
 export default function WhoWeServePage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Who We Serve", path: "/who-we-serve" }]} />
       <Section bg="ambient" className="bg-background pt-40 pb-20">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
@@ -41,15 +46,38 @@ export default function WhoWeServePage() {
 
       <Section bg="grid">
         <Container>
-          <RevealGroup className="grid grid-cols-1 gap-8 lg:grid-cols-2" stagger={0.08}>
-            {segments.map((segment) => (
+          <RevealGroup className="grid grid-cols-1 gap-8 md:grid-cols-2" stagger={0.08}>
+            {segments.map((segment) => {
+              const Illustration = segmentIllustrationMap[segment.slug];
+              return (
               <RevealItem key={segment.slug}>
-                <div className="flex h-full flex-col gap-6 rounded-3xl border border-border bg-card p-8">
+                <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card">
+                  <div className="relative h-40 w-full overflow-hidden bg-muted">
+                    <Image
+                      src={`/images/segments/${segment.slug}.jpg`}
+                      alt={segment.title}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover"
+                      placeholder="blur"
+                      blurDataURL={blurMap[`/images/segments/${segment.slug}.jpg`]}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
+                    {Illustration && (
+                      <span className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-lg bg-card/90 backdrop-blur-sm">
+                        <Illustration className="h-7 w-7" />
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-1 flex-col gap-6 p-8">
                   <div>
                     <h2 className="text-xl font-semibold text-charcoal font-heading">{segment.title}</h2>
                     <p className="mt-3 text-sm text-steel">{segment.summary}</p>
                   </div>
 
+                  <div>
+                  <h3 className="mb-2.5 text-xs font-semibold tracking-[0.1em] text-steel uppercase">Example applications</h3>
                   <ul className="flex flex-col gap-2.5">
                     {segment.needs.map((need) => (
                       <li key={need} className="flex items-start gap-2.5 text-sm text-steel">
@@ -58,8 +86,13 @@ export default function WhoWeServePage() {
                       </li>
                     ))}
                   </ul>
+                  </div>
 
-                  <div className="mt-auto flex flex-wrap gap-2 border-t border-border pt-5">
+                  <div
+                    role="group"
+                    aria-label={`Related services for ${segment.title}`}
+                    className="mt-auto flex flex-wrap gap-2 border-t border-border pt-5"
+                  >
                     {segment.relevantServiceSlugs.map((slug) => (
                       <Link
                         key={slug}
@@ -70,9 +103,11 @@ export default function WhoWeServePage() {
                       </Link>
                     ))}
                   </div>
+                  </div>
                 </div>
               </RevealItem>
-            ))}
+              );
+            })}
           </RevealGroup>
         </Container>
       </Section>

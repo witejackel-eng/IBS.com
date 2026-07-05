@@ -4,9 +4,29 @@ import { Resend } from "resend";
 import { prisma } from "@/lib/db";
 import { contactFormSchema } from "@/lib/validation/contact";
 import { company } from "@/lib/content";
+import { getClientIp, rateLimit } from "@/lib/rate-limit";
+
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
 
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  const { success, resetAt } = rateLimit(`contact:${ip}`, RATE_LIMIT, RATE_WINDOW_MS);
+  if (!success) {
+    return NextResponse.json(
+      { error: "Too many submissions. Please try again later." },
+      { status: 429, headers: { "Retry-After": Math.ceil((resetAt - Date.now()) / 1000).toString() } }
+    );
+  }
+
   const body = await request.json().catch(() => null);
+
+  // Honeypot: a hidden field real users never fill in. Bots that populate
+  // every input trip it, so we pretend success without doing any real work.
+  if (body && typeof body === "object" && "hp" in body && typeof body.hp === "string" && body.hp.length > 0) {
+    return NextResponse.json({ ok: true });
+  }
+
   const parsed = contactFormSchema.safeParse(body);
 
   if (!parsed.success) {

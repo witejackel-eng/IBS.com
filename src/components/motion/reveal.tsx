@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
+import { DURATION, EASE_OUT_EXPO } from "@/lib/motion";
 
 type Direction = "up" | "down" | "left" | "right" | "scale" | "none";
 
@@ -19,7 +20,7 @@ export function Reveal({
   className,
   direction = "up",
   delay = 0,
-  duration = 0.8,
+  duration = DURATION.hero,
   once = true,
   amount = 0.3,
 }: {
@@ -31,16 +32,17 @@ export function Reveal({
   once?: boolean;
   amount?: number;
 }) {
-  const offset = OFFSETS[direction];
+  const prefersReducedMotion = useReducedMotion();
+  const offset = prefersReducedMotion ? {} : OFFSETS[direction];
 
   const variants: Variants = {
-    hidden: { opacity: 0, ...offset },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, ...offset },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
       scale: 1,
-      transition: { duration, delay, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: prefersReducedMotion ? 0 : duration, delay: prefersReducedMotion ? 0 : delay, ease: EASE_OUT_EXPO },
     },
   };
 
@@ -85,12 +87,18 @@ export function RevealGroup({
 
 export const revealItemVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: DURATION.reveal, ease: EASE_OUT_EXPO } },
+};
+
+const reducedRevealItemVariants: Variants = {
+  hidden: { opacity: 1, y: 0 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0 } },
 };
 
 export function RevealItem({ children, className }: { children: ReactNode; className?: string }) {
+  const prefersReducedMotion = useReducedMotion();
   return (
-    <motion.div className={className} variants={revealItemVariants}>
+    <motion.div className={className} variants={prefersReducedMotion ? reducedRevealItemVariants : revealItemVariants}>
       {children}
     </motion.div>
   );

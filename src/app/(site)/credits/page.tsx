@@ -17,8 +17,8 @@ export default function CreditsPage() {
       <Container className="max-w-2xl">
         <h1 className="text-display-3 font-semibold tracking-tight text-charcoal">Image Credits</h1>
         <p className="mt-4 text-steel">
-          Photography on this site is sourced from Wikimedia Commons under free licenses. Where the
-          license requires attribution, it&apos;s provided below.
+          Photography on this site is sourced from Wikimedia Commons and Pexels under free licenses.
+          Where the license requires attribution, it&apos;s provided below.
         </p>
         <ul className="mt-10 flex flex-col gap-6">
           {imageCredits.map((credit) => (

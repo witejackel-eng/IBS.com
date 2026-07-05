@@ -5,6 +5,9 @@ import { Section } from "@/components/layout/section";
 import { SplitText } from "@/components/motion/split-text";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { CtaSection } from "@/components/sections/cta-section";
+import { IllustrationFrame } from "@/components/illustrations/illustration-frame";
+import { PartnersEcosystemIllustration } from "@/components/illustrations/partners-ecosystem";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { partners, partnerCategories } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -17,6 +20,7 @@ export const metadata: Metadata = {
 export default function PartnersPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Partners", path: "/partners" }]} />
       <Section bg="ambient" className="bg-background pt-40 pb-20">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
@@ -32,6 +36,11 @@ export default function PartnersPage() {
               Our OEM partners ensure top-quality products and reliable solutions, enhancing our
               service excellence across {partners.length}+ brands.
             </p>
+          </Reveal>
+          <Reveal direction="up" delay={0.3}>
+            <IllustrationFrame className="mx-auto mt-12 aspect-[2/1] w-full max-w-xl">
+              <PartnersEcosystemIllustration className="h-3/4 w-3/4" />
+            </IllustrationFrame>
           </Reveal>
         </Container>
       </Section>

@@ -5,3 +5,6 @@ export * from "./partners";
 export * from "./segments";
 export * from "./nav";
 export * from "./image-credits";
+export * from "./process";
+export * from "./quality";
+export * from "./projects";

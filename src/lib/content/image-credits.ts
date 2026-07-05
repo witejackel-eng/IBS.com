@@ -9,8 +9,9 @@ export interface ImageCredit {
 
 /**
  * Every photo on this site (other than IBS's own logo/wordmark) is sourced
- * from Wikimedia Commons under a free license. CC BY-SA requires attribution,
- * so it's recorded here and surfaced on /credits.
+ * from Wikimedia Commons or Pexels under a free license. CC BY-SA requires
+ * attribution; the Pexels License doesn't, but sourcing is recorded here for
+ * transparency and surfaced on /credits either way.
  */
 export const imageCredits: ImageCredit[] = [
   {
@@ -44,5 +45,77 @@ export const imageCredits: ImageCredit[] = [
     source: "https://commons.wikimedia.org/wiki/File:Laptop_computer.jpeg",
     license: "CC BY-SA 4.0",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+  },
+  {
+    usedFor: "Voice Communication",
+    title: "IP phone in a data center room",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/17636234/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
+  },
+  {
+    usedFor: "Call Center Solutions",
+    title: "Dual-monitor workstation",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/8204353/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
+  },
+  {
+    usedFor: "Annual Maintenance Service",
+    title: "IT technician working in a data center server room",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/37605911/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
+  },
+  {
+    usedFor: "Enterprises segment",
+    title: "Modern office building interior",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/260994/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
+  },
+  {
+    usedFor: "Hotels segment",
+    title: "Modern hotel lobby interior",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/36354489/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
+  },
+  {
+    usedFor: "Residential segment",
+    title: "Modern living room with smart TV",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/35490296/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
+  },
+  {
+    usedFor: "SOHO segment",
+    title: "Home office desk setup",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/27436633/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
+  },
+  {
+    usedFor: "Who We Are (homepage)",
+    title: "Engineer monitoring servers in a data center",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/1181316/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
+  },
+  {
+    usedFor: "Engineering Process (homepage)",
+    title: "Field engineer checking electrical installation",
+    author: "Pexels contributor",
+    source: "https://www.pexels.com/photo/442160/",
+    license: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
   },
 ];

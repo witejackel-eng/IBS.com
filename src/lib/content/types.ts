@@ -30,3 +30,35 @@ export interface Segment {
   needs: string[];
   relevantServiceSlugs: string[];
 }
+
+export interface ProcessStep {
+  slug: string;
+  title: string;
+  description: string;
+}
+
+/** A placeholder-flagged slot: rendered with a visible "pending" treatment, never as a real claim. */
+export interface QualityPlaceholder {
+  title: string;
+  description: string;
+  placeholder: true;
+}
+
+/**
+ * A generic, illustrative delivery scenario built from real service
+ * capabilities -- not a completed client engagement. Every render site must
+ * show the `illustrative` flag as a visible badge, never as a footnote.
+ */
+export interface ProjectScenario {
+  slug: string;
+  illustrative: true;
+  role: string;
+  tagline: string;
+  overview: string;
+  challenge: string;
+  solution: string;
+  outcome: string;
+  technicalHighlights: string[];
+  location: string;
+  relevantServiceSlugs: string[];
+}

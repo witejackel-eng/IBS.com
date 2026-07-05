@@ -27,8 +27,8 @@ export function CtaSection() {
             <Magnetic>
               <ButtonLink
                 href="/contact"
-                size="lg"
-                className="h-12 rounded-full bg-deep-blue px-8 text-base text-warm-white hover:bg-deep-blue-light"
+                variant="cta"
+                size="xl"
                 data-cursor-hover
               >
                 Talk to us <ArrowRight className="h-4 w-4" />

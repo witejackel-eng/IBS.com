@@ -12,20 +12,25 @@ team bios, or statistics. See [`/credits`](src/app/(site)/credits/page.tsx) for 
 ## Highlights
 
 - Cinematic WebGL hero (React Three Fiber network/particle scene), Lenis smooth scroll, custom
-  cursor, mask/split-text reveals, tilt cards, and magnetic buttons
-- Working contact form (React Hook Form + Zod) that persists leads to Postgres via Prisma and
-  emails via Resend — degrading gracefully to a clear error if neither is configured
-- Password-gated `/admin` with a leads dashboard and a live content editor for homepage copy and
-  contact info, reading from the database with static-content fallback
-- Full SEO: metadata, Open Graph + Twitter cards, a generated OG image, JSON-LD business schema,
-  robots.txt, sitemap.xml, and canonical URLs on every page
+  cursor, mask/split-text reveals, tilt cards, and magnetic buttons — every continuous animation
+  (hero render loop, cursor, tilt, magnetic, smooth scroll) pauses for `prefers-reduced-motion`
+- Working contact form (React Hook Form + Zod) with a honeypot field, rate limiting, and persistence
+  to Postgres via Prisma plus email via Resend — degrading gracefully if neither is configured
+- Password-gated `/admin` (rate-limited login) with a leads dashboard and a live content editor for
+  homepage copy and contact info, reading from the database with static-content fallback
+- Full SEO: metadata, Open Graph + Twitter cards, a generated OG image, JSON-LD (Organization/
+  LocalBusiness, BreadcrumbList, Service, ContactPage), robots.txt, sitemap.xml, and canonical URLs
+- Security headers and a Content-Security-Policy, plus custom 404/error/global-error pages and
+  loading states for the dynamic admin routes
+- Vercel Analytics + Speed Insights, and real blur placeholders for every image (see
+  [Image optimization](#image-optimization) below)
 - Real, freely-licensed photography (Wikimedia Commons) with attribution tracked on `/credits`
 
 ## Tech stack
 
-- **Frontend:** Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4, Framer Motion, GSAP-ready, Lenis smooth scroll, shadcn/ui (Base UI primitives), Lucide icons, Three.js / React Three Fiber / Drei
+- **Frontend:** Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4, Framer Motion, Lenis smooth scroll, shadcn/ui (Base UI primitives), Lucide icons, Three.js / React Three Fiber / Drei
 - **Backend:** Next.js Route Handlers, Prisma 7 (driver adapters) + PostgreSQL, Resend (email), React Hook Form + Zod
-- **Deployment:** Vercel
+- **Deployment:** Vercel (Analytics + Speed Insights included)
 
 ## Project structure
 
@@ -44,14 +49,19 @@ src/
     webgl/            # React Three Fiber hero scene
     ui/               # shadcn/ui primitives
     admin/            # Admin-only components (content editor, logout button)
+    seo/              # JSON-LD components: Organization, Breadcrumb, Service, ContactPage
   lib/
     content/          # Source-of-truth data: services, partners, segments,
                       # company info -- edit this to change site copy
     db.ts             # Prisma client (gracefully null if DATABASE_URL unset)
     content-overrides.ts  # Admin CMS override read/write with static fallback
     admin-auth.ts     # Password + signed-cookie session for /admin
+    rate-limit.ts     # In-memory sliding-window limiter for /api/contact and admin login
+    image-blur-map.ts # Generated blurDataURL map, see `npm run generate:blur`
 prisma/
   schema.prisma       # ContactSubmission + ContentOverride models
+scripts/
+  generate-blur-placeholders.mjs  # Regenerates src/lib/image-blur-map.ts from public/images
 ```
 
 ## Local development
@@ -95,6 +105,37 @@ the homepage hero (headline/subcopy) and the contact info block on the Contact p
 back to the static content above when no override exists. The pattern in
 `src/lib/content-overrides.ts` can be extended to more fields the same way.
 
+## Image optimization
+
+All images are served through `next/image` with descriptive `alt` text, per-breakpoint `sizes`,
+and `priority` only on above-the-fold hero images. Images referenced by a dynamic path (services,
+industry segments) can't use Next's automatic blur-on-import, so `scripts/generate-blur-placeholders.mjs`
+pre-generates a tiny base64 `blurDataURL` for every file in `public/images` into
+`src/lib/image-blur-map.ts`. Re-run it after adding, removing, or replacing an image:
+
+```bash
+npm run generate:blur
+```
+
+## Production hardening
+
+- **Security headers & CSP** — set in `next.config.ts`: X-Frame-Options, X-Content-Type-Options,
+  Referrer-Policy, Permissions-Policy, HSTS, and a Content-Security-Policy locked to `'self'`
+  (plus Vercel Analytics' domains and `raw.githack.com`, which the WebGL hero's
+  `<Environment preset="city" />` fetches an HDRI from at runtime).
+- **Rate limiting** — `/api/contact` (5 / 10 min per IP) and `/api/admin/login` (5 / 15 min per IP)
+  via `src/lib/rate-limit.ts`, an in-memory limiter suitable for a single-region, low-traffic
+  deployment. For multi-instance/high-traffic deployments, swap it for a durable store (e.g.
+  Upstash Redis) behind the same function signature.
+- **Spam protection** — the contact form includes a honeypot field; submissions that fill it
+  return a fake success without touching the database or sending an email.
+- **Error handling** — `not-found.tsx` (root + in-tree), `error.tsx`, and `global-error.tsx` match
+  the site's design language; `loading.tsx` covers the dynamic `/admin/leads` and `/admin/content`
+  routes.
+- **Accessibility** — keyboard-operable mega menu and mobile menu (arrow keys, Escape, focus
+  return), a skip-to-content link, and `prefers-reduced-motion` support on every continuous
+  animation (WebGL hero, custom cursor, tilt cards, magnetic buttons, Lenis smooth scroll).
+
 ## Deployment (Vercel)
 
 1. Push this repo to GitHub/GitLab/Bitbucket and import it in Vercel.
@@ -110,6 +151,8 @@ back to the static content above when no override exists. The pattern in
 
 ## Verification
 
-`npm run lint` and `npm run build` both pass cleanly (zero errors/warnings) as of this commit.
-All 6 core services, the AMC page, and every static marketing page are statically generated;
-`/admin/*` and the API routes are server-rendered on demand.
+`npm run lint`, `npx tsc --noEmit`, and `npm run build` all pass cleanly (zero errors/warnings) as
+of this commit. All 6 core services, the AMC page, and every static marketing page are statically
+generated; `/admin/*` and the API routes are server-rendered on demand. A production build
+(`npm run build && npm run start`) was smoke-tested: security headers, sitemap.xml, robots.txt,
+the 404 page, and contact-form rate limiting all behave as expected.

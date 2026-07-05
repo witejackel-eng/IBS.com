@@ -6,12 +6,25 @@ import {
   createSessionToken,
   isAdminConfigured,
 } from "@/lib/admin-auth";
+import { getClientIp, rateLimit } from "@/lib/rate-limit";
+
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 15 * 60 * 1000;
 
 export async function POST(request: Request) {
   if (!isAdminConfigured()) {
     return NextResponse.json(
       { error: "Admin login is not configured. Set ADMIN_PASSWORD and ADMIN_SESSION_SECRET." },
       { status: 503 }
+    );
+  }
+
+  const ip = getClientIp(request);
+  const { success, resetAt } = rateLimit(`admin-login:${ip}`, RATE_LIMIT, RATE_WINDOW_MS);
+  if (!success) {
+    return NextResponse.json(
+      { error: "Too many attempts. Please try again later." },
+      { status: 429, headers: { "Retry-After": Math.ceil((resetAt - Date.now()) / 1000).toString() } }
     );
   }
 

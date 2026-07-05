@@ -7,8 +7,18 @@ export const mainNav = [
     label: "Services",
     href: "/services",
     children: [
-      ...services.map((s) => ({ label: s.navLabel, href: `/services/${s.slug}` })),
-      { label: amcService.navLabel, href: `/services/${amcService.slug}` },
+      ...services.map((s) => ({
+        label: s.navLabel,
+        href: `/services/${s.slug}`,
+        tagline: s.tagline,
+        slug: s.slug,
+      })),
+      {
+        label: amcService.navLabel,
+        href: `/services/${amcService.slug}`,
+        tagline: amcService.tagline,
+        slug: amcService.slug,
+      },
     ],
   },
   { label: "Who We Serve", href: "/who-we-serve" },

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
@@ -6,7 +7,11 @@ import { Section } from "@/components/layout/section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ButtonLink } from "@/components/shared/button-link";
 import { SplitText } from "@/components/motion/split-text";
+import { MaskReveal } from "@/components/motion/mask-reveal";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { CapabilityCheckIcon } from "@/components/illustrations/icons";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { blurMap } from "@/lib/image-blur-map";
 import { company, partners } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -18,19 +23,36 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "About", path: "/about" }]} />
       <Section bg="ambient" className="bg-background pt-40 pb-24">
-        <Container>
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
-            About Us
-          </span>
-          <SplitText
-            as="h1"
-            text={company.positioning}
-            className="max-w-3xl text-display-2 leading-[1.05] font-semibold tracking-tight text-charcoal text-balance"
-          />
-          <Reveal direction="up" delay={0.2}>
-            <p className="mt-8 max-w-2xl text-lg text-steel">{company.about.intro}</p>
-          </Reveal>
+        <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div>
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
+              About Us
+            </span>
+            <SplitText
+              as="h1"
+              text={company.positioning}
+              className="max-w-3xl text-display-2 leading-[1.05] font-semibold tracking-tight text-charcoal text-balance"
+            />
+            <Reveal direction="up" delay={0.2}>
+              <p className="mt-8 max-w-2xl text-lg text-steel">{company.about.intro}</p>
+            </Reveal>
+          </div>
+          <MaskReveal>
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
+              <Image
+                src="/images/about/who-we-are.jpg"
+                alt="An IBS engineer monitoring infrastructure in a data center"
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover"
+                placeholder="blur"
+                blurDataURL={blurMap["/images/about/who-we-are.jpg"]}
+                priority
+              />
+            </div>
+          </MaskReveal>
         </Container>
       </Section>
 
@@ -42,10 +64,11 @@ export default function AboutPage() {
             align="left"
             className="mb-14 items-start text-left"
           />
-          <RevealGroup className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-2" stagger={0.06}>
+          <RevealGroup className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
             {company.about.categories.map((cat) => (
               <RevealItem key={cat.title} className="bg-background p-8">
-                <h3 className="text-lg font-semibold text-charcoal font-heading">{cat.title}</h3>
+                <CapabilityCheckIcon className="h-5 w-5 text-deep-blue" />
+                <h3 className="mt-3 text-lg font-semibold text-charcoal font-heading">{cat.title}</h3>
                 <p className="mt-3 text-sm text-steel">{cat.description}</p>
               </RevealItem>
             ))}
@@ -95,7 +118,7 @@ export default function AboutPage() {
             text="Have a project in mind?"
             className="text-display-3 font-semibold tracking-tight text-charcoal"
           />
-          <ButtonLink href="/contact" size="lg" className="h-12 rounded-full bg-deep-blue px-8 text-base text-warm-white hover:bg-deep-blue-light" data-cursor-hover>
+          <ButtonLink href="/contact" variant="cta" size="xl" data-cursor-hover>
             Talk to us <ArrowRight className="h-4 w-4" />
           </ButtonLink>
         </Container>

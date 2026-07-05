@@ -9,6 +9,11 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
 import { ServiceVisual } from "@/components/shared/service-visual";
 import { CtaSection } from "@/components/sections/cta-section";
+import { IllustrationFrame } from "@/components/illustrations/illustration-frame";
+import { serviceIllustrationMap } from "@/components/illustrations/services";
+import { CapabilityCheckIcon } from "@/components/illustrations/icons";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { ServiceJsonLd } from "@/components/seo/service-jsonld";
 import { services } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -38,9 +43,18 @@ export default async function ServiceDetailPage({
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) notFound();
+  const Illustration = serviceIllustrationMap[service.slug];
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: service.title, path: `/services/${service.slug}` },
+        ]}
+      />
+      <ServiceJsonLd name={service.title} summary={service.summary} slug={service.slug} />
       <Section className="pt-40 pb-0">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
@@ -70,19 +84,30 @@ export default async function ServiceDetailPage({
 
       <Section bg="grid" className="pt-0">
         <Container>
-          <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2" stagger={0.08}>
-            {service.capabilities.map((cap) => (
-              <RevealItem key={cap.title}>
-                <div className="h-full rounded-2xl border border-border bg-card p-7">
-                  <h3 className="text-lg font-semibold text-charcoal font-heading">{cap.title}</h3>
-                  <p className="mt-3 text-sm text-steel">{cap.description}</p>
-                </div>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[240px_1fr] lg:gap-12">
+            {Illustration && (
+              <Reveal direction="left" className="lg:sticky lg:top-28 lg:self-start">
+                <IllustrationFrame className="aspect-square w-full">
+                  <Illustration className="h-2/3 w-2/3" />
+                </IllustrationFrame>
+              </Reveal>
+            )}
+
+            <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2" stagger={0.08}>
+              {service.capabilities.map((cap) => (
+                <RevealItem key={cap.title}>
+                  <div className="h-full rounded-2xl border border-border bg-card p-6">
+                    <CapabilityCheckIcon className="h-5 w-5 text-deep-blue" />
+                    <h3 className="mt-3 text-lg font-semibold text-charcoal font-heading">{cap.title}</h3>
+                    <p className="mt-3 text-sm text-steel">{cap.description}</p>
+                  </div>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </div>
 
           <Reveal direction="up" className="mt-14 flex justify-center">
-            <ButtonLink href="/contact" size="lg" className="h-12 gap-2 rounded-full bg-deep-blue px-8 text-base text-warm-white hover:bg-deep-blue-light" data-cursor-hover>
+            <ButtonLink href="/contact" variant="cta" size="xl" data-cursor-hover>
               Ask about {service.title} <ArrowRight className="h-4 w-4" />
             </ButtonLink>
           </Reveal>

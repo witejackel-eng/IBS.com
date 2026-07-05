@@ -3,12 +3,14 @@
 import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
+import { useReducedMotion } from "framer-motion";
 
 import { NetworkMesh } from "@/components/webgl/network-mesh";
 import { ParticleField } from "@/components/webgl/particle-field";
 
 export function HeroScene({ active = true }: { active?: boolean }) {
   const mouse = useRef({ x: 0, y: 0 });
+  const prefersReducedMotion = useReducedMotion();
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -24,7 +26,7 @@ export function HeroScene({ active = true }: { active?: boolean }) {
         dpr={[1, 1.75]}
         camera={{ position: [0, 0, 6.5], fov: 42 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        frameloop={active ? "always" : "never"}
+        frameloop={active && !prefersReducedMotion ? "always" : "never"}
       >
         <ambientLight intensity={0.9} />
         <directionalLight position={[3, 3, 4]} intensity={1} />

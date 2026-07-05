@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { DURATION, EASE_OUT_EXPO } from "@/lib/motion";
 
 export function SplitText({
   text,
@@ -19,10 +20,12 @@ export function SplitText({
   stagger?: number;
 }) {
   const parts = splitBy === "word" ? text.split(" ") : text.split("");
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <Tag className={cn("inline-block overflow-hidden", className)}>
+    <Tag className={cn("inline-block overflow-hidden", className)} aria-label={text}>
       <motion.span
+        aria-hidden="true"
         className="inline-block"
         initial="hidden"
         whileInView="visible"
@@ -33,14 +36,18 @@ export function SplitText({
           <span key={i} className="inline-block overflow-hidden align-top">
             <motion.span
               className="inline-block"
-              variants={{
-                hidden: { y: "110%", opacity: 0 },
-                visible: {
-                  y: "0%",
-                  opacity: 1,
-                  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-                },
-              }}
+              variants={
+                prefersReducedMotion
+                  ? { hidden: { y: "0%", opacity: 1 }, visible: { y: "0%", opacity: 1, transition: { duration: 0 } } }
+                  : {
+                      hidden: { y: "110%", opacity: 0 },
+                      visible: {
+                        y: "0%",
+                        opacity: 1,
+                        transition: { duration: DURATION.reveal, ease: EASE_OUT_EXPO },
+                      },
+                    }
+              }
             >
               {part}
               {splitBy === "word" && i !== parts.length - 1 ? " " : ""}

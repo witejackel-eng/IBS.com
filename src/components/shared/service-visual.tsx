@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Headset, PhoneCall } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { blurMap } from "@/lib/image-blur-map";
 import type { Service } from "@/lib/content";
 
 const iconMap = {
@@ -25,6 +26,8 @@ export function ServiceVisual({
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
+          placeholder={blurMap[service.image] ? "blur" : "empty"}
+          blurDataURL={blurMap[service.image]}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent" />
       </div>

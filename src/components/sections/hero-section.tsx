@@ -51,8 +51,8 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
             <Magnetic>
               <ButtonLink
                 href="/contact"
-                size="lg"
-                className="h-12 rounded-full bg-deep-blue px-7 text-base text-warm-white hover:bg-deep-blue-light"
+                variant="cta"
+                size="xl"
                 data-cursor-hover
               >
                 Talk to us <ArrowRight className="h-4 w-4" />
@@ -61,8 +61,8 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
             <ButtonLink
               href="/services"
               variant="outline"
-              size="lg"
-              className="h-12 rounded-full border-border bg-transparent px-7 text-base text-charcoal hover:bg-secondary"
+              size="xl"
+              className="border-border bg-transparent text-charcoal hover:bg-secondary"
               data-cursor-hover
             >
               Explore services

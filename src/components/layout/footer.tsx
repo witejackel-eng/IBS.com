@@ -63,7 +63,7 @@ export function Footer() {
               <li><Link href="/quality" className="text-sm text-steel transition-colors hover:text-charcoal">Quality & Support</Link></li>
               <li><Link href="/contact" className="text-sm text-steel transition-colors hover:text-charcoal">Careers</Link></li>
             </ul>
-            <p className="mt-2 text-xs text-steel/70">
+            <p className="mt-2 text-xs text-steel/90">
               Interested in joining IBS? <Link href="/contact" className="underline underline-offset-2 hover:text-charcoal">Get in touch</Link>.
             </p>
           </div>
@@ -102,7 +102,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-steel/70 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-steel/90 sm:flex-row">
           <p>Copyright © {company.legalName} {new Date().getFullYear()}. All Rights Reserved.</p>
           <Link href="/credits" className="hover:text-charcoal">
             Image credits

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,6 +25,7 @@ const serviceOptions = [...services.map((s) => s.navLabel), amcService.navLabel]
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
   const {
     register,
     control,
@@ -41,9 +42,13 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, hp: honeypotRef.current?.value ?? "" }),
       });
-      if (!res.ok) throw new Error("Request failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        toast.error(data?.error ?? "Something went wrong. Please try again or call us directly.");
+        return;
+      }
       setSubmitted(true);
       reset();
     } catch {
@@ -79,6 +84,15 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 rounded-3xl border border-border bg-card p-8">
+      <input
+        ref={honeypotRef}
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label htmlFor="name">Full name</Label>
@@ -104,13 +118,13 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label>What are you interested in? (optional)</Label>
+        <Label htmlFor="serviceInterest">What are you interested in? (optional)</Label>
         <Controller
           control={control}
           name="serviceInterest"
           render={({ field }) => (
             <Select value={field.value || undefined} onValueChange={field.onChange}>
-              <SelectTrigger className="w-full">
+              <SelectTrigger id="serviceInterest" className="w-full">
                 <SelectValue placeholder="Select a service" />
               </SelectTrigger>
               <SelectContent>
@@ -133,9 +147,10 @@ export function ContactForm() {
 
       <Button
         type="submit"
-        size="lg"
+        variant="cta"
+        size="xl"
         disabled={isSubmitting}
-        className="mt-2 h-12 gap-2 self-start rounded-full bg-deep-blue px-8 text-base text-warm-white hover:bg-deep-blue-light"
+        className="mt-2 self-start"
       >
         <AnimatePresence mode="wait" initial={false}>
           {isSubmitting ? (

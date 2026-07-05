@@ -6,6 +6,7 @@ import { SplitText } from "@/components/motion/split-text";
 import { Reveal } from "@/components/motion/reveal";
 import { ServicesGridSection } from "@/components/sections/services-grid-section";
 import { CtaSection } from "@/components/sections/cta-section";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { company } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 export default function ServicesIndexPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Services", path: "/services" }]} />
       <Section bg="ambient" className="bg-background pt-40 pb-20">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
