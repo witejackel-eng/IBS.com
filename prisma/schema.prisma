@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ContactStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
+model ContactSubmission {
+  id              String        @id @default(cuid())
+  name            String
+  email           String
+  phone           String?
+  company         String?
+  serviceInterest String?
+  message         String
+  status          ContactStatus @default(NEW)
+  createdAt       DateTime      @default(now())
+}
+
+/// Generic key-value content store backing the lightweight admin CMS.
+/// `key` identifies the editable unit (e.g. "home.hero", "contact.info",
+/// "seo./about"); `data` holds arbitrary JSON matching that unit's shape.
+/// Pages read from here first and fall back to the static content in
+/// src/lib/content when no override exists or the database is unreachable.
+model ContentOverride {
+  key       String   @id
+  data      Json
+  updatedAt DateTime @updatedAt
+}
