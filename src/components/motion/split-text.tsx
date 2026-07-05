@@ -23,7 +23,7 @@ export function SplitText({
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <Tag className={cn("inline-block overflow-hidden", className)} aria-label={text}>
+    <Tag className={cn("block overflow-hidden", className)} aria-label={text}>
       <motion.span
         aria-hidden="true"
         className="inline-block"
