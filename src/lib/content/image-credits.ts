@@ -9,9 +9,9 @@ export interface ImageCredit {
 
 /**
  * Every photo on this site (other than IBS's own logo/wordmark) is sourced
- * from Wikimedia Commons or Pexels under a free license. CC BY-SA requires
- * attribution; the Pexels License doesn't, but sourcing is recorded here for
- * transparency and surfaced on /credits either way.
+ * from Wikimedia Commons, Pexels, or Unsplash under a free license. CC BY-SA
+ * requires attribution; the Pexels/Unsplash licenses don't, but sourcing is
+ * recorded here for transparency and surfaced on /credits either way.
  */
 export const imageCredits: ImageCredit[] = [
   {
@@ -32,11 +32,11 @@ export const imageCredits: ImageCredit[] = [
   },
   {
     usedFor: "Security Solutions",
-    title: "CP Plus CCTV camera",
-    author: "sharky1005",
-    source: "https://commons.wikimedia.org/wiki/File:CP_Plus_CCTV_camera.jpg",
-    license: "CC BY-SA 4.0",
-    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+    title: "Two CCTV security cameras mounted against a blue sky",
+    author: "Michal Jakubowski",
+    source: "https://unsplash.com/photos/oQD9uq4Rd4I",
+    license: "Unsplash License",
+    licenseUrl: "https://unsplash.com/license",
   },
   {
     usedFor: "Software Licenses",
