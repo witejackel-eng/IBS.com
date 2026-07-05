@@ -132,10 +132,10 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
       <div
         className={cn(
-          "flex w-full max-w-6xl items-center justify-between rounded-full border px-5 py-3 transition-[background-color,backdrop-filter,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "glass flex w-full max-w-6xl items-center justify-between rounded-full transition-[padding,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
           scrolled
-            ? "glass shadow-[0_16px_40px_-20px_rgba(15,23,42,0.28),0_4px_16px_-8px_rgba(15,23,42,0.14)]"
-            : "border-transparent bg-transparent shadow-transparent"
+            ? "px-5 py-2.5 shadow-[0_14px_36px_-16px_rgba(0,0,0,0.16),0_4px_14px_-6px_rgba(0,0,0,0.08)]"
+            : "px-5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
         )}
       >
         <Link href="/" data-cursor-hover>
@@ -157,8 +157,8 @@ export function Navbar() {
                   onMouseEnter={() => !isCoarsePointer && setServicesOpen(true)}
                   onMouseLeave={() => !isCoarsePointer && setServicesOpen(false)}
                   className={cn(
-                    "relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                    isServicesActive ? "text-charcoal" : "text-steel hover:text-charcoal"
+                    "relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium tracking-[0.01em] transition-colors",
+                    isServicesActive ? "text-charcoal" : "text-graphite hover:text-deep-blue"
                   )}
                 >
                   {link.label}
@@ -180,7 +180,7 @@ export function Navbar() {
                       onKeyDown={handleMenuKeyDown}
                       onMouseEnter={() => !isCoarsePointer && setServicesOpen(true)}
                       onMouseLeave={() => !isCoarsePointer && setServicesOpen(false)}
-                      className="glass absolute top-full left-1/2 mt-3 w-[440px] max-w-[92vw] origin-top -translate-x-1/2 rounded-3xl p-3 shadow-[0_32px_64px_-24px_rgba(15,23,42,0.22),0_8px_24px_-8px_rgba(15,23,42,0.12)] xl:w-[760px]"
+                      className="glass absolute top-full left-1/2 mt-3 w-[440px] max-w-[92vw] origin-top -translate-x-1/2 rounded-3xl p-3 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] xl:w-[760px]"
                     >
                       <div className="grid grid-cols-1 xl:grid-cols-[1fr_296px] xl:gap-3">
                         <div className="flex flex-col">
@@ -295,8 +295,8 @@ export function Navbar() {
                 href={link.href}
                 data-cursor-hover
                 className={cn(
-                  "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                  isActive(link.href) ? "text-charcoal" : "text-steel hover:text-charcoal"
+                  "relative rounded-full px-4 py-2 text-sm font-medium tracking-[0.01em] transition-colors",
+                  isActive(link.href) ? "text-charcoal" : "text-graphite hover:text-deep-blue"
                 )}
               >
                 {link.label}
@@ -310,7 +310,13 @@ export function Navbar() {
 
         <div className="hidden md:flex">
           <Magnetic>
-            <ButtonLink href="/contact" variant="cta" size="sm" className="rounded-full" data-cursor-hover>
+            <ButtonLink
+              href="/contact"
+              variant="cta"
+              size="sm"
+              className="rounded-full transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-8px_rgba(234,88,12,0.4)]"
+              data-cursor-hover
+            >
               Talk to us <ArrowRight className="h-3.5 w-3.5" />
             </ButtonLink>
           </Magnetic>
@@ -337,7 +343,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: DURATION.base, ease: EASE_OUT_EXPO }}
-            className="glass absolute inset-x-4 top-20 z-40 flex max-h-[75vh] flex-col gap-1 overflow-y-auto rounded-3xl p-4 shadow-[0_32px_64px_-24px_rgba(15,23,42,0.22),0_8px_24px_-8px_rgba(15,23,42,0.12)] md:hidden"
+            className="glass absolute inset-x-4 top-20 z-40 flex max-h-[75vh] flex-col gap-1 overflow-y-auto rounded-3xl p-4 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] md:hidden"
           >
             {mainNav.map((link) => (
               <div key={link.href}>

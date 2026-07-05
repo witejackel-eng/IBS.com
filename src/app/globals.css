@@ -231,11 +231,14 @@
     text-wrap: balance;
   }
 
+  /* Solid, near-opaque nav surface -- deliberately NOT translucent so the
+     WebGL hero's moving particles never show through and reduce readability.
+     Blur is kept only as a subtle enhancement behind the ~98% opaque fill. */
   .glass {
-    background: color-mix(in oklab, var(--card) 70%, transparent);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid color-mix(in oklab, var(--warm-white) 60%, var(--border));
+    background: color-mix(in oklab, var(--warm-white) 98%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(0, 0, 0, 0.06);
   }
 
   .glass-dark {
