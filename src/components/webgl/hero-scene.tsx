@@ -7,6 +7,7 @@ import { useReducedMotion } from "framer-motion";
 
 import { NetworkMesh } from "@/components/webgl/network-mesh";
 import { ParticleField } from "@/components/webgl/particle-field";
+import { EnvironmentErrorBoundary } from "@/components/webgl/environment-error-boundary";
 
 export function HeroScene({ active = true }: { active?: boolean }) {
   const mouse = useRef({ x: 0, y: 0 });
@@ -33,7 +34,9 @@ export function HeroScene({ active = true }: { active?: boolean }) {
         <directionalLight position={[-4, -2, -2]} intensity={0.35} color="#F97316" />
         <NetworkMesh mouse={mouse} />
         <ParticleField />
-        <Environment preset="city" environmentIntensity={0.2} />
+        <EnvironmentErrorBoundary>
+          <Environment preset="city" environmentIntensity={0.2} />
+        </EnvironmentErrorBoundary>
       </Canvas>
     </div>
   );
