@@ -23,7 +23,7 @@ export function Marquee({
         <div
           key={i}
           className={cn(
-            "flex shrink-0 items-center justify-around gap-16 pr-16",
+            "flex shrink-0 items-center justify-around gap-20 pr-20",
             reverse ? "animate-marquee-reverse" : "animate-marquee",
             pauseOnHover && "group-hover:[animation-play-state:paused]"
           )}
