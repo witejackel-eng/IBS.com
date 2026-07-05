@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
@@ -73,7 +73,7 @@ export default function AmcPage() {
                   <ul className="flex flex-col gap-2.5">
                     {cat.items.map((item) => (
                       <li key={item} className="flex items-start gap-2.5 text-steel">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-deep-blue" />
+                        <CapabilityCheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-deep-blue" />
                         <span>{item}</span>
                       </li>
                     ))}

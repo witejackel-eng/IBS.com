@@ -7,12 +7,15 @@ export function SectionHeading({
   title,
   description,
   align = "center",
+  size = "default",
   className,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
+  /** "lg" gives the section more visual weight than its neighbors -- use sparingly for the page's primary section. */
+  size?: "default" | "lg";
   className?: string;
 }) {
   return (
@@ -35,13 +38,20 @@ export function SectionHeading({
         text={title}
         as="h2"
         className={cn(
-          "text-display-3 font-semibold tracking-tight text-charcoal text-balance",
+          size === "lg" ? "text-display-2" : "text-display-3",
+          "font-semibold tracking-tight text-charcoal text-balance",
           align === "center" ? "text-center" : "text-left"
         )}
       />
       {description && (
         <Reveal direction="up" delay={0.15} amount={0.8}>
-          <p className={cn("max-w-2xl text-lg text-steel", align === "center" ? "text-center" : "text-left")}>
+          <p
+            className={cn(
+              size === "lg" ? "max-w-2xl text-xl" : "max-w-2xl text-lg",
+              "text-steel",
+              align === "center" ? "text-center" : "text-left"
+            )}
+          >
             {description}
           </p>
         </Reveal>

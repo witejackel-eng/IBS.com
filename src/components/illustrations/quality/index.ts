@@ -24,3 +24,12 @@ export const qualityIllustrationMap: Record<string, ComponentType<{ className?: 
   "technical-support": TechnicalSupportIllustration,
   "quality-assurance": QualityAssuranceIllustration,
 };
+
+/** amcService.whyUs title -> illustration slug, shared by the homepage "Why IBS" teaser and the full /quality page. */
+export const whyUsIllustrationSlug: Record<string, string> = {
+  "Tailored AMC Packages": "quality-assurance",
+  "Rapid Response Team": "technical-support",
+  "Compliance Ready": "compliance",
+  "Preventive & Emergency Support": "preventive-maintenance",
+  "Documentation & Reporting": "documentation",
+};

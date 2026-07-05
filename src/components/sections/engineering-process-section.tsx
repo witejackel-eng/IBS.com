@@ -50,7 +50,7 @@ export function EngineeringProcessSection() {
                 alt="A field engineer completing a technical installation"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
+                className="photo-grade object-cover"
                 placeholder="blur"
                 blurDataURL={blurMap["/images/process/engineering-process.jpg"]}
               />

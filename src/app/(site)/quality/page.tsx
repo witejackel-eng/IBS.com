@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
@@ -7,17 +7,10 @@ import { SplitText } from "@/components/motion/split-text";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
-import { qualityIllustrationMap } from "@/components/illustrations/quality";
+import { ComplianceMarkIcon } from "@/components/illustrations/icons";
+import { qualityIllustrationMap, whyUsIllustrationSlug } from "@/components/illustrations/quality";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { amcService, certificationPlaceholders, downloadPlaceholders } from "@/lib/content";
-
-const whyUsIllustrationSlug: Record<string, string> = {
-  "Tailored AMC Packages": "quality-assurance",
-  "Rapid Response Team": "technical-support",
-  "Compliance Ready": "compliance",
-  "Preventive & Emergency Support": "preventive-maintenance",
-  "Documentation & Reporting": "documentation",
-};
 
 export const metadata: Metadata = {
   title: "Quality & Support",
@@ -69,7 +62,7 @@ export default function QualityPage() {
         <Container className="grid grid-cols-1 gap-16 md:grid-cols-2 md:items-center">
           <Reveal direction="left">
             <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.14em] text-deep-blue uppercase">
-              <ShieldCheck className="h-4 w-4" /> Compliance Ready
+              <ComplianceMarkIcon className="h-4 w-4" /> Compliance Ready
             </span>
             <h2 className="mt-4 text-display-3 font-semibold tracking-tight text-charcoal text-balance">
               Maintenance aligned with BIS and STQC regulatory norms

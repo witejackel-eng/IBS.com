@@ -7,6 +7,7 @@ import { SplitText } from "@/components/motion/split-text";
 import { Reveal } from "@/components/motion/reveal";
 import { Magnetic } from "@/components/shared/magnetic";
 import { ButtonLink } from "@/components/shared/button-link";
+import { Stat } from "@/components/shared/stat";
 import { Container } from "@/components/layout/container";
 import { company, services, partners } from "@/lib/content";
 
@@ -86,14 +87,5 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
         </Reveal>
       </Container>
     </section>
-  );
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <p className="text-3xl font-semibold text-charcoal font-heading">{value}</p>
-      <p className="mt-1 text-sm text-steel">{label}</p>
-    </div>
   );
 }

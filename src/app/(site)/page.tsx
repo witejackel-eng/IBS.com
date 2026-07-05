@@ -22,12 +22,12 @@ export default async function Home() {
     <>
       <HeroSection headline={hero.headline} subcopy={hero.subcopy} />
       <WhoWeAreSection />
-      <WhyIbsSection />
       <ServicesGridSection />
       <SegmentsTeaserSection />
       <FeaturedScenariosSection />
       <EngineeringProcessSection />
       <PartnerMarqueeSection />
+      <WhyIbsSection />
       <CtaSection />
     </>
   );

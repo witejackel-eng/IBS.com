@@ -6,13 +6,14 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ButtonLink } from "@/components/shared/button-link";
+import { Stat } from "@/components/shared/stat";
 import { SplitText } from "@/components/motion/split-text";
 import { MaskReveal } from "@/components/motion/mask-reveal";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { CapabilityCheckIcon } from "@/components/illustrations/icons";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { blurMap } from "@/lib/image-blur-map";
-import { company, partners } from "@/lib/content";
+import { company, partners, services, segments } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -38,6 +39,14 @@ export default function AboutPage() {
             <Reveal direction="up" delay={0.2}>
               <p className="mt-8 max-w-2xl text-lg text-steel">{company.about.intro}</p>
             </Reveal>
+            <Reveal direction="up" delay={0.3}>
+              <div className="mt-10 grid max-w-lg grid-cols-2 gap-6 border-t border-border pt-8 sm:grid-cols-4">
+                <Stat value={`${services.length}`} label="Solution areas" />
+                <Stat value={`${partners.length}+`} label="OEM technology partners" />
+                <Stat value={`${segments.length}`} label="Industries served" />
+                <Stat value={`${company.serviceAreas.length}`} label="Delhi NCR locations" />
+              </div>
+            </Reveal>
           </div>
           <MaskReveal>
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
@@ -46,7 +55,7 @@ export default function AboutPage() {
                 alt="An IBS engineer monitoring infrastructure in a data center"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
+                className="photo-grade object-cover"
                 placeholder="blur"
                 blurDataURL={blurMap["/images/about/who-we-are.jpg"]}
                 priority

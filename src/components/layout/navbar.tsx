@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -9,10 +10,26 @@ import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Magnetic } from "@/components/shared/magnetic";
 import { Logo } from "@/components/layout/logo";
-import { mainNav } from "@/lib/content";
+import { amcService, mainNav, serviceCategories, services } from "@/lib/content";
 import { navIconMap } from "@/lib/nav-icons";
+import { serviceIllustrationMap } from "@/components/illustrations/services";
+import { blurMap } from "@/lib/image-blur-map";
 import { DURATION, EASE_OUT_EXPO } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+
+/** Flat visual order of the mega menu (category order, not the raw services array) -- keyboard nav follows this. */
+const orderedServiceSlugs = serviceCategories.flatMap((category) => category.slugs);
+
+/** slug -> preview-pane data (image, summary) for the mega menu's hover/focus preview. */
+const servicePreviewBySlug: Record<
+  string,
+  { title: string; tagline: string; summary: string; image?: string; illustration?: React.ComponentType<{ className?: string }> }
+> = Object.fromEntries(
+  [...services, amcService].map((s) => [
+    s.slug,
+    { title: s.title, tagline: s.tagline, summary: s.summary, image: s.image, illustration: serviceIllustrationMap[s.slug] },
+  ])
+);
 
 export function Navbar() {
   const pathname = usePathname();
@@ -20,6 +37,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+  const [previewSlug, setPreviewSlug] = useState<string | null>(null);
 
   const servicesRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -59,7 +77,10 @@ export function Navbar() {
   }, [open]);
 
   useEffect(() => {
-    if (!servicesOpen) return;
+    if (!servicesOpen) {
+      setPreviewSlug(null);
+      return;
+    }
     if (document.activeElement === triggerRef.current) {
       itemRefs.current[0]?.focus();
     }
@@ -111,9 +132,9 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
       <div
         className={cn(
-          "flex w-full max-w-6xl items-center justify-between rounded-full border px-5 py-2.5 transition-all duration-500",
+          "flex w-full max-w-6xl items-center justify-between rounded-full border px-5 py-3 transition-[background-color,backdrop-filter,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
           scrolled
-            ? "glass shadow-[0_8px_30px_-12px_rgba(15,23,42,0.25)]"
+            ? "glass shadow-[0_16px_40px_-20px_rgba(15,23,42,0.28),0_4px_16px_-8px_rgba(15,23,42,0.14)]"
             : "border-transparent bg-transparent shadow-transparent"
         )}
       >
@@ -152,48 +173,112 @@ export function Navbar() {
                       id="services-menu"
                       role="menu"
                       aria-label="Services"
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: DURATION.fast, ease: EASE_OUT_EXPO }}
+                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                      transition={{ duration: DURATION.base, ease: EASE_OUT_EXPO }}
                       onKeyDown={handleMenuKeyDown}
                       onMouseEnter={() => !isCoarsePointer && setServicesOpen(true)}
                       onMouseLeave={() => !isCoarsePointer && setServicesOpen(false)}
-                      className="glass absolute top-full left-1/2 mt-2 w-[640px] max-w-[90vw] -translate-x-1/2 rounded-3xl p-3 shadow-[0_24px_48px_-16px_rgba(15,23,42,0.3)]"
+                      className="glass absolute top-full left-1/2 mt-3 w-[440px] max-w-[92vw] origin-top -translate-x-1/2 rounded-3xl p-3 shadow-[0_32px_64px_-24px_rgba(15,23,42,0.22),0_8px_24px_-8px_rgba(15,23,42,0.12)] xl:w-[760px]"
                     >
-                      <div className="grid grid-cols-2 gap-1">
-                        {link.children.map((child, i) => {
-                          const Icon = navIconMap[child.slug];
-                          return (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              role="menuitem"
-                              ref={(el) => {
-                                itemRefs.current[i] = el;
-                              }}
-                              onClick={() => setServicesOpen(false)}
-                              className={cn(
-                                "group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-deep-blue/5 focus-visible:bg-deep-blue/5",
-                                isActive(child.href) && "bg-deep-blue/5"
-                              )}
-                            >
-                              {Icon && (
-                                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-deep-blue/10 text-deep-blue">
-                                  <Icon className="h-4 w-4" />
-                                </span>
-                              )}
-                              <span className="flex flex-col">
-                                <span className="text-sm font-medium text-charcoal">{child.label}</span>
-                                <span className="text-xs text-steel">{child.tagline}</span>
-                              </span>
-                            </Link>
-                          );
-                        })}
+                      <div className="grid grid-cols-1 xl:grid-cols-[1fr_296px] xl:gap-3">
+                        <div className="flex flex-col">
+                          {serviceCategories.map((category) => (
+                            <div key={category.title}>
+                              <p className="px-3 pt-3 pb-1.5 text-[11px] font-semibold tracking-wider text-steel/70 uppercase">
+                                {category.title}
+                              </p>
+                              <div className="flex flex-col gap-0.5">
+                                {category.slugs.map((slug) => {
+                                  const child = link.children.find((c) => c.slug === slug);
+                                  if (!child) return null;
+                                  const Icon = navIconMap[child.slug];
+                                  const index = orderedServiceSlugs.indexOf(slug);
+                                  return (
+                                    <Link
+                                      key={child.href}
+                                      href={child.href}
+                                      role="menuitem"
+                                      data-cursor-hover
+                                      ref={(el) => {
+                                        itemRefs.current[index] = el;
+                                      }}
+                                      onMouseEnter={() => setPreviewSlug(slug)}
+                                      onFocus={() => setPreviewSlug(slug)}
+                                      onClick={() => setServicesOpen(false)}
+                                      className={cn(
+                                        "group flex items-center gap-3 rounded-2xl px-3 py-2.5 transition-colors hover:bg-deep-blue/5 focus-visible:bg-deep-blue/5",
+                                        isActive(child.href) && "bg-deep-blue/5"
+                                      )}
+                                    >
+                                      {Icon && (
+                                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-deep-blue/10 text-deep-blue transition-transform duration-300 group-hover:scale-105">
+                                          <Icon className="h-5 w-5" />
+                                        </span>
+                                      )}
+                                      <span className="flex flex-col">
+                                        <span className="text-sm font-medium text-charcoal">{child.label}</span>
+                                        <span className="text-xs text-steel">{child.tagline}</span>
+                                      </span>
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="relative hidden overflow-hidden rounded-2xl border border-border/60 bg-card xl:flex xl:flex-col">
+                          {(() => {
+                            const activeSlug = previewSlug ?? orderedServiceSlugs[0];
+                            const preview = servicePreviewBySlug[activeSlug];
+                            if (!preview) return null;
+                            return (
+                              <AnimatePresence mode="wait">
+                                <motion.div
+                                  key={activeSlug}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  transition={{ duration: DURATION.fast, ease: EASE_OUT_EXPO }}
+                                  className="flex h-full flex-col"
+                                >
+                                  <div className="relative flex h-32 w-full shrink-0 items-center justify-center overflow-hidden bg-gradient-to-br from-deep-blue/15 via-deep-blue/5 to-background bg-engineering-grid">
+                                    {preview.image ? (
+                                      <Image
+                                        src={preview.image}
+                                        alt={preview.title}
+                                        fill
+                                        sizes="296px"
+                                        className="photo-grade object-cover"
+                                        placeholder={blurMap[preview.image] ? "blur" : "empty"}
+                                        blurDataURL={blurMap[preview.image]}
+                                      />
+                                    ) : (
+                                      preview.illustration && <preview.illustration className="h-16 w-16" />
+                                    )}
+                                    {preview.image && (
+                                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/55 to-transparent" />
+                                    )}
+                                  </div>
+                                  <div className="flex flex-1 flex-col gap-1.5 p-4">
+                                    <p className="text-[11px] font-semibold tracking-wider text-deep-blue uppercase">
+                                      {preview.tagline}
+                                    </p>
+                                    <p className="text-sm font-medium text-charcoal">{preview.title}</p>
+                                    <p className="line-clamp-3 text-xs leading-relaxed text-steel">{preview.summary}</p>
+                                  </div>
+                                </motion.div>
+                              </AnimatePresence>
+                            );
+                          })()}
+                        </div>
                       </div>
                       <div className="mt-1 border-t border-border pt-2">
                         <Link
                           href="/services"
+                          data-cursor-hover
                           onClick={() => setServicesOpen(false)}
                           className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-deep-blue hover:bg-deep-blue/5"
                         >
@@ -252,7 +337,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: DURATION.base, ease: EASE_OUT_EXPO }}
-            className="glass absolute inset-x-4 top-20 z-40 flex max-h-[75vh] flex-col gap-1 overflow-y-auto rounded-3xl p-4 shadow-[0_24px_48px_-16px_rgba(15,23,42,0.3)] md:hidden"
+            className="glass absolute inset-x-4 top-20 z-40 flex max-h-[75vh] flex-col gap-1 overflow-y-auto rounded-3xl p-4 shadow-[0_32px_64px_-24px_rgba(15,23,42,0.22),0_8px_24px_-8px_rgba(15,23,42,0.12)] md:hidden"
           >
             {mainNav.map((link) => (
               <div key={link.href}>
@@ -265,17 +350,27 @@ export function Navbar() {
                 </Link>
                 {"children" in link && link.children && (
                   <div className="ml-3 flex flex-col border-l border-border pl-3">
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        onClick={() => setOpen(false)}
-                        className="rounded-xl px-3 py-2 text-sm text-steel hover:text-charcoal"
-                      >
-                        {child.label}
-                        <span className="block text-xs text-steel/90">{child.tagline}</span>
-                      </Link>
-                    ))}
+                    {link.children.map((child) => {
+                      const Icon = navIconMap[child.slug];
+                      return (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => setOpen(false)}
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-steel hover:text-charcoal"
+                        >
+                          {Icon && (
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-deep-blue/10 text-deep-blue">
+                              <Icon className="h-4 w-4" />
+                            </span>
+                          )}
+                          <span className="flex flex-col">
+                            {child.label}
+                            <span className="block text-xs text-steel/90">{child.tagline}</span>
+                          </span>
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>

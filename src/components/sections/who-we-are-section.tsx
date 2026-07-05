@@ -19,7 +19,7 @@ export function WhoWeAreSection() {
               alt="An IBS engineer monitoring infrastructure in a data center"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
+              className="photo-grade object-cover"
               placeholder="blur"
               blurDataURL={blurMap["/images/about/who-we-are.jpg"]}
             />

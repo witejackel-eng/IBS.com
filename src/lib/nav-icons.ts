@@ -1,25 +1,8 @@
-import {
-  Headset,
-  KeyRound,
-  MonitorPlay,
-  Network,
-  PhoneCall,
-  ShieldCheck,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+export { serviceNavIconMap as navIconMap } from "@/components/illustrations/nav/service-icons";
 
 /**
  * Slug -> icon map for the Services mega menu. Distinct from `Service.icon`
  * (a photo fallback used by ServiceVisual) since most services here have a
  * real `image` instead, but the mega menu wants an icon for every item.
+ * Icons are custom SVGs from the site's illustration system, not a library.
  */
-export const navIconMap: Record<string, LucideIcon> = {
-  "voice-communication": PhoneCall,
-  "audio-video-boardroom-solutions": MonitorPlay,
-  "it-infrastructure": Network,
-  "security-solutions": ShieldCheck,
-  "call-center-solutions": Headset,
-  "software-licenses": KeyRound,
-  "annual-maintenance-service": Wrench,
-};

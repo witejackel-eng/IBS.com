@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { SplitText } from "@/components/motion/split-text";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { CtaSection } from "@/components/sections/cta-section";
+import { CapabilityCheckIcon } from "@/components/illustrations/icons";
 import { segmentIllustrationMap } from "@/components/illustrations/segments";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { blurMap } from "@/lib/image-blur-map";
@@ -58,7 +58,7 @@ export default function WhoWeServePage() {
                       alt={segment.title}
                       fill
                       sizes="(min-width: 768px) 50vw, 100vw"
-                      className="object-cover"
+                      className="photo-grade object-cover"
                       placeholder="blur"
                       blurDataURL={blurMap[`/images/segments/${segment.slug}.jpg`]}
                     />
@@ -81,7 +81,7 @@ export default function WhoWeServePage() {
                   <ul className="flex flex-col gap-2.5">
                     {segment.needs.map((need) => (
                       <li key={need} className="flex items-start gap-2.5 text-sm text-steel">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-deep-blue" />
+                        <CapabilityCheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-deep-blue" />
                         <span>{need}</span>
                       </li>
                     ))}

@@ -33,7 +33,7 @@ export default async function ContactPage() {
     <>
       <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]} />
       <ContactPageJsonLd />
-      <Section className="pt-40">
+      <Section bg="ambient" className="bg-background pt-40 pb-24">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
             Contact Us

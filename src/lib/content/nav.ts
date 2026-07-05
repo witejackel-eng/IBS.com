@@ -26,3 +26,19 @@ export const mainNav = [
   { label: "Quality & Support", href: "/quality" },
   { label: "Contact", href: "/contact" },
 ] as const;
+
+/** Groups the Services mega menu into categories for the nav only -- purely an IA grouping, not a factual claim. */
+export const serviceCategories = [
+  {
+    title: "Communications",
+    slugs: ["voice-communication", "audio-video-boardroom-solutions", "call-center-solutions"],
+  },
+  {
+    title: "Infrastructure & Security",
+    slugs: ["it-infrastructure", "security-solutions"],
+  },
+  {
+    title: "Licensing & Support",
+    slugs: ["software-licenses", "annual-maintenance-service"],
+  },
+] as const;

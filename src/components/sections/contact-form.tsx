@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { contactFormSchema, type ContactFormValues } from "@/lib/validation/contact";
+import { EASE_OUT_EXPO, SPRING_SNAPPY } from "@/lib/motion";
 import { services, amcService } from "@/lib/content";
 
 const serviceOptions = [...services.map((s) => s.navLabel), amcService.navLabel];
@@ -61,13 +62,13 @@ export function ContactForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
         className="flex h-full flex-col items-center justify-center gap-4 rounded-3xl border border-border bg-card p-12 text-center"
       >
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ delay: 0.15, type: "spring", stiffness: 260, damping: 18 }}
+          transition={{ delay: 0.15, ...SPRING_SNAPPY }}
         >
           <CheckCircle2 className="h-14 w-14 text-deep-blue" />
         </motion.div>

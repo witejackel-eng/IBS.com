@@ -18,7 +18,8 @@ export function SegmentsTeaserSection() {
           eyebrow="Industries we serve"
           title="Built for how each space actually operates"
           description="From enterprise offices to hotel banquets to a spare bedroom office — the same disciplined delivery, sized to fit."
-          className="mb-16"
+          align="left"
+          className="mb-16 max-w-2xl"
         />
 
         <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
@@ -37,7 +38,7 @@ export function SegmentsTeaserSection() {
                       alt={segment.title}
                       fill
                       sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="photo-grade object-cover transition-transform duration-700 group-hover:scale-105"
                       placeholder="blur"
                       blurDataURL={blurMap[`/images/segments/${segment.slug}.jpg`]}
                     />
