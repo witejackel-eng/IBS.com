@@ -159,6 +159,7 @@ export const services: Service[] = [
     intro:
       "Our solutions cover the full stack of a modern contact center, from the agent's headset to predictive dialing and compliance-grade call recording.",
     icon: "headset",
+    image: "/images/services/call-center-solutions.jpg",
     capabilities: [
       {
         title: "Call Center Headset",
@@ -191,6 +192,7 @@ export const services: Service[] = [
       "Genuine software licenses for the applications businesses run on — Zoom, Webex, Microsoft Office 365, Adobe, ERP, and security software.",
     intro:
       "Licensed software keeps organizations compliant and current on features, updates, and security protocols — maintaining a secure, efficient operating environment.",
+    image: "/images/services/software-licenses.jpg",
     capabilities: [
       {
         title: "Collaboration & Productivity",
