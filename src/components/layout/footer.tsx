@@ -9,7 +9,7 @@ import { company, services, amcService } from "@/lib/content";
 export function Footer() {
   return (
     <footer className="relative border-t border-border bg-background bg-engineering-grid">
-      <Container className="relative z-10 py-20">
+      <Container className="relative z-10 py-20 pb-32 md:pb-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-16">
           <div className="flex flex-col gap-4">
             <Logo />

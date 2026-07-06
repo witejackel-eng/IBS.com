@@ -35,6 +35,10 @@ export function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
+    // Validate on blur so the user gets immediate feedback when leaving a
+    // field, then re-validate on every change so errors clear as they type.
+    mode: "onTouched",
+    reValidateMode: "onChange",
     defaultValues: { name: "", email: "", phone: "", company: "", serviceInterest: "", message: "" },
   });
 
@@ -97,21 +101,21 @@ export function ContactForm() {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label htmlFor="name">Full name *</Label>
-          <Input id="name" placeholder="Your name" {...register("name")} aria-invalid={!!errors.name} />
-          {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
+          <Input id="name" placeholder="Your name" aria-describedby={errors.name ? "name-error" : undefined} aria-invalid={!!errors.name} {...register("name")} />
+          {errors.name && <p id="name-error" className="text-xs text-destructive">{errors.name.message}</p>}
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="email">Email *</Label>
-          <Input id="email" type="email" placeholder="you@company.com" {...register("email")} aria-invalid={!!errors.email} />
-          {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
+          <Input id="email" type="email" placeholder="you@company.com" aria-describedby={errors.email ? "email-error" : undefined} aria-invalid={!!errors.email} {...register("email")} />
+          {errors.email && <p id="email-error" className="text-xs text-destructive">{errors.email.message}</p>}
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label htmlFor="phone">Phone</Label>
-          <Input id="phone" placeholder="+91 " {...register("phone")} aria-invalid={!!errors.phone} />
-          {errors.phone && <p className="text-xs text-destructive">{errors.phone.message}</p>}
+          <Input id="phone" placeholder="+91 " aria-describedby={errors.phone ? "phone-error" : undefined} aria-invalid={!!errors.phone} {...register("phone")} />
+          {errors.phone && <p id="phone-error" className="text-xs text-destructive">{errors.phone.message}</p>}
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="company">Company (optional)</Label>
@@ -143,8 +147,8 @@ export function ContactForm() {
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="message">How can we help?</Label>
-        <Textarea id="message" rows={5} placeholder="Tell us about your requirement..." {...register("message")} aria-invalid={!!errors.message} />
-        {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
+        <Textarea id="message" rows={5} placeholder="Tell us about your requirement..." aria-describedby={errors.message ? "message-error" : undefined} aria-invalid={!!errors.message} {...register("message")} />
+        {errors.message && <p id="message-error" className="text-xs text-destructive">{errors.message.message}</p>}
       </div>
 
       <Button

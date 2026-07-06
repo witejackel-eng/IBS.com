@@ -24,7 +24,7 @@ export function WhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="fixed bottom-6 left-6 z-40 flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-shadow hover:shadow-xl"
+        className="fixed bottom-24 left-6 z-40 flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-shadow hover:shadow-xl md:bottom-6"
         style={{ backgroundColor: "#25D366" }}
       >
         <WhatsAppIcon className="h-7 w-7 text-white" />
@@ -46,7 +46,7 @@ export function WhatsAppButton() {
           transition={{ duration: 0.4, ease: "easeOut" }}
           whileHover={{ scale: 1.1, boxShadow: "0 12px 28px -6px rgba(37, 211, 102, 0.45)" }}
           whileTap={{ scale: 0.95 }}
-          className="fixed bottom-6 left-6 z-40 flex h-14 w-14 items-center justify-center rounded-full shadow-lg"
+          className="fixed bottom-24 left-6 z-40 flex h-14 w-14 items-center justify-center rounded-full shadow-lg md:bottom-6"
           style={{ backgroundColor: "#25D366" }}
         >
           {/* Subtle pulse ring */}
