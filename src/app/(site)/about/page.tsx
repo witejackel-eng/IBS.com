@@ -17,7 +17,7 @@ import { blurMap } from "@/lib/image-blur-map";
 import { company, partners, services, segments } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Our Integration Team",
   description: company.about.intro,
   alternates: { canonical: "/about" },
 };

@@ -24,6 +24,7 @@ export const metadata: Metadata = {
   title: amcService.title,
   description: amcService.summary,
   alternates: { canonical: `/services/${amcService.slug}` },
+  openGraph: { url: `/services/${amcService.slug}` },
 };
 
 export default function AmcPage() {

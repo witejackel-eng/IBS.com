@@ -14,7 +14,7 @@ import { getContentOverride } from "@/lib/content-overrides";
 import type { ContactInfo } from "@/lib/admin-content-types";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact Our Engineering Team",
   description: `Reach ${company.legalName} at ${company.contact.phones[0]} or ${company.contact.email}.`,
   alternates: { canonical: "/contact" },
 };

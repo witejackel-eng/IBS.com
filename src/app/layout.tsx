@@ -21,7 +21,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ibsinfra.com";
-const titleDefault = `${company.legalName} — ${company.positioning}`;
+const isUsingFallback = !process.env.NEXT_PUBLIC_SITE_URL;
+if (isUsingFallback) {
+  console.warn(
+    "[seo] NEXT_PUBLIC_SITE_URL is not set — canonical tags, sitemap, and JSON-LD URLs will default to https://ibsinfra.com. Set this env var to your actual production domain.",
+  );
+}
+const titleDefault = `${company.legalName} — Communication, Network & Security Systems`;
 
 /** Grounded in company.ts's own service-category names and coverage area -- nothing invented. */
 const keywords = [

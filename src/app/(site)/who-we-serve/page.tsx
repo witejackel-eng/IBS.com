@@ -15,7 +15,7 @@ import { blurMap } from "@/lib/image-blur-map";
 import { segments, services, amcService } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Who We Serve",
+  title: "Industries & Spaces We Serve",
   description:
     "Enterprises, hotels, residential spaces, and small offices -- IBS delivers technology solutions sized to fit each segment.",
   alternates: { canonical: "/who-we-serve" },

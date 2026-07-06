@@ -12,7 +12,7 @@ import { SecondaryHeroNetwork } from "@/components/webgl/secondary-hero-network"
 import { company, services, amcService } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Technology Solutions We Deliver",
   description:
     "Voice communication, AV & boardroom integration, IT network infrastructure, security, call center solutions, and software licensing -- all delivered and supported by one team.",
   alternates: { canonical: "/services" },

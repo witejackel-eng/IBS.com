@@ -20,6 +20,20 @@ export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
 
+/**
+ * SEO-optimised page titles per service — longer/shorter than the display title
+ * so the rendered <title> lands in the 50–60 character sweet spot.
+ * The H1 on the page itself still uses the original service.title from content data.
+ */
+const serviceMetaTitles: Record<string, string> = {
+  "voice-communication": "Unified Voice Communication",
+  "audio-video-boardroom-solutions": "AV & Boardroom Integration",
+  "it-infrastructure": "IT Network & Infrastructure",
+  "security-solutions": "Security & Surveillance Systems",
+  "call-center-solutions": "Call Center Solutions",
+  "software-licenses": "Software Licensing & Compliance",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -29,9 +43,10 @@ export async function generateMetadata({
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
   return {
-    title: service.title,
+    title: serviceMetaTitles[service.slug] ?? service.title,
     description: service.summary,
     alternates: { canonical: `/services/${service.slug}` },
+    openGraph: { url: `/services/${service.slug}` },
   };
 }
 

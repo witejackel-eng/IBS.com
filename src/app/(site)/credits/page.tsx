@@ -5,7 +5,7 @@ import { Section } from "@/components/layout/section";
 import { imageCredits } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Image Credits",
+  title: "Image Credits & Licensing Info",
   description: "Attribution for freely-licensed photography used on this site.",
   alternates: { canonical: "/credits" },
   robots: { index: false, follow: true },

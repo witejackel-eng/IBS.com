@@ -23,7 +23,7 @@ import { CollectionPageJsonLd } from "@/components/seo/collection-page-jsonld";
 import { partners, partnerCategories, services } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Partners",
+  title: "Our OEM Technology Partners",
   description:
     "The OEM brands IBS deals in across audio/video integration, communication & IT, and security.",
   alternates: { canonical: "/partners" },

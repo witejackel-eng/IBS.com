@@ -12,7 +12,9 @@ import { CtaSection } from "@/components/sections/cta-section";
 import { getContentOverride } from "@/lib/content-overrides";
 
 export const metadata: Metadata = {
+  title: "Network & Security Integration",
   alternates: { canonical: "/" },
+  openGraph: { url: "/" },
 };
 
 export default async function Home() {

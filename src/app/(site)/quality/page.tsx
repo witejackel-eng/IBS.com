@@ -13,7 +13,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { amcService, certificationPlaceholders, downloadPlaceholders } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Quality & Support",
+  title: "Quality Assurance & AMC Support",
   description:
     "Structured service protocols, industry-standard SLAs, and BIS/STQC-aligned compliance behind every IBS deployment.",
   alternates: { canonical: "/quality" },
