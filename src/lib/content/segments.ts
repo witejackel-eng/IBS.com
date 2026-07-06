@@ -10,7 +10,7 @@ export const segments: Segment[] = [
     slug: "enterprises",
     title: "Small, Medium & Large Enterprises",
     summary:
-      "Organizations of every size that need unified communication, structured network infrastructure, and boardroom-grade collaboration under one roof.",
+      "Organizations of every size that need unified communication, structured network infrastructure, and boardroom systems working together on one site.",
     needs: [
       "Unified communication and IP telephony across offices",
       "Data center, structured cabling, and network security",
@@ -31,7 +31,7 @@ export const segments: Segment[] = [
     needs: [
       "Audio/video systems for banquets, conferencing, and events",
       "Property-wide CCTV, access control, and fire safety",
-      "Resilient network and Wi-Fi infrastructure for guests and staff",
+      "Reliable network and Wi-Fi coverage for guests and staff",
     ],
     relevantServiceSlugs: [
       "audio-video-boardroom-solutions",
@@ -43,7 +43,7 @@ export const segments: Segment[] = [
     slug: "residential",
     title: "Residential Spaces",
     summary:
-      "Homes that want modern security, automation, and connectivity without compromising on comfort.",
+      "Homes that want security, automation, and reliable connectivity without added complexity.",
     needs: [
       "Home automation for lighting, entertainment, and climate",
       "CCTV and access control for everyday peace of mind",

@@ -78,16 +78,15 @@ export default function PartnersPage() {
           </span>
           <SplitText
             as="h1"
-            text="Trusted global brands, one integrator."
+            text="The OEM brands behind our installations."
             className="max-w-3xl text-display-2 leading-[1.05] font-semibold tracking-tight text-charcoal text-balance"
           />
           <Reveal direction="up" delay={0.2}>
             <p className="mt-8 max-w-2xl text-lg text-steel">
-              Every product we deliver comes from a genuine, authorized OEM relationship — never a gray-market
-              substitute. Partnering directly with global manufacturers gives our engineering team early access to
-              new technology and the depth of expertise to integrate each brand correctly the first time. For you,
-              that means proven products and dependable long-term support, with one integrator accountable for how
-              everything works together.
+              Every product we install comes through an authorized OEM channel, never a gray-market reseller.
+              Working directly with manufacturers means we recommend hardware based on what a project needs,
+              not what one vendor happens to sell. It also means genuine warranties, and one team responsible
+              for how the different brands work together on site.
             </p>
           </Reveal>
           <Reveal direction="up" delay={0.3}>
@@ -157,7 +156,7 @@ export default function PartnersPage() {
               How it comes together
             </span>
             <h2 className="mt-4 text-display-3 font-semibold tracking-tight text-charcoal text-balance">
-              One integration ecosystem, built from genuine parts
+              How the different brands work as one system
             </h2>
           </Reveal>
           <Reveal direction="up" delay={0.1}>
@@ -193,18 +192,18 @@ export default function PartnersPage() {
         <Container className="flex flex-col items-center gap-6 text-center">
           <SplitText
             as="h2"
-            text="Let's build your technology ecosystem."
+            text="Let's talk about your next installation."
             className="max-w-2xl text-display-2 font-semibold tracking-tight text-charcoal text-balance"
           />
           <Reveal direction="up" delay={0.15}>
             <p className="max-w-xl text-lg text-steel">
-              Tell us which systems you need to bring together, and we&apos;ll design the integration around the
-              genuine OEM products your business already runs on.
+              Tell us which systems you need to bring together, and we&apos;ll recommend hardware based on
+              what&apos;s already in place and what the project actually needs.
             </p>
           </Reveal>
           <Reveal direction="up" delay={0.25}>
             <ButtonLink href="/contact" variant="cta" size="xl" data-cursor-hover>
-              Talk to our experts <ArrowRight className="h-4 w-4" />
+              Talk to Our Team <ArrowRight className="h-4 w-4" />
             </ButtonLink>
           </Reveal>
         </Container>

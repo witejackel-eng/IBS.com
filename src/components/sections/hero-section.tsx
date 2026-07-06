@@ -17,7 +17,7 @@ export interface HeroContent {
 }
 
 export const defaultHeroContent: HeroContent = {
-  headline: "Integrated technology, engineered for how your business runs.",
+  headline: "Communication, network, and security systems built around how your business runs.",
   subcopy: company.summary,
 };
 

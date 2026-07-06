@@ -45,7 +45,7 @@ export default function WhoWeServePage() {
             className="max-w-3xl text-display-2 leading-[1.05] font-semibold tracking-tight text-charcoal text-balance"
           />
           <Reveal direction="up" delay={0.2}>
-            <p className="mt-8 max-w-2xl text-lg text-steel">{"Comprehensive solutions under one roof for a diverse clientele."}</p>
+            <p className="mt-8 max-w-2xl text-lg text-steel">{"Enterprises, hotels, homes, and small offices each need something different — here's how we approach each one."}</p>
           </Reveal>
         </Container>
       </Section>

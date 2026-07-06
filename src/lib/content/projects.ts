@@ -62,7 +62,7 @@ export const projectScenarios: ProjectScenario[] = [
     challenge:
       "Legacy headsets and a dialer setup that made it hard to see call volume or agent performance in one place.",
     solution:
-      "Premium headsets, a CRM-integrated dialer platform, and voice logging for compliance and performance visibility.",
+      "New headsets, a CRM-integrated dialer platform, and voice logging for compliance and performance visibility.",
     outcome:
       "Call handling, customer data, and compliance recording brought into one integrated workflow.",
     technicalHighlights: [

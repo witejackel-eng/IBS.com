@@ -90,9 +90,9 @@ export default function AboutPage() {
       <Section bg="blueprint">
         <Container className="grid grid-cols-1 gap-16 lg:grid-cols-2">
           <Reveal direction="left">
-            <span className="text-xs font-semibold tracking-[0.14em] text-deep-blue uppercase">Industry leadership</span>
+            <span className="text-xs font-semibold tracking-[0.14em] text-deep-blue uppercase">Our partners</span>
             <h2 className="mt-4 text-display-3 font-semibold tracking-tight text-charcoal text-balance">
-              Built on partnerships with the brands the industry trusts
+              The OEM brands our installations run on
             </h2>
             <p className="mt-6 text-steel">{company.about.partnershipsNote}</p>
             <ButtonLink
@@ -107,7 +107,7 @@ export default function AboutPage() {
           <Reveal direction="right" delay={0.1}>
             <span className="text-xs font-semibold tracking-[0.14em] text-deep-blue uppercase">Who we serve</span>
             <h2 className="mt-4 text-display-3 font-semibold tracking-tight text-charcoal text-balance">
-              Comprehensive solutions, under one roof
+              Not every site needs the same setup
             </h2>
             <p className="mt-6 text-steel">{company.about.servesNote}</p>
             <ButtonLink

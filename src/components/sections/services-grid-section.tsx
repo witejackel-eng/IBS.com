@@ -49,7 +49,7 @@ export function ServicesGridSection() {
                         <h3 className="text-2xl font-semibold text-charcoal font-heading">{service.title}</h3>
                         <p className="flex-1 text-sm text-steel">{service.summary}</p>
                         <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-charcoal">
-                          Learn more
+                          View service
                           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </span>
                       </div>

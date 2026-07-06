@@ -6,43 +6,43 @@
 export const company = {
   legalName: "Insight Business Solutions",
   domain: "ibsinfra.com",
-  positioning: "A Leading Provider of Integrated Technology Solutions",
+  positioning: "Communication, network, and security systems — installed and supported",
   summary:
-    "A leader in advanced technology solutions, specializing in unified communication, collaboration, and AV integration. Founded by industry experts in data and voice networking, delivering customer-focused products across video conferencing, IT infrastructure, security, and data networks.",
+    "Founded by engineers with a background in data and voice networking, we design, install, and support communication, network, and security systems for offices, hotels, and homes across Delhi NCR.",
   about: {
     intro:
-      "Insight Business Solutions stands as a prominent player in India's technology landscape, distinguished by its dedication to delivering customer-centric products and solutions.",
+      "Insight Business Solutions designs, installs, and supports technology systems for organizations across India, with most of our projects in Delhi NCR. Our engineers handle everything from the first site visit to years of ongoing maintenance.",
     categories: [
       {
         title: "Communication Technologies",
         description:
-          "Empowering seamless communication through advanced voice communication systems, unified communication platforms, and reliable network infrastructure.",
+          "Voice systems and unified communication platforms, along with the network infrastructure that keeps them running.",
       },
       {
         title: "AV Integration & Board Room Solutions",
         description:
-          "Facilitating impactful collaborations and presentations with cutting-edge audio/video conferencing technology, integrated boardroom systems, and auditorium solutions.",
+          "Boardrooms, training rooms, and auditoriums fitted with video conferencing and presentation equipment that works the same way every time.",
       },
       {
         title: "Data Network & Security Solutions",
         description:
-          "Safeguarding critical data and operations with robust network infrastructure, comprehensive security measures, and secure storage options.",
+          "Network infrastructure, surveillance, and storage systems built to keep operations running and data protected.",
       },
       {
         title: "Fire, Safety & Security Solutions",
         description:
-          "A comprehensive set of strategies, equipment, and practices designed to safeguard people and property from fire, burglary, accidents, and other emergencies.",
+          "Fire detection, access control, and surveillance systems planned around how a building is actually used.",
       },
       {
         title: "Call Center Solutions",
         description:
-          "Enhancing customer engagement and optimizing contact center operations with dedicated solutions.",
+          "Headsets, dialers, and call recording systems for teams running inbound or outbound contact center operations.",
       },
     ],
     partnershipsNote:
-      "Industry leadership is reinforced by collaborations with world-class brands including Alcatel-Lucent, NEC, Polycom, Kramer, Samsung, LG, Epson, D-Link, Netgear, and Honeywell.",
+      "We work with established manufacturers including Alcatel-Lucent, NEC, Polycom, Kramer, Samsung, LG, Epson, D-Link, Netgear, and Honeywell, and recommend hardware based on the project rather than a single brand.",
     servesNote:
-      "Comprehensive solutions under one roof for a diverse clientele: small, medium, and large enterprises, residential spaces, hotels, and small office/home office (SOHO) segments.",
+      "We work with enterprises of every size, hotels, residential buildings, and small or home offices — each with different equipment and support needs.",
   },
   contact: {
     phones: ["+91 83685 61919", "+91 9873870992"],

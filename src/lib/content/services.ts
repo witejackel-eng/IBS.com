@@ -12,21 +12,21 @@ export const services: Service[] = [
     title: "Voice Communication",
     tagline: "Unified Communication",
     summary:
-      "Unified Communications (UC) integrates real-time and non-real-time communication — instant messaging, video conferencing, IP telephony, email, and SMS — into one seamless experience.",
+      "Unified Communications (UC) brings instant messaging, video conferencing, IP telephony, email, and SMS into one system, so teams aren't switching between separate tools.",
     intro:
-      "Our UC solutions streamline communication across channels and devices with a cohesive interface that lifts efficiency. Scalable and adaptable, they integrate with existing systems so businesses of any size can stay ahead of an evolving technology landscape.",
+      "We set up UC across a business's existing channels and devices, and connect it to the systems already in place. The same platform works whether a site has ten people or ten thousand.",
     icon: "phone-call",
     image: "/images/services/voice-communication.jpg",
     capabilities: [
       {
         title: "IP-PBX / KTS",
         description:
-          "IP-based platforms tailored to businesses of every size — from small-scale TDM switches for 10 users to fully IP platforms supporting up to 100,000 users. Features include cost-saving call routing, advanced conferencing, voicemail integration, and seamless remote-site functionality.",
+          "IP-based phone platforms sized to the business — from small TDM switches for 10 users up to fully IP platforms supporting 100,000 users, with call routing, conferencing, voicemail, and support for remote sites.",
       },
       {
         title: "SIP Phones",
         description:
-          "VoIP phones that integrate traditional telephony with online chat, email, and web-based services over an IP network — combining cutting-edge technology, superior ergonomics, and sleek design for efficient business communication.",
+          "VoIP handsets that combine traditional calling with chat, email, and web-based tools over the same IP network.",
       },
     ],
   },
@@ -36,40 +36,40 @@ export const services: Service[] = [
     title: "Audio Video & Boardroom Solutions",
     tagline: "AV Integration",
     summary:
-      "Audio and video conferencing systems, classroom technology, video walls, public address systems, and room booking — engineered for seamless internal and external collaboration.",
+      "Audio and video conferencing, classroom technology, video walls, public address systems, and room booking — set up so meetings and presentations run without extra troubleshooting.",
     intro:
-      "From boardrooms to classrooms to auditoriums, our AV integration is built for clarity, reliability, and round-the-clock support.",
+      "From boardrooms to classrooms to auditoriums, we install AV systems that are straightforward to operate and backed by support when something needs attention.",
     image: "/images/services/av-integration.jpg",
     capabilities: [
       {
         title: "Audio Conferencing",
         description:
-          "Advanced technology and 24/7 support for training, presentations, team discussions, and customer interactions — with clear, precise sound for every communication need.",
+          "Conferencing audio for training sessions, presentations, and team calls, with 24/7 support if something goes wrong mid-meeting.",
       },
       {
         title: "Video Conferencing",
         description:
-          "Seamless connectivity between employees, clients, and customers regardless of location, with screen sharing, recording, and chat for uninterrupted communication.",
+          "Video calling between offices, clients, and remote staff, with screen sharing, recording, and chat built in.",
       },
       {
         title: "Class Room Solutions",
         description:
-          "Clear visual displays, high-quality audio, and seamless connectivity across phones, laptops, and tablets — plus optimized lighting, acoustics, and furniture for an immersive learning space.",
+          "Displays, audio, and device connectivity for phones, laptops, and tablets, along with lighting, acoustics, and furniture suited to how the room is taught in.",
       },
       {
         title: "Video Walls",
         description:
-          "High-resolution multi-monitor video wall solutions for large-scale enterprises, supporting concurrent speakers with optimal visual clarity for virtual events and meetings.",
+          "Multi-monitor video wall installations for larger sites, built to handle concurrent speakers and stay legible for virtual events and meetings.",
       },
       {
         title: "Public Address System",
         description:
-          "A complete range of microphones, amplifiers, loudspeakers, and supporting technology for clear, powerful sound reinforcement in any venue.",
+          "Microphones, amplifiers, and loudspeakers sized to the venue, for announcements and events that need to be heard clearly throughout the space.",
       },
       {
         title: "Room Booking System",
         description:
-          "Calendar-integrated scheduling and occupancy management with real-time availability and automated AV control, optimizing resource use across meeting spaces.",
+          "Calendar-integrated room scheduling with real-time availability and automated AV control, so double-bookings and idle rooms are easier to catch.",
       },
     ],
   },
@@ -79,40 +79,40 @@ export const services: Service[] = [
     title: "IT Network & Infrastructure",
     tagline: "Data Center & Networking",
     summary:
-      "A complete range of components for building and operating modern networks and data centers — storage, servers, routers, firewalls, cabling, Wi-Fi, and power backup.",
+      "Storage, servers, routers, firewalls, cabling, Wi-Fi, and power backup — the components a network and data center actually run on.",
     intro:
-      "From initial installation and configuration through ongoing technical support, we deliver a reliable, scalable foundation for network performance and secure operations.",
+      "We install, configure, and support the infrastructure a network depends on, and stay involved after go-live for troubleshooting and upgrades as the setup grows.",
     image: "/images/services/it-infrastructure.jpg",
     capabilities: [
       {
         title: "Data Center",
         description:
-          "Storage systems, servers, routers, and firewalls with end-to-end installation, configuration, and ongoing support — plus cooling systems and battery backups for secure, efficient operation.",
+          "Storage, servers, routers, and firewalls, installed and configured with cooling and battery backup, plus ongoing support once the site is live.",
       },
       {
         title: "Firewall",
         description:
-          "Monitoring and controlling incoming and outgoing traffic, blocking unauthorized data packets and safeguarding against malicious threats while optimizing network performance.",
+          "Traffic monitoring and access rules that block unauthorized data and known threats without slowing the network down.",
       },
       {
         title: "Network Rack",
         description:
-          "Premium network racks designed to organize, secure, and protect critical hardware components as infrastructure demands grow.",
+          "Racks built to organize and protect network hardware as a site adds more equipment over time.",
       },
       {
         title: "Structured Cabling",
         description:
-          "Tailored structured cabling for organized, accessible network systems, including durable fiber optic solutions for long-distance communication and high-quality data networking.",
+          "Cabling laid out so the network stays easy to trace and maintain, including fiber runs for longer distances and higher throughput.",
       },
       {
         title: "Wi-Fi",
         description:
-          "Premier Wi-Fi hardware for computers, laptops, printers, scanners, and smartphones, supported by structured cabling and fully meshed network topologies for reliable connectivity.",
+          "Wireless access points for computers, laptops, printers, scanners, and phones, tied into structured cabling and mesh coverage where a single access point won't reach.",
       },
       {
         title: "Online UPS",
         description:
-          "Continuous, conditioned power that keeps batteries connected to the inverter — protecting critical systems from disruption and ensuring consistent operation during outages.",
+          "Battery-backed power that stays continuously connected to the inverter, so critical systems keep running through an outage instead of blinking off and restarting.",
       },
     ],
   },
@@ -122,30 +122,30 @@ export const services: Service[] = [
     title: "Security Solutions",
     tagline: "Surveillance & Access",
     summary:
-      "CCTV, access control and biometric systems, fire alarm systems, and home automation — a comprehensive security framework for people, assets, and property.",
+      "CCTV, access control and biometric systems, fire alarm systems, and home automation, covering people, assets, and property under one installation.",
     intro:
-      "As a dedicated security solutions provider, we design systems that deliver continuous monitoring and reliable protection for private and public spaces alike.",
+      "We design surveillance and access systems for both commercial and residential sites, with monitoring that keeps running after the cameras go up.",
     image: "/images/services/security-solutions.jpg",
     capabilities: [
       {
         title: "CCTV",
         description:
-          "Advanced closed-circuit television systems offering continuous monitoring for both private and public spaces, safeguarding people and assets.",
+          "Camera systems for continuous monitoring across private and public areas of a site.",
       },
       {
         title: "Access Control & Biometric Solutions",
         description:
-          "Systems that ensure only authorized individuals gain entry, with efficient visitor screening and biometric fingerprint solutions for accurate time and attendance tracking.",
+          "Entry systems that check identity before letting someone in, with visitor screening and biometric fingerprint scanning for accurate attendance records.",
       },
       {
         title: "Fire Alarm System",
         description:
-          "Smoke detectors and alarm systems that provide early warning through horns or bells, ensuring timely evacuation and minimizing damage and risk.",
+          "Smoke detectors and alarms that sound early enough to evacuate a building before damage spreads.",
       },
       {
         title: "Home Automation",
         description:
-          "Advanced security systems, smart thermostats, lighting controls, and entertainment setups integrated into a safer, more comfortable, more convenient home.",
+          "Security systems, thermostats, lighting, and entertainment tied into one setup that's simpler to control day to day.",
       },
     ],
   },
@@ -155,31 +155,31 @@ export const services: Service[] = [
     title: "Call Center Solutions",
     tagline: "Customer Engagement",
     summary:
-      "Premium headsets, GSM/PRI gateways, CRM and dialer platforms, and voice logging — built to optimize contact center operations and customer engagement.",
+      "Headsets, GSM/PRI gateways, CRM and dialer platforms, and voice logging — the equipment a contact center runs its shifts on.",
     intro:
-      "Our solutions cover the full stack of a modern contact center, from the agent's headset to predictive dialing and compliance-grade call recording.",
+      "We cover the full stack of a contact center, from the agent's headset to predictive dialing and call recording for compliance.",
     icon: "headset",
     image: "/images/services/call-center-solutions.jpg",
     capabilities: [
       {
         title: "Call Center Headset",
         description:
-          "Premium headsets designed for comfort and performance, with noise reduction and soft ear padding to enhance communication and employee well-being.",
+          "Headsets built for full-shift comfort, with noise reduction and cushioned ear pads for agents on back-to-back calls.",
       },
       {
         title: "GSM / PRI Gateway",
         description:
-          "GSM gateways enable seamless, cost-effective communication between digital, analog, IP, and GSM networks; PRI gateways connect ISDN and IP networks for smooth VoIP migration.",
+          "GSM gateways connect digital, analog, IP, and GSM networks for cost-effective calling; PRI gateways bridge ISDN and IP networks for a cleaner move to VoIP.",
       },
       {
         title: "CRM / Dialer Solution",
         description:
-          "Integrated CRM and predictive dialer technology that automate dialing, surface a full view of customer data, and drive faster resolutions, higher lead conversion, and stronger sales performance.",
+          "CRM and predictive dialer software that automates dialing and surfaces customer history on the agent's screen, aimed at fewer dropped leads and faster resolutions.",
       },
       {
         title: "Voice Logger & Auto Dialer",
         description:
-          "Multi-channel call recording and compliance (analog, PRI, VoIP) paired with automated outbound dialing (predictive, progressive, preview, manual), CRM integration, IVR, SMS outreach, and performance dashboards.",
+          "Call recording across analog, PRI, and VoIP lines, paired with automated outbound dialing (predictive, progressive, preview, or manual), CRM integration, IVR, SMS outreach, and performance dashboards.",
       },
     ],
   },
@@ -189,25 +189,25 @@ export const services: Service[] = [
     title: "Software Licenses",
     tagline: "Licensing & Compliance",
     summary:
-      "Genuine software licenses for the applications businesses run on — Zoom, Webex, Microsoft Office 365, Adobe, ERP, and security software.",
+      "Genuine software licenses for the applications businesses already run on — Zoom, Webex, Microsoft Office 365, Adobe, ERP, and security software.",
     intro:
-      "Licensed software keeps organizations compliant and current on features, updates, and security protocols — maintaining a secure, efficient operating environment.",
+      "Licensed software means fewer compliance headaches and no gap in updates or security patches.",
     image: "/images/services/software-licenses.jpg",
     capabilities: [
       {
         title: "Collaboration & Productivity",
         description:
-          "Licenses for Zoom, Webex, Microsoft Office, and Windows / Microsoft 365 to keep teams connected and productive.",
+          "Licenses for Zoom, Webex, Microsoft Office, and Windows / Microsoft 365.",
       },
       {
         title: "Creative & Enterprise Applications",
         description:
-          "Access to the latest Adobe applications and enterprise resource planning (ERP) software.",
+          "Access to current Adobe applications and enterprise resource planning (ERP) software.",
       },
       {
         title: "Security Software",
         description:
-          "Licensed antivirus and endpoint protection software to keep systems compliant and secure.",
+          "Licensed antivirus and endpoint protection to keep systems patched and compliant.",
       },
     ],
   },
@@ -219,9 +219,9 @@ export const amcService = {
   title: "Annual Maintenance Service",
   tagline: "AMC & Support",
   summary:
-    "Specialized Annual Maintenance Contract (AMC) services that keep mission-critical systems operating at peak performance, backed by certified technicians and industry-standard SLAs.",
+    "Annual Maintenance Contracts that keep the systems we install running the way they're supposed to, backed by certified technicians and clear service-level agreements.",
   intro:
-    "Structured service protocols and industry-standard SLAs ensure reliability, responsiveness, and compliance across diverse technical infrastructures.",
+    "A structured service schedule and defined SLAs mean support doesn't depend on remembering to call someone — problems get caught and logged before they become downtime.",
   image: "/images/services/annual-maintenance-service.jpg",
   categories: [
     {
@@ -235,7 +235,7 @@ export const amcService = {
     {
       title: "Audio/Video Solutions",
       items: [
-        "Comprehensive maintenance of AV setups in conference rooms, classrooms, and auditoriums",
+        "Maintenance of AV setups in conference rooms, classrooms, and auditoriums",
         "DSP and mixer calibration, cable integrity checks, and system refreshes",
         "Support for video conferencing platforms and touch panel interfaces",
       ],
@@ -268,7 +268,7 @@ export const amcService = {
   whyUs: [
     {
       title: "Tailored AMC Packages",
-      description: "Custom-built based on site size, system complexity, and risk profile.",
+      description: "Built around site size, system complexity, and risk profile.",
     },
     {
       title: "Rapid Response Team",
@@ -284,7 +284,7 @@ export const amcService = {
     },
     {
       title: "Documentation & Reporting",
-      description: "Structured service logs, checklists, and health summaries.",
+      description: "Service logs, checklists, and health summaries after every visit.",
     },
   ],
 } as const;

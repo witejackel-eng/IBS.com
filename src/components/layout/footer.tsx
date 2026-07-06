@@ -14,7 +14,11 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <Logo />
             <p className="text-xs font-semibold tracking-[0.1em] text-deep-blue uppercase">{company.positioning}</p>
-            <p className="max-w-xs text-sm text-steel">{company.summary}</p>
+            <p className="max-w-xs text-sm text-steel">
+              {company.legalName} helps organizations design, deploy, and maintain communication, networking, AV,
+              and security systems. From planning to long-term support, we focus on technology that works reliably
+              every day.
+            </p>
             <div className="flex items-center gap-3 pt-2">
               <a
                 href={company.social.facebook}

@@ -9,7 +9,7 @@ export function PartnerMarqueeSection() {
       <Container>
         <Reveal direction="up" amount={0.6}>
           <p className="mb-8 text-center text-xs font-semibold tracking-[0.18em] text-graphite uppercase">
-            Genuine products from {partners.length}+ trusted global OEM brands
+            Genuine products from {partners.length}+ OEM brands we work with directly
           </p>
         </Reveal>
       </Container>

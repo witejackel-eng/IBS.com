@@ -53,7 +53,7 @@ export function SegmentsTeaserSection() {
                     <h3 className="text-lg font-semibold text-charcoal font-heading">{segment.title}</h3>
                     <p className="flex-1 text-sm text-steel">{segment.summary}</p>
                     <span className="inline-flex items-center gap-1.5 text-sm font-medium text-deep-blue">
-                      Details
+                      See how we help
                       <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                   </div>
