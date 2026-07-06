@@ -1,14 +1,19 @@
 import { company } from "@/lib/content";
 
 export function OrganizationJsonLd() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.ibsinfra.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ibsinfra.com";
 
   const data = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    // A single entity described with multiple applicable schema.org types --
+    // not three separate/duplicate entries for the same business.
+    "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
     name: company.legalName,
+    legalName: company.legalName,
     description: company.summary,
     url: siteUrl,
+    logo: `${siteUrl}/icon`,
+    image: `${siteUrl}/opengraph-image`,
     telephone: company.contact.phones,
     email: company.contact.email,
     address: {
@@ -18,7 +23,7 @@ export function OrganizationJsonLd() {
       postalCode: "110075",
       addressCountry: "IN",
     },
-    areaServed: company.serviceAreas,
+    areaServed: company.serviceAreas.map((area) => ({ "@type": "City", name: area })),
     sameAs: [company.social.facebook, company.social.linkedin],
   };
 

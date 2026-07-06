@@ -1,6 +1,6 @@
 import { company } from "@/lib/content";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.ibsinfra.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ibsinfra.com";
 
 export function ServiceJsonLd({
   name,
