@@ -4,12 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ChevronDown, Menu, X, Phone } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 
 import { ButtonLink } from "@/components/shared/button-link";
 import { Magnetic } from "@/components/shared/magnetic";
 import { Logo } from "@/components/layout/logo";
-import { mainNav, serviceCategories, company } from "@/lib/content";
+import { mainNav, serviceCategories } from "@/lib/content";
 import { navIconMap } from "@/lib/nav-icons";
 import { DURATION, EASE_OUT_EXPO } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -31,7 +31,6 @@ export function Navbar() {
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const mobileNavCloseRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -49,20 +48,10 @@ export function Navbar() {
     setOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when the full-screen mobile menu is open.
   useEffect(() => {
     if (!open) return;
-    const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = original;
-    };
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    // Focus the close button first — it's the most predictable "I'm in a dialog" signal.
-    const t = window.setTimeout(() => mobileNavCloseRef.current?.focus(), 50);
+    const firstLink = mobileMenuRef.current?.querySelector("a");
+    (firstLink as HTMLAnchorElement | null)?.focus();
 
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -71,10 +60,7 @@ export function Navbar() {
       }
     }
     document.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.clearTimeout(t);
-      document.removeEventListener("keydown", onKeyDown);
-    };
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
   useEffect(() => {
@@ -125,9 +111,6 @@ export function Navbar() {
   );
   const isServicesActive =
     !!servicesGroup && (isActive(servicesGroup.href) || servicesGroup.children.some((c) => isActive(c.href)));
-
-  const primaryPhone = company.contact.phones[0];
-  const primaryPhoneHref = `tel:${primaryPhone.replace(/\s/g, "")}`;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
@@ -268,16 +251,7 @@ export function Navbar() {
           )}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <a
-            href={primaryPhoneHref}
-            data-cursor-hover
-            className="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-graphite transition-colors hover:text-deep-blue"
-            aria-label={`Call us at ${primaryPhone}`}
-          >
-            <Phone className="h-3.5 w-3.5" />
-            <span className="tabular-nums">{primaryPhone}</span>
-          </a>
+        <div className="hidden md:flex">
           <Magnetic>
             <ButtonLink
               href="/contact"
@@ -303,95 +277,63 @@ export function Navbar() {
         </button>
       </div>
 
-      {/* Full-screen mobile overlay menu — focus is trapped inside, closes on
-          ESC, route change, and on selecting any link. Body scroll is locked
-          while open (see useEffect above). */}
       <AnimatePresence>
         {open && (
           <motion.div
             id="mobile-nav-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Site navigation"
+            role="navigation"
+            aria-label="Mobile"
             ref={mobileMenuRef}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
             transition={{ duration: DURATION.base, ease: EASE_OUT_EXPO }}
-            className="fixed inset-0 z-40 flex flex-col bg-[var(--warm-white)] md:hidden"
+            className="glass absolute inset-x-4 top-20 z-40 flex max-h-[75vh] flex-col gap-1 overflow-y-auto rounded-3xl p-4 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] md:hidden"
           >
-            <div className="flex items-center justify-between px-6 pt-6">
-              <span className="text-xs font-semibold tracking-[0.14em] text-steel uppercase">Menu</span>
-              <button
-                ref={mobileNavCloseRef}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-charcoal transition-colors hover:bg-secondary"
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-6 py-6">
-              <ul className="flex flex-col divide-y divide-border">
-                {mainNav.map((link) => (
-                  <li key={link.href} className="py-2">
-                    <Link
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className={cn(
-                        "flex min-h-[48px] items-center text-lg font-medium transition-colors",
-                        isActive(link.href) ? "text-deep-blue" : "text-charcoal hover:text-deep-blue"
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                    {"children" in link && link.children && (
-                      <ul className="mt-1 flex flex-col gap-1 border-l-2 border-border pl-4">
-                        {link.children.map((child) => {
-                          const Icon = navIconMap[child.slug];
-                          return (
-                            <li key={child.href}>
-                              <Link
-                                href={child.href}
-                                onClick={() => setOpen(false)}
-                                className="flex min-h-[44px] items-center gap-3 rounded-lg px-2 text-sm text-steel hover:text-charcoal"
-                              >
-                                {Icon && (
-                                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-deep-blue/10 text-deep-blue">
-                                    <Icon className="h-4 w-4" />
-                                  </span>
-                                )}
-                                <span className="flex flex-col">
-                                  {child.label}
-                                  <span className="block text-xs text-steel/80">{child.tagline}</span>
-                                </span>
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div className="flex flex-col gap-3 border-t border-border px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
-              <a
-                href={primaryPhoneHref}
-                className="flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-border bg-card text-sm font-semibold text-charcoal"
-              >
-                <Phone className="h-4 w-4 text-deep-blue" />
-                {primaryPhone}
-              </a>
+            {mainNav.map((link) => (
+              <div key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="flex min-h-[44px] items-center rounded-2xl px-4 text-sm font-medium text-charcoal hover:bg-deep-blue/5"
+                >
+                  {link.label}
+                </Link>
+                {"children" in link && link.children && (
+                  <div className="ml-3 flex flex-col border-l border-border pl-3">
+                    {link.children.map((child) => {
+                      const Icon = navIconMap[child.slug];
+                      return (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => setOpen(false)}
+                          className="flex min-h-[44px] items-center gap-3 rounded-xl px-3 text-sm text-steel hover:text-charcoal"
+                        >
+                          {Icon && (
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-deep-blue/10 text-deep-blue">
+                              <Icon className="h-4 w-4" />
+                            </span>
+                          )}
+                          <span className="flex flex-col">
+                            {child.label}
+                            <span className="block text-xs text-steel/90">{child.tagline}</span>
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            ))}
+            <div className="mt-2 border-t border-border pt-3">
               <ButtonLink
                 href="/contact"
                 onClick={() => setOpen(false)}
                 variant="cta"
                 className="w-full rounded-full"
               >
-                Talk to us <ArrowRight className="h-4 w-4" />
+                Talk to us
               </ButtonLink>
             </div>
           </motion.div>

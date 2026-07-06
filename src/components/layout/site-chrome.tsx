@@ -5,7 +5,6 @@ import { CustomCursor } from "@/components/shared/custom-cursor";
 import { ScrollProgress } from "@/components/shared/scroll-progress";
 import { BackToTop } from "@/components/shared/back-to-top";
 import { WhatsAppButton } from "@/components/shared/whatsapp-button";
-import { MobileCallBar } from "@/components/shared/mobile-call-bar";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 
@@ -28,7 +27,6 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       <Footer />
       <BackToTop />
       <WhatsAppButton />
-      <MobileCallBar />
     </SmoothScrollProvider>
   );
 }

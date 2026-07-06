@@ -7,6 +7,7 @@ import { SplitText } from "@/components/motion/split-text";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Stat } from "@/components/shared/stat";
+import { PartnerLogo } from "@/components/shared/partner-logo";
 import { IllustrationFrame } from "@/components/illustrations/illustration-frame";
 import { PartnersEcosystemIllustration } from "@/components/illustrations/partners-ecosystem";
 import { PartnerIntegrationFlowIllustration } from "@/components/illustrations/partner-integration-flow";
@@ -136,10 +137,11 @@ export default function PartnersPage() {
               >
                 {items.map((p) => (
                   <RevealItem key={p.slug}>
-                    <div className="group flex h-24 items-center justify-center rounded-2xl border border-border bg-card p-4 text-center shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-deep-blue/40 hover:shadow-[0_16px_32px_-16px_rgba(234,88,12,0.25)]">
-                      <span className="text-sm font-semibold tracking-tight text-charcoal transition-colors duration-300 group-hover:text-deep-blue font-heading">
-                        {p.name}
-                      </span>
+                    <div className="group flex h-32 items-center justify-center rounded-2xl border border-border bg-card p-5 text-center shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-deep-blue/40 hover:shadow-[0_16px_32px_-16px_rgba(234,88,12,0.25)]">
+                      <PartnerLogo
+                        name={p.name}
+                        className="h-full w-full max-w-[180px] transition-transform duration-300 group-hover:scale-[1.04]"
+                      />
                     </div>
                   </RevealItem>
                 ))}

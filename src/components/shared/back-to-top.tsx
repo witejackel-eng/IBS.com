@@ -42,7 +42,7 @@ export function BackToTop() {
         type="button"
         onClick={scrollToTop}
         aria-label="Back to top"
-        className="fixed bottom-24 right-6 z-40 flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border bg-warm-white shadow-md transition-shadow hover:shadow-lg md:bottom-6"
+        className="fixed bottom-6 right-6 z-40 flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border bg-warm-white shadow-md transition-shadow hover:shadow-lg"
       >
         <ArrowUp className="h-5 w-5 text-charcoal" />
       </button>
@@ -62,7 +62,7 @@ export function BackToTop() {
           transition={{ duration: 0.25, ease: "easeOut" }}
           whileHover={{ scale: 1.1, boxShadow: "0 10px 25px -5px rgb(0 0 0 / 0.15)" }}
           whileTap={{ scale: 0.95 }}
-          className="fixed bottom-24 right-6 z-40 flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border bg-warm-white shadow-md glass md:bottom-6"
+          className="fixed bottom-6 right-6 z-40 flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border bg-warm-white shadow-md glass"
         >
           <ArrowUp className="h-5 w-5 text-charcoal" />
         </motion.button>

@@ -28,6 +28,34 @@ model ContactSubmission {
   createdAt       DateTime      @default(now())
 }
 
+/// Job applications submitted via the /careers page.
+/// Stored separately from contact submissions so the recruiting
+/// workflow (review, screen, schedule) can run independently of the
+/// sales-lead workflow.
+model CareerApplication {
+  id          String          @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  role        String
+  experience  String?
+  location    String?
+  coverLetter String?
+  resumeLink  String?
+  message     String
+  status      ApplicationStatus @default(NEW)
+  createdAt   DateTime        @default(now())
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWED
+  INTERVIEWING
+  OFFERED
+  REJECTED
+  HIRED
+}
+
 /// Generic key-value content store backing the lightweight admin CMS.
 /// `key` identifies the editable unit (e.g. "home.hero", "contact.info",
 /// "seo./about"); `data` holds arbitrary JSON matching that unit's shape.

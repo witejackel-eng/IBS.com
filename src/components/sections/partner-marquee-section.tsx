@@ -17,7 +17,7 @@ export function PartnerMarqueeSection() {
         {partners.map((p, i) => (
           <span
             key={`${p.slug}-${i}`}
-            className="shrink-0 cursor-pointer text-base font-semibold tracking-wide whitespace-nowrap text-steel/55 transition-[color,transform,filter,opacity] duration-300 hover:-translate-y-0.5 hover:text-tangerine-600 hover:drop-shadow-[0_0_10px_rgba(249,115,22,0.25)] sm:text-xl lg:text-2xl font-heading"
+            className="shrink-0 cursor-pointer text-base font-semibold tracking-wide whitespace-nowrap text-tangerine-500 transition-[color,transform,filter,opacity] duration-300 hover:-translate-y-0.5 hover:text-tangerine-600 hover:drop-shadow-[0_0_10px_rgba(249,115,22,0.25)] sm:text-xl lg:text-2xl font-heading"
           >
             {p.name}
           </span>

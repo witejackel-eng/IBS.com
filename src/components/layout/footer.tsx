@@ -9,7 +9,7 @@ import { company, services, amcService } from "@/lib/content";
 export function Footer() {
   return (
     <footer className="relative border-t border-border bg-background bg-engineering-grid">
-      <Container className="relative z-10 py-20 pb-32 md:pb-20">
+      <Container className="relative z-10 py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-16">
           <div className="flex flex-col gap-4">
             <Logo />
@@ -66,11 +66,11 @@ export function Footer() {
               <li><Link href="/who-we-serve" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Who We Serve</Link></li>
               <li><Link href="/partners" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Partners</Link></li>
               <li><Link href="/quality" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Quality & Support</Link></li>
-              <li><Link href="/blog" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Blog</Link></li>
-              <li><Link href="/contact" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Careers</Link></li>
+              <li><Link href="/careers" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Careers</Link></li>
+              <li><Link href="/contact" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Contact</Link></li>
             </ul>
             <p className="mt-2 text-xs text-steel/90">
-              Interested in joining IBS? <Link href="/contact" className="underline underline-offset-2 hover:text-charcoal">Get in touch</Link>.
+              Interested in joining IBS? <Link href="/careers" className="underline underline-offset-2 hover:text-charcoal">Get in touch</Link>.
             </p>
           </div>
 
