@@ -64,7 +64,7 @@ export function RevealGroup({
   className,
   stagger = 0.1,
   once = true,
-  amount = 0.3,
+  amount = 0,
 }: {
   children: ReactNode;
   className?: string;
@@ -72,6 +72,11 @@ export function RevealGroup({
   once?: boolean;
   amount?: number;
 }) {
+  // amount is a fraction of THIS container's own height, not the viewport's -- a grid that
+  // collapses to a single column on mobile (e.g. 6 cards stacked) can be several viewport
+  // heights tall, so a non-zero amount (e.g. 0.3) may never be satisfied until the user has
+  // scrolled past most of the section. Default to 0 ("as soon as any part enters view") so the
+  // trigger stays independent of how tall the grid becomes at any breakpoint.
   return (
     <motion.div
       className={className}
