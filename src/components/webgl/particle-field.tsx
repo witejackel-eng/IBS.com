@@ -4,7 +4,16 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-export function ParticleField({ count = 200 }: { count?: number }) {
+export function ParticleField({
+  count = 200,
+  opacity = 0.4,
+  speed = 1,
+}: {
+  count?: number;
+  opacity?: number;
+  /** Multiplier on the base drift speed -- 1 matches the homepage hero. */
+  speed?: number;
+}) {
   const pointsRef = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
@@ -19,8 +28,8 @@ export function ParticleField({ count = 200 }: { count?: number }) {
 
   useFrame((state, delta) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y += delta * 0.012;
-      pointsRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.12) * 0.12;
+      pointsRef.current.rotation.y += delta * 0.012 * speed;
+      pointsRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.12 * speed) * 0.12;
     }
   });
 
@@ -29,7 +38,7 @@ export function ParticleField({ count = 200 }: { count?: number }) {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.028} color="#FB923C" transparent opacity={0.4} sizeAttenuation depthWrite={false} />
+      <pointsMaterial size={0.028} color="#FB923C" transparent opacity={opacity} sizeAttenuation depthWrite={false} />
     </points>
   );
 }
