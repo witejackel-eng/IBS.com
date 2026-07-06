@@ -37,7 +37,7 @@ export default function AmcPage() {
           { name: amcService.title, path: `/services/${amcService.slug}` },
         ]}
       />
-      <ServiceJsonLd name={amcService.title} summary={amcService.summary} slug={amcService.slug} />
+      <ServiceJsonLd service={{ title: amcService.title, summary: amcService.summary, slug: amcService.slug, tagline: amcService.tagline, image: amcService.image } as any} />
       <Section bg="ambient" className="bg-background pt-40 pb-20">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">

@@ -4,9 +4,8 @@ import { ArrowRight, Clock } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { SectionHeading } from "@/components/shared/section-heading";
 import { SplitText } from "@/components/motion/split-text";
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { CollectionPageJsonLd } from "@/components/seo/collection-page-jsonld";
 import { SecondaryHeroNetwork } from "@/components/webgl/secondary-hero-network";
