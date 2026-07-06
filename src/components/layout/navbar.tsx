@@ -10,8 +10,7 @@ import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Magnetic } from "@/components/shared/magnetic";
 import { Logo } from "@/components/layout/logo";
-import { CapabilityCheckIcon } from "@/components/illustrations/icons";
-import { amcService, mainNav, segments, serviceCategories, services } from "@/lib/content";
+import { amcService, mainNav, serviceCategories, services } from "@/lib/content";
 import { navIconMap } from "@/lib/nav-icons";
 import { serviceIllustrationMap } from "@/components/illustrations/services";
 import { blurMap } from "@/lib/image-blur-map";
@@ -51,15 +50,6 @@ servicePreviewBySlug[amcService.slug] = {
   illustration: serviceIllustrationMap[amcService.slug],
   capabilities: amcService.categories.slice(0, 5).map((c) => c.title),
 };
-
-/** Short display labels for the real "Who We Serve" segments -- no industries beyond the four ibsinfra.com actually names. */
-const industryShortLabel: Record<string, string> = {
-  enterprises: "Enterprises",
-  hotels: "Hotels",
-  residential: "Residential",
-  soho: "SOHO",
-};
-const industriesServed = segments.map((s) => industryShortLabel[s.slug] ?? s.title);
 
 export function Navbar() {
   const pathname = usePathname();
@@ -210,19 +200,19 @@ export function Navbar() {
                       onKeyDown={handleMenuKeyDown}
                       onMouseEnter={() => !isCoarsePointer && setServicesOpen(true)}
                       onMouseLeave={() => !isCoarsePointer && setServicesOpen(false)}
-                      className="glass absolute top-full left-1/2 mt-3 w-[440px] max-w-[94vw] origin-top -translate-x-1/2 rounded-[24px] p-4 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] md:w-[680px] xl:w-[1180px]"
+                      className="glass absolute top-full left-1/2 mt-3 w-[420px] max-w-[94vw] origin-top -translate-x-1/2 rounded-[22px] p-3.5 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] md:w-[640px]"
                     >
-                      <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] md:gap-5 md:divide-x md:divide-border xl:grid-cols-[260px_1fr_260px] xl:gap-6">
-                        <div className="flex flex-col md:pr-5 xl:pr-6">
+                      <div className="grid grid-cols-1 md:grid-cols-[35%_65%] md:gap-6 md:divide-x md:divide-border">
+                        <div className="flex flex-col gap-1 md:pr-6">
                           {serviceCategories.map((category) => (
                             <div key={category.title}>
-                              <div className="flex items-center gap-2 px-3 pt-3 pb-2">
+                              <div className="flex items-center gap-2 px-3 pt-1.5 pb-1">
                                 <p className="text-[11px] font-semibold tracking-[0.12em] text-steel/70 uppercase">
                                   {category.title}
                                 </p>
                                 <span className="h-px flex-1 bg-border" />
                               </div>
-                              <div className="flex flex-col gap-0.5">
+                              <div className="flex flex-col gap-1">
                                 {category.slugs.map((slug) => {
                                   const child = link.children.find((c) => c.slug === slug);
                                   if (!child) return null;
@@ -242,7 +232,7 @@ export function Navbar() {
                                       onFocus={() => setPreviewSlug(slug)}
                                       onClick={() => setServicesOpen(false)}
                                       className={cn(
-                                        "group relative flex items-center gap-3 rounded-2xl py-3 pr-3 pl-4 transition-all duration-300 hover:-translate-y-0.5 hover:bg-deep-blue/5 hover:shadow-[0_10px_24px_-14px_rgba(234,88,12,0.3)] focus-visible:bg-deep-blue/5",
+                                        "group relative flex items-center gap-2.5 rounded-xl py-1.5 pr-3 pl-4 transition-all duration-300 hover:-translate-y-0.5 hover:bg-deep-blue/5 hover:shadow-[0_10px_24px_-14px_rgba(234,88,12,0.3)] focus-visible:bg-deep-blue/5",
                                         isPreviewActive && "-translate-y-0.5 bg-deep-blue/5 shadow-[0_10px_24px_-14px_rgba(234,88,12,0.3)]"
                                       )}
                                     >
@@ -253,13 +243,13 @@ export function Navbar() {
                                         )}
                                       />
                                       {Icon && (
-                                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-deep-blue/10 text-deep-blue transition-transform duration-300 group-hover:scale-105">
-                                          <Icon className="h-5 w-5" />
+                                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-deep-blue/10 text-deep-blue transition-transform duration-300 group-hover:scale-105">
+                                          <Icon className="h-4 w-4" />
                                         </span>
                                       )}
-                                      <span className="flex flex-col">
-                                        <span className="text-sm font-medium text-charcoal">{child.label}</span>
-                                        <span className="text-xs text-steel">{child.tagline}</span>
+                                      <span className="flex min-w-0 flex-col">
+                                        <span className="line-clamp-2 text-[13px] leading-[1.05] font-medium text-charcoal">{child.label}</span>
+                                        <span className="mt-0.5 truncate text-[11px] text-steel">{child.tagline}</span>
                                       </span>
                                       {isActive(child.href) && (
                                         <span className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-deep-blue" />
@@ -272,7 +262,7 @@ export function Navbar() {
                           ))}
                         </div>
 
-                        <div className="relative hidden overflow-hidden md:flex md:flex-col md:px-1">
+                        <div className="relative hidden overflow-hidden md:flex md:flex-col md:pl-6">
                           {(() => {
                             const activeSlug = previewSlug ?? orderedServiceSlugs[0];
                             const preview = servicePreviewBySlug[activeSlug];
@@ -284,12 +274,12 @@ export function Navbar() {
                                   initial={{ opacity: 0 }}
                                   animate={{ opacity: 1 }}
                                   exit={{ opacity: 0 }}
-                                  transition={{ duration: 0.28, ease: EASE_OUT_EXPO }}
+                                  transition={{ duration: 0.24, ease: EASE_OUT_EXPO }}
                                   className="flex h-full flex-col"
                                 >
-                                  <div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-2xl border border-border/60 shadow-[0_16px_32px_-16px_rgba(0,0,0,0.16)]">
+                                  <div className="relative h-[200px] w-full shrink-0 overflow-hidden rounded-2xl border border-border/60 shadow-[0_16px_32px_-16px_rgba(0,0,0,0.16)]">
                                     <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-deep-blue/15 via-deep-blue/5 to-background bg-engineering-grid">
-                                      {!preview.image && preview.illustration && <preview.illustration className="h-20 w-20" />}
+                                      {!preview.image && preview.illustration && <preview.illustration className="h-16 w-16" />}
                                     </div>
                                     {preview.image && (
                                       <Image
@@ -306,31 +296,15 @@ export function Navbar() {
                                       <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent" />
                                     )}
                                   </div>
-                                  <div className="flex flex-1 flex-col gap-3 pt-4">
-                                    <div>
-                                      <p className="text-[11px] font-semibold tracking-[0.12em] text-deep-blue uppercase">
-                                        {preview.tagline}
-                                      </p>
-                                      <p className="mt-1 text-[22px] leading-tight font-semibold text-charcoal font-heading">
-                                        {preview.title}
-                                      </p>
-                                    </div>
-                                    <p className="text-sm leading-relaxed text-steel">{preview.summary}</p>
-
-                                    {preview.capabilities.length > 0 && (
-                                      <ul className="grid grid-cols-1 gap-x-4 gap-y-1.5 sm:grid-cols-2">
-                                        {preview.capabilities.slice(0, 4).map((title) => (
-                                          <li key={title} className="flex items-start gap-2 text-xs text-charcoal">
-                                            <CapabilityCheckIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-deep-blue" />
-                                            <span>{title}</span>
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    )}
+                                  <div className="flex flex-1 flex-col gap-2.5 pt-4">
+                                    <p className="text-[19px] leading-tight font-semibold text-charcoal font-heading">
+                                      {preview.title}
+                                    </p>
+                                    <p className="line-clamp-2 text-sm leading-relaxed text-steel">{preview.summary}</p>
 
                                     <div className="mt-auto flex items-center justify-between gap-3 pt-2">
                                       <div className="flex flex-wrap gap-1.5">
-                                        {preview.capabilities.slice(0, 3).map((title) => (
+                                        {preview.capabilities.slice(0, 4).map((title) => (
                                           <span
                                             key={title}
                                             className="rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-[11px] text-steel"
@@ -354,60 +328,13 @@ export function Navbar() {
                             );
                           })()}
                         </div>
-
-                        <div className="hidden xl:flex xl:flex-col xl:gap-6 xl:pl-6">
-                          <div>
-                            <p className="mb-3 text-[11px] font-semibold tracking-[0.12em] text-steel/70 uppercase">Why IBS</p>
-                            <ul className="flex flex-col gap-2.5">
-                              {["46+ Global OEM Partners", "Genuine Products", "Engineering Expertise", "Long-term Support"].map(
-                                (item) => (
-                                  <li key={item} className="flex items-start gap-2 text-sm text-charcoal">
-                                    <CapabilityCheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-deep-blue" />
-                                    <span>{item}</span>
-                                  </li>
-                                )
-                              )}
-                            </ul>
-                          </div>
-
-                          <div>
-                            <p className="mb-3 text-[11px] font-semibold tracking-[0.12em] text-steel/70 uppercase">
-                              Industries served
-                            </p>
-                            <div className="flex flex-wrap gap-1.5">
-                              {industriesServed.map((label) => (
-                                <span
-                                  key={label}
-                                  className="rounded-full border border-border bg-secondary/60 px-3 py-1 text-xs text-steel"
-                                >
-                                  {label}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div className="mt-auto rounded-2xl border border-border bg-secondary/40 p-4">
-                            <p className="text-sm font-medium text-charcoal">Need help choosing?</p>
-                            <p className="mt-1 text-xs text-steel">Talk to our team about your requirement.</p>
-                            <ButtonLink
-                              href="/contact"
-                              variant="cta"
-                              size="sm"
-                              onClick={() => setServicesOpen(false)}
-                              className="mt-3 w-full rounded-full"
-                              data-cursor-hover
-                            >
-                              Talk to an expert
-                            </ButtonLink>
-                          </div>
-                        </div>
                       </div>
-                      <div className="mt-3 border-t border-border pt-3">
+                      <div className="mt-2 border-t border-border pt-2">
                         <Link
                           href="/services"
                           data-cursor-hover
                           onClick={() => setServicesOpen(false)}
-                          className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-deep-blue hover:bg-deep-blue/5"
+                          className="flex items-center justify-between rounded-xl px-3 py-1.5 text-sm font-medium text-deep-blue hover:bg-deep-blue/5"
                         >
                           View all services <ArrowRight className="h-3.5 w-3.5" />
                         </Link>
