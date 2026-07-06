@@ -30,15 +30,19 @@ export const mainNav = [
 /** Groups the Services mega menu into categories for the nav only -- purely an IA grouping, not a factual claim. */
 export const serviceCategories = [
   {
-    title: "Communications",
+    title: "Communication",
     slugs: ["voice-communication", "audio-video-boardroom-solutions", "call-center-solutions"],
   },
   {
-    title: "Infrastructure & Security",
-    slugs: ["it-infrastructure", "security-solutions"],
+    title: "Infrastructure",
+    slugs: ["it-infrastructure"],
   },
   {
-    title: "Licensing & Support",
+    title: "Security",
+    slugs: ["security-solutions"],
+  },
+  {
+    title: "Support",
     slugs: ["software-licenses", "annual-maintenance-service"],
   },
 ] as const;
