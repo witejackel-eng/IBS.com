@@ -6,9 +6,8 @@ export const contactFormSchema = z.object({
   phone: z
     .string()
     .trim()
-    .max(20)
-    .optional()
-    .or(z.literal("")),
+    .min(8, "Enter a valid phone number")
+    .max(20),
   company: z.string().trim().max(160).optional().or(z.literal("")),
   serviceInterest: z.string().trim().max(120).optional().or(z.literal("")),
   message: z.string().trim().min(10, "Tell us a little more (10+ characters)").max(2000),

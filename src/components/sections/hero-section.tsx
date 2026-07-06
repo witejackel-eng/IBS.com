@@ -30,13 +30,6 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
 
       <Container className="relative z-10 pt-24 pb-16">
-        <Reveal direction="up" amount={0.6}>
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
-            <span className="h-1.5 w-1.5 rounded-full bg-deep-blue" />
-            {company.positioning}
-          </span>
-        </Reveal>
-
         <SplitText
           as="h1"
           text={headline ?? defaultHeroContent.headline}

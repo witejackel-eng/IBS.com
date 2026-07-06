@@ -96,12 +96,12 @@ export function ContactForm() {
       />
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="name">Full name</Label>
+          <Label htmlFor="name">Full name *</Label>
           <Input id="name" placeholder="Your name" {...register("name")} aria-invalid={!!errors.name} />
           {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">Email *</Label>
           <Input id="email" type="email" placeholder="you@company.com" {...register("email")} aria-invalid={!!errors.email} />
           {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
         </div>
@@ -109,8 +109,9 @@ export function ContactForm() {
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="phone">Phone (optional)</Label>
-          <Input id="phone" placeholder="+91 " {...register("phone")} />
+          <Label htmlFor="phone">Phone</Label>
+          <Input id="phone" placeholder="+91 " {...register("phone")} aria-invalid={!!errors.phone} />
+          {errors.phone && <p className="text-xs text-destructive">{errors.phone.message}</p>}
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="company">Company (optional)</Label>

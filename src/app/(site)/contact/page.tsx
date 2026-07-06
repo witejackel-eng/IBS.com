@@ -6,6 +6,7 @@ import { Section } from "@/components/layout/section";
 import { SplitText } from "@/components/motion/split-text";
 import { Reveal } from "@/components/motion/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
+import { ViewOnMap } from "@/components/shared/view-on-map";
 import { ContactNetworkIllustration } from "@/components/illustrations/contact-network";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { ContactPageJsonLd } from "@/components/seo/contact-page-jsonld";
@@ -26,8 +27,6 @@ export default async function ContactPage() {
     email: company.contact.email,
     mapQuery: company.contact.mapQuery,
   });
-
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(info.mapQuery)}&output=embed`;
 
   return (
     <>
@@ -84,15 +83,7 @@ export default async function ContactPage() {
                 </div>
               </div>
 
-              <div className="h-72 overflow-hidden rounded-3xl border border-border">
-                <iframe
-                  title="IBS Infra location map"
-                  src={mapSrc}
-                  className="h-full w-full border-0"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
+              <ViewOnMap address={info.mapQuery} className="mt-2" />
             </Reveal>
           </div>
         </Container>
