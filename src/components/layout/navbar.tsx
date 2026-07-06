@@ -126,7 +126,7 @@ export function Navbar() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
           {mainNav.map((link) =>
             "children" in link && link.children ? (
               <div key={link.href} ref={servicesRef} className="relative">
@@ -281,6 +281,8 @@ export function Navbar() {
         {open && (
           <motion.div
             id="mobile-nav-menu"
+            role="navigation"
+            aria-label="Mobile"
             ref={mobileMenuRef}
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
