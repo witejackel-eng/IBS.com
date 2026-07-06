@@ -213,7 +213,10 @@ export const services: Service[] = [
   },
 ];
 
-export const amcService = {
+export const amcService: Service & {
+  categories: readonly { title: string; items: readonly string[] }[];
+  whyUs: readonly { title: string; description: string }[];
+} = {
   slug: "annual-maintenance-service",
   navLabel: "Annual Maintenance Service",
   title: "Annual Maintenance Service",
@@ -223,6 +226,38 @@ export const amcService = {
   intro:
     "A structured service schedule and defined SLAs mean support doesn't depend on remembering to call someone — problems get caught and logged before they become downtime.",
   image: "/images/services/annual-maintenance-service.jpg",
+  /**
+   * Top-level capabilities surfaced for SEO/JSON-LD and any consumer that
+   * treats this entry as a generic `Service`. Mirrors the more detailed
+   * `categories` below so both views stay in sync.
+   */
+  capabilities: [
+    {
+      title: "Communication Technologies",
+      description:
+        "Maintenance of voice platforms — SIP, analog, and hybrid configurations — including firmware updates, call-flow optimization, and troubleshooting.",
+    },
+    {
+      title: "Audio/Video Solutions",
+      description:
+        "Servicing of AV setups in conference rooms, classrooms, and auditoriums, with DSP and mixer calibration, cable checks, and video conferencing support.",
+    },
+    {
+      title: "Fire Alarm Systems",
+      description:
+        "Servicing of conventional and addressable panels, smoke detector cleaning, alarm verification, battery checks, and fire safety compliance support.",
+    },
+    {
+      title: "CCTV Surveillance Systems",
+      description:
+        "Maintenance of IP and analog cameras with NVR/DVR integration, lens cleaning, angle verification, and storage health checks.",
+    },
+    {
+      title: "Access Control Systems",
+      description:
+        "Inspection of biometric, RFID, and keypad modules, with configuration updates, event log monitoring, and visitor management integration support.",
+    },
+  ],
   categories: [
     {
       title: "Communication Technologies",

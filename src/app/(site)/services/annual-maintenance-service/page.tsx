@@ -19,7 +19,6 @@ import {
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { ServiceJsonLd } from "@/components/seo/service-jsonld";
 import { amcService } from "@/lib/content";
-import type { Service } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: amcService.title,
@@ -38,7 +37,7 @@ export default function AmcPage() {
           { name: amcService.title, path: `/services/${amcService.slug}` },
         ]}
       />
-      <ServiceJsonLd service={amcService as Service} />
+      <ServiceJsonLd service={amcService} />
       <Section bg="ambient" className="bg-background pt-40 pb-20">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
