@@ -50,7 +50,7 @@ export const company = {
     address:
       "Plot No. 94, 3rd Floor, Block - B, Pocket - 10, Sector - 13, Dwarka, New Delhi - 110075",
     mapQuery:
-      "Plot No. 94, 3rd Floor, Block B, Pocket 10, Sector 13, Dwarka, New Delhi 110075",
+      "Plot No. 94, 3rd Floor, Block - B, Pocket - 10, Sector - 13, Dwarka, New Delhi - 110075",
   },
   serviceAreas: ["Delhi", "Noida", "Gurgaon", "Faridabad", "Dwarka"],
   social: {

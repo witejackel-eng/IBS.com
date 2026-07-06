@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, MapPin } from "lucide-react";
+import { X, Loader2, MapPin, ExternalLink } from "lucide-react";
 
 interface ViewOnMapProps {
   address?: string;
@@ -10,7 +10,7 @@ interface ViewOnMapProps {
 }
 
 export function ViewOnMap({
-  address = "Plot No. 94, Block B, Pocket 10, Sector 13, Dwarka, New Delhi 110075",
+  address = "Plot No. 94, 3rd Floor, Block - B, Pocket - 10, Sector - 13, Dwarka, New Delhi - 110075",
   className = "",
 }: ViewOnMapProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,10 @@ export function ViewOnMap({
     mass: 0.8,
   };
 
-  const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+  // Google Maps embed URL (no API key required) for the inline preview.
+  const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+  // Google Maps external link — opens the full maps.google.com experience.
+  const mapExternalUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
   return (
     <div className={`flex w-full flex-col items-center justify-center ${className}`}>
@@ -85,7 +88,7 @@ export function ViewOnMap({
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
-                  src={mapUrl}
+                  src={mapEmbedUrl}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -110,6 +113,16 @@ export function ViewOnMap({
               >
                 <X className="h-5 w-5" strokeWidth={3} />
               </motion.button>
+
+              <a
+                href={mapExternalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-4 left-4 z-50 flex items-center gap-1.5 rounded-full border border-border bg-warm-white/95 px-3 py-1.5 text-xs font-semibold text-charcoal shadow-lg backdrop-blur transition-all hover:border-deep-blue/30 hover:text-deep-blue"
+              >
+                <ExternalLink className="h-3.5 w-3.5" />
+                Open in Google Maps
+              </a>
             </motion.div>
           )}
         </AnimatePresence>
