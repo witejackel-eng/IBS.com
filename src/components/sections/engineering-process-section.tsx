@@ -13,28 +13,35 @@ import { DURATION, EASE_OUT_EXPO } from "@/lib/motion";
 import { blurMap } from "@/lib/image-blur-map";
 import { processSteps } from "@/lib/content";
 
+/** Horizontal connector between step cards -- desktop only, where steps flow left-to-right. */
 function Connector() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <>
-      <motion.span
-        aria-hidden
-        className="hidden h-px w-8 shrink-0 origin-left bg-border lg:block xl:w-10"
-        initial={prefersReducedMotion ? undefined : { scaleX: 0 }}
-        whileInView={prefersReducedMotion ? undefined : { scaleX: 1 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: DURATION.reveal, ease: EASE_OUT_EXPO }}
-      />
-      <motion.span
-        aria-hidden
-        className="h-8 w-px shrink-0 origin-top bg-border lg:hidden"
-        initial={prefersReducedMotion ? undefined : { scaleY: 0 }}
-        whileInView={prefersReducedMotion ? undefined : { scaleY: 1 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: DURATION.reveal, ease: EASE_OUT_EXPO }}
-      />
-    </>
+    <motion.span
+      aria-hidden
+      className="hidden h-px w-8 shrink-0 origin-left bg-border lg:block xl:w-10"
+      initial={prefersReducedMotion ? undefined : { scaleX: 0 }}
+      whileInView={prefersReducedMotion ? undefined : { scaleX: 1 }}
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{ duration: DURATION.reveal, ease: EASE_OUT_EXPO }}
+    />
+  );
+}
+
+/** Vertical connector threaded under the icon -- mobile/tablet only, where steps stack in a timeline. */
+function MobileConnector() {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <motion.span
+      aria-hidden
+      className="mt-1 h-8 w-px flex-1 origin-top bg-border lg:hidden"
+      initial={prefersReducedMotion ? undefined : { scaleY: 0 }}
+      whileInView={prefersReducedMotion ? undefined : { scaleY: 1 }}
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{ duration: DURATION.reveal, ease: EASE_OUT_EXPO }}
+    />
   );
 }
 
@@ -73,12 +80,17 @@ export function EngineeringProcessSection() {
               {processSteps.map((step, i) => {
                 const Illustration = processIllustrationMap[step.slug];
                 return (
-                  <div key={step.slug} className="flex items-center lg:contents">
-                    <RevealItem className="flex flex-col items-center gap-2 text-center lg:w-24">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card">
-                        {Illustration && <Illustration className="h-7 w-7" />}
+                  <div key={step.slug} className="flex w-full items-start lg:w-auto lg:items-center lg:contents">
+                    <RevealItem className="flex w-full flex-row items-start gap-4 lg:w-24 lg:flex-col lg:items-center lg:gap-2 lg:text-center">
+                      <span className="flex shrink-0 flex-col items-center">
+                        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card">
+                          {Illustration && <Illustration className="h-7 w-7" />}
+                        </span>
+                        {i < processSteps.length - 1 && <MobileConnector />}
                       </span>
-                      <span className="text-xs font-medium text-charcoal">{step.title}</span>
+                      <span className="min-w-0 flex-1 pt-3 text-left text-xs font-medium text-charcoal lg:flex-none lg:pt-0 lg:text-center">
+                        {step.title}
+                      </span>
                     </RevealItem>
                     {i < processSteps.length - 1 && <Connector />}
                   </div>
