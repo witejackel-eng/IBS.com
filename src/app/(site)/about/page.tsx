@@ -4,13 +4,12 @@ import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { SectionHeading } from "@/components/shared/section-heading";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Stat } from "@/components/shared/stat";
 import { SplitText } from "@/components/motion/split-text";
 import { MaskReveal } from "@/components/motion/mask-reveal";
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
-import { CapabilityCheckIcon } from "@/components/illustrations/icons";
+import { Reveal } from "@/components/motion/reveal";
+import { DisciplinesSection } from "@/components/sections/disciplines-section";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { AboutPageJsonLd } from "@/components/seo/about-page-jsonld";
 import { blurMap } from "@/lib/image-blur-map";
@@ -67,25 +66,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section bg="grid">
-        <Container>
-          <SectionHeading
-            eyebrow="What we do"
-            title="Five disciplines, one integrated delivery team"
-            align="left"
-            className="mb-14 items-start text-left"
-          />
-          <RevealGroup className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-            {company.about.categories.map((cat) => (
-              <RevealItem key={cat.title} className="bg-background p-8">
-                <CapabilityCheckIcon className="h-5 w-5 text-deep-blue" />
-                <h3 className="mt-3 text-lg font-semibold text-charcoal font-heading">{cat.title}</h3>
-                <p className="mt-3 text-sm text-steel">{cat.description}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </Container>
-      </Section>
+      <DisciplinesSection />
 
       <Section bg="blueprint">
         <Container className="grid grid-cols-1 gap-16 lg:grid-cols-2">
