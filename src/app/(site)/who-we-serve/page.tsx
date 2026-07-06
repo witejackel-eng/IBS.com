@@ -10,6 +10,7 @@ import { CtaSection } from "@/components/sections/cta-section";
 import { CapabilityCheckIcon } from "@/components/illustrations/icons";
 import { segmentIllustrationMap } from "@/components/illustrations/segments";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { CollectionPageJsonLd } from "@/components/seo/collection-page-jsonld";
 import { blurMap } from "@/lib/image-blur-map";
 import { segments, services, amcService } from "@/lib/content";
 
@@ -28,6 +29,11 @@ export default function WhoWeServePage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Who We Serve", path: "/who-we-serve" }]} />
+      <CollectionPageJsonLd
+        name="Who We Serve"
+        path="/who-we-serve"
+        description="Enterprises, hotels, residential spaces, and small offices -- IBS delivers technology solutions sized to fit each segment."
+      />
       <Section bg="ambient" className="bg-background pt-40 pb-20">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
@@ -46,12 +52,13 @@ export default function WhoWeServePage() {
 
       <Section bg="grid">
         <Container>
+          <h2 className="sr-only">Segments we serve</h2>
           <RevealGroup className="grid grid-cols-1 gap-8 md:grid-cols-2" stagger={0.08}>
             {segments.map((segment) => {
               const Illustration = segmentIllustrationMap[segment.slug];
               return (
               <RevealItem key={segment.slug}>
-                <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card">
+                <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card">
                   <div className="relative h-40 w-full overflow-hidden bg-muted">
                     <Image
                       src={`/images/segments/${segment.slug}.jpg`}
@@ -72,12 +79,12 @@ export default function WhoWeServePage() {
 
                   <div className="flex flex-1 flex-col gap-6 p-8">
                   <div>
-                    <h2 className="text-xl font-semibold text-charcoal font-heading">{segment.title}</h2>
+                    <h3 className="text-xl font-semibold text-charcoal font-heading">{segment.title}</h3>
                     <p className="mt-3 text-sm text-steel">{segment.summary}</p>
                   </div>
 
                   <div>
-                  <h3 className="mb-2.5 text-xs font-semibold tracking-[0.1em] text-steel uppercase">Example applications</h3>
+                  <h4 className="mb-2.5 text-xs font-semibold tracking-[0.1em] text-steel uppercase">Example applications</h4>
                   <ul className="flex flex-col gap-2.5">
                     {segment.needs.map((need) => (
                       <li key={need} className="flex items-start gap-2.5 text-sm text-steel">
@@ -104,7 +111,7 @@ export default function WhoWeServePage() {
                     ))}
                   </div>
                   </div>
-                </div>
+                </article>
               </RevealItem>
               );
             })}

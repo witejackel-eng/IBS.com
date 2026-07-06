@@ -7,8 +7,9 @@ import { Reveal } from "@/components/motion/reveal";
 import { ServicesGridSection } from "@/components/sections/services-grid-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { CollectionPageJsonLd } from "@/components/seo/collection-page-jsonld";
 import { SecondaryHeroNetwork } from "@/components/webgl/secondary-hero-network";
-import { company } from "@/lib/content";
+import { company, services, amcService } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -21,6 +22,12 @@ export default function ServicesIndexPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Services", path: "/services" }]} />
+      <CollectionPageJsonLd
+        name="Services"
+        path="/services"
+        description="Voice communication, AV & boardroom integration, IT network infrastructure, security, call center solutions, and software licensing."
+        items={[...services, amcService].map((s) => ({ name: s.title, path: `/services/${s.slug}` }))}
+      />
       <Section bg="ambient" className="relative overflow-hidden bg-background pt-40 pb-20">
         <SecondaryHeroNetwork />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />

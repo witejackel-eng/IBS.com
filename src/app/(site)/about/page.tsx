@@ -12,6 +12,7 @@ import { MaskReveal } from "@/components/motion/mask-reveal";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { CapabilityCheckIcon } from "@/components/illustrations/icons";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { AboutPageJsonLd } from "@/components/seo/about-page-jsonld";
 import { blurMap } from "@/lib/image-blur-map";
 import { company, partners, services, segments } from "@/lib/content";
 
@@ -25,6 +26,7 @@ export default function AboutPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "About", path: "/about" }]} />
+      <AboutPageJsonLd />
       <Section bg="ambient" className="bg-background pt-40 pb-24">
         <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
