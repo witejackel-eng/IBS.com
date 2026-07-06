@@ -295,7 +295,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-2xl px-4 py-3 text-sm font-medium text-charcoal hover:bg-deep-blue/5"
+                  className="flex min-h-[44px] items-center rounded-2xl px-4 text-sm font-medium text-charcoal hover:bg-deep-blue/5"
                 >
                   {link.label}
                 </Link>
@@ -308,7 +308,7 @@ export function Navbar() {
                           key={child.href}
                           href={child.href}
                           onClick={() => setOpen(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-steel hover:text-charcoal"
+                          className="flex min-h-[44px] items-center gap-3 rounded-xl px-3 text-sm text-steel hover:text-charcoal"
                         >
                           {Icon && (
                             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-deep-blue/10 text-deep-blue">

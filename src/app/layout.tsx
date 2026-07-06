@@ -7,6 +7,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { OrganizationJsonLd } from "@/components/seo/organization-jsonld";
 import { WebsiteJsonLd } from "@/components/seo/website-jsonld";
+import { ServiceJsonLd } from "@/components/seo/service-jsonld";
 import { company } from "@/lib/content";
 
 const geistSans = Geist({
@@ -69,11 +70,20 @@ export const metadata: Metadata = {
     siteName: company.legalName,
     title: titleDefault,
     description: company.summary,
+    images: [
+      {
+        url: `${siteUrl}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: titleDefault,
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary_large_image" as const,
     title: titleDefault,
     description: company.summary,
+    images: [`${siteUrl}/opengraph-image`],
   },
   robots: {
     index: true,
@@ -103,9 +113,15 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://vitals.vercel-insights.com" />
+        <link rel="preconnect" href="https://vitals.vercel-analytics.com" />
+        <link rel="dns-prefetch" href="https://raw.githack.com" />
+      </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <OrganizationJsonLd />
         <WebsiteJsonLd />
+        <ServiceJsonLd />
         {children}
         <Toaster />
         <Analytics />

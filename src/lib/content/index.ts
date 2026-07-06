@@ -8,3 +8,4 @@ export * from "./image-credits";
 export * from "./process";
 export * from "./quality";
 export * from "./projects";
+export * from "./blog";

@@ -46,13 +46,13 @@ export function Footer() {
             <ul className="flex flex-col gap-2.5">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="text-sm text-steel transition-colors hover:text-charcoal">
+                  <Link href={`/services/${s.slug}`} className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">
                     {s.navLabel}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href={`/services/${amcService.slug}`} className="text-sm text-steel transition-colors hover:text-charcoal">
+                <Link href={`/services/${amcService.slug}`} className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">
                   {amcService.navLabel}
                 </Link>
               </li>
@@ -62,11 +62,12 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-semibold tracking-wide text-charcoal">Company</h3>
             <ul className="flex flex-col gap-2.5">
-              <li><Link href="/about" className="text-sm text-steel transition-colors hover:text-charcoal">About</Link></li>
-              <li><Link href="/who-we-serve" className="text-sm text-steel transition-colors hover:text-charcoal">Who We Serve</Link></li>
-              <li><Link href="/partners" className="text-sm text-steel transition-colors hover:text-charcoal">Partners</Link></li>
-              <li><Link href="/quality" className="text-sm text-steel transition-colors hover:text-charcoal">Quality & Support</Link></li>
-              <li><Link href="/contact" className="text-sm text-steel transition-colors hover:text-charcoal">Careers</Link></li>
+              <li><Link href="/about" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">About</Link></li>
+              <li><Link href="/who-we-serve" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Who We Serve</Link></li>
+              <li><Link href="/partners" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Partners</Link></li>
+              <li><Link href="/quality" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Quality & Support</Link></li>
+              <li><Link href="/blog" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Blog</Link></li>
+              <li><Link href="/contact" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Careers</Link></li>
             </ul>
             <p className="mt-2 text-xs text-steel/90">
               Interested in joining IBS? <Link href="/contact" className="underline underline-offset-2 hover:text-charcoal">Get in touch</Link>.

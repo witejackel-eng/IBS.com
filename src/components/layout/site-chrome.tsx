@@ -2,6 +2,9 @@ import type { ReactNode } from "react";
 
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { CustomCursor } from "@/components/shared/custom-cursor";
+import { ScrollProgress } from "@/components/shared/scroll-progress";
+import { BackToTop } from "@/components/shared/back-to-top";
+import { WhatsAppButton } from "@/components/shared/whatsapp-button";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 
@@ -16,11 +19,14 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       </a>
       <div className="grain-overlay-fixed" aria-hidden />
       <CustomCursor />
+      <ScrollProgress />
       <Navbar />
       <main id="main-content" className="flex-1">
         {children}
       </main>
       <Footer />
+      <BackToTop />
+      <WhatsAppButton />
     </SmoothScrollProvider>
   );
 }

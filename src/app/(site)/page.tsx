@@ -1,15 +1,29 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 import { HeroSection, defaultHeroContent, type HeroContent } from "@/components/sections/hero-section";
 import { WhoWeAreSection } from "@/components/sections/who-we-are-section";
-import { PartnerMarqueeSection } from "@/components/sections/partner-marquee-section";
 import { ServicesGridSection } from "@/components/sections/services-grid-section";
-import { SegmentsTeaserSection } from "@/components/sections/segments-teaser-section";
-import { FeaturedScenariosSection } from "@/components/sections/featured-scenarios-section";
-import { EngineeringProcessSection } from "@/components/sections/engineering-process-section";
-import { WhyIbsSection } from "@/components/sections/why-ibs-section";
-import { CtaSection } from "@/components/sections/cta-section";
 import { getContentOverride } from "@/lib/content-overrides";
+
+const SegmentsTeaserSection = dynamic(
+  () => import("@/components/sections/segments-teaser-section").then((m) => ({ default: m.SegmentsTeaserSection }))
+);
+const FeaturedScenariosSection = dynamic(
+  () => import("@/components/sections/featured-scenarios-section").then((m) => ({ default: m.FeaturedScenariosSection }))
+);
+const EngineeringProcessSection = dynamic(
+  () => import("@/components/sections/engineering-process-section").then((m) => ({ default: m.EngineeringProcessSection }))
+);
+const PartnerMarqueeSection = dynamic(
+  () => import("@/components/sections/partner-marquee-section").then((m) => ({ default: m.PartnerMarqueeSection }))
+);
+const WhyIbsSection = dynamic(
+  () => import("@/components/sections/why-ibs-section").then((m) => ({ default: m.WhyIbsSection }))
+);
+const CtaSection = dynamic(
+  () => import("@/components/sections/cta-section").then((m) => ({ default: m.CtaSection }))
+);
 
 export const metadata: Metadata = {
   title: "Network & Security Integration",

@@ -24,6 +24,7 @@ export const mainNav = [
   { label: "Who We Serve", href: "/who-we-serve" },
   { label: "Partners", href: "/partners" },
   { label: "Quality & Support", href: "/quality" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ] as const;
 

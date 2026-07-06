@@ -14,7 +14,9 @@ import { serviceIllustrationMap } from "@/components/illustrations/services";
 import { CapabilityCheckIcon } from "@/components/illustrations/icons";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { ServiceJsonLd } from "@/components/seo/service-jsonld";
-import { services } from "@/lib/content";
+import { FaqJsonLd } from "@/components/seo/faq-jsonld";
+import { FaqItem } from "@/components/shared/faq-item";
+import { services, company } from "@/lib/content";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -69,7 +71,7 @@ export default async function ServiceDetailPage({
           { name: service.title, path: `/services/${service.slug}` },
         ]}
       />
-      <ServiceJsonLd name={service.title} summary={service.summary} slug={service.slug} />
+      <ServiceJsonLd service={service} />
       <Section className="pt-40 pb-0">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
@@ -130,6 +132,37 @@ export default async function ServiceDetailPage({
         </Container>
       </Section>
 
+      <Section bg="grid">
+        <Container className="max-w-3xl">
+          <Reveal direction="up">
+            <h2 className="mb-8 text-2xl font-semibold text-charcoal font-heading">Frequently asked questions</h2>
+            <div className="flex flex-col gap-6">
+              <FaqItem
+                question="What areas does IBS serve?"
+                answer={`We design, install, and support systems across ${company.serviceAreas.join(", ")} and the broader Delhi NCR region. For projects outside this area, reach out to discuss availability.`}
+              />
+              <FaqItem
+                question="Do you offer maintenance contracts?"
+                answer="Yes, we offer comprehensive Annual Maintenance Contracts (AMCs) that cover preventive maintenance, emergency response, and compliance checks. Our AMCs include certified technicians and clearly defined service-level agreements to keep your systems running reliably."
+              />
+              <FaqItem
+                question="How do I get a quote?"
+                answer="Contact us through our website form, call us directly, or send us an email. We typically schedule a site visit to understand your requirements before providing a detailed proposal with transparent pricing."
+              />
+              <FaqItem
+                question="Do you work with existing systems or only new installations?"
+                answer="We handle both. Whether you need a completely new deployment, an upgrade to existing infrastructure, or integration of new technology with legacy systems, our engineering team evaluates your current setup and recommends the most practical approach."
+              />
+            </div>
+          </Reveal>
+        </Container>
+      </Section>
+      <FaqJsonLd faqs={[
+        { question: "What areas does IBS serve?", answer: `We serve ${company.serviceAreas.join(", ")} and the broader Delhi NCR region.` },
+        { question: "Do you offer maintenance contracts?", answer: "Yes, we offer comprehensive Annual Maintenance Contracts (AMCs) covering preventive maintenance, emergency response, and compliance checks." },
+        { question: "How do I get a quote?", answer: "Contact us through our website form, call us directly, or send us an email. We schedule a site visit before providing a detailed proposal." },
+        { question: "Do you work with existing systems or only new installations?", answer: "We handle both new deployments and upgrades to existing infrastructure, including integration of new technology with legacy systems." },
+      ]} />
       <CtaSection />
     </>
   );
