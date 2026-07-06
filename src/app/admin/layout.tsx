@@ -1,7 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import { LogoutButton } from "@/components/admin/logout-button";
+
+// Defense-in-depth alongside the /admin disallow in robots.ts -- this segment's own metadata
+// applies to every nested admin route (login, content, leads) unless a child overrides it.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false, nocache: true },
+};
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
