@@ -9,9 +9,6 @@ import { getContentOverride } from "@/lib/content-overrides";
 const SegmentsTeaserSection = dynamic(
   () => import("@/components/sections/segments-teaser-section").then((m) => ({ default: m.SegmentsTeaserSection }))
 );
-const FeaturedScenariosSection = dynamic(
-  () => import("@/components/sections/featured-scenarios-section").then((m) => ({ default: m.FeaturedScenariosSection }))
-);
 const EngineeringProcessSection = dynamic(
   () => import("@/components/sections/engineering-process-section").then((m) => ({ default: m.EngineeringProcessSection }))
 );
@@ -40,7 +37,6 @@ export default async function Home() {
       <WhoWeAreSection />
       <ServicesGridSection />
       <SegmentsTeaserSection />
-      <FeaturedScenariosSection />
       <EngineeringProcessSection />
       <PartnerMarqueeSection />
       <WhyIbsSection />

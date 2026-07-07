@@ -17,33 +17,44 @@ export function SegmentsTeaserSection() {
         <SectionHeading
           eyebrow="Industries we serve"
           title="Built for how each space actually operates"
-          description="From enterprise offices to hotel banquets to a spare bedroom office — the same disciplined delivery, sized to fit."
+          description="From enterprise offices to hotels, hospitals, and government facilities — the same disciplined delivery, sized to fit."
           align="left"
           className="mb-16 max-w-2xl"
         />
 
-        <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+        {/* 5-card grid: 3 columns on lg, 2 on md, 1 on mobile.
+            On lg the 4th & 5th cards centre in a sub-grid via justify-items-center
+            so the second row is visually balanced under the first row of three. */}
+        <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
           {segments.map((segment) => {
             const Illustration = segmentIllustrationMap[segment.slug];
             return (
-              <RevealItem key={segment.slug}>
+              <RevealItem key={segment.slug} className={segment.slug === "government" ? "lg:col-span-1 lg:justify-self-center lg:max-w-[calc(100%-4rem)]" : undefined}>
                 <Link
                   href="/who-we-serve"
                   data-cursor-hover
                   className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-colors hover:border-deep-blue/30"
                 >
                   <div className="relative h-32 w-full overflow-hidden bg-muted">
-                    <Image
-                      src={`/images/segments/${segment.slug}.jpg`}
-                      alt={segment.imageAlt}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-                      className="photo-grade object-cover transition-transform duration-700 group-hover:scale-105"
-                      placeholder="blur"
-                      blurDataURL={blurMap[`/images/segments/${segment.slug}.jpg`]}
-                    />
+                    {segment.slug !== "government" ? (
+                      <Image
+                        src={`/images/segments/${segment.slug}.jpg`}
+                        alt={segment.imageAlt}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="photo-grade object-cover transition-transform duration-700 group-hover:scale-105"
+                        placeholder="blur"
+                        blurDataURL={blurMap[`/images/segments/${segment.slug}.jpg`]}
+                      />
+                    ) : (
+                      /* Government card uses a styled illustration as the visual
+                         since no dedicated photo is available yet. */
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary to-muted">
+                        {Illustration && <Illustration className="h-20 w-20" />}
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
-                    {Illustration && (
+                    {segment.slug !== "government" && Illustration && (
                       <span className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-lg bg-card/90 backdrop-blur-sm">
                         <Illustration className="h-6 w-6" />
                       </span>

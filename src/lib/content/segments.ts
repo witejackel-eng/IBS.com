@@ -1,9 +1,8 @@
 import type { Segment } from "./types";
 
 /**
- * "Who We Serve" replaces a generic Industries section. The four segments
- * below are the exact clientele named on ibsinfra.com/about-us-insight.php —
- * no additional verticals or invented case studies are added.
+ * "Who We Serve" replaces a generic Industries section. The segments
+ * below cover the core clientele served by IBS.
  */
 export const segments: Segment[] = [
   {
@@ -27,13 +26,13 @@ export const segments: Segment[] = [
   },
   {
     slug: "hotels",
-    title: "Hotels",
+    title: "Hotels & Hospitals",
     summary:
-      "Hospitality properties that depend on reliable guest-facing and back-of-house technology — from banquet AV to property-wide security.",
+      "Hospitality properties and healthcare facilities that depend on reliable guest- and patient-facing technology, from banquet AV and nurse-call systems to property-wide security.",
     needs: [
       "Audio/video systems for banquets, conferencing, and events",
       "Property-wide CCTV, access control, and fire safety",
-      "Reliable network and Wi-Fi coverage for guests and staff",
+      "Reliable network and Wi-Fi coverage for guests, patients, and staff",
     ],
     relevantServiceSlugs: [
       "audio-video-boardroom-solutions",
@@ -42,6 +41,25 @@ export const segments: Segment[] = [
     ],
     imageAlt:
       "Hotel lobby interior with guest reception desk and adjoining event spaces",
+  },
+  {
+    slug: "government",
+    title: "Government & Public Sector",
+    summary:
+      "Government departments and public institutions that need secure, compliant, and audit-ready technology infrastructure — from surveillance networks to controlled-access facilities.",
+    needs: [
+      "CCTV and access control for secure perimeters and public areas",
+      "Structured cabling and hardened network infrastructure",
+      "Boardroom and council-chamber AV for proceedings and conferencing",
+    ],
+    relevantServiceSlugs: [
+      "security-solutions",
+      "it-infrastructure",
+      "audio-video-boardroom-solutions",
+      "voice-communication",
+    ],
+    imageAlt:
+      "Government building entrance with security infrastructure and controlled-access points",
   },
   {
     slug: "residential",
