@@ -1,5 +1,14 @@
 # IBS Infra — Insight Business Solutions
 
+[![Live Site](https://img.shields.io/badge/live-ibsinfra.com-brightgreen?style=flat-square)](https://ibsinfra.com)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
+[![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?style=flat-square&logo=prisma)](https://www.prisma.io)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38BDF8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](./LICENSE)
+
+
 A from-scratch marketing site redesign for **Insight Business Solutions** (ibsinfra.com), a Delhi-NCR
 IT & AV systems integrator. Built with Next.js 15, React 19, Tailwind CSS v4, Framer Motion, and a
 React Three Fiber WebGL hero.
