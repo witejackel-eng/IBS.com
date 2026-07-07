@@ -70,23 +70,17 @@ export default function WhoWeServePage() {
               <RevealItem key={segment.slug}>
                 <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card">
                   <div className="relative h-40 w-full overflow-hidden bg-muted">
-                    {segment.slug !== "government" ? (
-                      <Image
-                        src={`/images/segments/${segment.slug}.jpg`}
-                        alt={segment.imageAlt}
-                        fill
-                        sizes="(min-width: 768px) 50vw, 100vw"
-                        className="photo-grade object-cover"
-                        placeholder="blur"
-                        blurDataURL={blurMap[`/images/segments/${segment.slug}.jpg`]}
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary to-muted">
-                        {Illustration && <Illustration className="h-24 w-24" />}
-                      </div>
-                    )}
+                    <Image
+                      src={`/images/segments/${segment.slug}.jpg`}
+                      alt={segment.imageAlt}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="photo-grade object-cover"
+                      placeholder="blur"
+                      blurDataURL={blurMap[`/images/segments/${segment.slug}.jpg`]}
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
-                    {segment.slug !== "government" && Illustration && (
+                    {Illustration && (
                       <span className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-lg bg-card/90 backdrop-blur-sm">
                         <Illustration className="h-7 w-7" />
                       </span>
