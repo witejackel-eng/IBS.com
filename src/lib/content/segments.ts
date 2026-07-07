@@ -8,6 +8,7 @@ export const segments: Segment[] = [
   {
     slug: "enterprises",
     title: "Small, Medium & Large Enterprises",
+    shortTitle: "Enterprises",
     summary:
       "Organizations of every size that need unified communication, structured network infrastructure, and boardroom systems working together on one site.",
     needs: [
@@ -27,6 +28,7 @@ export const segments: Segment[] = [
   {
     slug: "hotels",
     title: "Hotels & Hospitals",
+    shortTitle: "Hotels & Hospitals",
     summary:
       "Hospitality properties and healthcare facilities that depend on reliable guest- and patient-facing technology, from banquet AV and nurse-call systems to property-wide security.",
     needs: [
@@ -45,6 +47,7 @@ export const segments: Segment[] = [
   {
     slug: "government",
     title: "Government & Public Sector",
+    shortTitle: "Government",
     summary:
       "Government departments and public institutions that need secure, compliant, and audit-ready technology infrastructure — from surveillance networks to controlled-access facilities.",
     needs: [
@@ -64,6 +67,7 @@ export const segments: Segment[] = [
   {
     slug: "residential",
     title: "Residential Spaces",
+    shortTitle: "Residential",
     summary:
       "Homes that want security, automation, and reliable connectivity without added complexity.",
     needs: [
@@ -78,6 +82,7 @@ export const segments: Segment[] = [
   {
     slug: "soho",
     title: "Small Office / Home Office (SOHO)",
+    shortTitle: "SOHO",
     summary:
       "Lean teams that need enterprise-grade communication and security tools sized for a smaller footprint.",
     needs: [

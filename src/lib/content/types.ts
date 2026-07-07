@@ -38,6 +38,8 @@ export interface Partner {
 export interface Segment {
   slug: string;
   title: string;
+  /** Short label for compact contexts (icon grids, teasers). Falls back to title. */
+  shortTitle?: string;
   summary: string;
   needs: string[];
   relevantServiceSlugs: string[];
