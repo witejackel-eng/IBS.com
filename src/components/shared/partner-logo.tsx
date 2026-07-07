@@ -151,6 +151,7 @@ export function PartnerLogo({ name, className, style }: PartnerLogoProps) {
         letterSpacing={letterSpacing}
         fontSize={label.length > 8 ? 28 : label.length > 6 ? 34 : 42}
         fill={color}
+        style={{ textTransform }}
       >
         {label}
       </text>
