@@ -26,22 +26,31 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
     <section className="relative flex min-h-screen items-center overflow-hidden bg-background text-charcoal">
       <div className="absolute inset-0 bg-engineering-grid opacity-70" />
       <div className="absolute inset-0 bg-ambient-glow" />
-      <HeroCanvas />
+
+      {/* ── WebGL illustration: anchored upper-right, fades toward bottom-left ── */}
+      <div className="absolute inset-0 [mask-image:linear-gradient(215deg,black_10%,black_35%,transparent_65%)]">
+        <HeroCanvas />
+      </div>
+
+      {/* ── Gradient overlay: ensures text column reads cleanly ── */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
 
-      <Container className="relative z-10 pt-24 pb-16">
+      <Container className="relative z-10 pt-28 pb-10 lg:pb-12">
+        {/* ── Headline ── */}
         <SplitText
           as="h1"
           text={headline ?? defaultHeroContent.headline}
           className="max-w-4xl text-display-1 leading-[1.02] font-semibold tracking-tight text-balance"
         />
 
+        {/* ── Body paragraph (48px gap from headline) ── */}
         <Reveal direction="up" delay={0.2} amount={0.6}>
-          <p className="mt-8 max-w-xl text-lg text-steel">{subcopy ?? defaultHeroContent.subcopy}</p>
+          <p className="mt-12 max-w-xl text-lg text-steel">{subcopy ?? defaultHeroContent.subcopy}</p>
         </Reveal>
 
+        {/* ── CTA row (48px gap from body) ── */}
         <Reveal direction="up" delay={0.3} amount={0.6}>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div className="mt-12 flex flex-wrap items-center gap-5">
             <Magnetic>
               <ButtonLink
                 href="/contact"
@@ -61,18 +70,24 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
             >
               Explore services
             </ButtonLink>
+
+            {/* ── Phone number: visually separated with icon circle + divider ── */}
+            <span className="mx-1 hidden h-8 w-px bg-border sm:block" aria-hidden />
             <a
               href={`tel:${company.contact.phones[0].replace(/\s/g, "")}`}
-              className="flex items-center gap-2 px-2 text-sm text-steel transition-colors hover:text-charcoal"
+              className="flex items-center gap-2.5 rounded-full border border-border px-4 py-2 text-sm text-steel transition-colors hover:border-steel-light hover:text-charcoal"
             >
-              <Phone className="h-4 w-4" />
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
+                <Phone className="h-3.5 w-3.5 text-charcoal" />
+              </span>
               {company.contact.phones[0]}
             </a>
           </div>
         </Reveal>
 
+        {/* ── Stats row (48px gap from CTA, generous bottom padding) ── */}
         <Reveal direction="up" delay={0.4} amount={0.6}>
-          <div className="mt-16 grid max-w-2xl grid-cols-3 gap-8 border-t border-border pt-8">
+          <div className="mt-12 grid max-w-2xl grid-cols-3 gap-x-10 gap-y-0 border-t border-border pt-10 pb-4 lg:gap-x-16">
             <Stat value={`${services.length}`} label="Solution areas" />
             <Stat value={`${partners.length}+`} label="OEM technology partners" />
             <Stat value={`${company.serviceAreas.length}`} label="Delhi NCR locations served" />
