@@ -9,9 +9,9 @@ export function EnterprisesIllustration({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 120 120" className={className} xmlns="http://www.w3.org/2000/svg">
       <BlueprintGrid id="grid-enterprises" />
-      <rect x={38} y={32} width={34} height={58} rx={2} fill="none" stroke="var(--steel)" strokeWidth={1.5} />
+      <rect x={38} y={32} width={34} height={58} rx={2} className="fill-none stroke-steel" strokeWidth={1.5} />
       {windows.map((w, i) => (
-        <rect key={i} x={w.x} y={w.y} width={4} height={4} fill="none" stroke="var(--steel)" strokeWidth={1} opacity={0.7} />
+        <rect key={i} x={w.x} y={w.y} width={4} height={4} className="fill-none stroke-steel" strokeWidth={1} opacity={0.7} />
       ))}
       <ConnectionLine d="M72 58 L 92 48" accent />
       <ConnectionLine d="M72 70 L 92 72" delay={0.15} />
