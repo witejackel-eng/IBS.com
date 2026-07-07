@@ -3,6 +3,7 @@
 import { motion, useReducedMotion, type SVGMotionProps } from "framer-motion";
 
 import { EASE_OUT_EXPO, DURATION } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 /**
  * Shared visual grammar for the custom illustration system: every piece is
@@ -30,14 +31,20 @@ export function Node({
       cx={cx}
       cy={cy}
       r={r}
-      className={className}
-      style={{
-        fill: filled
-          ? (accent ? "var(--deep-blue)" : "var(--charcoal)")
-          : "var(--card)",
-        stroke: accent ? "var(--deep-blue)" : "var(--steel)",
-        strokeWidth: 1.5,
-      }}
+      strokeWidth={1.5}
+      className={cn(
+        /* fill */
+        filled
+          ? accent
+            ? "fill-deep-blue"
+            : "fill-charcoal"
+          : "fill-card",
+        /* stroke */
+        accent
+          ? "stroke-deep-blue"
+          : "stroke-steel",
+        className
+      )}
     />
   );
 }
@@ -62,14 +69,14 @@ export function ConnectionLine({
   return (
     <motion.path
       d={d}
-      className="fill-none"
-      style={{
-        stroke: accent ? "var(--deep-blue)" : "var(--steel)",
-        strokeWidth: 1.5,
-        strokeLinecap: "round",
-        strokeLinejoin: "round",
-        strokeDasharray: dashed ? "3 4" : undefined,
-      }}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      strokeDasharray={dashed ? "3 4" : undefined}
+      className={cn(
+        "fill-none",
+        accent ? "stroke-deep-blue" : "stroke-steel"
+      )}
       initial={shouldAnimate ? { pathLength: 0, opacity: 0 } : undefined}
       whileInView={shouldAnimate ? { pathLength: 1, opacity: 1 } : undefined}
       viewport={shouldAnimate ? { once: true, amount: 0.6 } : undefined}
@@ -85,7 +92,7 @@ export function BlueprintGrid({ id, opacity = 0.5 }: { id: string; opacity?: num
     <>
       <defs>
         <pattern id={id} width="10" height="10" patternUnits="userSpaceOnUse">
-          <circle cx="1" cy="1" r="1" style={{ fill: "var(--border)" }} />
+          <circle cx="1" cy="1" r="1" className="fill-border" />
         </pattern>
       </defs>
       <rect width="120" height="120" fill={`url(#${id})`} opacity={opacity} />
@@ -102,8 +109,8 @@ export function IllustrationPulse({ cx, cy, r = 3.5, delay = 0 }: { cx: number; 
       cx={cx}
       cy={cy}
       r={r}
-      className="fill-none"
-      style={{ stroke: "var(--deep-blue)", strokeWidth: 1.5 }}
+      className="fill-none stroke-deep-blue"
+      strokeWidth={1.5}
       initial={{ r, opacity: 0.6 }}
       whileInView={{ r: r + 10, opacity: 0 }}
       viewport={{ once: false, amount: 0.6 }}
