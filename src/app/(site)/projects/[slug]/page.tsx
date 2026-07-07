@@ -178,7 +178,7 @@ export default async function ProjectScenarioPage({
                           <>
                             <Image
                               src={s.image}
-                              alt={s.title}
+                              alt={`Representative capability: ${s.title}`}
                               fill
                               sizes="240px"
                               className="photo-grade object-cover transition-transform duration-700 group-hover:scale-105"

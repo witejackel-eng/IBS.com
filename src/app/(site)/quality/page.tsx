@@ -36,11 +36,24 @@ export default function QualityPage() {
           <Reveal direction="up" delay={0.2}>
             <p className="mt-8 max-w-2xl text-lg text-steel">{amcService.intro}</p>
           </Reveal>
+          <Reveal direction="up" delay={0.25}>
+            <div className="mt-6 flex max-w-2xl flex-col gap-5 text-base leading-relaxed text-steel">
+              <p>
+                Quality on a systems integration project is not a single checklist at the end — it is a series of decisions made across the project lifecycle, from the site survey before the quote to the service log six months after go-live. We treat every installation as something the customer will rely on for years, not something we hand over and walk away from. That shows up in how we size a UPS for headroom, how we label every patch panel, how we document every macro on a boardroom touchscreen, and how we test a fire alarm panel before signing off the handover.
+              </p>
+              <p>
+                The AMC framework below is the structure that keeps that quality level in place after the install team has left. Certified technicians, a defined service-level agreement, scheduled preventive maintenance, and a paper trail of every visit — these are the things that turn a one-time install into a system that keeps running. The same engineering team that built the system stays responsible for it, which means the AMC is not a third-party vendor guessing at someone else&apos;s wiring.
+              </p>
+            </div>
+          </Reveal>
         </Container>
       </Section>
 
       <Section bg="grid">
         <Container>
+          {/* sr-only h2 to keep the heading hierarchy valid (h1 → h2 → h3).
+              Without this, the whyUs cards jump from h1 to h3. */}
+          <h2 className="sr-only">How our AMC keeps installations reliable</h2>
           <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
             {amcService.whyUs.map((item) => {
               const Illustration = qualityIllustrationMap[whyUsIllustrationSlug[item.title]];

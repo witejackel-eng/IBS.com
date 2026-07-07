@@ -4,6 +4,7 @@ export function BreadcrumbJsonLd({ items }: { items: { name: string; path: strin
   const data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${siteUrl}${items[items.length - 1]?.path ?? ""}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,

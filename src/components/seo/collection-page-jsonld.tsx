@@ -16,9 +16,11 @@ export function CollectionPageJsonLd({
   const data = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
+    "@id": `${siteUrl}${path}#collectionpage`,
     name,
     url: `${siteUrl}${path}`,
     description,
+    isPartOf: { "@id": `${siteUrl}/#website` },
     ...(items && {
       mainEntity: {
         "@type": "ItemList",

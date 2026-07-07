@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { Mail, MapPin, Phone, ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
@@ -84,6 +85,42 @@ export default async function ContactPage() {
               </div>
 
               <ViewOnMap address={info.mapQuery} className="mt-2" />
+
+              {/* Body-content cross-links — gives a contact-page visitor a
+                  quick path to the rest of the site, and strengthens
+                  internal linking to the service and segment pages. */}
+              <div className="rounded-3xl border border-border bg-card p-8">
+                <h2 className="text-sm font-semibold tracking-[0.1em] text-steel uppercase">
+                  Not sure where to start?
+                </h2>
+                <p className="mt-3 text-sm text-steel">
+                  If you&apos;re still scoping the project, browse what we install and support, or see how we
+                  approach each segment we serve.
+                </p>
+                <div className="mt-5 flex flex-col gap-2">
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-deep-blue hover:text-deep-blue/80"
+                    data-cursor-hover
+                  >
+                    Services we deliver <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                  <Link
+                    href="/who-we-serve"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-deep-blue hover:text-deep-blue/80"
+                    data-cursor-hover
+                  >
+                    Who we serve <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                  <Link
+                    href="/quality"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-deep-blue hover:text-deep-blue/80"
+                    data-cursor-hover
+                  >
+                    How our AMC works <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
             </Reveal>
           </div>
         </Container>

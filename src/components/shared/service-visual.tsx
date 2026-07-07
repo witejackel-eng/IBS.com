@@ -11,11 +11,25 @@ const iconMap = {
   headset: Headset,
 };
 
+/**
+ * Build a descriptive, context-specific alt string for a service's hero
+ * image. We avoid bare `service.title` (e.g. "Voice Communication") because
+ * that's the page heading, not a description of what the photo actually
+ * shows — bad for screen readers and unhelpful in image search. The
+ * resulting alt names the service and what the photo depicts, in context.
+ */
+function serviceImageAlt(service: Pick<Service, "title" | "summary">): string {
+  // Take the first clause of the summary as the descriptive hint, then
+  // frame it as "what the photo shows for [service]".
+  const firstSentence = service.summary.split(/[.!?]/)[0].trim().toLowerCase();
+  return `${service.title}: ${firstSentence}.`;
+}
+
 export function ServiceVisual({
   service,
   className,
 }: {
-  service: Pick<Service, "slug" | "image" | "icon" | "title">;
+  service: Pick<Service, "slug" | "image" | "icon" | "title" | "summary">;
   className?: string;
 }) {
   if (service.image) {
@@ -23,7 +37,7 @@ export function ServiceVisual({
       <div className={cn("relative overflow-hidden bg-muted", className)}>
         <Image
           src={service.image}
-          alt={service.title}
+          alt={serviceImageAlt(service)}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="photo-grade object-cover transition-transform duration-700 group-hover:scale-105"

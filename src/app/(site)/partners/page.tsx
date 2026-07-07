@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
@@ -107,6 +108,9 @@ export default function PartnersPage() {
 
       <Section bg="grid">
         <Container>
+          {/* sr-only h2 to keep the heading hierarchy valid (h1 → h2 → h3).
+              Without this, the whyThesePartners cards jump from h1 to h3. */}
+          <h2 className="sr-only">Why these OEM partners</h2>
           <RevealGroup className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
             {whyThesePartners.map((item) => (
               <RevealItem key={item.title}>
@@ -200,7 +204,15 @@ export default function PartnersPage() {
           <Reveal direction="up" delay={0.15}>
             <p className="max-w-xl text-lg text-steel">
               Tell us which systems you need to bring together, and we&apos;ll recommend hardware based on
-              what&apos;s already in place and what the project actually needs.
+              what&apos;s already in place and what the project actually needs. You can also browse the{" "}
+              <Link href="/services" className="font-medium text-deep-blue underline-offset-4 hover:underline">
+                full list of services we deliver
+              </Link>{" "}
+              — voice, AV, network, security, contact centers, and software licensing — or read about{" "}
+              <Link href="/quality" className="font-medium text-deep-blue underline-offset-4 hover:underline">
+                how our AMC keeps installations running
+              </Link>{" "}
+              after handover.
             </p>
           </Reveal>
           <Reveal direction="up" delay={0.25}>

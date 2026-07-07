@@ -47,6 +47,16 @@ export default function WhoWeServePage() {
           <Reveal direction="up" delay={0.2}>
             <p className="mt-8 max-w-2xl text-lg text-steel">{"Enterprises, hotels, homes, and small offices each need something different — here's how we approach each one."}</p>
           </Reveal>
+          <Reveal direction="up" delay={0.25}>
+            <div className="mt-6 flex max-w-2xl flex-col gap-5 text-base leading-relaxed text-steel">
+              <p>
+                The hardware that goes into a 200-person enterprise office, a 60-room hotel, a private residence, and a four-person startup is often the same brands — Cisco, Hikvision, Honeywell, APC — but the way it is specified, configured, and supported looks completely different. A hotel needs guest-facing Wi-Fi that resets per stay and banquet AV that any event manager can operate without an engineer on call. A residence needs the same camera coverage with a fraction of the retention window and an app the homeowner actually wants to open. An enterprise needs the same firewall with a much heavier rule set and a quarterly review cycle. A SOHO needs enterprise-grade hardware sized for a single rack and a support contract that does not assume a 24/7 NOC.
+              </p>
+              <p>
+                We split our work across these four segments because the engineering decisions are genuinely different in each, not because the brands change. A boardroom in a hotel has different acoustic, lighting, and usage constraints than a boardroom in a corporate office, even if both end up with a Crestron control system and a Shure mic array. A CCTV deployment in a residence has different privacy and storage constraints than one in an enterprise lobby, even if both use Hikvision cameras. Below is how we approach each segment — what we typically install, what we typically have to work around, and where the support cadence lands.
+              </p>
+            </div>
+          </Reveal>
         </Container>
       </Section>
 
@@ -62,7 +72,7 @@ export default function WhoWeServePage() {
                   <div className="relative h-40 w-full overflow-hidden bg-muted">
                     <Image
                       src={`/images/segments/${segment.slug}.jpg`}
-                      alt={segment.title}
+                      alt={segment.imageAlt}
                       fill
                       sizes="(min-width: 768px) 50vw, 100vw"
                       className="photo-grade object-cover"

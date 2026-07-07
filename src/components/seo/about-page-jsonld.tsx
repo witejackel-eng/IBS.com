@@ -6,14 +6,13 @@ export function AboutPageJsonLd() {
   const data = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
+    "@id": `${siteUrl}/about#aboutpage`,
     name: "About",
     url: `${siteUrl}/about`,
-    mainEntity: {
-      "@type": ["Organization", "LocalBusiness"],
-      name: company.legalName,
-      description: company.about.intro,
-      url: siteUrl,
-    },
+    // Reference (not re-embed) the Organization emitted by OrganizationJsonLd.
+    mainEntity: { "@id": `${siteUrl}/#organization` },
+    // Brief description helps Google match the page to relevant queries.
+    description: company.about.intro,
   };
 
   return (

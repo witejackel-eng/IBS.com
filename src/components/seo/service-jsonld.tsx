@@ -9,6 +9,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ibsinfra.com";
  * - With a `service` prop: emits a single Service entity for that service.
  * - Without any prop: emits an Organization with a `hasOfferCatalog`
  *   containing all services listed on the site.
+ *
+ * In both cases the provider is referenced by @id (rather than re-embedded)
+ * so Google can deduplicate the Organization entity across every page that
+ * mentions it.
  */
 export function ServiceJsonLd({ service }: { service?: Service }) {
   const areaServed = company.serviceAreas.map((area) => ({
@@ -16,33 +20,28 @@ export function ServiceJsonLd({ service }: { service?: Service }) {
     name: area,
   }));
 
-  const provider = {
-    "@type": "Organization",
-    name: company.legalName,
-    url: siteUrl,
-    telephone: company.contact.phones[0],
-    email: company.contact.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress:
-        "Plot No. 94, 3rd Floor, Block - B, Pocket - 10, Sector - 13, Dwarka",
-      addressLocality: "New Delhi",
-      postalCode: "110075",
-      addressCountry: "IN",
-    },
-  };
+  // Provider is the same Organization emitted by OrganizationJsonLd on every
+  // page (see app/layout.tsx). Reference it by @id so we don't redefine the
+  // address/telephone/etc. on every Service block.
+  const provider = { "@id": `${siteUrl}/#organization` };
 
   // ── Per-service mode ─────────────────────────────────────────────────
   if (service) {
     const data = {
       "@context": "https://schema.org",
       "@type": "Service",
+      "@id": `${siteUrl}/services/${service.slug}#service`,
       name: service.title,
       description: service.summary,
       url: `${siteUrl}/services/${service.slug}`,
       provider,
       areaServed,
       serviceType: service.tagline,
+      // No `offers` block: this is a B2B systems integrator, prices are
+      // quoted per project after a site visit, not listed. Google's rich
+      // result spec requires `offers.price` > 0; emitting one with a fake
+      // or zero price would trigger a structured-data warning, and
+      // omitting `offers` entirely is the cleaner choice.
       ...(service.image && {
         image: `${siteUrl}${service.image}`,
       }),
@@ -73,6 +72,7 @@ export function ServiceJsonLd({ service }: { service?: Service }) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
     name: company.legalName,
     url: siteUrl,
     hasOfferCatalog: {

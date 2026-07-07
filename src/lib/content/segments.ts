@@ -22,6 +22,8 @@ export const segments: Segment[] = [
       "audio-video-boardroom-solutions",
       "security-solutions",
     ],
+    imageAlt:
+      "Modern enterprise office interior with collaboration spaces and network infrastructure",
   },
   {
     slug: "hotels",
@@ -38,6 +40,8 @@ export const segments: Segment[] = [
       "security-solutions",
       "it-infrastructure",
     ],
+    imageAlt:
+      "Hotel lobby interior with guest reception desk and adjoining event spaces",
   },
   {
     slug: "residential",
@@ -50,6 +54,8 @@ export const segments: Segment[] = [
       "Dependable in-home Wi-Fi and networking",
     ],
     relevantServiceSlugs: ["security-solutions", "it-infrastructure"],
+    imageAlt:
+      "Modern living room with smart TV, ambient lighting, and integrated home automation",
   },
   {
     slug: "soho",
@@ -66,5 +72,7 @@ export const segments: Segment[] = [
       "it-infrastructure",
       "software-licenses",
     ],
+    imageAlt:
+      "Compact home office desk setup with a laptop, IP phone, and network router",
   },
 ];

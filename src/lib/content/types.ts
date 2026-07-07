@@ -10,6 +10,18 @@ export interface Service {
   tagline: string;
   summary: string;
   intro: string;
+  /**
+   * Optional long-form prose shown on the service detail page between the
+   * hero and the capabilities grid. Each entry is one paragraph (rendered
+   * inside a <p>). Used to give the page genuine, specific body copy
+   * rather than only card labels — improves text-to-HTML ratio and gives
+   * search engines and prospects something substantive to read.
+   *
+   * Content rule: every sentence must be traceable to a fact already on
+   * ibsinfra.com or to the service's own capabilities list. No invented
+   * stats, client names, or certifications.
+   */
+  body?: string[];
   /** Present when a real, freely-licensed photo represents this service well. */
   image?: string;
   /** Fallback visual (icon name from lucide-react) for services without a good photo. */
@@ -29,6 +41,13 @@ export interface Segment {
   summary: string;
   needs: string[];
   relevantServiceSlugs: string[];
+  /**
+   * Descriptive alt text for the segment's hero photo. Required because
+   * the segment `title` alone (e.g. "Hotels") is too generic for screen
+   * readers or image search — alt should describe what the photo actually
+   * shows in the context of the segment.
+   */
+  imageAlt: string;
 }
 
 export interface ProcessStep {

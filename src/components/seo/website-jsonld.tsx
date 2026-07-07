@@ -12,10 +12,12 @@ export function WebsiteJsonLd() {
   const data = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
     name: company.legalName,
     url: siteUrl,
     inLanguage: "en-IN",
-    publisher: { "@type": "Organization", name: company.legalName },
+    // Reference (not re-embed) the Organization defined in OrganizationJsonLd.
+    publisher: { "@id": `${siteUrl}/#organization` },
   };
 
   return (

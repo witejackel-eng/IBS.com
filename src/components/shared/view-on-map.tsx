@@ -56,10 +56,15 @@ export function ViewOnMap({
               <motion.div
                 layoutId="map-bg"
                 className="absolute inset-0 opacity-10 transition-opacity"
+                // Decorative map-grid backdrop, drawn in CSS instead of an
+                // external image. Previously this pointed at an Unsplash
+                // photo (photo-1526778548025-fa2f459cd5ce) that 404s on
+                // the Unsplash CDN — a broken external link. A CSS pattern
+                // is also faster (no third-party request) and can't rot.
                 style={{
-                  backgroundImage: `url(https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?q=80&w=400&auto=format&fit=crop)`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(15,23,42,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(15,23,42,0.4) 1px, transparent 1px)",
+                  backgroundSize: "24px 24px",
                 }}
               />
               <motion.div className="relative z-10 flex items-center gap-3 px-4 py-4">

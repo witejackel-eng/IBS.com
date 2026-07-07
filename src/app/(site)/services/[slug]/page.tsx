@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
@@ -16,7 +17,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { ServiceJsonLd } from "@/components/seo/service-jsonld";
 import { FaqJsonLd } from "@/components/seo/faq-jsonld";
 import { FaqItem } from "@/components/shared/faq-item";
-import { services, company } from "@/lib/content";
+import { services, amcService, company } from "@/lib/content";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -96,6 +97,15 @@ export default async function ServiceDetailPage({
           <Reveal direction="up">
             <p className="text-lg text-steel">{service.intro}</p>
           </Reveal>
+          {service.body && service.body.length > 0 && (
+            <Reveal direction="up" delay={0.05}>
+              <div className="mt-6 flex flex-col gap-5 text-base leading-relaxed text-steel">
+                {service.body.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+            </Reveal>
+          )}
         </Container>
       </Section>
 
@@ -163,6 +173,54 @@ export default async function ServiceDetailPage({
         { question: "How do I get a quote?", answer: "Contact us through our website form, call us directly, or send us an email. We schedule a site visit before providing a detailed proposal." },
         { question: "Do you work with existing systems or only new installations?", answer: "We handle both new deployments and upgrades to existing infrastructure, including integration of new technology with legacy systems." },
       ]} />
+
+      {/* Related services — strengthens internal linking between service
+          detail pages and surfaces the AMC offering on every service page.
+          Excludes the current service so we never link a page to itself. */}
+      <Section bg="ambient" className="bg-secondary/30">
+        <Container>
+          <Reveal direction="up" className="mb-10">
+            <h2 className="text-display-3 font-semibold tracking-tight text-charcoal text-balance">
+              Related services
+            </h2>
+            <p className="mt-3 max-w-2xl text-steel">
+              Other technology domains our team installs and supports. Most projects draw on more than one of these — the same engineers handle the whole scope.
+            </p>
+          </Reveal>
+          <RevealGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+            {[...services, amcService]
+              .filter((s) => s.slug !== service.slug)
+              .slice(0, 6)
+              .map((s) => {
+                const RelatedIllustration = serviceIllustrationMap[s.slug];
+                return (
+                  <RevealItem key={s.slug}>
+                    <Link
+                      href={`/services/${s.slug}`}
+                      data-cursor-hover
+                      className="group flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-deep-blue/30"
+                    >
+                      <div className="flex items-center gap-3">
+                        {RelatedIllustration && (
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-deep-blue/10 text-deep-blue">
+                            <RelatedIllustration className="h-5 w-5" />
+                          </span>
+                        )}
+                        <span className="text-xs font-semibold tracking-[0.1em] text-deep-blue uppercase">{s.tagline}</span>
+                      </div>
+                      <h3 className="text-base font-semibold text-charcoal font-heading">{s.title}</h3>
+                      <p className="flex-1 text-sm text-steel">{s.summary}</p>
+                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-charcoal">
+                        View service
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </Link>
+                  </RevealItem>
+                );
+              })}
+          </RevealGroup>
+        </Container>
+      </Section>
       <CtaSection />
     </>
   );

@@ -35,7 +35,7 @@ export function SegmentsTeaserSection() {
                   <div className="relative h-32 w-full overflow-hidden bg-muted">
                     <Image
                       src={`/images/segments/${segment.slug}.jpg`}
-                      alt={segment.title}
+                      alt={segment.imageAlt}
                       fill
                       sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
                       className="photo-grade object-cover transition-transform duration-700 group-hover:scale-105"
