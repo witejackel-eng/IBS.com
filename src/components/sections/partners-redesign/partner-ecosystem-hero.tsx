@@ -25,14 +25,14 @@ export function PartnerEcosystemHero() {
     <div className="relative w-full aspect-square max-w-lg mx-auto">
       <svg viewBox="0 0 400 400" className="w-full h-full" fill="none">
         {/* Orbit ring */}
-        <circle cx={cx} cy={cy} r={radius} stroke="var(--border)" strokeWidth="1" strokeDasharray="4 6" />
+        <circle cx={cx} cy={cy} r={radius} className="stroke-border" strokeWidth="1" strokeDasharray="4 6" />
 
         {/* Connection lines to center */}
         {positions.map((pos, i) => (
           <motion.line
             key={pos.name}
             x1={cx} y1={cy} x2={pos.x} y2={pos.y}
-            stroke="var(--border)"
+            className="stroke-border"
             strokeWidth="1"
             initial={{ pathLength: 0, opacity: 0 }}
             whileInView={{ pathLength: 1, opacity: 1 }}
@@ -51,8 +51,8 @@ export function PartnerEcosystemHero() {
           viewport={{ once: true }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.6, ease: EASE_OUT_EXPO as [number, number, number, number] }}
         >
-          <rect x={cx - 30} y={cy - 20} width="60" height="40" rx="12" fill="var(--deep-blue)" />
-          <text x={cx} y={cy + 4} textAnchor="middle" fontSize="11" fontWeight="700" fill="white" fontFamily="var(--font-heading)">IBS</text>
+          <rect x={cx - 30} y={cy - 20} width="60" height="40" rx="12" className="fill-deep-blue" />
+          <text x={cx} y={cy + 4} textAnchor="middle" fontSize="11" fontWeight="700" className="fill-warm-white" style={{ fontFamily: "var(--font-heading)" }}>IBS</text>
         </motion.g>
 
         {/* Partner nodes */}
@@ -71,8 +71,7 @@ export function PartnerEcosystemHero() {
               x={pos.x - 36} y={pos.y - 14}
               width="72" height="28"
               rx="8"
-              fill="var(--card)"
-              stroke="var(--border)"
+              className="fill-card stroke-border"
               strokeWidth="1"
             />
             <text
@@ -80,8 +79,8 @@ export function PartnerEcosystemHero() {
               textAnchor="middle"
               fontSize="8"
               fontWeight="600"
-              fill="var(--charcoal)"
-              fontFamily="var(--font-heading)"
+              className="fill-charcoal"
+              style={{ fontFamily: "var(--font-heading)" }}
             >
               {pos.name}
             </text>
@@ -92,7 +91,7 @@ export function PartnerEcosystemHero() {
         <motion.circle
           cx={cx} cy={cy}
           r="8"
-          fill="var(--deep-blue)"
+          className="fill-deep-blue"
           opacity="0.15"
           animate={!prefersReducedMotion ? { r: [8, 20, 8], opacity: [0.15, 0, 0.15] } : {}}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}

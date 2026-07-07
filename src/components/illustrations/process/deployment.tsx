@@ -6,14 +6,14 @@ export function DeploymentIllustration({ className }: { className?: string }) {
     <svg viewBox="0 0 120 120" className={className} xmlns="http://www.w3.org/2000/svg">
       <BlueprintGrid id="grid-deployment" opacity={0.3} />
       {/* Launch pad */}
-      <rect x={48} y={88} width={24} height={6} rx={1} fill="none" stroke="var(--steel)" strokeWidth={1.5} />
+      <rect x={48} y={88} width={24} height={6} rx={1} fill="none" className="stroke-steel" strokeWidth={1.5} />
       {/* Rocket body */}
-      <path d="M60 82 L 52 62 L 54 50 Q 60 32 66 50 L 68 62 Z" fill="none" stroke="var(--steel)" strokeWidth={1.5} strokeLinejoin="round" />
+      <path d="M60 82 L 52 62 L 54 50 Q 60 32 66 50 L 68 62 Z" fill="none" className="stroke-steel" strokeWidth={1.5} strokeLinejoin="round" />
       {/* Rocket nose accent */}
       <Node cx={60} cy={34} r={2.5} accent filled />
       {/* Fins */}
-      <path d="M52 62 L 44 76" stroke="var(--steel)" strokeWidth={1.5} strokeLinecap="round" />
-      <path d="M68 62 L 76 76" stroke="var(--steel)" strokeWidth={1.5} strokeLinecap="round" />
+      <path d="M52 62 L 44 76" className="stroke-steel" strokeWidth={1.5} strokeLinecap="round" />
+      <path d="M68 62 L 76 76" className="stroke-steel" strokeWidth={1.5} strokeLinecap="round" />
       {/* Thrust / exhaust lines */}
       <ConnectionLine d="M56 82 L 52 92" accent delay={0.1} />
       <ConnectionLine d="M60 82 L 60 94" accent delay={0.15} />

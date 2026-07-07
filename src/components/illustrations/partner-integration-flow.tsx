@@ -22,8 +22,7 @@ export function PartnerIntegrationFlowIllustration({ className }: { className?: 
             x={s.x}
             y={104}
             textAnchor="middle"
-            className="font-sans"
-            fill="var(--charcoal)"
+            className="font-sans fill-charcoal"
             fontSize="13"
             fontWeight={500}
           >

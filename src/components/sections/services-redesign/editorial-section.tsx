@@ -61,12 +61,12 @@ export function EditorialSection() {
               <line x1="100" y1="120" x2="100" y2="80" stroke="currentColor" strokeWidth="1" />
               <line x1="60" y1="95" x2="60" y2="105" stroke="currentColor" strokeWidth="1" />
               <line x1="140" y1="95" x2="140" y2="105" stroke="currentColor" strokeWidth="1" />
-              <circle cx="100" cy="70" r="6" fill="var(--deep-blue)" fillOpacity="0.3" />
-              <circle cx="100" cy="130" r="6" fill="var(--deep-blue)" fillOpacity="0.3" />
-              <circle cx="65" cy="50" r="4" fill="var(--deep-blue)" fillOpacity="0.2" />
-              <circle cx="135" cy="50" r="4" fill="var(--deep-blue)" fillOpacity="0.2" />
-              <circle cx="65" cy="150" r="4" fill="var(--deep-blue)" fillOpacity="0.2" />
-              <circle cx="135" cy="150" r="4" fill="var(--deep-blue)" fillOpacity="0.2" />
+              <circle cx="100" cy="70" r="6" className="fill-deep-blue" fillOpacity="0.3" />
+              <circle cx="100" cy="130" r="6" className="fill-deep-blue" fillOpacity="0.3" />
+              <circle cx="65" cy="50" r="4" className="fill-deep-blue" fillOpacity="0.2" />
+              <circle cx="135" cy="50" r="4" className="fill-deep-blue" fillOpacity="0.2" />
+              <circle cx="65" cy="150" r="4" className="fill-deep-blue" fillOpacity="0.2" />
+              <circle cx="135" cy="150" r="4" className="fill-deep-blue" fillOpacity="0.2" />
             </svg>
             <p className="mt-6 text-sm font-medium tracking-wide text-steel uppercase">One Engineering Team</p>
           </div>

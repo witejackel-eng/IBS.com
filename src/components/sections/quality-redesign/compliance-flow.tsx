@@ -38,10 +38,9 @@ export function ComplianceFlow() {
           {/* Connecting path */}
           <motion.path
             d="M80 60 L200 60 L200 120 L320 120 L320 180 L200 180 L200 240 L80 240 L80 300"
-            stroke="var(--deep-blue)"
+            className="stroke-deep-blue"
             strokeWidth="1.5"
             strokeDasharray="6 4"
-            fill="none"
             initial={{ pathLength: 0, opacity: 0 }}
             whileInView={{ pathLength: 1, opacity: 0.4 }}
             viewport={{ once: true }}
@@ -58,6 +57,7 @@ export function ComplianceFlow() {
               { x: 80, y: 300 },
             ];
             const pos = positions[i];
+            const isLast = i === steps.length - 1;
             return (
               <motion.g
                 key={step.label}
@@ -73,16 +73,15 @@ export function ComplianceFlow() {
                   x={pos.x - 40} y={pos.y - 20}
                   width="80" height="40"
                   rx="10"
-                  fill="var(--card)"
-                  stroke={i === steps.length - 1 ? "var(--deep-blue)" : "var(--border)"}
-                  strokeWidth={i === steps.length - 1 ? "1.5" : "1"}
+                  className={isLast ? "fill-card stroke-deep-blue" : "fill-card stroke-border"}
+                  strokeWidth={isLast ? "1.5" : "1"}
                 />
-                {i === steps.length - 1 && (
+                {isLast && (
                   <rect
                     x={pos.x - 40} y={pos.y - 20}
                     width="80" height="40"
                     rx="10"
-                    fill="var(--deep-blue)"
+                    className="fill-deep-blue"
                     fillOpacity="0.08"
                   />
                 )}
@@ -91,16 +90,16 @@ export function ComplianceFlow() {
                   textAnchor="middle"
                   fontSize="8"
                   fontWeight="600"
-                  fill={i === steps.length - 1 ? "var(--deep-blue)" : "var(--charcoal)"}
-                  fontFamily="var(--font-heading)"
+                  className={isLast ? "fill-deep-blue" : "fill-charcoal"}
+                  style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {step.label}
                 </text>
                 {/* Checkmark on last step */}
-                {i === steps.length - 1 && (
+                {isLast && (
                   <g>
-                    <circle cx={pos.x + 28} cy={pos.y - 10} r="6" fill="var(--deep-blue)" />
-                    <path d="M{pos.x + 24} {pos.y - 10} L{pos.x + 27} {pos.y - 7} L{pos.x + 32} {pos.y - 13}" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx={pos.x + 28} cy={pos.y - 10} r="6" className="fill-deep-blue" />
+                    <path d={`M${pos.x + 24} ${pos.y - 10} L${pos.x + 27} ${pos.y - 7} L${pos.x + 32} ${pos.y - 13}`} stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                   </g>
                 )}
               </motion.g>

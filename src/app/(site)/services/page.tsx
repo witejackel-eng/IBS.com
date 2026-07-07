@@ -7,7 +7,6 @@ import { Section } from "@/components/layout/section";
 import { SplitText } from "@/components/motion/split-text";
 import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
-import { AnimatedCounter } from "@/components/shared/animated-counter";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { HorizontalTimeline } from "@/components/shared/horizontal-timeline";
 import { SecondaryHeroNetwork } from "@/components/webgl/secondary-hero-network";
@@ -334,18 +333,6 @@ export default function ServicesIndexPage() {
                 </div>
               </Reveal>
             ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* ── TRUST METRICS ── */}
-      <Section className="bg-charcoal py-24 lg:py-32">
-        <Container>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-            <AnimatedCounter value={500} suffix="+" label="Projects" />
-            <AnimatedCounter value={46} suffix="+" label="OEM Partners" />
-            <AnimatedCounter value={15} suffix="+" label="Years" />
-            <AnimatedCounter value={24} suffix="/7" label="Support" />
           </div>
         </Container>
       </Section>

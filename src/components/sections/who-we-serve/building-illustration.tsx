@@ -17,13 +17,13 @@ const BUILDINGS: {
   y: number;
   width: number;
   height: number;
-  color: string;
+  colorClass: string;
 }[] = [
-  { slug: "soho", label: "SOHO", x: 60, y: 155, width: 60, height: 50, color: "var(--steel-light)" },
-  { slug: "residential", label: "Residential", x: 135, y: 130, width: 70, height: 75, color: "var(--steel)" },
-  { slug: "government", label: "Government", x: 220, y: 100, width: 90, height: 105, color: "var(--graphite)" },
-  { slug: "hotels", label: "Hotels", x: 330, y: 85, width: 80, height: 120, color: "var(--steel)" },
-  { slug: "enterprises", label: "Enterprises", x: 430, y: 55, width: 100, height: 150, color: "var(--charcoal)" },
+  { slug: "soho", label: "SOHO", x: 60, y: 155, width: 60, height: 50, colorClass: "fill-steel" },
+  { slug: "residential", label: "Residential", x: 135, y: 130, width: 70, height: 75, colorClass: "fill-graphite" },
+  { slug: "government", label: "Government", x: 220, y: 100, width: 90, height: 105, colorClass: "fill-charcoal" },
+  { slug: "hotels", label: "Hotels", x: 330, y: 85, width: 80, height: 120, colorClass: "fill-graphite" },
+  { slug: "enterprises", label: "Enterprises", x: 430, y: 55, width: 100, height: 150, colorClass: "fill-charcoal" },
 ];
 
 function Windows({ x, y, w, h, cols, rows, gap = 8 }: { x: number; y: number; w: number; h: number; cols: number; rows: number; gap?: number }) {
@@ -40,8 +40,7 @@ function Windows({ x, y, w, h, cols, rows, gap = 8 }: { x: number; y: number; w:
             width={cellW}
             height={cellH}
             rx={1.5}
-            fill="rgba(255,255,255,0.08)"
-            className="transition-all duration-300 group-hover/Building:fill-[rgba(255,255,255,0.18)]"
+            className="fill-white/[0.08] transition-all duration-300 group-hover/Building:fill-white/[0.18]"
           />
         ))
       )}
@@ -71,7 +70,7 @@ function Building({
         y={building.y - 20}
         width={building.width + 12}
         height={building.height + 28}
-        fill="transparent"
+        className="fill-transparent"
       />
       {/* Building body — state-driven animation instead of whileHover */}
       <motion.rect
@@ -80,8 +79,7 @@ function Building({
         width={building.width}
         height={building.height}
         rx={4}
-        fill={building.color}
-        className="transition-colors duration-300 group-hover/Building:fill-[var(--deep-blue-light)]"
+        className={`${building.colorClass} transition-colors duration-300 group-hover/Building:fill-deep-blue`}
         animate={isHovered ? { y: building.y - 6, scale: 1.02 } : { y: building.y, scale: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
       />
@@ -92,8 +90,7 @@ function Building({
         width={building.width}
         height={3}
         rx={1.5}
-        fill="rgba(255,255,255,0.12)"
-        className="group-hover/Building:fill-[var(--signal-orange)] transition-colors duration-300"
+        className="fill-white/[0.12] transition-colors duration-300 group-hover/Building:fill-signal-orange"
       />
       {/* Windows */}
       <Windows
@@ -111,8 +108,7 @@ function Building({
         width={16}
         height={16}
         rx={2}
-        fill="rgba(255,255,255,0.06)"
-        className="group-hover/Building:fill-[var(--signal-orange)]/30 transition-colors duration-300"
+        className="fill-white/[0.06] transition-colors duration-300 group-hover/Building:fill-signal-orange/30"
       />
       {/* Label on hover — pointer-events-none to avoid hit-test interference */}
       <text
@@ -131,8 +127,7 @@ function Building({
         width={building.width + 8}
         height={building.height + 8}
         rx={8}
-        fill="none"
-        stroke="var(--signal-orange)"
+        className="fill-transparent stroke-signal-orange"
         strokeWidth={1.5}
         animate={{ opacity: isHovered ? 0.6 : 0 }}
         transition={{ duration: 0.2 }}
@@ -159,10 +154,10 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
       role="img"
     >
       {/* Ground plane */}
-      <rect x={30} y={208} width={540} height={2} rx={1} fill="var(--border)" />
+      <rect x={30} y={208} width={540} height={2} rx={1} className="fill-border" />
       {/* Subtle grid on ground */}
       {[100, 200, 300, 400, 500].map((gx) => (
-        <line key={gx} x1={gx} y1={208} x2={gx} y2={214} stroke="var(--border)" strokeWidth={0.5} />
+        <line key={gx} x1={gx} y1={208} x2={gx} y2={214} className="stroke-border" strokeWidth={0.5} />
       ))}
 
       {BUILDINGS.map((b) => (
@@ -185,7 +180,7 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
           cy={212}
           rx={40}
           ry={4}
-          fill="var(--signal-orange)"
+          className="fill-signal-orange"
           style={{ pointerEvents: "none", opacity: hovered === b.slug ? 0.35 : 0, transition: "opacity 0.3s" }}
         />
       ))}

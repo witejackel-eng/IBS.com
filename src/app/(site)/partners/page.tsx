@@ -6,7 +6,6 @@ import { Section } from "@/components/layout/section";
 import { SplitText } from "@/components/motion/split-text";
 import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
-import { AnimatedCounter } from "@/components/shared/animated-counter";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { PartnerEcosystemHero } from "@/components/sections/partners-redesign/partner-ecosystem-hero";
 import { PartnerPhilosophy } from "@/components/sections/partners-redesign/partner-philosophy";
@@ -83,18 +82,6 @@ export default function PartnersPage() {
       <Section className="bg-background">
         <Container>
           <PartnerPhilosophy />
-        </Container>
-      </Section>
-
-      {/* ── TRUST STATISTICS (dark) ── */}
-      <Section className="bg-charcoal py-24 lg:py-32">
-        <Container>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-            <AnimatedCounter value={partners.length} suffix="+" label="OEM Partners" />
-            <AnimatedCounter value={100} suffix="%" label="Genuine Products" />
-            <AnimatedCounter value={6} suffix="" label="Technology Categories" />
-            <AnimatedCounter value={15} suffix="+" label="Years of Relationships" />
-          </div>
         </Container>
       </Section>
 

@@ -26,7 +26,7 @@ export function ConnectionsFlow() {
       >
         <motion.line
           x1="0" y1="8" x2="1000" y2="8"
-          stroke="var(--border)"
+          className="stroke-border"
           strokeWidth="2"
           initial={{ pathLength: 0 }}
           whileInView={{ pathLength: 1 }}

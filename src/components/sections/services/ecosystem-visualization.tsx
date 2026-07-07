@@ -11,7 +11,6 @@ const disciplines = [
     fullLabel: "Voice Communication",
     description: "IP-PBX, SIP trunks, unified communications, and call routing across every desk.",
     angle: -90,
-    color: "var(--deep-blue)",
   },
   {
     slug: "av",
@@ -19,7 +18,6 @@ const disciplines = [
     fullLabel: "Audio Video & Boardrooms",
     description: "Conference rooms, auditoriums, training spaces, and video walls that run without troubleshooting.",
     angle: -30,
-    color: "var(--deep-blue-light)",
   },
   {
     slug: "networking",
@@ -27,7 +25,6 @@ const disciplines = [
     fullLabel: "IT Networks & Infrastructure",
     description: "Structured cabling, firewalls, Wi-Fi, servers, and UPS systems that keep operations running.",
     angle: 30,
-    color: "var(--deep-blue)",
   },
   {
     slug: "security",
@@ -35,7 +32,6 @@ const disciplines = [
     fullLabel: "Security Systems",
     description: "CCTV surveillance, access control, fire alarms, and home automation under one installation.",
     angle: 90,
-    color: "var(--deep-blue-light)",
   },
   {
     slug: "callcenter",
@@ -43,7 +39,6 @@ const disciplines = [
     fullLabel: "Call Center Solutions",
     description: "Headsets, dialers, CRM integration, and voice logging for contact center operations.",
     angle: 150,
-    color: "var(--deep-blue)",
   },
   {
     slug: "software",
@@ -51,7 +46,6 @@ const disciplines = [
     fullLabel: "Software Licensing & AMC",
     description: "Genuine licenses for Zoom, Webex, Microsoft 365, and security software — plus long-term maintenance.",
     angle: 210,
-    color: "var(--deep-blue-light)",
   },
 ];
 
@@ -68,7 +62,7 @@ export function EcosystemVisualization() {
       <svg viewBox="0 0 400 400" className="h-full w-full" aria-label="Interactive technology ecosystem diagram" role="img">
         <defs>
           <pattern id="eco-dots" width="16" height="16" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="0.8" fill="var(--border)" />
+            <circle cx="2" cy="2" r="0.8" className="fill-border" />
           </pattern>
         </defs>
         <rect width="400" height="400" fill="url(#eco-dots)" opacity="0.5" />
@@ -85,7 +79,7 @@ export function EcosystemVisualization() {
               y1={cy}
               x2={x2}
               y2={y2}
-              stroke="var(--deep-blue)"
+              className="stroke-deep-blue"
               strokeWidth={isHighlighted ? 2 : 1}
               strokeDasharray={isHighlighted ? "none" : "4 4"}
               opacity={hovered ? (isHighlighted ? 0.6 : 0.1) : 0.25}
@@ -118,7 +112,7 @@ export function EcosystemVisualization() {
               y1={y1}
               x2={x2}
               y2={y2}
-              stroke="var(--signal-orange)"
+              className="stroke-signal-orange"
               strokeWidth={isHighlighted ? 1.5 : 0.5}
               opacity={hovered ? (isHighlighted ? 0.4 : 0.03) : 0.08}
               animate={hovered ? { opacity: isHighlighted ? 0.4 : 0.03 } : { opacity: 0.08 }}
@@ -139,7 +133,7 @@ export function EcosystemVisualization() {
             cx={cx}
             cy={cy}
             r={hovered === "center" ? 36 : 32}
-            fill="var(--deep-blue)"
+            className="fill-deep-blue"
             animate={{ r: hovered === "center" ? 36 : 32 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           />
@@ -150,8 +144,7 @@ export function EcosystemVisualization() {
             cx={cx}
             cy={cy}
             r={40}
-            fill="none"
-            stroke="var(--deep-blue)"
+            className="fill-transparent stroke-deep-blue"
             strokeWidth={1}
             opacity={0.2}
             animate={{ r: hovered === "center" ? 52 : 44, opacity: hovered === "center" ? 0.3 : 0.15 }}
@@ -174,13 +167,12 @@ export function EcosystemVisualization() {
               data-cursor-hover
             >
               {/* Invisible wider hit area */}
-              <circle cx={nx} cy={ny} r={28} fill="transparent" />
+              <circle cx={nx} cy={ny} r={28} className="fill-transparent" />
               <motion.circle
                 cx={nx}
                 cy={ny}
                 r={isHovered ? 24 : 20}
-                fill="var(--card)"
-                stroke={isHovered ? "var(--deep-blue)" : "var(--border)"}
+                className={`fill-card ${isHovered ? "stroke-deep-blue" : "stroke-border"}`}
                 strokeWidth={isHovered ? 2 : 1}
                 animate={{ r: isHovered ? 24 : 20 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -192,7 +184,7 @@ export function EcosystemVisualization() {
                 dominantBaseline="middle"
                 fontSize="9"
                 fontWeight={600}
-                fill={isHovered ? "var(--deep-blue)" : "var(--charcoal)"}
+                className={isHovered ? "fill-deep-blue" : "fill-charcoal"}
                 style={{ fontFamily: "var(--font-heading)", pointerEvents: "none" }}
               >
                 {d.label}

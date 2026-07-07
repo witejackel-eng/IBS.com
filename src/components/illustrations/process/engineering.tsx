@@ -16,16 +16,16 @@ export function EngineeringIllustration({ className }: { className?: string }) {
           <line
             key={i}
             x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke="var(--steel)" strokeWidth={2} strokeLinecap="round"
+            className="stroke-steel" strokeWidth={2} strokeLinecap="round"
           />
         );
       })}
       {/* Main gear circle */}
-      <circle cx={60} cy={60} r={22} fill="none" stroke="var(--steel)" strokeWidth={1.5} />
+      <circle cx={60} cy={60} r={22} fill="none" className="stroke-steel" strokeWidth={1.5} />
       {/* Inner ring */}
-      <circle cx={60} cy={60} r={12} fill="none" stroke="var(--deep-blue)" strokeWidth={1.5} opacity={0.6} />
+      <circle cx={60} cy={60} r={12} fill="none" className="stroke-deep-blue" strokeWidth={1.5} opacity={0.6} />
       {/* Center hub */}
-      <circle cx={60} cy={60} r={5} fill="none" stroke="var(--steel)" strokeWidth={1.5} />
+      <circle cx={60} cy={60} r={5} fill="none" className="stroke-steel" strokeWidth={1.5} />
       {/* Spec nodes around gear */}
       <ConnectionLine d="M88 60 L 100 52" accent />
       <Node cx={102} cy={50} r={2.5} accent filled />
