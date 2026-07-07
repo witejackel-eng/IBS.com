@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
 
 export type SegmentSlug = "enterprises" | "hotels" | "government" | "residential" | "soho";
@@ -18,16 +18,14 @@ const BUILDINGS: {
   width: number;
   height: number;
   color: string;
-  hoverColor: string;
 }[] = [
-  { slug: "soho", label: "SOHO", x: 60, y: 155, width: 60, height: 50, color: "var(--steel-light)", hoverColor: "var(--deep-blue-light)" },
-  { slug: "residential", label: "Residential", x: 135, y: 130, width: 70, height: 75, color: "var(--steel)", hoverColor: "var(--deep-blue-light)" },
-  { slug: "government", label: "Government", x: 220, y: 100, width: 90, height: 105, color: "var(--graphite)", hoverColor: "var(--deep-blue)" },
-  { slug: "hotels", label: "Hotels", x: 330, y: 85, width: 80, height: 120, color: "var(--steel)", hoverColor: "var(--deep-blue-light)" },
-  { slug: "enterprises", label: "Enterprises", x: 430, y: 55, width: 100, height: 150, color: "var(--charcoal)", hoverColor: "var(--deep-blue)" },
+  { slug: "soho", label: "SOHO", x: 60, y: 155, width: 60, height: 50, color: "var(--steel-light)" },
+  { slug: "residential", label: "Residential", x: 135, y: 130, width: 70, height: 75, color: "var(--steel)" },
+  { slug: "government", label: "Government", x: 220, y: 100, width: 90, height: 105, color: "var(--graphite)" },
+  { slug: "hotels", label: "Hotels", x: 330, y: 85, width: 80, height: 120, color: "var(--steel)" },
+  { slug: "enterprises", label: "Enterprises", x: 430, y: 55, width: 100, height: 150, color: "var(--charcoal)" },
 ];
 
-/* Window grid for a building face */
 function Windows({ x, y, w, h, cols, rows, gap = 8 }: { x: number; y: number; w: number; h: number; cols: number; rows: number; gap?: number }) {
   const cellW = (w - (cols - 1) * gap) / cols;
   const cellH = (h - (rows - 1) * gap) / rows;
@@ -51,13 +49,31 @@ function Windows({ x, y, w, h, cols, rows, gap = 8 }: { x: number; y: number; w:
   );
 }
 
-function Building({ building, onHover }: { building: (typeof BUILDINGS)[number]; onHover?: (slug: SegmentSlug | null) => void }) {
+function Building({
+  building,
+  isHovered,
+  onHover,
+}: {
+  building: (typeof BUILDINGS)[number];
+  isHovered: boolean;
+  onHover?: (slug: SegmentSlug | null) => void;
+}) {
   return (
     <g
       className="group/Building cursor-pointer"
+      data-cursor-hover
       onMouseEnter={() => onHover?.(building.slug)}
       onMouseLeave={() => onHover?.(null)}
     >
+      {/* Invisible wider hit area to prevent flicker at edges */}
+      <rect
+        x={building.x - 6}
+        y={building.y - 20}
+        width={building.width + 12}
+        height={building.height + 28}
+        fill="transparent"
+      />
+      {/* Building body — state-driven animation instead of whileHover */}
       <motion.rect
         x={building.x}
         y={building.y}
@@ -66,7 +82,7 @@ function Building({ building, onHover }: { building: (typeof BUILDINGS)[number];
         rx={4}
         fill={building.color}
         className="transition-colors duration-300 group-hover/Building:fill-[var(--deep-blue-light)]"
-        whileHover={{ y: building.y - 6, scale: 1.02 }}
+        animate={isHovered ? { y: building.y - 6, scale: 1.02 } : { y: building.y, scale: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
       />
       {/* Roof accent line */}
@@ -98,17 +114,17 @@ function Building({ building, onHover }: { building: (typeof BUILDINGS)[number];
         fill="rgba(255,255,255,0.06)"
         className="group-hover/Building:fill-[var(--signal-orange)]/30 transition-colors duration-300"
       />
-      {/* Label on hover */}
+      {/* Label on hover — pointer-events-none to avoid hit-test interference */}
       <text
         x={building.x + building.width / 2}
         y={building.y - 14}
         textAnchor="middle"
         className="fill-steel text-[11px] font-medium opacity-0 transition-opacity duration-300 group-hover/Building:opacity-100"
-        style={{ fontFamily: "var(--font-heading)" }}
+        style={{ fontFamily: "var(--font-heading)", pointerEvents: "none" }}
       >
         {building.label}
       </text>
-      {/* Glow on hover */}
+      {/* Glow border — state-driven instead of whileHover */}
       <motion.rect
         x={building.x - 4}
         y={building.y - 4}
@@ -118,8 +134,7 @@ function Building({ building, onHover }: { building: (typeof BUILDINGS)[number];
         fill="none"
         stroke="var(--signal-orange)"
         strokeWidth={1.5}
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 0.6 }}
+        animate={{ opacity: isHovered ? 0.6 : 0 }}
         transition={{ duration: 0.2 }}
       />
     </g>
@@ -154,6 +169,7 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
         <Building
           key={b.slug}
           building={b}
+          isHovered={hovered === b.slug}
           onHover={(slug) => {
             setHovered(slug);
             onHover?.(slug);
@@ -161,21 +177,18 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
         />
       ))}
 
-      {/* Orange glow under hovered building */}
-      {hovered && (
-        <motion.ellipse
-          key={hovered}
-          cx={BUILDINGS.find((b) => b.slug === hovered)!.x + BUILDINGS.find((b) => b.slug === hovered)!.width / 2}
+      {/* Orange glow under hovered building — always mounted, pointer-events-none */}
+      {BUILDINGS.map((b) => (
+        <ellipse
+          key={`glow-${b.slug}`}
+          cx={b.x + b.width / 2}
           cy={212}
           rx={40}
           ry={4}
           fill="var(--signal-orange)"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.35 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          style={{ pointerEvents: "none", opacity: hovered === b.slug ? 0.35 : 0, transition: "opacity 0.3s" }}
         />
-      )}
+      ))}
     </motion.svg>
   );
 }
