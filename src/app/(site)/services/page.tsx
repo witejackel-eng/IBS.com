@@ -7,9 +7,7 @@ import { Section } from "@/components/layout/section";
 import { SplitText } from "@/components/motion/split-text";
 import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
-import { SectionHeading } from "@/components/shared/section-heading";
 import { SecondaryHeroNetwork } from "@/components/webgl/secondary-hero-network";
-import { TechnologyEcosystem } from "@/components/sections/services-redesign/technology-ecosystem";
 import { ServiceShowcase } from "@/components/sections/services-redesign/service-showcase";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { CollectionPageJsonLd } from "@/components/seo/collection-page-jsonld";
@@ -34,7 +32,7 @@ export default function ServicesIndexPage() {
       />
 
       {/* ── HERO ── */}
-      <Section bg="ambient" className="relative overflow-hidden bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
+      <Section bg="ambient" className="relative overflow-hidden bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 sm:pb-16 lg:pb-20">
         <SecondaryHeroNetwork />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
         <Container className="relative z-10">
@@ -54,21 +52,6 @@ export default function ServicesIndexPage() {
               </p>
             </Reveal>
           </div>
-        </Container>
-      </Section>
-
-      {/* ── TECHNOLOGY ECOSYSTEM ── */}
-      <Section className="bg-background py-24 lg:py-32">
-        <Container>
-          <SectionHeading
-            eyebrow="Integrated approach"
-            title="One team. Six disciplines."
-            description="Instead of hiring multiple vendors, clients work with one engineering team that handles every technology layer. Hover any node to see what it covers."
-            align="center"
-            size="lg"
-            className="mb-16"
-          />
-          <TechnologyEcosystem services={services} />
         </Container>
       </Section>
 
