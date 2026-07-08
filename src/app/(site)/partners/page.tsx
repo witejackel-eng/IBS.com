@@ -10,9 +10,7 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { PartnerEcosystemHero } from "@/components/sections/partners-redesign/partner-ecosystem-hero";
 import { PartnerPhilosophy } from "@/components/sections/partners-redesign/partner-philosophy";
 import { TechnologyCluster } from "@/components/sections/partners-redesign/technology-clusters";
-import { FeaturedCategory } from "@/components/sections/partners-redesign/featured-category";
 import { IntegrationFlow } from "@/components/sections/partners-redesign/integration-flow";
-import { WhyGenuineOem } from "@/components/sections/partners-redesign/why-genuine-oem";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { CollectionPageJsonLd } from "@/components/seo/collection-page-jsonld";
 import { partners, partnerCategories } from "@/lib/content";
@@ -33,11 +31,7 @@ const categoryDescriptions: Record<string, string> = {
     "CCTV surveillance, access control, fire detection, and intrusion systems — from camera manufacturers to fire panel specialists.",
 };
 
-const categoryDeployments: Record<string, string[]> = {
-  "av-integration": ["Boardrooms", "Training rooms", "Auditoriums", "Video walls", "Classrooms"],
-  "communication-it": ["Office networks", "Data centers", "Wi-Fi coverage", "Server rooms", "Remote sites"],
-  "security": ["Office buildings", "Hotels", "Residential", "Industrial", "Government"],
-};
+
 
 export default function PartnersPage() {
   return (
@@ -113,29 +107,6 @@ export default function PartnersPage() {
         </Container>
       </Section>
 
-      {/* ── FEATURED PARTNER CATEGORIES (Alternating Editorial) ── */}
-      {partnerCategories.map((cat, i) => {
-        const catPartners = partners.filter((p) => p.category === cat.key);
-        return (
-          <Section
-            key={cat.key}
-            bg={i === 1 ? "grid" : "none"}
-            className={i === 1 ? "bg-secondary/20" : "bg-background"}
-          >
-            <Container>
-              <FeaturedCategory
-                title={cat.label}
-                description={categoryDescriptions[cat.key]}
-                partners={catPartners}
-                deployments={categoryDeployments[cat.key]}
-                reversed={i % 2 === 1}
-                accent={i === 0}
-              />
-            </Container>
-          </Section>
-        );
-      })}
-
       {/* ── INTEGRATION FLOW ── */}
       <Section bg="blueprint" className="bg-secondary/20">
         <Container>
@@ -147,13 +118,6 @@ export default function PartnersPage() {
             className="mb-14"
           />
           <IntegrationFlow />
-        </Container>
-      </Section>
-
-      {/* ── WHY GENUINE OEM ── */}
-      <Section bg="grid" className="bg-background">
-        <Container>
-          <WhyGenuineOem />
         </Container>
       </Section>
 
@@ -181,15 +145,6 @@ export default function PartnersPage() {
                 data-cursor-hover
               >
                 Talk to Our Team <ArrowRight className="h-4 w-4" />
-              </ButtonLink>
-              <ButtonLink
-                href="/services"
-                variant="outline"
-                size="xl"
-                className="rounded-full"
-                data-cursor-hover
-              >
-                Explore Solutions
               </ButtonLink>
             </Reveal>
           </div>

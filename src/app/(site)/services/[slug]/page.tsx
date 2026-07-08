@@ -8,18 +8,10 @@ import { services } from "@/lib/content";
 import { servicePageDataMap } from "@/lib/content/service-page-data";
 import {
   HeroSection,
-  TrustMetricsSection,
-  BusinessChallengeSection,
-  EngineeringApproachSection,
-  TechnologyEcosystemSection,
   SolutionsSection,
-  FeaturedDeploymentSection,
   IndustriesSection,
   EngineeringProcessSection,
-  OemPartnersSection,
-  WhyChooseIbsSection,
   FaqSection,
-  RelatedServicesSection,
   PremiumCtaSection,
 } from "@/components/sections/service-page";
 
@@ -78,46 +70,26 @@ export default async function ServiceDetailPage({
       {/* 1. Hero */}
       <HeroSection service={service} data={data} />
 
-      {/* 2. Trust Metrics */}
-      <TrustMetricsSection />
-
-      {/* 3. Business Challenge */}
-      <BusinessChallengeSection data={data} />
-
-      {/* 4. IBS Engineering Approach */}
-      <EngineeringApproachSection data={data} />
-
-      {/* 5. Technology Ecosystem */}
-      <TechnologyEcosystemSection data={data} serviceSlug={service.slug} />
-
-      {/* 6. Solutions We Deliver */}
+      {/* 2. Solutions We Deliver */}
       <SolutionsSection data={data} serviceImage={service.image} />
 
-      {/* 7. Featured Deployment */}
-      <FeaturedDeploymentSection data={data} serviceImage={service.image} />
-
-      {/* 8. Industries Served */}
+      {/* 3. Industries Served */}
       <IndustriesSection data={data} />
 
-      {/* 9. Engineering Process */}
+      {/* 4. Engineering Process */}
       <EngineeringProcessSection />
 
-      {/* 10. OEM Partners */}
-      <OemPartnersSection data={data} />
+      {/* 5. FAQ */}
+      {data.faqs.length > 0 && (
+        <>
+          <FaqSection data={data} />
+          <FaqJsonLd
+            faqs={data.faqs.map((f) => ({ question: f.question, answer: f.answer }))}
+          />
+        </>
+      )}
 
-      {/* 11. Why Choose IBS */}
-      <WhyChooseIbsSection data={data} />
-
-      {/* 12. FAQ */}
-      <FaqSection data={data} />
-      <FaqJsonLd
-        faqs={data.faqs.map((f) => ({ question: f.question, answer: f.answer }))}
-      />
-
-      {/* 13. Related Services Ecosystem */}
-      <RelatedServicesSection currentSlug={service.slug} />
-
-      {/* 14. Premium CTA */}
+      {/* 6. CTA */}
       <PremiumCtaSection data={data} />
     </>
   );

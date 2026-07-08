@@ -1,14 +1,6 @@
 export { HeroSection } from "./hero-section";
-export { TrustMetricsSection } from "./trust-metrics-section";
-export { BusinessChallengeSection } from "./business-challenge-section";
-export { EngineeringApproachSection } from "./engineering-approach-section";
-export { TechnologyEcosystemSection } from "./technology-ecosystem-section";
 export { SolutionsSection } from "./solutions-section";
-export { FeaturedDeploymentSection } from "./featured-deployment-section";
 export { IndustriesSection } from "./industries-section";
 export { EngineeringProcessSection } from "./engineering-process-section";
-export { OemPartnersSection } from "./oem-partners-section";
-export { WhyChooseIbsSection } from "./why-choose-ibs-section";
 export { FaqSection } from "./faq-section";
-export { RelatedServicesSection } from "./related-services-section";
 export { PremiumCtaSection } from "./premium-cta-section";
