@@ -35,7 +35,7 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
       {/* ── Gradient overlay: ensures text column reads cleanly ── */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
 
-      <Container className="relative z-10 pt-28 pb-10 lg:pb-12">
+      <Container className="relative z-10 pt-24 pb-8 sm:pt-28 lg:pb-12">
         {/* ── Headline ── */}
         <SplitText
           as="h1"
@@ -50,7 +50,7 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
 
         {/* ── CTA row (48px gap from body) ── */}
         <Reveal direction="up" delay={0.3} amount={0.6}>
-          <div className="mt-12 flex flex-wrap items-center gap-5">
+          <div className="mt-10 flex flex-wrap items-center gap-3 sm:gap-5">
             <Magnetic>
               <ButtonLink
                 href="/contact"

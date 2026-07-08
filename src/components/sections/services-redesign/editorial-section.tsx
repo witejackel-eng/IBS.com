@@ -33,7 +33,7 @@ const statements = [
 
 export function EditorialSection() {
   return (
-    <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
+    <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-24">
       {/* Left: statements */}
       <RevealGroup className="flex flex-col gap-10" stagger={0.08}>
         {statements.map((s) => {

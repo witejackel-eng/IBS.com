@@ -26,9 +26,9 @@ export default function QualityPage() {
       <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Quality & Support", path: "/quality" }]} />
 
       {/* ── HERO ── */}
-      <Section bg="ambient" className="bg-background pt-40 pb-24">
+      <Section bg="ambient" className="bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
                 Quality &amp; Support

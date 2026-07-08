@@ -33,7 +33,7 @@ export default async function ContactPage() {
     <>
       <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]} />
       <ContactPageJsonLd />
-      <Section bg="ambient" className="bg-background pt-40 pb-24">
+      <Section bg="ambient" className="bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
         <Container>
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
             Contact Us
@@ -50,7 +50,7 @@ export default async function ContactPage() {
             </Reveal>
 
             <Reveal direction="up" delay={0.15} className="flex flex-col gap-6 md:col-span-2">
-              <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8">
+              <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-5 sm:p-6 md:p-8">
                 <ContactNetworkIllustration className="pointer-events-none absolute -top-6 -right-6 h-28 w-28 opacity-70" />
                 <h2 className="relative text-sm font-semibold tracking-[0.1em] text-steel uppercase">Reach us directly</h2>
                 <ul className="mt-5 flex flex-col gap-4 text-sm">
@@ -89,7 +89,7 @@ export default async function ContactPage() {
               {/* Body-content cross-links — gives a contact-page visitor a
                   quick path to the rest of the site, and strengthens
                   internal linking to the service and segment pages. */}
-              <div className="rounded-3xl border border-border bg-card p-8">
+              <div className="rounded-3xl border border-border bg-card p-5 sm:p-6 md:p-8">
                 <h2 className="text-sm font-semibold tracking-[0.1em] text-steel uppercase">
                   Not sure where to start?
                 </h2>

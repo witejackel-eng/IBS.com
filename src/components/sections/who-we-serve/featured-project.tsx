@@ -22,9 +22,9 @@ interface FeaturedProjectProps {
 
 export function FeaturedProject({ project, image, reversed, index }: FeaturedProjectProps) {
   return (
-    <section className={`bg-muted/30 py-24 lg:py-32 ${index % 2 === 1 ? "bg-background" : ""}`}>
+    <section className={`bg-muted/30 py-14 sm:py-20 md:py-24 lg:py-32 ${index % 2 === 1 ? "bg-background" : ""}`}>
       <Container>
-        <div className={`grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20 ${reversed ? "lg:[direction:rtl]" : ""}`}>
+        <div className={`grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20 ${reversed ? "lg:[direction:rtl]" : ""}`}>
           {/* Image side */}
           <motion.div
             initial={{ opacity: 0, x: reversed ? 40 : -40 }}

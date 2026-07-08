@@ -138,7 +138,7 @@ export function DisciplinesSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden py-24 lg:py-32">
+    <section className="relative overflow-hidden py-14 sm:py-20 md:py-24 lg:py-32">
       {/* Layered background: very light grid + radial glow + orange accent.
           None of these layers compete with the content — they're all
           subtle enough to read as texture, not pattern. */}
@@ -166,7 +166,7 @@ export function DisciplinesSection() {
 
       <Container className="relative z-10">
         {/* Heading + description */}
-        <div className="mb-16 max-w-3xl">
+        <div className="mb-10 sm:mb-14 lg:mb-16 max-w-3xl">
           <Reveal direction="up" amount={0.6}>
             <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
               <span className="h-1.5 w-1.5 rounded-full bg-deep-blue" />
@@ -179,7 +179,7 @@ export function DisciplinesSection() {
             className="text-display-2 leading-[1.05] font-semibold tracking-tight text-charcoal text-balance"
           />
           <Reveal direction="up" delay={0.15} amount={0.6}>
-            <p className="mt-6 max-w-2xl text-lg text-steel">
+            <p className="mt-5 max-w-2xl text-base sm:text-lg text-steel">
               From the first site visit to years of ongoing maintenance, our engineers cover the
               full technology stack — communication, AV, networking, safety, and contact center —
               under one roof.
@@ -189,7 +189,7 @@ export function DisciplinesSection() {
 
         {/* Metrics row */}
         <motion.div
-          className="mb-14 grid grid-cols-2 gap-6 border-y border-border py-8 sm:grid-cols-4"
+          className="mb-10 lg:mb-14 grid grid-cols-2 gap-5 border-y border-border py-7 sm:grid-cols-4"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}

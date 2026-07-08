@@ -29,7 +29,7 @@ export function FaqSection({ data }: FaqSectionProps) {
   }, [query, data.faqs]);
 
   return (
-    <section className="bg-background py-24 lg:py-32">
+    <section className="bg-background py-14 sm:py-20 md:py-24 lg:py-32">
       <Container className="max-w-3xl">
         <Reveal direction="up" delay={0.05}>
           <span className="text-xs font-semibold tracking-[0.1em] text-deep-blue uppercase">

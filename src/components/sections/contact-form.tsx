@@ -88,7 +88,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 rounded-3xl border border-border bg-card p-8">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 rounded-3xl border border-border bg-card p-5 sm:p-6 md:p-8">
       <input
         ref={honeypotRef}
         type="text"

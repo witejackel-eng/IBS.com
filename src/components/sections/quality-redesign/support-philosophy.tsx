@@ -40,7 +40,7 @@ export function SupportPhilosophy() {
       {principles.map((p, i) => (
         <motion.div
           key={p.title}
-          className={`rounded-3xl border border-border bg-card p-8 ${
+          className={`rounded-3xl border border-border bg-card p-5 sm:p-6 md:p-8 ${
             p.size === "large" ? "md:col-span-7" : "md:col-span-5"
           } ${i >= 2 ? "md:mt-0" : ""}`}
           initial={{ opacity: 0, y: 32 }}

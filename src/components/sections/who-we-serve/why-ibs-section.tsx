@@ -27,7 +27,7 @@ export function WhyIbsSection() {
   useInView(ref, { once: true, amount: 0.15 });
 
   return (
-    <section ref={ref} className="bg-muted/20 py-24 lg:py-32">
+    <section ref={ref} className="bg-muted/20 py-14 sm:py-20 md:py-24 lg:py-32">
       <Container>
         {/* Header */}
         <motion.div
@@ -62,7 +62,7 @@ export function WhyIbsSection() {
                 delay: i * 0.08,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="group rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:border-deep-blue/20 hover:shadow-lg hover:shadow-charcoal/[0.04]"
+              className="group rounded-2xl border border-border bg-card p-5 sm:p-6 md:p-8 transition-all duration-300 hover:border-deep-blue/20 hover:shadow-lg hover:shadow-charcoal/[0.04]"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-background transition-colors duration-300 group-hover:border-deep-blue/30 group-hover:bg-deep-blue/[0.04]">
                 <d.icon className="h-5 w-5 text-deep-blue" />

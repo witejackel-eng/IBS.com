@@ -13,7 +13,7 @@ export function Section({ children, className, id, bg = "none" }: SectionProps) 
     <section
       id={id}
       className={cn(
-        "relative py-24 lg:py-32",
+        "relative py-14 sm:py-20 md:py-24 lg:py-32",
         bg === "grid" && "bg-engineering-grid",
         bg === "blueprint" && "bg-blueprint-lines",
         bg === "ambient" && "bg-ambient-glow",

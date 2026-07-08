@@ -27,7 +27,7 @@ export function ProcessSection() {
   useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section ref={ref} className="bg-background py-24 lg:py-32">
+    <section ref={ref} className="bg-background py-14 sm:py-20 md:py-24 lg:py-32">
       <Container>
         {/* Header */}
         <motion.div

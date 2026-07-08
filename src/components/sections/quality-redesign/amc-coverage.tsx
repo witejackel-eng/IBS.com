@@ -19,7 +19,7 @@ export function AmcCoverage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
       {/* Left: Explanation */}
       <div>
         <h3 className="text-display-3 font-semibold tracking-tight text-charcoal text-balance">

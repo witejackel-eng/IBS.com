@@ -14,7 +14,7 @@ export function ComplianceFlow() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
       <div>
         <h3 className="text-display-3 font-semibold tracking-tight text-charcoal text-balance">
           Built around BIS and STQC standards.

@@ -34,7 +34,7 @@ export default function CareersPage() {
       {/* Hero — concise, no overclaiming. We're hiring for specific roles
           and the page leads with that fact rather than generic "join our
           family" copy. */}
-      <Section bg="ambient" className="relative overflow-hidden bg-background pt-40 pb-20">
+      <Section bg="ambient" className="relative overflow-hidden bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
         <SecondaryHeroNetwork />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
         <Container className="relative z-10">
@@ -261,7 +261,7 @@ export default function CareersPage() {
             </Reveal>
 
             <Reveal direction="up" delay={0.15} className="flex flex-col gap-6 md:col-span-2">
-              <div className="rounded-3xl border border-border bg-card p-8">
+              <div className="rounded-3xl border border-border bg-card p-5 sm:p-6 md:p-8">
                 <h3 className="text-sm font-semibold tracking-[0.1em] text-steel uppercase">
                   Prefer to reach us directly?
                 </h3>
@@ -300,7 +300,7 @@ export default function CareersPage() {
                 </ul>
               </div>
 
-              <div className="rounded-3xl border border-border bg-card p-8">
+              <div className="rounded-3xl border border-border bg-card p-5 sm:p-6 md:p-8">
                 <h3 className="text-sm font-semibold tracking-[0.1em] text-steel uppercase">
                   Not ready to apply yet?
                 </h3>

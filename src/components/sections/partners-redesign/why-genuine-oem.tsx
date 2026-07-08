@@ -17,7 +17,7 @@ export function WhyGenuineOem() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
       {/* Left - heading */}
       <div className="lg:col-span-2">
         <motion.div

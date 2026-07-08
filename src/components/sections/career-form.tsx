@@ -96,7 +96,7 @@ export function CareerForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-5 rounded-3xl border border-border bg-card p-8"
+      className="flex flex-col gap-5 rounded-3xl border border-border bg-card p-5 sm:p-6 md:p-8"
     >
       {/* Honeypot: hidden from real users, filled by bots. */}
       <input

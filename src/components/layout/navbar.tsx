@@ -267,7 +267,7 @@ export function Navbar() {
 
         <button
           ref={mobileToggleRef}
-          className="flex h-9 w-9 items-center justify-center rounded-full text-charcoal md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full text-charcoal md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -288,7 +288,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: DURATION.base, ease: EASE_OUT_EXPO }}
-            className="glass absolute inset-x-4 top-20 z-40 flex max-h-[75vh] flex-col gap-1 overflow-y-auto rounded-3xl p-4 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] md:hidden"
+            className="glass absolute inset-x-3 top-[72px] z-40 flex max-h-[70vh] flex-col gap-0.5 overflow-y-auto rounded-2xl p-3 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] md:hidden"
           >
             {mainNav.map((link) => (
               <div key={link.href}>
@@ -331,6 +331,7 @@ export function Navbar() {
                 href="/contact"
                 onClick={() => setOpen(false)}
                 variant="cta"
+                size="lg"
                 className="w-full rounded-full"
               >
                 Talk to us

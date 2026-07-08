@@ -86,11 +86,11 @@ export function SolutionsSection({ data, serviceImage }: SolutionsSectionProps) 
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="bg-background py-24 lg:py-32">
+    <section className="bg-background py-14 sm:py-20 md:py-24 lg:py-32">
       <Container>
         {/* Section header */}
         <motion.div
-          className="mb-16 max-w-2xl lg:mb-24"
+          className="mb-10 lg:mb-16 max-w-2xl"
           initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -105,7 +105,7 @@ export function SolutionsSection({ data, serviceImage }: SolutionsSectionProps) 
         </motion.div>
 
         {/* Solution blocks — alternating editorial layout */}
-        <div className="flex flex-col gap-20 lg:gap-32">
+        <div className="flex flex-col gap-12 sm:gap-16 lg:gap-28">
           {data.solutions.map((solution, i) => {
             const isEven = i % 2 === 0;
             const direction = isEven ? "left" : "right";

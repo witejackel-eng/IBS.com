@@ -19,7 +19,7 @@ export function IndustriesSection({ data }: IndustriesSectionProps) {
   if (industries.length === 0) return null;
 
   return (
-    <section className="bg-background py-24 lg:py-32">
+    <section className="bg-background py-14 sm:py-20 md:py-24 lg:py-32">
       <Container>
         <SectionHeading
           eyebrow="Industries"
@@ -28,7 +28,7 @@ export function IndustriesSection({ data }: IndustriesSectionProps) {
         />
 
         <RevealGroup
-          className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-10 sm:mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
           stagger={0.08}
         >
           {industries.map((industry, idx) => {

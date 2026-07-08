@@ -49,7 +49,7 @@ export function EngineeringProcessSection() {
   return (
     <Section bg="blueprint" className="bg-background">
       <Container>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-16">
           <MaskReveal className="rounded-3xl">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
               <Image

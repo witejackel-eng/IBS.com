@@ -15,7 +15,7 @@ export function PartnerPhilosophy() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
       {/* Left - editorial text */}
       <div className="lg:col-span-3">
         <motion.div

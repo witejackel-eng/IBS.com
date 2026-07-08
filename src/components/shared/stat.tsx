@@ -2,8 +2,8 @@
 export function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <p className="text-3xl font-semibold text-charcoal font-heading">{value}</p>
-      <p className="mt-1 text-sm text-steel">{label}</p>
+      <p className="text-2xl font-semibold text-charcoal font-heading sm:text-3xl">{value}</p>
+      <p className="mt-1 text-xs sm:text-sm text-steel">{label}</p>
     </div>
   );
 }

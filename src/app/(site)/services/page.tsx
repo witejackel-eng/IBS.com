@@ -34,7 +34,7 @@ export default function ServicesIndexPage() {
       />
 
       {/* ── HERO ── */}
-      <Section bg="ambient" className="relative overflow-hidden bg-background pt-40 pb-24">
+      <Section bg="ambient" className="relative overflow-hidden bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
         <SecondaryHeroNetwork />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
         <Container className="relative z-10">
@@ -88,7 +88,7 @@ export default function ServicesIndexPage() {
       {/* ── ANNUAL MAINTENANCE ── */}
       <Section className="bg-secondary/20">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <Reveal direction="left">
               <div>
                 <span className="text-[10px] font-semibold tracking-[0.14em] text-deep-blue uppercase">

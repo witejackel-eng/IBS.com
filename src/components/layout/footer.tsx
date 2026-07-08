@@ -9,8 +9,8 @@ import { company, services, amcService } from "@/lib/content";
 export function Footer() {
   return (
     <footer className="relative border-t border-border bg-background bg-engineering-grid">
-      <Container className="relative z-10 py-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-16">
+      <Container className="relative z-10 py-12 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 gap-10 sm:gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-16">
           <div className="flex flex-col gap-4">
             <Logo />
             <p className="text-xs font-semibold tracking-[0.1em] text-deep-blue uppercase">{company.positioning}</p>
@@ -46,13 +46,13 @@ export function Footer() {
             <ul className="flex flex-col gap-2.5">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">
+                  <Link href={`/services/${s.slug}`} className="block min-h-[44px] text-sm leading-[44px] text-steel transition-colors hover:text-charcoal">
                     {s.navLabel}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href={`/services/${amcService.slug}`} className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">
+                <Link href={`/services/${amcService.slug}`} className="block min-h-[44px] text-sm leading-[44px] text-steel transition-colors hover:text-charcoal">
                   {amcService.navLabel}
                 </Link>
               </li>
@@ -62,12 +62,12 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-semibold tracking-wide text-charcoal">Company</h3>
             <ul className="flex flex-col gap-2.5">
-              <li><Link href="/about" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">About</Link></li>
-              <li><Link href="/who-we-serve" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Who We Serve</Link></li>
-              <li><Link href="/partners" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Partners</Link></li>
-              <li><Link href="/quality" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Quality & Support</Link></li>
-              <li><Link href="/careers" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Careers</Link></li>
-              <li><Link href="/contact" className="block min-h-[36px] text-sm leading-9 text-steel transition-colors hover:text-charcoal">Contact</Link></li>
+              <li><Link href="/about" className="block min-h-[44px] text-sm leading-[44px] text-steel transition-colors hover:text-charcoal">About</Link></li>
+              <li><Link href="/who-we-serve" className="block min-h-[44px] text-sm leading-[44px] text-steel transition-colors hover:text-charcoal">Who We Serve</Link></li>
+              <li><Link href="/partners" className="block min-h-[44px] text-sm leading-[44px] text-steel transition-colors hover:text-charcoal">Partners</Link></li>
+              <li><Link href="/quality" className="block min-h-[44px] text-sm leading-[44px] text-steel transition-colors hover:text-charcoal">Quality & Support</Link></li>
+              <li><Link href="/careers" className="block min-h-[44px] text-sm leading-[44px] text-steel transition-colors hover:text-charcoal">Careers</Link></li>
+              <li><Link href="/contact" className="block min-h-[44px] text-sm leading-[44px] text-steel transition-colors hover:text-charcoal">Contact</Link></li>
             </ul>
             <p className="mt-2 text-xs text-steel/90">
               Interested in joining IBS? <Link href="/careers" className="underline underline-offset-2 hover:text-charcoal">Get in touch</Link>.
@@ -98,9 +98,9 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-10 flex flex-wrap gap-2">
               {company.serviceAreas.map((area) => (
-                <span key={area} className="rounded-full border border-border px-3 py-1 text-xs text-steel">
+                <span key={area} className="rounded-full border border-border px-3 py-1.5 text-xs text-steel">
                   {area}
                 </span>
               ))}

@@ -138,7 +138,7 @@ function ProcessStepItem({
 
 export function EngineeringProcessSection() {
   return (
-    <section className="bg-muted/20 py-24 lg:py-32">
+    <section className="bg-muted/20 py-14 sm:py-20 md:py-24 lg:py-32">
       <Container>
         <SectionHeading
           eyebrow="Process"

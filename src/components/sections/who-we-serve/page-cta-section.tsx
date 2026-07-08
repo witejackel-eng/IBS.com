@@ -10,7 +10,7 @@ import { company } from "@/lib/content";
 export function PageCtaSection() {
   return (
     <section
-      className="relative overflow-hidden bg-charcoal py-24 lg:py-32"
+      className="relative overflow-hidden bg-charcoal py-14 sm:py-20 md:py-24 lg:py-32"
     >
       {/* Subtle pattern */}
       <div className="pointer-events-none absolute inset-0 bg-engineering-grid-dark opacity-[0.06]" />

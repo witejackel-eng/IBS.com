@@ -63,10 +63,10 @@ export function IndustryShowcase({ segment, reversed, index }: IndustryShowcaseP
   return (
     <section
       id={segment.slug}
-      className={`bg-background scroll-mt-24 py-24 lg:py-32 ${index % 2 === 1 ? "bg-muted/20" : ""}`}
+      className={`bg-background scroll-mt-24 py-14 sm:py-20 md:py-24 lg:py-32 ${index % 2 === 1 ? "bg-muted/20" : ""}`}
     >
       <Container>
-        <div className={`grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20 ${reversed ? "lg:[direction:rtl]" : ""}`}>
+        <div className={`grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20 ${reversed ? "lg:[direction:rtl]" : ""}`}>
           {/* Image */}
           <motion.div
             initial={{ opacity: 0, x: reversed ? 50 : -50 }}

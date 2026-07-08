@@ -60,7 +60,7 @@ export function ServicesTrustMetrics() {
   const inView = useInView(ref, { once: true, amount: 0.4 });
 
   return (
-    <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+    <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 sm:gap-16">
       {metrics.map((m, i) => (
         <motion.div
           key={m.label}

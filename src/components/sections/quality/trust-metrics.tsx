@@ -63,7 +63,7 @@ export function TrustMetricsSection() {
   return (
     <Section>
       <div ref={ref} className="mx-auto w-full max-w-7xl px-6 lg:px-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 sm:gap-16">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}

@@ -33,13 +33,13 @@ export function HeroSection({ service, data }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-background pt-36 pb-24 lg:pt-44 lg:pb-32"
+      className="relative bg-background pt-24 pb-16 sm:pt-28 md:pt-36 lg:pt-44 lg:pb-32"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 bg-ambient-glow" />
 
       <Container>
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-20">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
           {/* Left: headline + copy */}
           <div>
             {/* Pill badge */}

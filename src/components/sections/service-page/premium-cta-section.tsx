@@ -15,7 +15,7 @@ interface PremiumCtaSectionProps {
 
 export function PremiumCtaSection({ data }: PremiumCtaSectionProps) {
   return (
-    <section className="bg-ambient-glow py-24 lg:py-32">
+    <section className="bg-ambient-glow py-14 sm:py-20 md:py-24 lg:py-32">
       <Container>
         <div className="flex flex-col items-center gap-8 text-center">
           <Reveal direction="up" delay={0.05}>
@@ -44,7 +44,7 @@ export function PremiumCtaSection({ data }: PremiumCtaSectionProps) {
           </Reveal>
 
           <Reveal direction="up" delay={0.35}>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 rounded-xl border border-border bg-card/80 px-6 py-4 text-sm text-steel">
+            <div className="mt-6 flex flex-col items-center gap-3 rounded-xl border border-border bg-card/80 px-5 py-4 text-sm text-steel sm:flex-row sm:gap-x-6 sm:gap-y-3 sm:flex-wrap sm:justify-center">
               <span className="flex items-center gap-2">
                 <Phone className="h-4 w-4" /> {company.contact.phones.join(" / ")}
               </span>
