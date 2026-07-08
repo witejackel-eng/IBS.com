@@ -222,7 +222,7 @@ export function PartnerLogoWall({
       </motion.div>
 
       {/* Logo Grid — 6-8 desktop, 4 tablet, 2-3 mobile */}
-      <div role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-5">
+      <div role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 md:gap-4 lg:gap-5">
         {partners.map((partner, i) => (
           <BrandLogoCard
             key={partner.slug}

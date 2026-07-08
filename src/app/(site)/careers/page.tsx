@@ -34,7 +34,7 @@ export default function CareersPage() {
       {/* Hero — concise, no overclaiming. We're hiring for specific roles
           and the page leads with that fact rather than generic "join our
           family" copy. */}
-      <Section bg="ambient" className="relative overflow-hidden bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
+      <Section bg="ambient" className="relative overflow-hidden bg-background pt-28 sm:pt-32 md:pt-32 lg:pt-40 pb-14 sm:pb-16 md:pb-20 lg:pb-24">
         <SecondaryHeroNetwork />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
         <Container className="relative z-10">
@@ -47,7 +47,7 @@ export default function CareersPage() {
             className="max-w-4xl text-display-2 leading-[1.05] font-semibold tracking-tight text-charcoal text-balance"
           />
           <Reveal direction="up" delay={0.2}>
-            <p className="mt-8 max-w-2xl text-lg text-steel">
+            <p className="mt-8 max-w-xl md:max-w-2xl text-lg text-steel">
               We are an engineering-led systems integrator in Dwarka, New Delhi, and our project
               pipeline across Delhi NCR is growing. We hire engineers who want to design, install,
               and maintain communication, AV, IT, and security systems — not just hand off to

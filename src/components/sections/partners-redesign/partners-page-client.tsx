@@ -49,9 +49,9 @@ export function PartnersPageClient({
       {/* ══════════════════════════════════════════════════════════════ */}
       {/*  SECTION 1 — HERO                                            */}
       {/* ══════════════════════════════════════════════════════════════ */}
-      <Section bg="ambient" className="bg-background pt-24 sm:pt-28 md:pt-40 lg:pt-44 pb-16 sm:pb-24 lg:pb-28">
+      <Section bg="ambient" className="bg-background pt-24 sm:pt-28 md:pt-32 lg:pt-44 pb-14 sm:pb-16 md:pb-20 lg:pb-28">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
                 Partners (OEM)

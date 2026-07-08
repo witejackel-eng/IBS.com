@@ -33,13 +33,13 @@ export function HeroSection({ service, data }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-background pt-24 pb-16 sm:pt-28 md:pt-36 lg:pt-44 lg:pb-32"
+      className="relative bg-background pt-24 pb-14 sm:pt-28 md:pt-32 md:pb-20 lg:pt-44 lg:pb-32"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 bg-ambient-glow" />
 
       <Container>
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-2 lg:gap-20">
           {/* Left: headline + copy */}
           <div>
             {/* Pill badge */}
@@ -58,7 +58,7 @@ export function HeroSection({ service, data }: HeroSectionProps) {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration, ease, delay: prefersReducedMotion ? 0 : 0.1 }}
-              className="max-w-xl text-[clamp(2.25rem,5vw,4rem)] font-heading font-semibold leading-[1.08] tracking-tight text-charcoal"
+              className="max-w-md md:max-w-xl text-[clamp(2rem,4.5vw,4rem)] font-heading font-semibold leading-[1.08] tracking-tight text-charcoal"
             >
               {data.heroHeadline}
             </motion.h1>
@@ -68,7 +68,7 @@ export function HeroSection({ service, data }: HeroSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: duration * 0.75, ease, delay: prefersReducedMotion ? 0 : 0.25 }}
-              className="mt-8 max-w-xl text-lg leading-relaxed text-steel"
+              className="mt-6 md:mt-8 max-w-md md:max-w-xl text-base md:text-lg leading-relaxed text-steel"
             >
               {data.heroSubheadline}
             </motion.p>
@@ -78,7 +78,7 @@ export function HeroSection({ service, data }: HeroSectionProps) {
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: duration * 0.7, ease, delay: prefersReducedMotion ? 0 : 0.4 }}
-              className="mt-10 flex flex-wrap items-center gap-3"
+              className="mt-8 md:mt-10 flex flex-wrap items-center gap-3"
             >
               <ButtonLink href="/contact" variant="cta" size="xl">
                 {data.heroPrimaryCta}
@@ -116,7 +116,7 @@ export function HeroSection({ service, data }: HeroSectionProps) {
           >
             <ServiceVisual
               service={service}
-              className="h-80 lg:h-[420px] w-full rounded-3xl"
+              className="h-64 md:h-80 lg:h-[420px] w-full rounded-3xl"
             />
           </motion.div>
         </div>

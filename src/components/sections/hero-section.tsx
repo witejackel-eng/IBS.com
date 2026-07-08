@@ -35,12 +35,12 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
       {/* ── Gradient overlay: ensures text column reads cleanly ── */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
 
-      <Container className="relative z-10 pt-24 pb-8 sm:pt-28 lg:pb-12">
+      <Container className="relative z-10 pt-24 pb-8 sm:pt-28 md:pb-10 lg:pb-12">
         {/* ── Headline ── */}
         <SplitText
           as="h1"
           text={headline ?? defaultHeroContent.headline}
-          className="max-w-4xl text-display-1 leading-[1.02] font-semibold tracking-tight text-balance"
+          className="max-w-3xl md:max-w-4xl text-display-1 leading-[1.02] font-semibold tracking-tight text-balance"
         />
 
         {/* ── Body paragraph (48px gap from headline) ── */}
@@ -50,7 +50,7 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
 
         {/* ── CTA row (48px gap from body) ── */}
         <Reveal direction="up" delay={0.3} amount={0.6}>
-          <div className="mt-10 flex flex-wrap items-center gap-3 sm:gap-5">
+          <div className="mt-10 flex flex-wrap items-center gap-3 sm:gap-4 md:gap-5">
             <Magnetic>
               <ButtonLink
                 href="/contact"
@@ -72,7 +72,7 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
             </ButtonLink>
 
             {/* ── Phone number: visually separated with icon circle + divider ── */}
-            <span className="mx-1 hidden h-8 w-px bg-border sm:block" aria-hidden />
+            <span className="mx-1 hidden h-8 w-px bg-border md:block" aria-hidden />
             <a
               href={`tel:${company.contact.phones[0].replace(/\s/g, "")}`}
               className="flex items-center gap-2.5 rounded-full border border-border px-4 py-2 text-sm text-steel transition-colors hover:border-steel-light hover:text-charcoal"
@@ -87,7 +87,7 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
 
         {/* ── Stats row (48px gap from CTA, generous bottom padding) ── */}
         <Reveal direction="up" delay={0.4} amount={0.6}>
-          <div className="mt-12 grid max-w-2xl grid-cols-3 gap-x-10 gap-y-0 border-t border-border pt-10 pb-4 lg:gap-x-16">
+          <div className="mt-10 md:mt-12 grid max-w-2xl grid-cols-3 gap-x-8 gap-y-0 border-t border-border pt-8 md:pt-10 pb-4 lg:gap-x-16">
             <Stat value={`${services.length}`} label="Solution areas" />
             <Stat value={`${partners.length}+`} label="OEM technology partners" />
             <Stat value={`${company.serviceAreas.length}`} label="Delhi NCR locations served" />

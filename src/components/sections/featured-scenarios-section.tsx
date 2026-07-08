@@ -23,7 +23,7 @@ export function FeaturedScenariosSection() {
           className="mb-16"
         />
 
-        <RevealGroup className="grid grid-cols-1 gap-6 lg:grid-cols-3" stagger={0.08}>
+        <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
           {projectScenarios.map((project) => (
             <RevealItem key={project.slug}>
               <Link

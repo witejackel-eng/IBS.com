@@ -19,7 +19,7 @@ export function FeaturedCategory({ title, description, partners, deployments, re
   const displayPartners = partners.slice(0, 6);
 
   return (
-    <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${reversed ? "[&>*:first-child]:lg:order-2" : ""}`}>
+    <div className={`grid grid-cols-1 md:grid-cols-2 md:gap-10 lg:gap-20 items-center ${reversed ? "[&>*:first-child]:lg:order-2" : ""}`}>
       {/* Visual side - brand logos */}
       <motion.div
         className={`relative rounded-3xl border border-border bg-card p-10 lg:p-12 ${accent ? "bg-deep-blue/[0.03] border-deep-blue/20" : ""}`}

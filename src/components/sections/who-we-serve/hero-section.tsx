@@ -17,13 +17,13 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative bg-background pt-24 pb-16 sm:pt-28 md:pt-36 lg:pt-44 lg:pb-32"
+      className="relative bg-background pt-24 pb-14 sm:pt-28 md:pt-32 md:pb-20 lg:pt-44 lg:pb-32"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 bg-ambient-glow" />
 
       <Container>
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-2 lg:gap-20">
           {/* Left: headline + copy */}
           <div>
             <motion.span
@@ -40,7 +40,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-xl text-[clamp(2.25rem,5vw,4rem)] font-heading font-semibold leading-[1.08] tracking-tight text-charcoal"
+              className="max-w-md md:max-w-xl text-[clamp(2rem,4.5vw,4rem)] font-heading font-semibold leading-[1.08] tracking-tight text-charcoal"
             >
               Sized to fit
               <br />
@@ -53,7 +53,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8 max-w-md text-lg leading-relaxed text-steel"
+              className="mt-6 md:mt-8 max-w-sm md:max-w-md text-base md:text-lg leading-relaxed text-steel"
             >
               Every environment has different communication, networking, AV and
               security requirements. We design systems around how people

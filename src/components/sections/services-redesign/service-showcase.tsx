@@ -16,7 +16,7 @@ export function ServiceShowcase({ service, index }: ServiceShowcaseProps) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className={`grid grid-cols-1 gap-10 lg:gap-20 items-center lg:grid-cols-2 ${isReversed ? "lg:[&>*:first-child]:order-2" : ""}`}>
+    <div className={`grid grid-cols-1 gap-8 md:gap-12 items-center md:grid-cols-2 lg:gap-20 ${isReversed ? "lg:[&>*:first-child]:order-2" : ""}`}>
       {/* Image */}
       <motion.div
         className="relative overflow-hidden rounded-3xl aspect-[4/3] bg-muted"

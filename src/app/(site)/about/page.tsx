@@ -26,8 +26,8 @@ export default function AboutPage() {
     <>
       <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "About", path: "/about" }]} />
       <AboutPageJsonLd />
-      <Section bg="ambient" className="bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
-        <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <Section bg="ambient" className="bg-background pt-28 sm:pt-32 md:pt-32 lg:pt-40 pb-14 sm:pb-16 md:pb-20 lg:pb-24">
+        <Container className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
               About Us
@@ -35,13 +35,13 @@ export default function AboutPage() {
             <SplitText
               as="h1"
               text={company.positioning}
-              className="max-w-3xl text-display-2 leading-[1.05] font-semibold tracking-tight text-charcoal text-balance"
+              className="max-w-2xl md:max-w-3xl text-display-2 leading-[1.05] font-semibold tracking-tight text-charcoal text-balance"
             />
             <Reveal direction="up" delay={0.2}>
               <p className="mt-8 max-w-2xl text-lg text-steel">{company.about.intro}</p>
             </Reveal>
             <Reveal direction="up" delay={0.3}>
-              <div className="mt-8 grid max-w-lg grid-cols-2 gap-5 border-t border-border pt-7 sm:grid-cols-4">
+              <div className="mt-8 grid max-w-lg grid-cols-2 gap-5 border-t border-border pt-7 sm:grid-cols-2 md:grid-cols-4">
                 <Stat value={`${services.length}`} label="Solution areas" />
                 <Stat value={`${partners.length}+`} label="OEM technology partners" />
                 <Stat value={`${segments.length}`} label="Industries served" />
@@ -50,7 +50,7 @@ export default function AboutPage() {
             </Reveal>
           </div>
           <MaskReveal>
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl md:aspect-[3/4]">
               <Image
                 src="/images/about/who-we-are.jpg"
                 alt="An IBS engineer monitoring infrastructure in a data center"

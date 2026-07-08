@@ -138,7 +138,7 @@ export function DisciplinesSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden py-14 sm:py-20 md:py-24 lg:py-32">
+    <section className="relative overflow-hidden py-14 sm:py-20 md:py-20 lg:py-32">
       {/* Layered background: very light grid + radial glow + orange accent.
           None of these layers compete with the content — they're all
           subtle enough to read as texture, not pattern. */}

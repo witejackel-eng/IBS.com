@@ -32,11 +32,11 @@ export default function ServicesIndexPage() {
       />
 
       {/* ── HERO ── */}
-      <Section bg="ambient" className="relative overflow-hidden bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 sm:pb-16 lg:pb-20">
+      <Section bg="ambient" className="relative overflow-hidden bg-background pt-28 sm:pt-32 md:pt-32 lg:pt-40 pb-12 sm:pb-14 md:pb-16 lg:pb-20">
         <SecondaryHeroNetwork />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
         <Container className="relative z-10">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto max-w-2xl md:max-w-3xl text-center">
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-steel uppercase">
               Product &amp; Services
             </span>
@@ -71,7 +71,7 @@ export default function ServicesIndexPage() {
       {/* ── ANNUAL MAINTENANCE ── */}
       <Section className="bg-secondary/20">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <Reveal direction="left">
               <div>
                 <span className="text-[10px] font-semibold tracking-[0.14em] text-deep-blue uppercase">
@@ -126,7 +126,7 @@ export default function ServicesIndexPage() {
       </Section>
 
       {/* ── CTA ── */}
-      <Section bg="ambient" className="bg-background pt-20 pb-24 lg:pt-24 lg:pb-32">
+      <Section bg="ambient" className="bg-background pt-16 pb-20 md:pt-20 md:pb-24 lg:pt-24 lg:pb-32">
         <Container>
           <div className="flex flex-col items-center gap-8 text-center">
             <Reveal direction="up" delay={0.05}>
