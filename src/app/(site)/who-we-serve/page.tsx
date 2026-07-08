@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   title: "Industries & Spaces We Serve",
   description:
     "Enterprises, hotels, hospitals, government facilities, and residential spaces — IBS delivers technology solutions sized to fit each segment.",
+  keywords: [
+    "enterprise IT solutions",
+    "hotel technology",
+    "hospital infrastructure",
+    "government security",
+    "residential automation",
+    "industry-specific IT",
+    "segment solutions",
+    "commercial AV",
+    "India",
+    "Delhi",
+  ],
   alternates: { canonical: "/who-we-serve" },
   openGraph: {
     url: "/who-we-serve",

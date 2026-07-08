@@ -74,20 +74,20 @@ export function ServiceShowcase({ service, index }: ServiceShowcaseProps) {
           ))}
         </div>
 
-        <Link
-          href={`/services/${service.slug}`}
-          className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-charcoal group"
+        <motion.div
+          whileHover={!prefersReducedMotion ? { x: 4 } : {}}
+          transition={{ duration: 0.2 }}
         >
-          Explore service
-          <motion.svg
-            width="16" height="16" viewBox="0 0 16 16"
-            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            whileHover={!prefersReducedMotion ? { x: 4 } : {}}
-            transition={{ duration: 0.2 }}
+          <Link
+            href={`/services/${service.slug}`}
+            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-charcoal group"
           >
-            <path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          </motion.svg>
-        </Link>
+            Explore service
+            <svg width="16" height="16" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        </motion.div>
       </motion.div>
     </div>
   );

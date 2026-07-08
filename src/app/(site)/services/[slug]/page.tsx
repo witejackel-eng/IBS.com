@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
@@ -14,11 +13,9 @@ import {
   EngineeringProcessSection,
   FaqSection,
   PremiumCtaSection,
+  RelatedServicesSection,
 } from "@/components/sections/service-page";
-
-const InstallationTypesSection = dynamic(
-  () => import("@/components/sections/installation-types-section").then((m) => ({ default: m.InstallationTypesSection }))
-);
+import { TypicalProjectsSection } from "@/components/sections/typical-projects-section";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -33,6 +30,87 @@ const serviceMetaTitles: Record<string, string> = {
   "software-licenses": "Software Licensing & Compliance",
 };
 
+const serviceMetaKeywords: Record<string, string[]> = {
+  "voice-communication": [
+    "IP-PBX",
+    "SIP trunk",
+    "unified communications",
+    "VoIP",
+    "IP telephony",
+    "voice integration",
+    "Alcatel-Lucent",
+    "NEC",
+    "Cisco",
+    "business phone system",
+    "enterprise communication",
+    "SIP phones",
+  ],
+  "audio-video-boardroom-solutions": [
+    "AV integration",
+    "video conferencing",
+    "audio conferencing",
+    "boardroom AV",
+    "video wall",
+    "public address system",
+    "room booking",
+    "classroom technology",
+    "Kramer",
+    "Crestron",
+    "Extron",
+  ],
+  "it-infrastructure": [
+    "data center",
+    "firewall",
+    "network rack",
+    "structured cabling",
+    "Wi-Fi",
+    "online UPS",
+    "IT networking",
+    "server room",
+    "Fortinet",
+    "Cisco",
+    "D-Link",
+    "HP Aruba",
+  ],
+  "security-solutions": [
+    "CCTV",
+    "access control",
+    "biometric",
+    "fire alarm",
+    "home automation",
+    "surveillance",
+    "Hikvision",
+    "Dahua",
+    "Axis",
+    "security integration",
+    "intrusion detection",
+  ],
+  "call-center-solutions": [
+    "call center",
+    "contact center",
+    "CRM dialer",
+    "voice logger",
+    "GSM gateway",
+    "PRI gateway",
+    "predictive dialer",
+    "headset",
+    "call recording",
+    "customer engagement",
+  ],
+  "software-licenses": [
+    "software licensing",
+    "Microsoft 365",
+    "Zoom",
+    "Webex",
+    "Adobe",
+    "ERP licenses",
+    "genuine software",
+    "license compliance",
+    "antivirus",
+    "endpoint protection",
+  ],
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -42,19 +120,22 @@ export async function generateMetadata({
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
   const title = serviceMetaTitles[service.slug] ?? service.title;
+  const description = service.summary;
+  const keywords = serviceMetaKeywords[service.slug];
   return {
     title,
-    description: service.summary,
+    description,
+    keywords,
     alternates: { canonical: `/services/${service.slug}` },
     openGraph: {
       url: `/services/${service.slug}`,
       title,
-      description: service.summary,
+      description,
     },
     twitter: {
       card: "summary_large_image" as const,
       title,
-      description: service.summary,
+      description,
     },
   };
 }
@@ -91,8 +172,8 @@ export default async function ServiceDetailPage({
       {/* 3. Industries Served */}
       <IndustriesSection data={data} />
 
-      {/* 4. Typical Installation Environments */}
-      <InstallationTypesSection />
+      {/* 4. Typical Installations */}
+      <TypicalProjectsSection />
 
       {/* 5. Engineering Process */}
       <EngineeringProcessSection />
@@ -107,7 +188,10 @@ export default async function ServiceDetailPage({
         </>
       )}
 
-      {/* 7. CTA */}
+      {/* 7. Related Services & Internal Links */}
+      <RelatedServicesSection currentSlug={service.slug} />
+
+      {/* 8. CTA */}
       <PremiumCtaSection data={data} />
     </>
   );

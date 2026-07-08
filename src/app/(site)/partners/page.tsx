@@ -9,6 +9,20 @@ export const metadata: Metadata = {
   title: "Our OEM Technology Partners",
   description:
     "The OEM brands IBS deals in across audio/video integration, communication & IT, and security.",
+  keywords: [
+    "OEM partners",
+    "technology brands",
+    "Cisco",
+    "NEC",
+    "Hikvision",
+    "Dahua",
+    "Fortinet",
+    "D-Link",
+    "authorized partner",
+    "AV brands",
+    "networking brands",
+    "security brands",
+  ],
   alternates: { canonical: "/partners" },
   openGraph: {
     url: "/partners",

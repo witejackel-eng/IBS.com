@@ -18,6 +18,18 @@ import type { ContactInfo } from "@/lib/admin-content-types";
 export const metadata: Metadata = {
   title: "Contact Our Engineering Team",
   description: `Reach ${company.legalName} at ${company.contact.phones[0]} or ${company.contact.email}.`,
+  keywords: [
+    "contact IBS",
+    "get a quote",
+    "IT consultation Delhi",
+    "project inquiry",
+    "systems integrator contact",
+    "support request",
+    "infrastructure consultation",
+    "India",
+    "Dwarka",
+    "New Delhi",
+  ],
   alternates: { canonical: "/contact" },
   openGraph: {
     url: "/contact",

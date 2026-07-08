@@ -23,20 +23,36 @@ const CtaSection = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Communication, AV, Network & Security Systems Integration",
+  title: "Communication, AV, Network Infrastructure, Security & IT Solutions",
   description:
-    "Insight Business Solutions designs, installs, and supports voice communication, AV boardroom integration, IT network infrastructure, security and surveillance, call center, and fire safety systems across India.",
+    "Insight Business Solutions designs, installs, and supports voice communication, AV boardroom integration, IT network infrastructure, security and surveillance, call center, and software licensing systems across India.",
+  keywords: [
+    "systems integration",
+    "IT infrastructure",
+    "voice communication",
+    "AV solutions",
+    "network security",
+    "CCTV",
+    "call center",
+    "software licensing",
+    "boardroom AV",
+    "IP-PBX",
+    "fire safety",
+    "India",
+    "Delhi",
+    "New Delhi",
+  ],
   alternates: { canonical: "/" },
   openGraph: {
     url: "/",
-    title: "Communication, AV, Network & Security Systems Integration — Insight Business Solutions",
+    title: "Communication, AV, Network Infrastructure, Security & IT Solutions — Insight Business Solutions",
     description:
-      "Voice, AV, IT, security, and fire safety systems — designed, installed, and supported by certified engineers across India.",
+      "Voice, AV, IT networking, security, call center, and software licensing — designed, installed, and supported by certified engineers across India.",
   },
   twitter: {
     title: "Communication, AV, Network & Security Systems — IBS",
     description:
-      "Voice, AV, IT, security, and fire safety systems — designed, installed, and supported by certified engineers across India.",
+      "Voice, AV, IT networking, security, call center, and software licensing — designed, installed, and supported by certified engineers across India.",
   },
 };
 

@@ -12,11 +12,25 @@ import {
   EngineeringProcessSection,
   FaqSection,
   PremiumCtaSection,
+  RelatedServicesSection,
 } from "@/components/sections/service-page";
+import { TypicalProjectsSection } from "@/components/sections/typical-projects-section";
 
 export const metadata: Metadata = {
   title: amcService.title,
   description: amcService.summary,
+  keywords: [
+    "annual maintenance contract",
+    "AMC services",
+    "preventive maintenance",
+    "SLA support",
+    "enterprise AMC",
+    "IT maintenance",
+    "security system maintenance",
+    "BIS compliance",
+    "system health check",
+    "India",
+  ],
   alternates: { canonical: `/services/${amcService.slug}` },
   openGraph: {
     url: `/services/${amcService.slug}`,
@@ -53,10 +67,13 @@ export default function AmcPage() {
       {/* 3. Industries Served */}
       <IndustriesSection data={data} />
 
-      {/* 4. Engineering Process */}
+      {/* 4. Typical Installations */}
+      <TypicalProjectsSection />
+
+      {/* 5. Engineering Process */}
       <EngineeringProcessSection />
 
-      {/* 5. FAQ */}
+      {/* 6. FAQ */}
       {data.faqs.length > 0 && (
         <>
           <FaqSection data={data} />
@@ -66,7 +83,10 @@ export default function AmcPage() {
         </>
       )}
 
-      {/* 6. CTA */}
+      {/* 7. Related Services & Internal Links */}
+      <RelatedServicesSection currentSlug={amcService.slug} />
+
+      {/* 8. CTA */}
       <PremiumCtaSection data={data} />
     </>
   );

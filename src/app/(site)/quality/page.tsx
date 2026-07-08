@@ -17,6 +17,18 @@ export const metadata: Metadata = {
   title: "Quality Assurance & AMC Support",
   description:
     "Structured service protocols, industry-standard SLAs, and BIS/STQC-aligned compliance behind every IBS deployment.",
+  keywords: [
+    "quality assurance",
+    "AMC support",
+    "SLA compliance",
+    "BIS standards",
+    "STQC compliance",
+    "preventive maintenance",
+    "service protocols",
+    "annual maintenance contract",
+    "enterprise support",
+    "India",
+  ],
   alternates: { canonical: "/quality" },
   openGraph: {
     url: "/quality",

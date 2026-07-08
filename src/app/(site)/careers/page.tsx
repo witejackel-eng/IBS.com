@@ -17,17 +17,29 @@ export const metadata: Metadata = {
   title: "Careers — Join the IBS Engineering Team",
   description:
     "Open roles at Insight Business Solutions: field service engineers, AV installation engineers, network engineers, sales engineers, AMC coordinators, and interns. Apply online.",
+  keywords: [
+    "engineering jobs India",
+    "AV engineer",
+    "network engineer",
+    "field service engineer",
+    "sales engineer",
+    "IT jobs Delhi",
+    "systems integrator careers",
+    "AMC coordinator",
+    "internship",
+    "technology jobs",
+  ],
   alternates: { canonical: "/careers" },
   openGraph: {
     url: "/careers",
     title: "Careers — Join the IBS Engineering Team",
     description:
-      "Open engineering roles at Insight Business Solutions: field service, AV installation, network, and sales engineers. Nationwide deployment across India.",
+      "Open roles at Insight Business Solutions: field service engineers, AV installation engineers, network engineers, sales engineers, AMC coordinators, and interns. Nationwide deployment across India.",
   },
   twitter: {
     title: "Engineering Careers at IBS — Hiring Now",
     description:
-      "Open roles: field service, AV installation, network, and sales engineers. Apply online for engineering positions across India.",
+      "Open roles at Insight Business Solutions: field service engineers, AV installation engineers, network engineers, sales engineers, AMC coordinators, and interns. Apply online for engineering positions across India.",
   },
 };
 

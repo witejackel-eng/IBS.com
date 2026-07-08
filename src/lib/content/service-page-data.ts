@@ -161,6 +161,11 @@ const voiceCommunication: ServicePageData = {
       answer:
         "That is one of the primary advantages of IP-PBX. Extensions are added via software licenses rather than physical hardware. SIP trunks can be scaled by increasing channel capacity with your provider.",
     },
+    {
+      question: "What happens after the voice system goes live?",
+      answer:
+        "We fold every voice install into our Annual Maintenance Contract — covering firmware updates, call-flow adjustments, SIP trunk capacity reviews, and quarterly health checks so issues are caught before they cause outages.",
+    },
   ],
 
   ctaHeadline: "Planning a Voice System Upgrade?",
@@ -334,6 +339,16 @@ const audioVideoBoardroomSolutions: ServicePageData = {
       answer:
         "Yes. Our AMC covers scheduled preventive visits for audio systems, display calibration, firmware updates on conferencing equipment, and emergency response for in-room failures. Frequency and scope are tailored to the equipment and usage.",
     },
+    {
+      question: "What happens after the AV system is installed?",
+      answer:
+        "We document every input label, macro, and configuration so future servicing is straightforward. Our AMC then covers DSP and mixer calibration, cable integrity checks, and video conferencing platform support on a scheduled basis.",
+    },
+    {
+      question: "Can the AV system expand if our company grows?",
+      answer:
+        "Yes. We specify equipment with growth in mind — additional displays, microphones, or rooms can be added to the same control infrastructure. Room booking and AV platforms scale with additional licenses and endpoints.",
+    },
   ],
 
   ctaHeadline: "Planning a Boardroom or Auditorium Upgrade?",
@@ -505,6 +520,21 @@ const itInfrastructure: ServicePageData = {
         "Yes. IBS handles network infrastructure projects at client sites across India. Staging and pre-configuration are done at our facility to minimize on-site time.",
     },
     {
+      question: "How do you handle a multi-floor office cabling project?",
+      answer:
+        "We plan fiber backbone runs between floors and IDF/MDF placements before cabling begins. Every run is documented from patch panel to outlet, with cable paths designed for future expansion — not just the immediate headcount.",
+    },
+    {
+      question: "Do you offer AMC for IT infrastructure?",
+      answer:
+        "Yes. We fold IT infrastructure installs into our Annual Maintenance Contract — covering firewall firmware and signature updates, Wi-Fi optimization, UPS battery load testing, and switch health checks on a scheduled basis.",
+    },
+    {
+      question: "Which firewall brands do you work with?",
+      answer:
+        "We specify firewalls from Fortinet, Sophos, and Cisco based on the site's throughput requirements and security posture. The recommendation follows the project's budget and risk profile, not a single brand relationship.",
+    },
+    {
       question: "Can you maintain IT infrastructure installed by another vendor?",
       answer:
         "Yes, after an initial audit. We document the existing setup, verify configurations, and flag any issues before starting maintenance. If the installation is incomplete or undocumented, we recommend a remediation pass first.",
@@ -518,6 +548,11 @@ const itInfrastructure: ServicePageData = {
       question: "Can the network be expanded later as the company grows?",
       answer:
         "All infrastructure we deploy includes growth headroom — spare switch ports, rack space, and conduit capacity. Adding users, access points, or new network segments later does not require a forklift upgrade.",
+    },
+    {
+      question: "Do you document the full network after installation?",
+      answer:
+        "Yes. We document every IP address, VLAN, patch panel label, and UPS runtime estimate. Complete documentation is part of every handover and is kept current through AMC visits.",
     },
   ],
 
@@ -672,6 +707,16 @@ const securitySolutions: ServicePageData = {
       answer:
         "Yes. AMC covers scheduled camera and NVR health checks, access control reader cleaning and calibration, and full fire alarm servicing per BIS norms. Emergency response for faults is included in every contract.",
     },
+    {
+      question: "Do you install both commercial and residential security systems?",
+      answer:
+        "Yes. We cover commercial sites with integrated CCTV, access control, and fire alarm, as well as residences with selective camera placement, home automation, and access control sized for domestic use.",
+    },
+    {
+      question: "Can we view CCTV footage remotely?",
+      answer:
+        "Yes. The camera systems we deploy support remote monitoring so authorized personnel can access live and recorded footage from off-site.",
+    },
   ],
 
   ctaHeadline: "Planning a Security System?",
@@ -814,6 +859,16 @@ const callCenterSolutions: ServicePageData = {
       answer:
         "Yes. IP-based call center platforms scale through software licenses and additional headsets. We specify the PBX and gateway with headroom so that adding agents does not require hardware replacement.",
     },
+    {
+      question: "Do you provide training for agents and supervisors?",
+      answer:
+        "Yes. Training is included during handover — covering headset usage, dialer operation, CRM screen-pop workflows, and voice logger retrieval so your operations team can manage day-to-day tasks independently.",
+    },
+    {
+      question: "Can voice logging work across both analog and VoIP lines?",
+      answer:
+        "Yes. The voice logging systems we deploy record across analog, PRI, and VoIP lines in one system, so a blended contact center does not need separate recording infrastructure.",
+    },
   ],
 
   ctaHeadline: "Planning a Contact Center Upgrade?",
@@ -954,6 +1009,36 @@ const softwareLicenses: ServicePageData = {
       answer:
         "Yes, with an initial assessment. If the system was installed to a reasonable standard and is OEM-compatible, we can build an AMC around it. If there are gaps, we recommend remediation first.",
     },
+    {
+      question: "Can you help us consolidate licenses from multiple vendors?",
+      answer:
+        "Yes. We start with an audit of what's deployed, assigned, and actually used across the organization, then consolidate into a managed portfolio with a single renewal calendar and one admin view.",
+    },
+    {
+      question: "Do you only sell licenses, or do you also deploy the software?",
+      answer:
+        "IBS handles the full lifecycle — auditing current deployments, sourcing genuine licenses through authorized channels, managing user assignments, and maintaining the renewal calendar and compliance documentation.",
+    },
+    {
+      question: "What happens if we need to add or remove users mid-contract?",
+      answer:
+        "We manage the tenant so license additions and removals are handled promptly. For platforms like Microsoft 365 and Zoom, we adjust seat counts and reassign licenses as your team changes — so you're not paying for departed employees.",
+    },
+    {
+      question: "Do you offer volume discounts?",
+      answer:
+        "We source through authorized channels and work with the licensing programs each vendor offers. For larger deployments, we structure the purchase to align with the vendor's volume pricing tiers.",
+    },
+    {
+      question: "Which collaboration platforms do you work with most?",
+      answer:
+        "The collaboration stack is where most licensing spend concentrates — Zoom and Webex for video conferencing, and Microsoft 365 for email and Office applications. We source and manage licenses for all three.",
+    },
+    {
+      question: "Can you help with software compliance audits?",
+      answer:
+        "Yes. We maintain the license inventory, proof-of-purchase records, and renewal calendar in one place. If a vendor audit or regulatory review is triggered, the documentation is ready — turning a potentially disruptive exercise into a straightforward one.",
+    },
   ],
 
   ctaHeadline: "Need to Get Your Licensing Under Control?",
@@ -1085,14 +1170,29 @@ const annualMaintenanceService: ServicePageData = {
         "Yes. If you install new systems — whether by IBS or another vendor — they can be added to the existing AMC. We update the asset inventory and adjust the service schedule and pricing accordingly.",
     },
     {
+      question: "Do you work outside Delhi/NCR?",
+      answer:
+        "Yes. IBS provides AMC support at client sites across India from our base in Dwarka, New Delhi.",
+    },
+    {
+      question: "How quickly do you respond to emergency calls?",
+      answer:
+        "Response times are defined in the contract based on system type and severity, with a documented escalation matrix routing issues to the right technician. The exact target depends on the site's operational requirements and the AMC tier selected.",
+    },
+    {
+      question: "Can an AMC cover multiple locations?",
+      answer:
+        "Yes. We build AMC packages around the full system inventory across all locations, with a single service calendar and consolidated reporting. Visit frequency is determined by the system mix and risk profile at each site.",
+    },
+    {
+      question: "What brands do you support under AMC?",
+      answer:
+        "We maintain the same OEM brands we install — Alcatel-Lucent, NEC, and Cisco for voice; Fortinet and Sophos for firewalls; Hikvision, Dahua, and Axis for CCTV; Honeywell, Morley, and Edwards for fire alarm; and Biamp, Crestron, and Shure for AV.",
+    },
+    {
       question: "What documentation do we receive after each maintenance visit?",
       answer:
         "A service log with date, technician name, systems inspected, actions taken, and observations. For regulated sites, the log is formatted to support audit requirements. Health summaries are provided periodically.",
-    },
-    {
-      question: "Do you work on AMC projects outside Delhi/NCR?",
-      answer:
-        "Yes. IBS manages AMC for client sites across India. Scheduled visits are planned in advance, and emergency response is coordinated through the escalation matrix with the nearest available technician.",
     },
   ],
 

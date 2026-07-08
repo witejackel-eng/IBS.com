@@ -18,6 +18,16 @@ import { company, partners, services, segments } from "@/lib/content";
 export const metadata: Metadata = {
   title: "About Our Integration Team",
   description: company.about.intro,
+  keywords: [
+    "about IBS",
+    "systems integrator India",
+    "infrastructure engineering team",
+    "company overview",
+    "technology partner Delhi",
+    "OEM partnerships",
+    "integration services India",
+    "IT solutions company",
+  ],
   alternates: { canonical: "/about" },
   openGraph: {
     url: "/about",

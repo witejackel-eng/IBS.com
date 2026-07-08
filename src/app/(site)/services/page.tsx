@@ -17,6 +17,18 @@ export const metadata: Metadata = {
   title: "Technology Solutions We Deliver",
   description:
     "Voice communication, AV & boardroom integration, IT network infrastructure, security, call center solutions, and software licensing — all delivered and supported by one team.",
+  keywords: [
+    "IT solutions India",
+    "voice communication",
+    "AV integration",
+    "network infrastructure",
+    "security solutions",
+    "call center",
+    "software licensing",
+    "AMC services",
+    "enterprise technology",
+    "systems integrator",
+  ],
   alternates: { canonical: "/services" },
   openGraph: {
     url: "/services",

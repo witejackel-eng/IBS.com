@@ -9,3 +9,4 @@ export * from "./process";
 export * from "./quality";
 export * from "./projects";
 export * from "./careers";
+export * from "./typical-projects";
