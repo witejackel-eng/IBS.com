@@ -18,6 +18,17 @@ export const metadata: Metadata = {
   description:
     "Voice communication, AV & boardroom integration, IT network infrastructure, security, call center solutions, and software licensing — all delivered and supported by one team.",
   alternates: { canonical: "/services" },
+  openGraph: {
+    url: "/services",
+    title: "Technology Solutions We Deliver — Insight Business Solutions",
+    description:
+      "Voice communication, AV & boardroom integration, IT network infrastructure, security, call center solutions, and software licensing — all delivered and supported by one team.",
+  },
+  twitter: {
+    title: "Technology Solutions — IBS",
+    description:
+      "Voice, AV, IT, security, call center, and software licensing — one team for design, installation, and support.",
+  },
 };
 
 export default function ServicesIndexPage() {

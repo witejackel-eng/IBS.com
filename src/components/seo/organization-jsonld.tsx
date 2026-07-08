@@ -38,7 +38,10 @@ export function OrganizationJsonLd() {
     // survey-verified lat/long for the Dwarka office, and an approximate
     // pin would be worse than none — Google Maps already resolves the
     // PostalAddress correctly. Add geo only when verified coordinates exist.
-    areaServed: company.serviceAreas.map((area) => ({ "@type": "City", name: area })),
+    areaServed: company.serviceAreas.map((area) => ({
+      "@type": area === "India" ? "Country" : area === "NCR" ? "AdministrativeArea" : "City",
+      name: area,
+    })),
     sameAs: [company.social.facebook, company.social.linkedin],
   };
 

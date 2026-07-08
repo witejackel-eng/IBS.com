@@ -111,9 +111,9 @@ export function IndustryShowcase({ segment, reversed, index }: IndustryShowcaseP
 
             {/* Challenges */}
             <div className="mt-8">
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-steel/60">
+              <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-steel/60">
                 Typical challenges
-              </h4>
+              </h3>
               <ul className="space-y-2">
                 {(CHALLENGES[segment.slug] ?? segment.needs).map((c) => (
                   <li key={c} className="flex items-start gap-2.5 text-sm text-steel">
@@ -126,9 +126,9 @@ export function IndustryShowcase({ segment, reversed, index }: IndustryShowcaseP
 
             {/* Service tags with icons */}
             <div className="mt-8">
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-steel/60">
+              <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-steel/60">
                 Solutions we deploy
-              </h4>
+              </h3>
               <div className="flex flex-wrap gap-2.5">
                 {segment.relevantServiceSlugs.map((slug) => {
                   const Icon = SERVICE_ICONS[slug] ?? Shield;

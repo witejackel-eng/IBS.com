@@ -19,6 +19,15 @@ export const metadata: Metadata = {
   title: "Contact Our Engineering Team",
   description: `Reach ${company.legalName} at ${company.contact.phones[0]} or ${company.contact.email}.`,
   alternates: { canonical: "/contact" },
+  openGraph: {
+    url: "/contact",
+    title: "Contact Our Engineering Team — Insight Business Solutions",
+    description: `Get in touch with ${company.legalName} for communication, AV, network, and security system requirements. Office in Dwarka, New Delhi.`,
+  },
+  twitter: {
+    title: "Contact IBS — Get a Quote",
+    description: `Reach IBS engineers for communication, AV, network, and security system requirements. Based in Dwarka, New Delhi.`,
+  },
 };
 
 export default async function ContactPage() {

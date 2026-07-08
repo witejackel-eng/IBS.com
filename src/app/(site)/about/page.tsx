@@ -19,6 +19,15 @@ export const metadata: Metadata = {
   title: "About Our Integration Team",
   description: company.about.intro,
   alternates: { canonical: "/about" },
+  openGraph: {
+    url: "/about",
+    title: "About Our Integration Team — Insight Business Solutions",
+    description: company.about.intro,
+  },
+  twitter: {
+    title: "About IBS — Communication & Security Engineers",
+    description: company.about.intro,
+  },
 };
 
 export default function AboutPage() {

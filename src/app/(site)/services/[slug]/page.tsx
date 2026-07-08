@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
@@ -14,6 +15,10 @@ import {
   FaqSection,
   PremiumCtaSection,
 } from "@/components/sections/service-page";
+
+const InstallationTypesSection = dynamic(
+  () => import("@/components/sections/installation-types-section").then((m) => ({ default: m.InstallationTypesSection }))
+);
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -36,11 +41,21 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
+  const title = serviceMetaTitles[service.slug] ?? service.title;
   return {
-    title: serviceMetaTitles[service.slug] ?? service.title,
+    title,
     description: service.summary,
     alternates: { canonical: `/services/${service.slug}` },
-    openGraph: { url: `/services/${service.slug}` },
+    openGraph: {
+      url: `/services/${service.slug}`,
+      title,
+      description: service.summary,
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description: service.summary,
+    },
   };
 }
 
@@ -76,10 +91,13 @@ export default async function ServiceDetailPage({
       {/* 3. Industries Served */}
       <IndustriesSection data={data} />
 
-      {/* 4. Engineering Process */}
+      {/* 4. Typical Installation Environments */}
+      <InstallationTypesSection />
+
+      {/* 5. Engineering Process */}
       <EngineeringProcessSection />
 
-      {/* 5. FAQ */}
+      {/* 6. FAQ */}
       {data.faqs.length > 0 && (
         <>
           <FaqSection data={data} />
@@ -89,7 +107,7 @@ export default async function ServiceDetailPage({
         </>
       )}
 
-      {/* 6. CTA */}
+      {/* 7. CTA */}
       <PremiumCtaSection data={data} />
     </>
   );

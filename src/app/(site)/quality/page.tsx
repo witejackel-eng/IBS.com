@@ -18,6 +18,17 @@ export const metadata: Metadata = {
   description:
     "Structured service protocols, industry-standard SLAs, and BIS/STQC-aligned compliance behind every IBS deployment.",
   alternates: { canonical: "/quality" },
+  openGraph: {
+    url: "/quality",
+    title: "Quality Assurance & AMC Support — Insight Business Solutions",
+    description:
+      "Industry-standard SLAs, BIS/STQC-aligned compliance, and structured annual maintenance contracts for every IBS deployment.",
+  },
+  twitter: {
+    title: "Quality & AMC Support — IBS",
+    description:
+      "Industry-standard SLAs, BIS/STQC-aligned compliance, and annual maintenance contracts for every deployment.",
+  },
 };
 
 export default function QualityPage() {

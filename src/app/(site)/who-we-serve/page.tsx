@@ -13,6 +13,17 @@ export const metadata: Metadata = {
   description:
     "Enterprises, hotels, hospitals, government facilities, and residential spaces — IBS delivers technology solutions sized to fit each segment.",
   alternates: { canonical: "/who-we-serve" },
+  openGraph: {
+    url: "/who-we-serve",
+    title: "Industries & Spaces We Serve — Insight Business Solutions",
+    description:
+      "Enterprise offices, hotels, hospitals, government buildings, and residential spaces — IBS designs, installs, and supports technology systems for each segment.",
+  },
+  twitter: {
+    title: "Who We Serve — IBS Technology Solutions by Industry",
+    description:
+      "Enterprise offices, hotels, hospitals, government buildings, and residential spaces — technology solutions sized to fit each segment.",
+  },
 };
 
 export default function WhoWeServePage() {

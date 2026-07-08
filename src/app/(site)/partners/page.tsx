@@ -10,6 +10,17 @@ export const metadata: Metadata = {
   description:
     "The OEM brands IBS deals in across audio/video integration, communication & IT, and security.",
   alternates: { canonical: "/partners" },
+  openGraph: {
+    url: "/partners",
+    title: "Our OEM Technology Partners — Insight Business Solutions",
+    description:
+      "Authorized partners with Alcatel-Lucent, Poly, Cisco, Samsung, Epson, Honeywell, and 40+ leading technology manufacturers.",
+  },
+  twitter: {
+    title: "OEM Technology Partners — IBS",
+    description:
+      "Authorized partners with Alcatel-Lucent, Poly, Cisco, Samsung, Epson, Honeywell, and 40+ leading manufacturers.",
+  },
 };
 
 const categoryGroups = partnerCategories.map((cat) => ({

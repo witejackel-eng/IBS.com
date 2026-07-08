@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import type { Service } from "@/lib/content";
@@ -73,17 +74,20 @@ export function ServiceShowcase({ service, index }: ServiceShowcaseProps) {
           ))}
         </div>
 
-        <motion.a
+        <Link
           href={`/services/${service.slug}`}
           className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-charcoal group"
-          whileHover={!prefersReducedMotion ? { x: 4 } : {}}
-          transition={{ duration: 0.2 }}
         >
           Explore service
-          <svg width="16" height="16" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+          <motion.svg
+            width="16" height="16" viewBox="0 0 16 16"
+            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            whileHover={!prefersReducedMotion ? { x: 4 } : {}}
+            transition={{ duration: 0.2 }}
+          >
             <path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </motion.a>
+          </motion.svg>
+        </Link>
       </motion.div>
     </div>
   );

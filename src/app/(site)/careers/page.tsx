@@ -18,6 +18,17 @@ export const metadata: Metadata = {
   description:
     "Open roles at Insight Business Solutions: field service engineers, AV installation engineers, network engineers, sales engineers, AMC coordinators, and interns. Apply online.",
   alternates: { canonical: "/careers" },
+  openGraph: {
+    url: "/careers",
+    title: "Careers — Join the IBS Engineering Team",
+    description:
+      "Open engineering roles at Insight Business Solutions: field service, AV installation, network, and sales engineers. Nationwide deployment across India.",
+  },
+  twitter: {
+    title: "Engineering Careers at IBS — Hiring Now",
+    description:
+      "Open roles: field service, AV installation, network, and sales engineers. Apply online for engineering positions across India.",
+  },
 };
 
 export default function CareersPage() {

@@ -23,9 +23,21 @@ const CtaSection = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Network & Security Integration",
+  title: "Communication, AV, Network & Security Systems Integration",
+  description:
+    "Insight Business Solutions designs, installs, and supports voice communication, AV boardroom integration, IT network infrastructure, security and surveillance, call center, and fire safety systems across India.",
   alternates: { canonical: "/" },
-  openGraph: { url: "/" },
+  openGraph: {
+    url: "/",
+    title: "Communication, AV, Network & Security Systems Integration — Insight Business Solutions",
+    description:
+      "Voice, AV, IT, security, and fire safety systems — designed, installed, and supported by certified engineers across India.",
+  },
+  twitter: {
+    title: "Communication, AV, Network & Security Systems — IBS",
+    description:
+      "Voice, AV, IT, security, and fire safety systems — designed, installed, and supported by certified engineers across India.",
+  },
 };
 
 export default async function Home() {

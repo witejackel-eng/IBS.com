@@ -131,6 +131,36 @@ const voiceCommunication: ServicePageData = {
       answer:
         "Yes. IP-PBX supports remote extensions via softphone or SIP handset at home. The caller sees the office number, calls route through the same hunt groups and voicemail.",
     },
+    {
+      question: "Can our existing PBX be upgraded, or do we need a full replacement?",
+      answer:
+        "It depends on the platform and its age. Some legacy PBX systems support add-on SIP cards or migration paths. If the hardware is end-of-life, we plan a phased transition so operations continue while the new system is brought online.",
+    },
+    {
+      question: "How long does a typical IP-PBX installation take?",
+      answer:
+        "A straightforward system for 50–100 users typically takes two to three weeks from delivery to commissioning, including cabling, configuration, and user training. Larger or multi-site deployments take longer depending on scope.",
+    },
+    {
+      question: "Do you work on projects outside Delhi/NCR?",
+      answer:
+        "Yes. IBS is based in Dwarka, New Delhi, but handles installation and commissioning at client sites across India. Travel and logistics are factored into project planning.",
+    },
+    {
+      question: "Which brands do you typically recommend for IP telephony?",
+      answer:
+        "We work with Matrix, Cisco, and Alcatel-Lucent for PBX platforms. Handset recommendations depend on the PBX chosen and the user's work profile — desk-based, mobile, or shared. We recommend based on compatibility and long-term support availability.",
+    },
+    {
+      question: "Can you maintain a phone system installed by another vendor?",
+      answer:
+        "Yes, after an initial assessment. If the system was installed to a reasonable standard and is OEM-compatible, we can build a maintenance plan around it. If there are gaps in documentation or configuration, we recommend remediation first.",
+    },
+    {
+      question: "Can we add more extensions or lines as the company grows?",
+      answer:
+        "That is one of the primary advantages of IP-PBX. Extensions are added via software licenses rather than physical hardware. SIP trunks can be scaled by increasing channel capacity with your provider.",
+    },
   ],
 
   ctaHeadline: "Planning a Voice System Upgrade?",
@@ -273,6 +303,36 @@ const audioVideoBoardroomSolutions: ServicePageData = {
       question: "How does room booking integrate with our calendar?",
       answer:
         "Panels connect directly to Microsoft 365, Google Workspace, or your existing platform — showing real-time availability and tying AV power to booking times.",
+    },
+    {
+      question: "Can our existing AV system be upgraded, or does it need full replacement?",
+      answer:
+        "We assess each component individually. Cameras, displays, and control systems that still meet requirements are retained. Upgrades are targeted at what's actually limiting performance — mic quality, processing, or connectivity.",
+    },
+    {
+      question: "How long does a typical boardroom AV installation take?",
+      answer:
+        "A single boardroom typically takes one to two weeks for installation and commissioning, including DSP tuning and control system programming. Multi-room projects are phased to minimize disruption.",
+    },
+    {
+      question: "Do you work on projects outside Delhi/NCR?",
+      answer:
+        "Yes. IBS handles AV installations at client sites across India. For large or multi-site projects, we plan logistics and staging to keep timelines on track.",
+    },
+    {
+      question: "Which brands do you recommend for conferencing equipment?",
+      answer:
+        "It depends on the conferencing platform and room requirements. For video, we work with Poly, Cisco, and Logitech. For audio processing, Biamp, Shure, and QSC. Recommendations are driven by the platform you standardize on and the room's acoustics.",
+    },
+    {
+      question: "Can you maintain AV systems installed by another vendor?",
+      answer:
+        "Yes, after reviewing the existing installation. If the equipment is OEM-supported and the cabling and configuration are sound, we can take over maintenance. Documentation gaps are addressed during the initial assessment.",
+    },
+    {
+      question: "Do you offer AMC for AV and conferencing systems?",
+      answer:
+        "Yes. Our AMC covers scheduled preventive visits for audio systems, display calibration, firmware updates on conferencing equipment, and emergency response for in-room failures. Frequency and scope are tailored to the equipment and usage.",
     },
   ],
 
@@ -429,6 +489,36 @@ const itInfrastructure: ServicePageData = {
       answer:
         "It sits between your network and the internet, enforcing rules about what traffic passes. We configure rules based on your actual traffic patterns and size hardware with throughput headroom.",
     },
+    {
+      question: "Can our existing network infrastructure be upgraded incrementally?",
+      answer:
+        "In most cases, yes. We assess what's still serviceable — switches, cabling, rack space — and layer in upgrades where they have the most impact. Full replacement is only recommended when the existing infrastructure is end-of-life or fundamentally underspecified.",
+    },
+    {
+      question: "How long does a structured cabling installation take for a new office?",
+      answer:
+        "It depends on floor area and outlet density. A typical 5,000 sq ft office with 80–100 drops takes roughly two to three weeks including conduit, cable pulling, termination, testing, and documentation. Larger spaces are phased by floor or zone.",
+    },
+    {
+      question: "Do you work on projects outside Delhi/NCR?",
+      answer:
+        "Yes. IBS handles network infrastructure projects at client sites across India. Staging and pre-configuration are done at our facility to minimize on-site time.",
+    },
+    {
+      question: "Can you maintain IT infrastructure installed by another vendor?",
+      answer:
+        "Yes, after an initial audit. We document the existing setup, verify configurations, and flag any issues before starting maintenance. If the installation is incomplete or undocumented, we recommend a remediation pass first.",
+    },
+    {
+      question: "Do you offer AMC for servers, networking, and UPS systems?",
+      answer:
+        "Yes. Our AMC covers scheduled preventive maintenance, firmware and signature updates for firewalls, UPS battery load testing, Wi-Fi health checks, and emergency response. The scope and frequency are matched to your installed equipment.",
+    },
+    {
+      question: "Can the network be expanded later as the company grows?",
+      answer:
+        "All infrastructure we deploy includes growth headroom — spare switch ports, rack space, and conduit capacity. Adding users, access points, or new network segments later does not require a forklift upgrade.",
+    },
   ],
 
   ctaHeadline: "Planning a Network Upgrade or New Office Fit-Out?",
@@ -552,6 +642,36 @@ const securitySolutions: ServicePageData = {
       answer:
         "Yes. We design systems where a single app controls surveillance, access, lighting, climate, and entertainment — with automated scenes that tie them together.",
     },
+    {
+      question: "Can our existing CCTV system be upgraded, or do we need to replace it?",
+      answer:
+        "Cameras that still produce usable footage and are OEM-supported can be retained. We add cameras where coverage is insufficient and upgrade the NVR if storage or channel capacity is the bottleneck. Selective upgrades are common.",
+    },
+    {
+      question: "How long does a typical security system installation take?",
+      answer:
+        "A standard commercial CCTV and access control deployment for a mid-size office takes two to three weeks. Fire alarm systems take additional time due to zone mapping, panel programming, and regulatory coordination. Timelines are provided after the site survey.",
+    },
+    {
+      question: "Do you work on projects outside Delhi/NCR?",
+      answer:
+        "Yes. IBS handles security installations at client sites across India. We coordinate logistics and schedule on-site work to minimize disruption.",
+    },
+    {
+      question: "Which camera and access control brands do you recommend?",
+      answer:
+        "For CCTV, we work with Dahua, Axis, and Hikvision depending on resolution requirements and budget. For access control, eSSL, HID, and Honeywell. Brand selection is driven by the site's requirements, integration needs, and long-term support availability.",
+    },
+    {
+      question: "Can you maintain security systems installed by another vendor?",
+      answer:
+        "Yes, subject to an initial assessment. We verify camera placement, NVR configuration, access control programming, and fire alarm zone mapping. If the original installation is OEM-compliant, we can take over maintenance directly.",
+    },
+    {
+      question: "Do you offer AMC for security and fire alarm systems?",
+      answer:
+        "Yes. AMC covers scheduled camera and NVR health checks, access control reader cleaning and calibration, and full fire alarm servicing per BIS norms. Emergency response for faults is included in every contract.",
+    },
   ],
 
   ctaHeadline: "Planning a Security System?",
@@ -674,6 +794,26 @@ const callCenterSolutions: ServicePageData = {
       answer:
         "Yes. The platforms we deploy support API connections and screen-pop protocols compatible with common CRM systems. Customer records surface automatically when a call connects.",
     },
+    {
+      question: "Can existing call center equipment be upgraded without replacing everything?",
+      answer:
+        "Yes. If your PBX, headsets, or gateway hardware are still OEM-supported and meet capacity requirements, they can be retained. We layer in the missing components — dialer software, CRM integration, or voice logging — around what you already have.",
+    },
+    {
+      question: "How long does a typical contact center installation take?",
+      answer:
+        "A 50-seat setup with dialer, CRM integration, and voice logging typically takes three to four weeks from delivery to full commissioning, including agent training. Larger or multi-site deployments are phased and take longer.",
+    },
+    {
+      question: "Do you offer AMC for call center systems?",
+      answer:
+        "Yes. AMC covers the full stack — PBX health checks, gateway and SIP trunk monitoring, dialer software updates, voice logger storage verification, and headset replacement logistics. Emergency response is included for any component failure.",
+    },
+    {
+      question: "Can the system expand if we add more agents?",
+      answer:
+        "Yes. IP-based call center platforms scale through software licenses and additional headsets. We specify the PBX and gateway with headroom so that adding agents does not require hardware replacement.",
+    },
   ],
 
   ctaHeadline: "Planning a Contact Center Upgrade?",
@@ -765,14 +905,54 @@ const softwareLicenses: ServicePageData = {
 
   faqs: [
     {
-      question: "Can you maintain systems that IBS didn't install?",
+      question: "How does IBS verify that licenses are genuine?",
       answer:
-        "Yes, with an initial assessment. If the system was installed to a reasonable standard and is OEM-compatible, we can build an AMC around it. If there are gaps, we recommend remediation first.",
+        "All licenses are sourced through authorized distribution channels. We provide proof of purchase, subscription credentials, and support entitlement documentation for every license we supply.",
     },
     {
-      question: "Is it more cost-effective to have an AMC or pay for repairs as needed?",
+      question: "Can you consolidate licenses purchased from different vendors?",
       answer:
-        "For organizations with multiple technology systems, AMC is almost always more cost-effective. Scheduled maintenance catches issues early when the fix is small — versus waiting for a disruptive, expensive failure.",
+        "Yes. We audit what's currently deployed, identify duplicate or unused seats, and consolidate management under a single admin view where the platform supports it — reducing overhead and catching waste.",
+    },
+    {
+      question: "What happens when a license renewal is approaching?",
+      answer:
+        "We maintain a renewal calendar for every license in your portfolio. You receive advance notice with cost and options before the renewal date, so nothing lapses unexpectedly.",
+    },
+    {
+      question: "Do you help with license compliance audits?",
+      answer:
+        "Yes. We reconcile deployed installations against purchased licenses and flag any gaps. The result is a compliance report you can present to management or to software auditors.",
+    },
+    {
+      question: "Can you manage licenses for software we bought before engaging IBS?",
+      answer:
+        "Yes. We on-board your existing license inventory, verify entitlements, and add them to the renewal calendar. The goal is a single point of management regardless of where the licenses were originally purchased.",
+    },
+    {
+      question: "What software brands can you source licenses for?",
+      answer:
+        "We source licenses for Zoom, Microsoft 365, Windows, Adobe, Webex, and common endpoint security platforms. If you need something outside this list, we check authorized channel availability.",
+    },
+    {
+      question: "Can you help us right-size our licensing to avoid overpaying?",
+      answer:
+        "Yes. We map actual usage against what's licensed — identifying underutilized seats, users who left but still have assignments, and features you're paying for but not using. Adjustments are made before the next renewal cycle.",
+    },
+    {
+      question: "Do you offer volume licensing or enterprise agreements?",
+      answer:
+        "We work with authorized channels that offer volume pricing. If your organization meets the threshold, we structure the purchase through the appropriate enterprise or volume program to reduce per-seat cost.",
+    },
+    {
+      question: "How long does it take to set up new licenses?",
+      answer:
+        "For cloud-subscription licenses like Microsoft 365 or Zoom, provisioning is typically same-day once the order is placed. Perpetual licenses with physical media or device-based activations take longer depending on the vendor.",
+    },
+    {
+      question: "Can you maintain systems installed by another vendor?",
+      answer:
+        "Yes, with an initial assessment. If the system was installed to a reasonable standard and is OEM-compatible, we can build an AMC around it. If there are gaps, we recommend remediation first.",
     },
   ],
 
@@ -883,6 +1063,36 @@ const annualMaintenanceService: ServicePageData = {
       question: "What's included in a fire alarm maintenance visit?",
       answer:
         "Visual inspection of all detectors and call points, smoke detector cleaning, alarm and sounder testing, battery and backup power testing, panel functionality checks, zone mapping verification, and event log review — all documented in the service log.",
+    },
+    {
+      question: "Can you take over AMC for systems installed by another vendor?",
+      answer:
+        "Yes, after an initial assessment. We document the existing setup, verify configurations, and identify any gaps. If the installation is OEM-compliant and reasonably documented, we can take over directly. Otherwise, remediation is recommended first.",
+    },
+    {
+      question: "How long does it take to set up a new AMC?",
+      answer:
+        "A new AMC typically takes one to two weeks to finalize — covering asset inventory, service schedule definition, escalation matrix, and contract documentation. For systems we installed, the setup is faster since documentation already exists.",
+    },
+    {
+      question: "Does AMC cover hardware replacement, or only servicing?",
+      answer:
+        "Standard AMC covers preventive maintenance, firmware updates, and emergency troubleshooting. Hardware replacement — spares like handsets, hard drives, or access control readers — can be included as part of the contract scope, with terms specified upfront.",
+    },
+    {
+      question: "Can the AMC scope be expanded if we add new systems later?",
+      answer:
+        "Yes. If you install new systems — whether by IBS or another vendor — they can be added to the existing AMC. We update the asset inventory and adjust the service schedule and pricing accordingly.",
+    },
+    {
+      question: "What documentation do we receive after each maintenance visit?",
+      answer:
+        "A service log with date, technician name, systems inspected, actions taken, and observations. For regulated sites, the log is formatted to support audit requirements. Health summaries are provided periodically.",
+    },
+    {
+      question: "Do you work on AMC projects outside Delhi/NCR?",
+      answer:
+        "Yes. IBS manages AMC for client sites across India. Scheduled visits are planned in advance, and emergency response is coordinated through the escalation matrix with the nearest available technician.",
     },
   ],
 
