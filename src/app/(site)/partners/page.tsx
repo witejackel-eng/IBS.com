@@ -8,7 +8,6 @@ import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { PartnerEcosystemHero } from "@/components/sections/partners-redesign/partner-ecosystem-hero";
-import { PartnerPhilosophy } from "@/components/sections/partners-redesign/partner-philosophy";
 import { TechnologyEcosystemGrid } from "@/components/sections/partners-redesign/technology-clusters";
 import { IntegrationFlow } from "@/components/sections/partners-redesign/integration-flow";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
@@ -69,13 +68,6 @@ export default function PartnersPage() {
               <PartnerEcosystemHero />
             </Reveal>
           </div>
-        </Container>
-      </Section>
-
-      {/* ── PARTNER PHILOSOPHY ── */}
-      <Section className="bg-background">
-        <Container>
-          <PartnerPhilosophy />
         </Container>
       </Section>
 
