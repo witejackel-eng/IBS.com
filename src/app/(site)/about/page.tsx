@@ -45,7 +45,7 @@ export default function AboutPage() {
                 <Stat value={`${services.length}`} label="Solution areas" />
                 <Stat value={`${partners.length}+`} label="OEM technology partners" />
                 <Stat value={`${segments.length}`} label="Industries served" />
-                <Stat value={`${company.serviceAreas.length}`} label="Delhi NCR locations" />
+                <Stat value={`${company.serviceAreas.length}`} label="Locations across India" />
               </div>
             </Reveal>
           </div>

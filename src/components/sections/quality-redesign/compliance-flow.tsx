@@ -20,7 +20,7 @@ export function ComplianceFlow() {
           Built around BIS and STQC standards.
         </h3>
         <p className="mt-6 text-steel leading-relaxed">
-          Fire alarm systems in Delhi NCR need to meet BIS norms. Surveillance and access
+          Fire alarm systems need to meet BIS norms. Surveillance and access
           control setups that touch employee data fall under STQC-aligned practices where
           applicable. We align the maintenance schedule with those requirements so compliance
           is built into every service visit — not bolted on as a separate exercise.

@@ -460,8 +460,8 @@ const securitySolutions: ServicePageData = {
         "Remote monitoring support for off-site access",
       ],
       typicalDeployment: "Commercial offices, hospitality, residential complexes, and government facilities.",
-      oemBrands: ["Hikvision", "Dahua", "Axis", "Pelco"],
-      image: "/images/services/solutions/security-access-control.jpg",
+      oemBrands: ["Dahua", "Axis", "Pelco"],
+      image: "/images/services/solutions/security-cctv.jpg",
     },
     {
       title: "Access Control & Biometric Solutions",
@@ -474,7 +474,7 @@ const securitySolutions: ServicePageData = {
       ],
       typicalDeployment: "Office entrances, server rooms, restricted areas requiring identity-verified entry.",
       oemBrands: ["eSSL", "HID", "Cooper", "Honeywell"],
-      image: "/images/services/solutions/security-cctv.jpg",
+      image: "/images/services/solutions/security-access-control.jpg",
     },
     {
       title: "Fire Alarm System",
@@ -583,7 +583,7 @@ const callCenterSolutions: ServicePageData = {
         "Audio chain verified from caller to recording system",
       ],
       typicalDeployment: "Any contact center where agents wear headsets for full shifts.",
-      oemBrands: ["Jabra", "Sennheiser"],
+      oemBrands: ["Jabra", "Sennheiser", "Poly"],
       image: "/images/services/solutions/callcenter-headsets.jpg",
     },
     {
@@ -649,6 +649,16 @@ const callCenterSolutions: ServicePageData = {
   ],
 
   faqs: [
+    {
+      question: "Can IBS integrate with our existing CRM or PBX system?",
+      answer:
+        "Yes. We integrate with existing CRM platforms via API or screen-pop protocols, and connect to IP-PBX systems from Cisco, Alcatel-Lucent, and Matrix. The goal is to avoid a rip-and-replace — we work with what is already deployed and add the pieces that are missing.",
+    },
+    {
+      question: "Do you provide installation, training, and ongoing support across India?",
+      answer:
+        "Yes. Based in Dwarka, New Delhi, IBS handles installation and commissioning at client sites across India, with training for your team during handover. Post-installation, our AMC covers scheduled maintenance, firmware updates, and on-call troubleshooting so the system stays current.",
+    },
     {
       question: "What is the difference between predictive and progressive dialing?",
       answer:

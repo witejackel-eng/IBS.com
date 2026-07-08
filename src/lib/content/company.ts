@@ -8,10 +8,10 @@ export const company = {
   domain: "ibsinfra.com",
   positioning: "Communication, network, and security systems — installed and supported",
   summary:
-    "Founded by engineers with a background in data and voice networking, we design, install, and support communication, network, and security systems for offices, hotels, and homes across Delhi NCR.",
+    "Founded by engineers with a background in data and voice networking, we design, install, and support communication, network, and security systems for offices, hotels, and homes across India.",
   about: {
     intro:
-      "Insight Business Solutions designs, installs, and supports technology systems for organizations across India, with most of our projects in Delhi NCR. Our engineers handle everything from the first site visit to years of ongoing maintenance.",
+      "Insight Business Solutions designs, installs, and supports technology systems for organizations across India. Based in Dwarka, New Delhi, our engineers handle everything from the first site visit to years of ongoing maintenance.",
     categories: [
       {
         title: "Communication Technologies",
@@ -52,7 +52,7 @@ export const company = {
     mapQuery:
       "Plot No. 94, 3rd Floor, Block - B, Pocket - 10, Sector - 13, Dwarka, New Delhi - 110075",
   },
-  serviceAreas: ["Delhi", "Noida", "Gurgaon", "Faridabad", "Dwarka"],
+  serviceAreas: ["Pan India"],
   social: {
     facebook: "https://www.facebook.com/ibsinfra",
     linkedin: "https://www.linkedin.com/in/insight-business-4b71bb37b/",

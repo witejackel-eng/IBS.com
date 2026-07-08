@@ -18,7 +18,7 @@ interface HeroSectionProps {
 
 const trustBadges = [
   { label: "15+ Years" },
-  { label: "Delhi NCR" },
+  { label: "Pan India" },
   { label: "46+ OEM Partners" },
 ];
 

@@ -90,7 +90,7 @@ export function HeroSection({ headline, subcopy }: Partial<HeroContent> = {}) {
           <div className="mt-10 md:mt-12 grid max-w-2xl grid-cols-3 gap-x-8 gap-y-0 border-t border-border pt-8 md:pt-10 pb-4 lg:gap-x-16">
             <Stat value={`${services.length}`} label="Solution areas" />
             <Stat value={`${partners.length}+`} label="OEM technology partners" />
-            <Stat value={`${company.serviceAreas.length}`} label="Delhi NCR locations served" />
+            <Stat value={`${company.serviceAreas.length}`} label="Locations across India" />
           </div>
         </Reveal>
       </Container>

@@ -19,7 +19,7 @@ const DIFFERENTIATORS = [
   { icon: Award, title: "Certified engineers", description: "Every technician is trained and certified on the platforms they deploy." },
   { icon: ShieldCheck, title: "Enterprise deployment standards", description: "Documentation, labeling, and testing protocols that scale from a SOHO to a 200-person office." },
   { icon: Wrench, title: "Long-term support", description: "AMC contracts with scheduled visits, firmware updates, and defined SLAs." },
-  { icon: Clock, title: "Delhi NCR focus", description: "Fifteen years of project history across Delhi, Noida, Gurgaon, Faridabad, and Dwarka." },
+  { icon: Clock, title: "Pan-India reach", description: "Based in Dwarka, New Delhi, delivering technology solutions and long-term support for organizations across India." },
 ];
 
 export function WhyIbsSection() {

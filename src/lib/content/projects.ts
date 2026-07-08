@@ -28,7 +28,7 @@ export const projectScenarios: ProjectScenario[] = [
       "Structured cabling and firewall-secured LAN",
       "Boardroom video conferencing integration",
     ],
-    location: "Delhi NCR",
+    location: "Pan India",
     relevantServiceSlugs: ["voice-communication", "it-infrastructure", "audio-video-boardroom-solutions"],
   },
   {
@@ -49,7 +49,7 @@ export const projectScenarios: ProjectScenario[] = [
       "IP CCTV with NVR integration",
       "Access control across guest and staff zones",
     ],
-    location: "Delhi NCR",
+    location: "Pan India",
     relevantServiceSlugs: ["audio-video-boardroom-solutions", "security-solutions"],
   },
   {
@@ -70,7 +70,7 @@ export const projectScenarios: ProjectScenario[] = [
       "Multi-channel voice logging",
       "Headset fleet refresh",
     ],
-    location: "Delhi NCR",
+    location: "Pan India",
     relevantServiceSlugs: ["call-center-solutions"],
   },
 ];

@@ -16,85 +16,92 @@ const CHARCOAL = "#1E293B";
 const STEEL = "#64748B";
 const BORDER_GRAY = "#E2E8F0";
 const WHITE = "#FFFFFF";
+const LIGHT_BG = "#F8FAFC";
 
 /* ─────────── segment data ─────────── */
 interface Segment {
   slug: SegmentSlug;
   label: string;
-  cx: number;   // center of building card
+  cx: number;
   cy: number;
   w: number;
   h: number;
-  iconPaths: string[]; // tiny SVG path d-strings for tech icons
+  buildingType: "tower" | "hotel" | "government" | "house" | "office";
+  iconPaths: string[];
 }
 
 const SEGMENTS: Segment[] = [
   {
     slug: "enterprises",
     label: "Enterprise",
-    cx: 300, cy: 52,
-    w: 130, h: 68,
+    cx: 300, cy: 48,
+    w: 140, h: 78,
+    buildingType: "tower",
     iconPaths: [
-      // network rack
-      "M-7,-8 h14 v16 h-14z M-5,-5 h10 M-5,-1 h10 M-5,3 h10 M-5,7 h10",
+      // server rack
+      "M-8,-9 h16 v18 h-16z M-6,-6 h12 M-6,-2 h12 M-6,2 h12 M-6,6 h12",
       // VoIP phone
       "M-4,-8 h8 v12 a2,2 0 0,1-8,0z M-2,4 h4 v3 a1,1 0 0,1-4,0z",
       // meeting display
-      "M-8,-6 h16 v10 h-16z M0,4 v4 M-3,8 h6",
+      "M-9,-6 h18 v11 h-18z M0,5 v4 M-3,9 h6",
     ],
   },
   {
     slug: "government",
     label: "Government",
-    cx: 72, cy: 240,
-    w: 120, h: 68,
+    cx: 62, cy: 230,
+    w: 130, h: 74,
+    buildingType: "government",
     iconPaths: [
-      // access control
-      "M0,-8 v6 M-6,0 a6,6 0 1,0 12,0 M-4,-2 h8 M-2,0 h4",
-      // surveillance
-      "M-7,-4 h10 l-3,8 h-4z M7,-4 v2 M7,-2 a2,2 0 1,1 0,0",
-      // networking
-      "M0,-7 h3 l3,3 l-3,3 h-3z M-3,0 h3 M-6,0 h3",
+      // access control reader
+      "M-6,-6 v8 a6,6 0 1,0 12,0 v-8z M-2,-2 h4 M-1,2 h2 M0,6 v2 M6,6 h6",
+      // CCTV camera
+      "M-4,-6 h6 l2,6 h-10z M8,-4 v2 a2,2 0 1,1 0,0",
+      // document/shield
+      "M-6,-5 h12 v10 h-12z M-3,-2 h6 M-3,1 h6 M-3,4 h4",
     ],
   },
   {
     slug: "hotels",
-    label: "Hotels",
-    cx: 528, cy: 240,
-    w: 120, h: 68,
+    label: "Hotels & Hospitals",
+    cx: 538, cy: 230,
+    w: 130, h: 74,
+    buildingType: "hotel",
     iconPaths: [
-      // TV
-      "M-7,-5 h14 v9 h-14z M-2,4 v2 M2,4 v2 M-4,6 h8",
-      // WiFi
+      // display/TV
+      "M-8,-5 h16 v10 h-16z M-2,5 v2 M2,5 v2 M-4,7 h8",
+      // WiFi signal
       "M-6,-6 a8,8 0 0,1 12,0 M-3,-3 a4,4 0 0,1 6,0 M0,1 a1.5,1.5 0 1,0 0,0.01",
-      // CCTV
-      "M-5,-5 h8 a2,2 0 0,1 2,2 v4 a2,2 0 0,1-2,2 h-8 a2,2 0 0,1-2,-2 v-4 a2,2 0 0,1 2,-2z M3,-2 h3 l1,3",
+      // medical cross
+      "M0,-7 v14 M-7,0 h14",
     ],
   },
   {
     slug: "residential",
     label: "Residential",
-    cx: 138, cy: 420,
-    w: 120, h: 68,
+    cx: 128, cy: 420,
+    w: 130, h: 74,
+    buildingType: "house",
     iconPaths: [
       // WiFi router
       "M-7,-3 h14 v8 h-14z M-2,5 v3 M2,5 v3 M-3,8 h6 M-1,-7 a4,4 0 0,1 0,3 M1,-7 a4,4 0 0,0 0,3",
-      // smart home
-      "M-7,-3 a7,5 0 0,1 14,0 v6 h-14z M-2,3 a2,2 0 1,0 4,0 M0,-7 v-2",
-      // CCTV
-      "M-5,-5 h8 a2,2 0 0,1 2,2 v4 a2,2 0 0,1-2,2 h-8 a2,2 0 0,1-2,-2 v-4 a2,2 0 0,1 2,-2z",
+      // smart home app
+      "M-6,-5 a7,5 0 0,1 14,0 v6 h-14z M-2,3 a2,2 0 1,0 4,0 M0,-7 v-2",
+      // lock
+      "M-4,-2 a4,5 0 0,1 8,0 v6 h-8z M-2,4 a2,2 0 1,0 4,0",
     ],
   },
   {
     slug: "soho",
     label: "SOHO",
-    cx: 462, cy: 420,
-    w: 110, h: 68,
+    cx: 472, cy: 420,
+    w: 120, h: 74,
+    buildingType: "office",
     iconPaths: [
       // laptop
-      "M-8,-4 h16 v10 h-16z M-10,6 h20 v2 h-20z M-1,-2 h2 v4 h-2z",
-      // router
-      "M-7,-2 h14 v6 h-14z M-2,4 v2 M2,4 v2 M-5,0 a1,1 0 1,0 0,0.01 M-1,0 a1,1 0 1,0 0,0.01 M3,0 a1,1 0 1,0 0,0.01",
+      "M-9,-4 h18 v11 h-18z M-11,7 h22 v2 h-22z M-1,-2 h2 v5 h-2z",
+      // network switch
+      "M-8,-2 h16 v6 h-16z M-5,0 a1,1 0 1,0 0,0.01 M-1,0 a1,1 0 1,0 0,0.01 M3,0 a1,1 0 1,0 0,0.01 M-3,4 v2 M1,4 v2 M5,4 v2",
       // IP phone
       "M-4,-8 h8 v12 a2,2 0 0,1-8,0z M-2,4 h4 v3 a1,1 0 0,1-4,0z M-1,-5 h2 M-1,-3 h2",
     ],
@@ -103,11 +110,106 @@ const SEGMENTS: Segment[] = [
 
 const CENTER = { cx: 300, cy: 248 };
 
+/* ─────────── building shape renderers ─────────── */
+function BuildingShape({ type, x, y, w, h, isHovered }: { type: Segment["buildingType"]; x: number; y: number; w: number; h: number; isHovered: boolean }) {
+  switch (type) {
+    case "tower":
+      return (
+        <g opacity={isHovered ? 0.08 : 0.05} transform={`translate(${x + w / 2}, ${y + h - 8})`}>
+          <rect x={-24} y={-30} width={48} height={38} rx={3} fill={CHARCOAL} />
+          <rect x={-20} y={-8} width={40} height={3} rx={1.5} fill={CHARCOAL} />
+          {/* windows grid */}
+          {[-16, -8, 0, 8].map((wx) =>
+            [-26, -19, -12].map((wy) => (
+              <rect key={`${wx}-${wy}`} x={wx} y={wy} width={5} height={3.5} rx={0.8} fill={WHITE} />
+            ))
+          )}
+          {/* antenna */}
+          <line x1={0} y1={-30} x2={0} y2={-36} stroke={CHARCOAL} strokeWidth={1.2} />
+          <circle cx={0} cy={-37} r={1.5} fill={CHARCOAL} />
+        </g>
+      );
+    case "government":
+      return (
+        <g opacity={isHovered ? 0.08 : 0.05} transform={`translate(${x + w / 2}, ${y + h - 6})`}>
+          {/* main building body */}
+          <rect x={-26} y={-28} width={52} height={34} rx={2} fill={CHARCOAL} />
+          {/* pediment/triangle roof */}
+          <path d="M-30,-28 L0,-40 L30,-28 Z" fill={CHARCOAL} />
+          {/* columns */}
+          {[-18, 0, 18].map((cx) => (
+            <rect key={cx} x={cx - 2} y={-26} width={4} height={26} rx={1} fill={WHITE} opacity={0.7} />
+          ))}
+          {/* steps */}
+          <rect x={-28} y={6} width={56} height={4} rx={1} fill={CHARCOAL} />
+          {/* flagpole */}
+          <line x1={24} y1={-40} x2={24} y2={-50} stroke={CHARCOAL} strokeWidth={0.8} />
+          <rect x={24} y={-50} width={8} height={5} rx={0.5} fill={ORANGE} opacity={0.6} />
+          {/* windows */}
+          {[-12, 0, 12].map((wx) =>
+            [-22, -14].map((wy) => (
+              <rect key={`${wx}-${wy}`} x={wx - 3} y={wy} width={6} height={4} rx={0.8} fill={WHITE} />
+            ))
+          )}
+        </g>
+      );
+    case "hotel":
+      return (
+        <g opacity={isHovered ? 0.08 : 0.05} transform={`translate(${x + w / 2}, ${y + h - 6})`}>
+          <rect x={-24} y={-30} width={48} height={36} rx={3} fill={CHARCOAL} />
+          {/* entrance arch */}
+          <path d="M-8,6 Q0,-2 8,6" fill="none" stroke={WHITE} strokeWidth={1.5} opacity={0.6} />
+          {/* windows */}
+          {[-16, -6, 4, 16].map((wx) =>
+            [-26, -18, -10].map((wy) => (
+              <rect key={`${wx}-${wy}`} x={wx - 3} y={wy} width={6} height={4} rx={0.8} fill={WHITE} />
+            ))
+          )}
+          {/* rooftop antenna */}
+          <line x1={-10} y1={-30} x2={-10} y2={-36} stroke={CHARCOAL} strokeWidth={0.8} />
+          <line x1={12} y1={-30} x2={12} y2={-34} stroke={CHARCOAL} strokeWidth={0.8} />
+        </g>
+      );
+    case "house":
+      return (
+        <g opacity={isHovered ? 0.08 : 0.05} transform={`translate(${x + w / 2}, ${y + h - 6})`}>
+          {/* pitched roof */}
+          <path d="M-26,-8 L0,-28 L26,-8 Z" fill={CHARCOAL} />
+          {/* house body */}
+          <rect x={-22} y={-8} width={44} height={22} rx={2} fill={CHARCOAL} />
+          {/* door */}
+          <rect x={-4} y={-2} width={8} height={14} rx={4} fill={WHITE} opacity={0.5} />
+          {/* windows */}
+          <rect x={-16} y={-4} width={7} height={5} rx={1} fill={WHITE} />
+          <rect x={9} y={-4} width={7} height={5} rx={1} fill={WHITE} />
+          {/* chimney */}
+          <rect x={14} y={-20} width={5} height={12} rx={1} fill={CHARCOAL} />
+        </g>
+      );
+    case "office":
+      return (
+        <g opacity={isHovered ? 0.08 : 0.05} transform={`translate(${x + w / 2}, ${y + h - 6})`}>
+          <rect x={-20} y={-24} width={40} height={30} rx={2} fill={CHARCOAL} />
+          {/* desk */}
+          <rect x={-14} y={2} width={28} height={3} rx={1} fill={CHARCOAL} />
+          {/* monitor */}
+          <rect x={-8} y={-16} width={16} height={10} rx={1.5} fill={WHITE} opacity={0.5} />
+          {/* small window grid */}
+          {[-10, 2].map((wx) =>
+            [-20, -12].map((wy) => (
+              <rect key={`${wx}-${wy}`} x={wx - 3} y={wy} width={6} height={3.5} rx={0.8} fill={WHITE} />
+            ))
+          )}
+        </g>
+      );
+  }
+}
+
 /* ─────────── curved connection paths ─────────── */
 function getConnectionPath(to: Segment): string {
   const dx = to.cx - CENTER.cx;
   const dy = to.cy - CENTER.cy;
-  const mx = CENTER.cx + dx * 0.5 + dy * 0.15;  // slight curve offset
+  const mx = CENTER.cx + dx * 0.5 + dy * 0.15;
   const my = CENTER.cy + dy * 0.5 - dx * 0.15;
   return `M ${CENTER.cx} ${CENTER.cy} Q ${mx} ${my} ${to.cx} ${to.cy}`;
 }
@@ -125,6 +227,25 @@ function PulseDot({ path, delay, isActive }: { path: string; delay: number; isAc
         repeatCount="indefinite"
       />
     </motion.circle>
+  );
+}
+
+/* ─────────── floating tech icon (between segments) ─────────── */
+function FloatingIcon({ cx, cy, path, delay }: { cx: number; cy: number; path: string; delay: number }) {
+  return (
+    <motion.g
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 0.3, y: [0, -3, 0] }}
+      transition={{
+        opacity: { duration: 0.5, delay },
+        y: { duration: 4 + delay * 0.3, repeat: Infinity, ease: "easeInOut" as const, delay },
+      }}
+    >
+      <circle cx={cx} cy={cy} r={12} fill={LIGHT_BG} stroke={BORDER_GRAY} strokeWidth={0.8} />
+      <g transform={`translate(${cx}, ${cy})`} stroke={STEEL} strokeWidth={0.9} strokeLinecap="round" strokeLinejoin="round" fill="none">
+        <path d={path} transform="scale(0.7)" />
+      </g>
+    </motion.g>
   );
 }
 
@@ -162,22 +283,19 @@ function BuildingCard({
         y={y}
         width={segment.w}
         height={segment.h}
-        rx={12}
+        rx={14}
         fill={WHITE}
         stroke={BORDER_GRAY}
         strokeWidth={1}
-        animate={isHovered
-          ? { y: y - 8, stroke: ORANGE, filter: "drop-shadow(0 8px 24px rgba(249,115,22,0.15))" }
-          : { y, stroke: BORDER_GRAY, filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.04))" }
-        }
-        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        animate={isHovered ? { y: Number(y) - 8, stroke: ORANGE } : { y: Number(y), stroke: BORDER_GRAY }}
+        transition={{ stiffness: 300, damping: 24 }}
       />
 
       {/* orange accent top bar on hover */}
       <motion.rect
-        x={x + 16}
+        x={x + 18}
         y={y}
-        width={segment.w - 32}
+        width={segment.w - 36}
         height={2.5}
         rx={1.25}
         fill={ORANGE}
@@ -186,22 +304,20 @@ function BuildingCard({
         style={{ transformOrigin: `${segment.cx}px ${y}px` }}
       />
 
-      {/* building silhouette — simple isometric-ish building outline */}
-      <g opacity={isHovered ? 0.06 : 0.04} transform={`translate(${segment.cx}, ${segment.cy + 6})`}>
-        <rect x={-20} y={-18} width={40} height={28} rx={3} fill={CHARCOAL} />
-        <rect x={-16} y={10} width={32} height={3} rx={1.5} fill={CHARCOAL} />
-        {/* tiny windows */}
-        {[-12, -4, 4].map((wx) =>
-          [-14, -7, 0].map((wy) => (
-            <rect key={`${wx}-${wy}`} x={wx} y={wy} width={6} height={4} rx={1} fill={WHITE} />
-          ))
-        )}
-      </g>
+      {/* building silhouette */}
+      <BuildingShape
+        type={segment.buildingType}
+        x={x}
+        y={y}
+        w={segment.w}
+        h={segment.h}
+        isHovered={isHovered}
+      />
 
       {/* tech icons — appear on hover */}
       <g>
         {segment.iconPaths.map((d, i) => {
-          const iconX = segment.cx + (i - 1) * 22;
+          const iconX = segment.cx + (i - 1) * 24;
           const iconY = segment.cy - 2;
           return (
             <motion.g
@@ -219,7 +335,7 @@ function BuildingCard({
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 fill="none"
-                transform="scale(0.9)"
+                transform="scale(0.95)"
               >
                 <path d={d} />
               </g>
@@ -247,7 +363,7 @@ function BuildingCard({
   );
 }
 
-/* ─────────── idle floating animation keyframes (applied per-building) ─────────── */
+/* ─────────── idle floating animation keyframes ─────────── */
 const floatVariants = {
   idle: (i: number) => ({
     y: [0, -3, 0],
@@ -287,25 +403,30 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
       role="img"
     >
       <defs>
-        {/* subtle radial glow behind center */}
         <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor={ORANGE} stopOpacity={0.06} />
+          <stop offset="0%" stopColor={ORANGE} stopOpacity={0.07} />
           <stop offset="100%" stopColor={ORANGE} stopOpacity={0} />
         </radialGradient>
-        {/* orange glow filter for hovered connections */}
         <filter id="orangeGlow" x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur in="SourceGraphic" stdDeviation={3} />
         </filter>
       </defs>
 
-      {/* subtle background dot grid */}
+      {/* background dot grid */}
       <pattern id="dotGrid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
         <circle cx="12" cy="12" r="0.6" fill={BORDER_GRAY} />
       </pattern>
       <rect width="600" height="500" fill="url(#dotGrid)" opacity={0.5} />
 
       {/* center glow */}
-      <circle cx={CENTER.cx} cy={CENTER.cy} r={120} fill="url(#centerGlow)" />
+      <circle cx={CENTER.cx} cy={CENTER.cy} r={130} fill="url(#centerGlow)" />
+
+      {/* ── floating tech icons between segments ── */}
+      <FloatingIcon cx={185} cy={140} path="M-5,-5 h10 v10 h-10z M-1,-2 v4" delay={0} />
+      <FloatingIcon cx={415} cy={140} path="M-6,-6 a8,8 0 0,1 12,0 M-3,-3 a4,4 0 0,1 6,0 M0,1 a1.5,1.5 0 1,0 0,0.01" delay={1} />
+      <FloatingIcon cx={95} cy={340} path="M-4,-6 h8 l2,8 h-12z M6,-2 v2 a2,2 0 1,1 0,0" delay={2} />
+      <FloatingIcon cx={505} cy={340} path="M-8,-4 h16 v10 h-16z M-2,6 v2 M2,6 v2 M-4,8 h8" delay={3} />
+      <FloatingIcon cx={300} cy={380} path="M-6,-2 h12 v6 h-12z M-2,4 v2 M2,4 v2" delay={4} />
 
       {/* ── connection lines ── */}
       {SEGMENTS.map((seg, i) => {
@@ -313,17 +434,15 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
         const isActive = hovered === seg.slug;
         return (
           <g key={`conn-${seg.slug}`}>
-            {/* base line */}
             <path
               d={path}
               fill="none"
               stroke={isActive ? ORANGE : BORDER_GRAY}
-              strokeWidth={isActive ? 1.5 : 1}
+              strokeWidth={isActive ? 1.5 : 0.8}
               strokeDasharray={isActive ? "none" : "4 4"}
-              opacity={isActive ? 1 : 0.6}
+              opacity={isActive ? 1 : 0.5}
               style={{ transition: "stroke 0.3s, stroke-width 0.3s, opacity 0.3s" }}
             />
-            {/* glow line on hover */}
             <motion.path
               d={path}
               fill="none"
@@ -333,7 +452,6 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
               animate={{ opacity: isActive ? 0.3 : 0 }}
               transition={{ duration: 0.3 }}
             />
-            {/* pulse dot */}
             <PulseDot path={path} delay={i * 0.8} isActive={isActive} />
           </g>
         );
@@ -353,45 +471,41 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
         }
         style={{ transformOrigin: `${CENTER.cx}px ${CENTER.cy}px` }}
       >
-        {/* outer ring */}
         <circle
           cx={CENTER.cx}
           cy={CENTER.cy}
-          r={42}
+          r={44}
           fill="none"
           stroke={hovered ? ORANGE : BORDER_GRAY}
           strokeWidth={1.5}
           strokeDasharray={hovered ? "none" : "3 3"}
           style={{ transition: "stroke 0.3s" }}
         />
-        {/* inner circle */}
         <circle
           cx={CENTER.cx}
           cy={CENTER.cy}
-          r={36}
+          r={38}
           fill={WHITE}
           stroke={hovered ? ORANGE : BORDER_GRAY}
           strokeWidth={1}
           style={{ transition: "stroke 0.3s" }}
         />
-        {/* IBS text */}
         <text
           x={CENTER.cx}
           y={CENTER.cy - 4}
           textAnchor="middle"
           dominantBaseline="central"
           fill={CHARCOAL}
-          fontSize={22}
+          fontSize={24}
           fontWeight={700}
           fontFamily="var(--font-heading, system-ui)"
           letterSpacing="0.08em"
         >
           IBS
         </text>
-        {/* small tagline */}
         <text
           x={CENTER.cx}
-          y={CENTER.cy + 14}
+          y={CENTER.cy + 15}
           textAnchor="middle"
           fill={STEEL}
           fontSize={6.5}
@@ -418,11 +532,11 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
         </motion.g>
       ))}
 
-      {/* ── decorative orbit rings (very subtle) ── */}
+      {/* ── decorative orbit rings ── */}
       <circle
         cx={CENTER.cx}
         cy={CENTER.cy}
-        r={95}
+        r={100}
         fill="none"
         stroke={BORDER_GRAY}
         strokeWidth={0.5}
@@ -432,7 +546,7 @@ export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
       <circle
         cx={CENTER.cx}
         cy={CENTER.cy}
-        r={190}
+        r={195}
         fill="none"
         stroke={BORDER_GRAY}
         strokeWidth={0.5}

@@ -36,8 +36,15 @@ export default function WhoWeServePage() {
       {/* 2. Industry Cards */}
       <IndustrySelector />
 
-      {/* 3. Enterprise Showcase */}
-      <IndustryShowcase segment={segments[0]} reversed={false} index={0} />
+      {/* 3. All five industry showcases */}
+      {segments.map((segment, i) => (
+        <IndustryShowcase
+          key={segment.slug}
+          segment={segment}
+          reversed={i % 2 === 1}
+          index={i}
+        />
+      ))}
 
       {/* 4. CTA */}
       <PageCtaSection />

@@ -16,7 +16,7 @@ import { company, openPositions, careerBenefits, hiringProcess } from "@/lib/con
 export const metadata: Metadata = {
   title: "Careers — Join the IBS Engineering Team",
   description:
-    "Open roles at Insight Business Solutions in Delhi NCR: field service engineers, AV installation engineers, network engineers, sales engineers, AMC coordinators, and interns. Apply online.",
+    "Open roles at Insight Business Solutions: field service engineers, AV installation engineers, network engineers, sales engineers, AMC coordinators, and interns. Apply online.",
   alternates: { canonical: "/careers" },
 };
 
@@ -27,7 +27,7 @@ export default function CareersPage() {
       <CollectionPageJsonLd
         name="Careers"
         path="/careers"
-        description="Open roles at Insight Business Solutions in Delhi NCR."
+        description="Open roles at Insight Business Solutions across India."
         items={openPositions.map((p) => ({ name: p.title, path: `/careers#${p.slug}` }))}
       />
 
@@ -48,8 +48,8 @@ export default function CareersPage() {
           />
           <Reveal direction="up" delay={0.2}>
             <p className="mt-8 max-w-xl md:max-w-2xl text-lg text-steel">
-              We are an engineering-led systems integrator in Dwarka, New Delhi, and our project
-              pipeline across Delhi NCR is growing. We hire engineers who want to design, install,
+              We are an engineering-led systems integrator based in Dwarka, New Delhi, and our project
+              pipeline across India is growing. We hire engineers who want to design, install,
               and maintain communication, AV, IT, and security systems — not just hand off to
               someone else after the install.
             </p>
@@ -305,7 +305,7 @@ export default function CareersPage() {
                   Not ready to apply yet?
                 </h3>
                 <p className="mt-3 text-sm text-steel">
-                  Learn more about who we are and the work we do across Delhi NCR before you decide.
+                  Learn more about who we are and the work we do before you decide.
                 </p>
                 <div className="mt-5 flex flex-col gap-2">
                   <Link

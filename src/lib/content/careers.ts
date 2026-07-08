@@ -8,7 +8,7 @@ export interface OpenPosition {
   slug: string;
   title: string;
   department: "Engineering" | "Sales" | "Operations" | "Support" | "Administration";
-  location: "Dwarka, New Delhi" | "Delhi NCR (Field)" | "Remote (India)";
+  location: "Dwarka, New Delhi" | "Field (India)" | "Remote (India)";
   experience: string;
   type: "Full-time" | "Contract" | "Internship";
   summary: string;
@@ -27,11 +27,11 @@ export const openPositions: OpenPosition[] = [
     slug: "field-service-engineer",
     title: "Field Service Engineer",
     department: "Engineering",
-    location: "Delhi NCR (Field)",
+    location: "Field (India)",
     experience: "2–5 years",
     type: "Full-time",
     summary:
-      "Own the on-site commissioning, handover, and ongoing maintenance of communication, AV, and security systems across Delhi NCR client sites.",
+      "Own the on-site commissioning, handover, and ongoing maintenance of communication, AV, and security systems at client sites across India.",
     responsibilities: [
       "Commissioning and configuring IP-PBX, networking, CCTV, and access control systems on customer sites.",
       "First-line troubleshooting and preventive maintenance visits under AMCs.",
@@ -41,7 +41,7 @@ export const openPositions: OpenPosition[] = [
     requirements: [
       "Diploma or B.Tech in Electronics, Electrical, or Computer Science.",
       "Hands-on experience with at least one of: IP-PBX (Alcatel, Cisco, Matrix), networking (Cisco, D-Link, Aruba), or CCTV/access control (Hikvision, Dahua, eSSL).",
-      "Comfortable travelling across Delhi NCR; valid driving licence preferred.",
+      "Comfortable travelling to client sites; valid driving licence preferred.",
       "Strong communication — you will be the face of IBS on customer sites.",
     ],
   },
@@ -49,7 +49,7 @@ export const openPositions: OpenPosition[] = [
     slug: "av-installation-engineer",
     title: "AV Installation Engineer",
     department: "Engineering",
-    location: "Delhi NCR (Field)",
+    location: "Field (India)",
     experience: "3–6 years",
     type: "Full-time",
     summary:
@@ -75,7 +75,7 @@ export const openPositions: OpenPosition[] = [
     experience: "2–5 years",
     type: "Full-time",
     summary:
-      "Design, deploy, and support enterprise network infrastructure — switching, routing, Wi-Fi, and firewall — for IBS clients across Delhi NCR.",
+      "Design, deploy, and support enterprise network infrastructure — switching, routing, Wi-Fi, and firewall — for IBS clients across India.",
     responsibilities: [
       "Network design, configuration, and deployment for office and campus environments.",
       "Switching (Cisco, Dell, D-Link), routing, Wi-Fi (Aruba, Ruckus, Netgear), and firewall (Sophos, Fortinet) configuration.",
@@ -108,7 +108,7 @@ export const openPositions: OpenPosition[] = [
       "Engineering degree with 3+ years in pre-sales or solution consulting for IT/AV/security systems.",
       "Ability to translate customer pain points into a concrete technical solution and BOQ.",
       "Strong written communication — proposals and technical documentation are a core deliverable.",
-      "Existing relationships with Delhi NCR facility managers, IT heads, or project consultants is a plus.",
+      "Existing relationships with facility managers, IT heads, or project consultants is a plus.",
     ],
   },
   {
@@ -151,7 +151,7 @@ export const openPositions: OpenPosition[] = [
     requirements: [
       "Recent B.Tech/Diploma graduate in Electronics, Electrical, or Computer Science.",
       "Eager to learn on site — this is not a desk-only role.",
-      "Comfortable with basic hand tools and willing to travel across Delhi NCR.",
+      "Comfortable with basic hand tools and willing to travel to client sites.",
       "Strong fundamentals in networking or electronics; manufacturer coursework is a plus.",
     ],
   },
@@ -184,9 +184,9 @@ export const careerBenefits: CareerBenefit[] = [
       "We are a small team. Your work shows up on real client sites within weeks, and you own outcomes end-to-end. No layers of approval between you and the customer's problem.",
   },
   {
-    title: "Delhi NCR focus — home every evening",
+    title: "Pan-India projects, home most evenings",
     description:
-      "All our projects are in Delhi NCR. Field engineers are back home every evening — no multi-week outstation deployments that take over your life.",
+      "Based in Dwarka, New Delhi, our projects span across India. Field engineers typically return home the same day — no multi-week outstation deployments that take over your life.",
   },
   {
     title: "Structured growth path",
