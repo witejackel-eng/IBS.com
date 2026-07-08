@@ -44,7 +44,7 @@ export default function PartnersPage() {
       />
 
       {/* ── HERO ── */}
-      <Section bg="ambient" className="bg-background pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
+      <Section bg="ambient" className="bg-background pt-24 sm:pt-28 md:pt-36 lg:pt-40 pb-14 sm:pb-20 lg:pb-24">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
@@ -88,7 +88,7 @@ export default function PartnersPage() {
             description="Three technology ecosystems, integrated by a single team. Hover any category to explore."
             align="center"
             size="lg"
-            className="mb-14"
+            className="mb-10 sm:mb-14"
           />
           <TechnologyEcosystemGrid
             categories={partnerCategories.map((cat) => ({

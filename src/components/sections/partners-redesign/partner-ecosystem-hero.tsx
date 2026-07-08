@@ -22,7 +22,7 @@ export function PartnerEcosystemHero() {
   });
 
   return (
-    <div className="relative w-full aspect-square max-w-lg mx-auto">
+    <div className="relative w-full aspect-square max-w-[240px] sm:max-w-xs md:max-w-md lg:max-w-lg mx-auto">
       <svg viewBox="0 0 400 400" className="w-full h-full" fill="none">
         {/* Orbit ring */}
         <circle cx={cx} cy={cy} r={radius} className="stroke-border" strokeWidth="1" strokeDasharray="4 6" />

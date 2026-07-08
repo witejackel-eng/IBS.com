@@ -126,7 +126,7 @@ export function Navbar() {
           <Logo />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {mainNav.map((link) =>
             "children" in link && link.children ? (
               <div key={link.href} ref={servicesRef} className="relative">
@@ -164,7 +164,7 @@ export function Navbar() {
                       onKeyDown={handleMenuKeyDown}
                       onMouseEnter={() => !isCoarsePointer && setServicesOpen(true)}
                       onMouseLeave={() => !isCoarsePointer && setServicesOpen(false)}
-                      className="absolute top-full left-1/2 mt-3 w-[420px] max-w-[94vw] origin-top -translate-x-1/2 rounded-[20px] border border-border bg-[var(--warm-white)] p-3.5 shadow-[0_20px_44px_-18px_rgba(0,0,0,0.16),0_8px_20px_-10px_rgba(0,0,0,0.08)] md:w-[560px]"
+                      className="absolute top-full left-1/2 mt-3 w-[420px] max-w-[94vw] origin-top -translate-x-1/2 rounded-[20px] border border-border bg-[var(--warm-white)] p-3.5 shadow-[0_20px_44px_-18px_rgba(0,0,0,0.16),0_8px_20px_-10px_rgba(0,0,0,0.08)] lg:w-[560px]"
                     >
                       <div className="grid grid-cols-2 gap-x-6">
                         {serviceCategoryColumns.map((column, columnIndex) => (
@@ -251,7 +251,7 @@ export function Navbar() {
           )}
         </nav>
 
-        <div className="hidden md:flex">
+        <div className="hidden lg:flex">
           <Magnetic>
             <ButtonLink
               href="/contact"
@@ -267,7 +267,7 @@ export function Navbar() {
 
         <button
           ref={mobileToggleRef}
-          className="flex h-11 w-11 items-center justify-center rounded-full text-charcoal md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full text-charcoal lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -288,7 +288,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: DURATION.base, ease: EASE_OUT_EXPO }}
-            className="glass absolute inset-x-3 top-[72px] z-40 flex max-h-[70vh] flex-col gap-0.5 overflow-y-auto rounded-2xl p-3 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] md:hidden"
+            className="glass absolute inset-x-3 top-[72px] z-40 flex max-h-[70vh] flex-col gap-0.5 overflow-y-auto rounded-2xl p-3 shadow-[0_32px_64px_-20px_rgba(0,0,0,0.18),0_10px_28px_-10px_rgba(0,0,0,0.1)] lg:hidden"
           >
             {mainNav.map((link) => (
               <div key={link.href}>

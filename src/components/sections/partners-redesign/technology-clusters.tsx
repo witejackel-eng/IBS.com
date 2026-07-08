@@ -99,7 +99,7 @@ function EcosystemCard({
 
   return (
     <motion.div
-      className="relative flex flex-col rounded-2xl border border-border bg-card p-7 lg:p-8 will-change-transform"
+      className="relative flex flex-col rounded-2xl border border-border bg-card p-5 sm:p-6 lg:p-8 will-change-transform"
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
@@ -132,7 +132,7 @@ function EcosystemCard({
       </h3>
 
       {/* ── Middle: Description / Logo Reveal (same slot, cross-fade) ── */}
-      <div className="relative mt-2.5 min-h-[60px]">
+      <div className="relative mt-2 sm:mt-2.5 min-h-[56px] sm:min-h-[60px]">
         {/* Description — visible by default, fades on hover */}
         <motion.p
           className="text-sm text-steel leading-relaxed"
@@ -174,7 +174,7 @@ function EcosystemCard({
       </div>
 
       {/* ── Bottom: CTA (always pinned to bottom) ── */}
-      <div className="mt-auto pt-5 border-t border-border/60">
+      <div className="mt-auto pt-4 sm:pt-5 border-t border-border/60">
         <motion.span
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-deep-blue"
           animate={!prefersReducedMotion ? { x: isHovered ? 3 : 0 } : undefined}
@@ -411,7 +411,7 @@ export function TechnologyEcosystemGrid({ categories }: EcosystemGridProps) {
     <div className="w-full">
       {/* ── Network Diagram ── */}
       <motion.div
-        className="mx-auto mb-14 lg:mb-16 max-w-2xl"
+        className="mx-auto mb-8 sm:mb-12 lg:mb-16 max-w-xl sm:max-w-2xl"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
