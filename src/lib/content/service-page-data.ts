@@ -461,7 +461,7 @@ const securitySolutions: ServicePageData = {
       ],
       typicalDeployment: "Commercial offices, hospitality, residential complexes, and government facilities.",
       oemBrands: ["Hikvision", "Dahua", "Axis", "Pelco"],
-      image: "/images/services/solutions/security-cctv.jpg",
+      image: "/images/services/solutions/security-access-control.jpg",
     },
     {
       title: "Access Control & Biometric Solutions",
@@ -474,7 +474,7 @@ const securitySolutions: ServicePageData = {
       ],
       typicalDeployment: "Office entrances, server rooms, restricted areas requiring identity-verified entry.",
       oemBrands: ["eSSL", "HID", "Cooper", "Honeywell"],
-      image: "/images/services/solutions/security-access-control.jpg",
+      image: "/images/services/solutions/security-cctv.jpg",
     },
     {
       title: "Fire Alarm System",
