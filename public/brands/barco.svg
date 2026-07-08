@@ -1,9 +1,7 @@
-<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg" role="img">
-  <title>BARCO</title>
-  <text x="120" y="48" text-anchor="middle" dominant-baseline="middle"
-    font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700" font-style="normal"
-    letter-spacing="0.15em" font-size="40" fill="#00B9F1" style="text-transform:uppercase">
-    BARCO
-  </text>
-  
+<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>Barco</title>
+  <text x="150" y="55" text-anchor="middle" dominant-baseline="middle"
+    font-family="'Inter','Segoe UI',system-ui,-apple-system,sans-serif"
+    font-weight="700" letter-spacing="0.02em" font-size="42"
+    fill="#BE0031">Barco</text>
 </svg>

@@ -22,7 +22,7 @@ export function FeaturedCategory({ title, description, partners, deployments, re
     <div className={`grid grid-cols-1 md:grid-cols-2 md:gap-10 lg:gap-20 items-center ${reversed ? "[&>*:first-child]:lg:order-2" : ""}`}>
       {/* Visual side - brand logos */}
       <motion.div
-        className={`relative rounded-3xl border border-border bg-card p-10 lg:p-12 ${accent ? "bg-deep-blue/[0.03] border-deep-blue/20" : ""}`}
+        className={`relative rounded-3xl border border-border bg-card p-10 lg:p-12 ${accent ? "bg-tangerine-500/[0.03] border-tangerine-500/20" : ""}`}
         initial={{ opacity: 0, x: reversed ? 40 : -40 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -32,14 +32,14 @@ export function FeaturedCategory({ title, description, partners, deployments, re
           {displayPartners.map((p, i) => (
             <motion.div
               key={p.slug}
-              className="flex h-20 items-center justify-center rounded-2xl border border-border bg-background px-6 transition-all duration-300 hover:border-deep-blue/30 hover:shadow-[0_8px_24px_-8px_rgba(234,88,12,0.12)]"
+              className="flex h-20 items-center justify-center rounded-2xl border border-border bg-background px-6 transition-all duration-300 hover:border-tangerine-500/30 hover:shadow-[0_8px_24px_-8px_rgba(249,115,22,0.12)]"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.2 + i * 0.05 }}
               whileHover={!prefersReducedMotion ? { y: -4 } : {}}
             >
-              <PartnerLogo name={p.name} className="h-8 w-auto max-w-[130px]" />
+              <PartnerLogo name={p.name} className="h-10 w-auto max-w-[150px]" />
             </motion.div>
           ))}
         </div>
@@ -58,7 +58,7 @@ export function FeaturedCategory({ title, description, partners, deployments, re
         transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: 0.1, ease: EASE_OUT_EXPO as [number, number, number, number] }}
       >
         {accent && (
-          <span className="text-[10px] font-semibold tracking-[0.14em] text-deep-blue uppercase">
+          <span className="text-[10px] font-semibold tracking-[0.14em] text-tangerine-600 uppercase">
             Featured Category
           </span>
         )}

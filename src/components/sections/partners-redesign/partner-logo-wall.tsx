@@ -1,42 +1,51 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ShieldCheck } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { EASE_OUT_EXPO } from "@/lib/motion";
 import type { Partner } from "@/lib/content";
 import { BrandLogoCard } from "./brand-logo-card";
-import { EASE_OUT_EXPO } from "@/lib/motion";
 
 /* ================================================================== */
-/*  Category config                                                    */
+/*  Category config — updated with richer metadata                      */
 /* ================================================================== */
 
 const CATEGORY_META: Record<
   string,
   {
     title: string;
+    subtitleFn: (count: number) => string;
+    countLabelFn: (count: number) => string;
     description: string;
     icon: "av" | "network" | "security";
     sectionId: string;
   }
 > = {
   "av-integration": {
-    title: "Audio & Video",
+    title: "Audio / Video Partners",
+    subtitleFn: (n) => `${n} certified integration partners`,
+    countLabelFn: (n) => `${n} Brands`,
     description:
-      "Boardroom conferencing, video walls, public address systems, and classroom technology — from display manufacturers to DSP and control system brands.",
+      "Boardroom systems, conferencing, displays, DSPs and collaboration hardware.",
     icon: "av",
     sectionId: "av-partners",
   },
   "communication-it": {
     title: "Communication & IT",
+    subtitleFn: (n) => `${n} certified OEMs`,
+    countLabelFn: (n) => `${n} Brands`,
     description:
-      "Voice platforms, network switching and routing, firewalls, Wi-Fi, UPS systems, and storage — the infrastructure that keeps everything connected.",
+      "Enterprise networking, Wi-Fi, routing, switching, infrastructure and power.",
     icon: "network",
     sectionId: "comm-it-partners",
   },
   security: {
-    title: "Security",
+    title: "Security Partners",
+    subtitleFn: (n) => `${n} certified manufacturers`,
+    countLabelFn: (n) => `${n} Brands`,
     description:
-      "CCTV surveillance, access control, fire detection, and intrusion systems — from camera manufacturers to fire panel specialists.",
+      "CCTV, access control, fire detection and perimeter security.",
     icon: "security",
     sectionId: "security-partners",
   },
@@ -127,8 +136,8 @@ export function EcosystemOverview({
               "relative flex flex-col rounded-2xl border bg-card p-7 sm:p-8 lg:p-9 text-left transition-all duration-300 cursor-pointer",
               "hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.14)]",
               isActive
-                ? "border-deep-blue shadow-[0_16px_40px_-12px_rgba(0,0,0,0.14)]"
-                : "border-border hover:border-deep-blue/60"
+                ? "border-tangerine-500 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.14)]"
+                : "border-border hover:border-tangerine-500/60"
             )}
             initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
             whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
@@ -146,7 +155,7 @@ export function EcosystemOverview({
           >
             {/* Icon + Count */}
             <div className="flex items-start justify-between">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-deep-blue/[0.07] text-deep-blue">
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-tangerine-600/[0.07] text-tangerine-600">
                 <CategoryIcon type={meta.icon} className="h-7 w-7" />
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold text-steel tabular-nums">
@@ -166,7 +175,7 @@ export function EcosystemOverview({
 
             {/* CTA */}
             <div className="mt-6 pt-5 border-t border-border/50">
-              <span className="inline-flex items-center gap-2 text-sm font-semibold text-deep-blue">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-tangerine-600">
                 View Partners
                 <ArrowDown className="h-3.5 w-3.5" />
               </span>
@@ -196,6 +205,7 @@ export function PartnerLogoWall({
   const prefersReducedMotion = useReducedMotion();
   const meta = CATEGORY_META[categoryKey];
   const dimmed = activeCategory !== null && activeCategory !== categoryKey;
+  const partnerCount = partners.length;
 
   return (
     <div
@@ -205,24 +215,42 @@ export function PartnerLogoWall({
         dimmed && "opacity-40"
       )}
     >
-      {/* Heading */}
+      {/* ── Section Header with hierarchy ── */}
       <motion.div
-        className="mb-12 sm:mb-16"
-        initial={prefersReducedMotion ? undefined : { opacity: 0, y: 16 }}
+        className="mb-8 sm:mb-10"
+        initial={prefersReducedMotion ? undefined : { opacity: 0, y: 12 }}
         whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: EASE_OUT_EXPO as [number, number, number, number] }}
       >
-        <h2 className="text-display-3 font-heading font-semibold tracking-tight text-charcoal">
-          {meta.title} Partners
-        </h2>
-        <p className="mt-4 max-w-xl text-[17px] text-steel leading-relaxed">
-          {meta.description}
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-6">
+          <div>
+            <h2 className="text-display-3 font-heading font-semibold tracking-tight text-charcoal">
+              {meta.title}
+            </h2>
+            <p className="mt-2 max-w-lg text-[15px] text-steel leading-relaxed">
+              {meta.description}
+            </p>
+          </div>
+
+          {/* Metadata badges */}
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold text-charcoal tabular-nums">
+              <ShieldCheck className="h-3.5 w-3.5 text-tangerine-500" />
+              {meta.countLabelFn(partnerCount)}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-tangerine-500/20 bg-tangerine-500/[0.04] px-3.5 py-1.5 text-xs font-semibold text-tangerine-600">
+              Authorized OEM
+            </span>
+          </div>
+        </div>
       </motion.div>
 
-      {/* Logo Grid — 6-8 desktop, 4 tablet, 2-3 mobile */}
-      <div role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 md:gap-4 lg:gap-5">
+      {/* ── Logo Grid — 5 desktop, 3-4 tablet, 2 mobile ── */}
+      <div
+        role="list"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4"
+      >
         {partners.map((partner, i) => (
           <BrandLogoCard
             key={partner.slug}
@@ -235,9 +263,3 @@ export function PartnerLogoWall({
     </div>
   );
 }
-
-/* ================================================================== */
-/*  Utility                                                            */
-/* ================================================================== */
-
-import { cn } from "@/lib/utils";

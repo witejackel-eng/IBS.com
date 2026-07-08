@@ -20,8 +20,8 @@ export function PartnerLogo({ name, className, style }: PartnerLogoProps) {
       <Image
         src={logoSrc}
         alt={`${name} logo`}
-        width={140}
-        height={48}
+        width={160}
+        height={56}
         className={className}
         style={style}
       />

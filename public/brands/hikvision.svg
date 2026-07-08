@@ -1,9 +1,7 @@
-<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg" role="img">
-  <title>HIKVISION</title>
-  <text x="120" y="48" text-anchor="middle" dominant-baseline="middle"
-    font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700" font-style="normal"
-    letter-spacing="0.04em" font-size="26" fill="#E2231A" style="text-transform:uppercase">
-    HIKVISION
-  </text>
-  
+<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>Hikvision</title>
+  <text x="150" y="55" text-anchor="middle" dominant-baseline="middle"
+    font-family="'Inter','Segoe UI',system-ui,-apple-system,sans-serif"
+    font-weight="700" letter-spacing="0.02em" font-size="42"
+    fill="#E2231A">Hikvision</text>
 </svg>
