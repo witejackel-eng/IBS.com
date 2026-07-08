@@ -1,18 +1,14 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import { Container } from "@/components/layout/container";
-import { BuildingIllustration, type SegmentSlug } from "./building-illustration";
-import { segments } from "@/lib/content";
+import { CityscapeIllustration } from "./building-illustration";
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
-  const [hoveredBuilding, setHoveredBuilding] = useState<SegmentSlug | null>(null);
-
-  const hoveredSegment = segments.find((s) => s.slug === hoveredBuilding);
 
   return (
     <section
@@ -23,9 +19,9 @@ export function HeroSection() {
       <div className="pointer-events-none absolute inset-0 bg-ambient-glow" />
 
       <Container>
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-8 lg:grid-cols-5 lg:gap-12">
-          {/* Left: headline + copy — 2 cols on lg */}
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+          {/* Left: headline + copy */}
+          <div>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -40,7 +36,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-md text-[clamp(1.75rem,4vw,3.25rem)] font-heading font-semibold leading-[1.1] tracking-tight text-charcoal"
+              className="max-w-md text-[clamp(2rem,4.5vw,3.75rem)] font-heading font-semibold leading-[1.08] tracking-tight text-charcoal"
             >
               Sized to fit
               <br />
@@ -53,34 +49,21 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-5 max-w-sm text-base leading-relaxed text-steel"
+              className="mt-6 max-w-sm md:max-w-md text-base md:text-lg leading-relaxed text-steel"
             >
               Every environment has different communication, networking, AV and
               security requirements. We design systems around how people
               actually work.
             </motion.p>
-
-            {/* Hovered building info — appears below copy */}
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={hoveredSegment ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-steel/80">
-                {hoveredSegment?.summary}
-              </p>
-            </motion.div>
           </div>
 
-          {/* Right: illustration — 3 cols on lg, occupying most of the right half */}
+          {/* Right: isometric cityscape illustration */}
           <motion.div
-            className="lg:col-span-3"
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <BuildingIllustration onHover={setHoveredBuilding} />
+            <CityscapeIllustration />
           </motion.div>
         </div>
       </Container>

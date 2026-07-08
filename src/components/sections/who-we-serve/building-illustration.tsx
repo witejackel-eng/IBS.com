@@ -1,139 +1,240 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 
-export type SegmentSlug = "enterprises" | "hotels" | "government" | "residential" | "soho";
+/* ═══════════════════════════════════════════════════════════════
+   COLOR PALETTE — matches site design tokens
+   ═══════════════════════════════════════════════════════════════ */
+const C = {
+  dark: "#1E293B",
+  mid: "#64748B",
+  light: "#94A3B8",
+  border: "#CBD5E1",
+  pale: "#E2E8F0",
+  wash: "#F1F5F9",
+  white: "#FFFFFF",
+  orange: "#F97316",
+  orangeSoft: "#FDBA74",
+  orangeFaint: "#FFF7ED",
+};
 
-interface BuildingIllustrationProps {
-  onHover?: (slug: SegmentSlug | null) => void;
+/* ═══════════════════════════════════════════════════════════════
+   ISOMETRIC PROJECTION HELPERS
+   Standard isometric: 30° from horizontal, 2:1 pixel ratio
+   ═══════════════════════════════════════════════════════════════ */
+const COS30 = 0.866;
+const SIN30 = 0.5;
+
+/** Project world (x, y, z) → screen (px, py), centered in viewBox */
+function iso(x: number, y: number, z: number): [number, number] {
+  const px = (x - y) * COS30 + 350;
+  const py = (x + y) * SIN30 - z + 320;
+  return [px, py];
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   COLOR TOKENS — hardcoded hex for SVG attribute compatibility
-   ═══════════════════════════════════════════════════════════════ */
-const ORANGE = "#F97316";
-const ORANGE_LIGHT = "#FB923C";
-const ORANGE_DARK = "#EA580C";
-const CHARCOAL = "#1E293B";
-const CHARCOAL_MID = "#334155";
-const STEEL = "#64748B";
-const STEEL_LIGHT = "#94A3B8";
-const BORDER = "#CBD5E1";
-const BG_CARD = "#F1F5F9";
-const WHITE = "#FFFFFF";
+/** Draw an isometric box (front face, right face, top face) */
+function IsoBox({
+  x,
+  y,
+  z,
+  w,
+  d,
+  h,
+  fillFront,
+  fillSide,
+  fillTop,
+  stroke,
+}: {
+  x: number;
+  y: number;
+  z: number;
+  w: number;
+  d: number;
+  h: number;
+  fillFront: string;
+  fillSide: string;
+  fillTop: string;
+  stroke: string;
+}) {
+  // 8 corners of the box
+  const fbl = iso(x, y, z); // front-bottom-left
+  const fbr = iso(x + w, y, z); // front-bottom-right
+  const ftl = iso(x, y, z + h); // front-top-left
+  const ftr = iso(x + w, y, z + h); // front-top-right
+  const bbl = iso(x, y + d, z); // back-bottom-left
+  const bbr = iso(x + w, y + d, z); // back-bottom-right
+  const btl = iso(x, y + d, z + h); // back-top-left
+  const btr = iso(x + w, y + d, z + h); // back-top-right
 
-/* ═══════════════════════════════════════════════════════════════
-   SEGMENT DATA — positions in 800×620 viewBox
-   Pentagon layout: top, upper-right, lower-right, lower-left, upper-left
-   ═══════════════════════════════════════════════════════════════ */
-interface Segment {
-  slug: SegmentSlug;
-  label: string;
-  cx: number;
-  cy: number;
-}
+  const sw = 1.2;
+  const j = "round";
 
-const SEGMENTS: Segment[] = [
-  { slug: "enterprises",      label: "Enterprise",        cx: 400, cy: 72  },
-  { slug: "hotels",           label: "Hotels & Hospitals", cx: 648, cy: 278 },
-  { slug: "soho",             label: "SOHO",              cx: 560, cy: 520 },
-  { slug: "residential",      label: "Residential",        cx: 240, cy: 520 },
-  { slug: "government",       label: "Government",         cx: 152, cy: 278 },
-];
-
-const CENTER = { cx: 400, cy: 300 };
-const CARD_W = 164;
-const CARD_H = 116;
-const CARD_R = 16;
-
-/* ═══════════════════════════════════════════════════════════════
-   TECHNOLOGY ICONS ALONG CONNECTIONS
-   Each has a position (midpoint of connection), SVG path, and label
-   ═══════════════════════════════════════════════════════════════ */
-interface TechIcon {
-  cx: number;
-  cy: number;
-  d: string;
-  label: string;
-  delay: number;
-}
-
-const TECH_ICONS: TechIcon[] = [
-  // Between Enterprise and center (network)
-  { cx: 420, cy: 178, d: "M-6,-2 h12 v8 h-12z M-3,1 h2 M1,1 h2 M-3,4 h2 M1,4 h2", label: "Network", delay: 0 },
-  // Between Government and center (CCTV)
-  { cx: 248, cy: 276, d: "M-5,-5 h6 l3,7 h-12z M7,-3 v2 a2,2 0 1,1 0,0", label: "CCTV", delay: 1.2 },
-  // Between Hotels and center (WiFi)
-  { cx: 552, cy: 276, d: "M-8,-4 a10,10 0 0,1 16,0 M-4,-1 a6,6 0 0,1 8,0 M0,3 a2,2 0 1,0 0,0.01", label: "WiFi", delay: 0.6 },
-  // Between Residential and center (access control)
-  { cx: 316, cy: 424, d: "M-4,-6 v5 a4,4 0 0,0 8,0 v-5z M-2,-1 h4 M-1,2 h2 M0,6 v2", label: "Access", delay: 1.8 },
-  // Between SOHO and center (voice)
-  { cx: 496, cy: 418, d: "M-4,-7 a6,3 0 0,1 8,0 v4 a6,3 0 0,1-8,0z M-1,3 v2 a3,2 0 0,0 2,0 v-2", label: "Voice", delay: 0.3 },
-  // Between Enterprise and Hotels (AV)
-  { cx: 555, cy: 158, d: "M-8,-5 h16 v10 h-16z M0,5 v3 M-3,8 h6", label: "AV", delay: 2.1 },
-  // Between Government and Residential (firewall)
-  { cx: 168, cy: 410, d: "M0,-7 l7,4 v6 l-7,4 l-7,-4 v-6z M-2,-1 h4 M-2,2 h4", label: "Firewall", delay: 0.9 },
-  // Between SOHO and Hotels (server)
-  { cx: 628, cy: 408, d: "M-6,-8 h12 v16 h-12z M-4,-5 h8 M-4,-1 h8 M-4,3 h8", label: "Server", delay: 1.5 },
-  // Between Enterprise and Government (cloud)
-  { cx: 256, cy: 150, d: "M-8,2 a5,5 0 0,1 0.5,-9 a6,4 0 0,1 11,0 a5,5 0 0,1 0.5,9z", label: "Cloud", delay: 2.4 },
-];
-
-/* ═══════════════════════════════════════════════════════════════
-   BUILDING ILLUSTRATIONS — detailed, always-visible at ~0.35 opacity
-   ═══════════════════════════════════════════════════════════════ */
-
-function EnterpriseBuilding() {
   return (
     <g>
-      {/* Main tower */}
-      <rect x={-28} y={-42} width={56} height={48} rx={3} fill={CHARCOAL} />
-      {/* Floor separator lines */}
-      <line x1={-28} y1={-26} x2={28} y2={-26} stroke={BG_CARD} strokeWidth={0.8} />
-      <line x1={-28} y1={-10} x2={28} y2={-10} stroke={BG_CARD} strokeWidth={0.8} />
-      {/* Window grid */}
-      {[-20, -8, 4, 16].map((wx) =>
-        [-38, -32, -20, -16, -4, 2].map((wy) => (
-          <rect key={`${wx}-${wy}`} x={wx} y={wy} width={7} height={4.5} rx={1} fill={WHITE} opacity={0.85} />
-        ))
-      )}
-      {/* Entrance */}
-      <rect x={-6} y={6} width={12} height={8} rx={2} fill={BG_CARD} opacity={0.6} />
-      {/* Antenna */}
-      <line x1={0} y1={-42} x2={0} y2={-50} stroke={CHARCOAL} strokeWidth={1.5} />
-      <circle cx={0} cy={-51} r={2} fill={ORANGE} />
-      {/* Side wing (meeting room) */}
-      <rect x={30} y={-20} width={18} height={26} rx={2} fill={CHARCOAL_MID} />
-      {[-16, -8].map((wy) => (
-        <rect key={wy} x={34} y={wy} width={5} height={4} rx={0.8} fill={WHITE} opacity={0.7} />
-      ))}
+      {/* Left face (visible from this angle) */}
+      <polygon
+        points={`${fbl[0]},${fbl[1]} ${bbl[0]},${bbl[1]} ${btl[0]},${btl[1]} ${ftl[0]},${ftl[1]}`}
+        fill={fillSide}
+        stroke={stroke}
+        strokeWidth={sw}
+        strokeLinejoin={j}
+      />
+      {/* Right face */}
+      <polygon
+        points={`${fbr[0]},${fbr[1]} ${bbr[0]},${bbr[1]} ${btr[0]},${btr[1]} ${ftr[0]},${ftr[1]}`}
+        fill={fillFront}
+        stroke={stroke}
+        strokeWidth={sw}
+        strokeLinejoin={j}
+      />
+      {/* Top face */}
+      <polygon
+        points={`${ftl[0]},${ftl[1]} ${ftr[0]},${ftr[1]} ${btr[0]},${btr[1]} ${btl[0]},${btl[1]}`}
+        fill={fillTop}
+        stroke={stroke}
+        strokeWidth={sw}
+        strokeLinejoin={j}
+      />
     </g>
   );
 }
 
-function HotelHospitalBuilding() {
+/* ═══════════════════════════════════════════════════════════════
+   BUILDING COMPONENTS
+   Each returns an isometric group placed at a world position
+   ═══════════════════════════════════════════════════════════════ */
+
+function EnterpriseTower() {
+  // Tall tower at world position
+  return (
+    <g>
+      {/* Main tower */}
+      <IsoBox x={60} y={40} z={0} w={50} d={50} h={120} fillFront={C.wash} fillSide={C.pale} fillTop={C.white} stroke={C.border} />
+      {/* Side wing (lower) */}
+      <IsoBox x={110} y={50} z={0} w={30} d={30} h={70} fillFront={C.wash} fillSide={C.pale} fillTop={C.white} stroke={C.border} />
+      {/* Windows on front face — 3 columns x 6 rows */}
+      {Array.from({ length: 6 }).map((_, row) =>
+        Array.from({ length: 3 }).map((_, col) => {
+          const wx = 72 + col * 14;
+          const wy = 10 + row * 18;
+          const wz = 15 + row * 0;
+          const [px, py] = iso(wx, 40, wz);
+          return (
+            <rect
+              key={`${row}-${col}`}
+              x={px - 4}
+              y={py - 5}
+              width={8}
+              height={6}
+              rx={1}
+              fill={C.white}
+              stroke={C.border}
+              strokeWidth={0.6}
+              opacity={0.8}
+            />
+          );
+        })
+      )}
+      {/* Windows on right face — 3 rows x 2 cols */}
+      {Array.from({ length: 4 }).map((_, row) =>
+        [0, 1].map((col) => {
+          const wx = 110 + col * 0;
+          const wy = 55 + row * 14;
+          const wz = 10 + col * 12;
+          const [px, py] = iso(wx, wy, wz);
+          return (
+            <rect
+              key={`r${row}-${col}`}
+              x={px - 3}
+              y={py - 4}
+              width={6}
+              height={5}
+              rx={0.8}
+              fill={C.white}
+              stroke={C.border}
+              strokeWidth={0.5}
+              opacity={0.7}
+            />
+          );
+        })
+      )}
+      {/* Antenna */}
+      {(() => {
+        const [bx, by] = iso(85, 65, 120);
+        const [tx, ty] = iso(85, 65, 140);
+        return (
+          <g>
+            <line x1={bx} y1={by} x2={tx} y2={ty} stroke={C.mid} strokeWidth={1.2} />
+            <circle cx={tx} cy={ty} r={2.5} fill={C.orange} />
+            {/* WiFi waves from antenna */}
+            <path d={`M${tx - 8},${ty - 3} a10,8 0 0,1 16,0`} fill="none" stroke={C.orange} strokeWidth={0.8} opacity={0.5} />
+            <path d={`M${tx - 4},${ty - 1} a6,5 0 0,1 8,0`} fill="none" stroke={C.orange} strokeWidth={0.8} opacity={0.7} />
+          </g>
+        );
+      })()}
+      {/* Entrance */}
+      {(() => {
+        const [px, py] = iso(78, 40, 0);
+        return (
+          <rect x={px - 6} y={py - 10} width={12} height={10} rx={1.5} fill={C.orangeFaint} stroke={C.orange} strokeWidth={0.8} opacity={0.6} />
+        );
+      })()}
+    </g>
+  );
+}
+
+function HotelHospital() {
   return (
     <g>
       {/* Main building */}
-      <rect x={-30} y={-38} width={60} height={46} rx={3} fill={CHARCOAL} />
-      {/* Floor separators */}
-      <line x1={-30} y1={-22} x2={30} y2={-22} stroke={BG_CARD} strokeWidth={0.8} />
-      <line x1={-30} y1={-6} x2={30} y2={-6} stroke={BG_CARD} strokeWidth={0.8} />
-      {/* Window grid */}
-      {[-22, -10, 2, 14, 22].map((wx) =>
-        [-34, -28, -16, -12, 0, -2].map((wy) => (
-          <rect key={`${wx}-${wy}`} x={wx} y={wy} width={6} height={4} rx={0.8} fill={WHITE} opacity={0.85} />
-        ))
+      <IsoBox x={160} y={30} z={0} w={55} d={55} h={95} fillFront={C.wash} fillSide={C.pale} fillTop={C.white} stroke={C.border} />
+      {/* Windows on front face — 4 cols x 5 rows */}
+      {Array.from({ length: 5 }).map((_, row) =>
+        Array.from({ length: 4 }).map((_, col) => {
+          const wx = 168 + col * 12;
+          const wz = 12 + row * 16;
+          const [px, py] = iso(wx, 30, wz);
+          return (
+            <rect
+              key={`h${row}-${col}`}
+              x={px - 4}
+              y={py - 5}
+              width={7}
+              height={5.5}
+              rx={0.8}
+              fill={C.white}
+              stroke={C.border}
+              strokeWidth={0.5}
+              opacity={0.85}
+            />
+          );
+        })
       )}
+      {/* Medical cross on roof */}
+      {(() => {
+        const [cx, cy] = iso(187, 57, 95);
+        return (
+          <g>
+            <rect x={cx - 1.5} y={cy - 8} width={3} height={16} rx={1} fill={C.orange} opacity={0.85} />
+            <rect x={cx - 8} y={cy - 1.5} width={16} height={3} rx={1} fill={C.orange} opacity={0.85} />
+          </g>
+        );
+      })()}
       {/* Entrance canopy */}
-      <path d="M-10,8 L0,2 L10,8" fill="none" stroke={BG_CARD} strokeWidth={1.2} />
-      {/* Medical cross (top right) */}
-      <rect x={18} y={-48} width={3} height={10} rx={1} fill={ORANGE} />
-      <rect x={14.5} y={-45.5} width={10} height={3} rx={1} fill={ORANGE} />
-      {/* Rooftop equipment */}
-      <rect x={-20} y={-44} width={8} height={6} rx={1} fill={CHARCOAL_MID} />
-      <rect x={-18} y={-42} width={4} height={2} rx={0.5} fill={ORANGE} opacity={0.6} />
+      {(() => {
+        const [lx, ly] = iso(178, 30, 5);
+        const [rx, ry] = iso(198, 30, 5);
+        const [mx, my] = iso(188, 30, 12);
+        return (
+          <path d={`M${lx},${ly} Q${mx},${my - 8} ${rx},${ry}`} fill="none" stroke={C.mid} strokeWidth={1} />
+        );
+      })()}
+      {/* Entrance door */}
+      {(() => {
+        const [px, py] = iso(183, 30, 0);
+        return <rect x={px - 5} y={py - 8} width={10} height={8} rx={1.5} fill={C.orangeFaint} stroke={C.orange} strokeWidth={0.7} opacity={0.5} />;
+      })()}
     </g>
   );
 }
@@ -141,553 +242,370 @@ function HotelHospitalBuilding() {
 function GovernmentBuilding() {
   return (
     <g>
-      {/* Pediment / triangle roof */}
-      <path d="M-34,-18 L0,-34 L34,-18 Z" fill={CHARCOAL} />
       {/* Main building body */}
-      <rect x={-30} y={-18} width={60} height={30} rx={2} fill={CHARCOAL} />
-      {/* Columns */}
-      {[-18, -6, 6, 18].map((cx) => (
-        <rect key={cx} x={cx - 2.5} y={-16} width={5} height={28} rx={1.2} fill={BG_CARD} opacity={0.5} />
-      ))}
+      <IsoBox x={-30} y={50} z={0} w={60} d={50} h={65} fillFront={C.wash} fillSide={C.pale} fillTop={C.white} stroke={C.border} />
+      {/* Pediment — triangular roof */}
+      {(() => {
+        const [fl, fyl] = iso(-30, 50, 65);
+        const [fr, fyr] = iso(30, 50, 65);
+        const [tl, tly] = iso(0, 50, 88);
+        const [bl, bly] = iso(-30, 100, 65);
+        const [br, bry] = iso(30, 100, 65);
+        const [tbl, tbly] = iso(0, 100, 88);
+        return (
+          <g>
+            {/* Front pediment */}
+            <polygon
+              points={`${fl},${fyl} ${fr},${fyr} ${tl},${tly}`}
+              fill={C.white}
+              stroke={C.border}
+              strokeWidth={1.2}
+              strokeLinejoin="round"
+            />
+            {/* Right pediment */}
+            <polygon
+              points={`${fr},${fyr} ${br},${bry} ${tbl},${tbly} ${tl},${tly}`}
+              fill={C.wash}
+              stroke={C.border}
+              strokeWidth={1.2}
+              strokeLinejoin="round"
+            />
+          </g>
+        );
+      })()}
+      {/* Columns on front face */}
+      {[-15, 0, 15].map((cx) => {
+        const [px, py] = iso(cx, 50, 8);
+        const [px2, py2] = iso(cx, 50, 60);
+        return (
+          <line
+            key={cx}
+            x1={px}
+            y1={py}
+            x2={px2}
+            y2={py2}
+            stroke={C.light}
+            strokeWidth={2.5}
+            strokeLinecap="round"
+          />
+        );
+      })}
       {/* Steps */}
-      <rect x={-34} y={12} width={68} height={4} rx={1} fill={CHARCOAL} />
-      <rect x={-30} y={8} width={60} height={4} rx={1} fill={CHARCOAL_MID} />
-      {/* Windows between columns */}
-      {[-12, 0, 12].map((wx) =>
-        [-12, -4].map((wy) => (
-          <rect key={`${wx}-${wy}`} x={wx - 3} y={wy} width={6} height={4} rx={0.8} fill={WHITE} opacity={0.7} />
-        ))
-      )}
+      {(() => {
+        const [s1l, s1ly] = iso(-35, 48, 0);
+        const [s1r, s1ry] = iso(35, 48, 0);
+        const [s1bl, s1bly] = iso(-35, 102, 0);
+        const [s1br, s1bry] = iso(35, 102, 0);
+        return (
+          <polygon
+            points={`${s1l},${s1ly} ${s1r},${s1ry} ${s1br},${s1bry} ${s1bl},${s1bly}`}
+            fill={C.pale}
+            stroke={C.border}
+            strokeWidth={0.8}
+          />
+        );
+      })()}
       {/* Flagpole */}
-      <line x1={26} y1={-34} x2={26} y2={-46} stroke={CHARCOAL} strokeWidth={1} />
-      <rect x={26} y={-46} width={8} height={5} rx={0.5} fill={ORANGE} opacity={0.8} />
-      {/* Security gate indicator */}
-      <rect x={-8} y={14} width={16} height={3} rx={1} fill={ORANGE} opacity={0.5} />
+      {(() => {
+        const [bx, by] = iso(22, 55, 88);
+        const [tx, ty] = iso(22, 55, 108);
+        return (
+          <g>
+            <line x1={bx} y1={by} x2={tx} y2={ty} stroke={C.mid} strokeWidth={1} />
+            <rect x={tx} y={ty} width={7} height={4} rx={0.5} fill={C.orange} opacity={0.8} />
+          </g>
+        );
+      })()}
     </g>
   );
 }
 
-function ResidentialBuilding() {
+function ResidentialHouse() {
   return (
     <g>
-      {/* Pitched roof */}
-      <path d="M-30,-4 L0,-28 L30,-4 Z" fill={CHARCOAL} />
-      {/* Chimney */}
-      <rect x={16} y={-24} width={6} height={14} rx={1} fill={CHARCOAL_MID} />
       {/* House body */}
-      <rect x={-26} y={-4} width={52} height={24} rx={2} fill={CHARCOAL} />
+      <IsoBox x={260} y={55} z={0} w={45} d={45} h={40} fillFront={C.wash} fillSide={C.pale} fillTop={C.white} stroke={C.border} />
+      {/* Pitched roof */}
+      {(() => {
+        const [fl, fyl] = iso(255, 55, 40);
+        const [fr, fyr] = iso(305, 55, 40);
+        const [peak, peaky] = iso(280, 78, 62);
+        const [bl, bly] = iso(255, 100, 40);
+        const [br, bry] = iso(305, 100, 40);
+        const [bpeak, bpeaky] = iso(280, 100, 62);
+        return (
+          <g>
+            <polygon points={`${fl},${fyl} ${fr},${fyr} ${peak},${peaky}`} fill={C.white} stroke={C.border} strokeWidth={1.2} strokeLinejoin="round" />
+            <polygon points={`${fr},${fyr} ${br},${bry} ${bpeak},${bpeaky} ${peak},${peaky}`} fill={C.wash} stroke={C.border} strokeWidth={1.2} strokeLinejoin="round" />
+          </g>
+        );
+      })()}
       {/* Door */}
-      <rect x={-5} y={4} width={10} height={16} rx={5} fill={BG_CARD} opacity={0.5} />
-      <circle cx={3} cy={12} r={1.2} fill={ORANGE} opacity={0.7} />
+      {(() => {
+        const [px, py] = iso(278, 55, 0);
+        return <rect x={px - 4} y={py - 10} width={8} height={10} rx={4} fill={C.orangeFaint} stroke={C.orange} strokeWidth={0.7} opacity={0.6} />;
+      })()}
       {/* Windows */}
-      <rect x={-20} y={0} width={10} height={8} rx={1.5} fill={WHITE} opacity={0.8} />
-      <rect x={10} y={0} width={10} height={8} rx={1.5} fill={WHITE} opacity={0.8} />
-      {/* WiFi indicator */}
-      <path d="M22,-14 a5,5 0 0,1 0,4" fill="none" stroke={ORANGE} strokeWidth={1.2} strokeLinecap="round" />
-      <path d="M22,-10 a3,3 0 0,1 0,2.5" fill="none" stroke={ORANGE} strokeWidth={1.2} strokeLinecap="round" />
-      <circle cx={22} cy={-7} r={1.2} fill={ORANGE} />
-      {/* CCTV camera (garage) */}
-      <rect x={-28} y={14} width={14} height={6} rx={1} fill={CHARCOAL_MID} />
+      {(() => {
+        const [w1x, w1y] = iso(268, 55, 20);
+        const [w2x, w2y] = iso(290, 55, 20);
+        return (
+          <g>
+            <rect x={w1x - 4} y={w1y - 4} width={8} height={6} rx={1} fill={C.white} stroke={C.border} strokeWidth={0.6} />
+            <rect x={w2x - 4} y={w2y - 4} width={8} height={6} rx={1} fill={C.white} stroke={C.border} strokeWidth={0.6} />
+          </g>
+        );
+      })()}
+      {/* Chimney */}
+      {(() => {
+        const [b1, b1y] = iso(295, 60, 40);
+        const [t1, t1y] = iso(295, 60, 52);
+        const [b2, b2y] = iso(302, 60, 40);
+        const [t2, t2y] = iso(302, 60, 52);
+        const [b3, b3y] = iso(302, 63, 40);
+        const [t3, t3y] = iso(302, 63, 52);
+        return (
+          <polygon
+            points={`${b1},${b1y} ${b2},${b2y} ${t2},${t2y} ${t1},${t1y}`}
+            fill={C.pale}
+            stroke={C.border}
+            strokeWidth={0.8}
+          />
+        );
+      })()}
+      {/* WiFi router indicator on roof */}
+      {(() => {
+        const [cx, cy] = iso(270, 70, 48);
+        return (
+          <g opacity={0.7}>
+            <path d={`M${cx - 5},${cy - 4} a7,5 0 0,1 10,0`} fill="none" stroke={C.orange} strokeWidth={0.8} strokeLinecap="round" />
+            <path d={`M${cx - 2},${cy - 2} a4,3 0 0,1 4,0`} fill="none" stroke={C.orange} strokeWidth={0.8} strokeLinecap="round" />
+            <circle cx={cx} cy={cy} r={1} fill={C.orange} />
+          </g>
+        );
+      })()}
     </g>
   );
 }
 
-function SohoBuilding() {
+function SohoOffice() {
   return (
     <g>
       {/* Small office building */}
-      <rect x={-24} y={-30} width={48} height={36} rx={3} fill={CHARCOAL} />
-      {/* Window grid */}
-      {[-16, -4, 8].map((wx) =>
-        [-26, -18, -10].map((wy) => (
-          <rect key={`${wx}-${wy}`} x={wx} y={wy} width={7} height={4.5} rx={0.8} fill={WHITE} opacity={0.85} />
-        ))
+      <IsoBox x={-60} y={100} z={0} w={40} d={40} h={55} fillFront={C.wash} fillSide={C.pale} fillTop={C.white} stroke={C.border} />
+      {/* Windows — 2 cols x 3 rows */}
+      {Array.from({ length: 3 }).map((_, row) =>
+        [0, 1].map((col) => {
+          const wx = -52 + col * 16;
+          const wz = 10 + row * 15;
+          const [px, py] = iso(wx, 100, wz);
+          return (
+            <rect
+              key={`s${row}-${col}`}
+              x={px - 4}
+              y={py - 4.5}
+              width={7}
+              height={5}
+              rx={0.8}
+              fill={C.white}
+              stroke={C.border}
+              strokeWidth={0.5}
+              opacity={0.85}
+            />
+          );
+        })
       )}
-      {/* Entrance */}
-      <rect x={-5} y={6} width={10} height={6} rx={1.5} fill={BG_CARD} opacity={0.5} />
-      {/* Signage bar */}
-      <rect x={-20} y={-34} width={40} height={4} rx={1} fill={CHARCOAL_MID} />
-      {/* Laptop on desk */}
-      <rect x={-10} y={-22} width={14} height={9} rx={1} fill={WHITE} opacity={0.4} />
-      <rect x={-12} y={-13} width={18} height={2} rx={0.5} fill={CHARCOAL_MID} />
-      {/* Printer */}
-      <rect x={8} y={-22} width={10} height={6} rx={1} fill={CHARCOAL_MID} />
-      <rect x={10} y={-20} width={6} height={2} rx={0.5} fill={WHITE} opacity={0.3} />
-      {/* Router */}
-      <rect x={-18} y={-8} width={8} height={4} rx={1} fill={ORANGE} opacity={0.4} />
+      {/* Door */}
+      {(() => {
+        const [px, py] = iso(-40, 100, 0);
+        return <rect x={px - 4} y={py - 8} width={8} height={8} rx={1.5} fill={C.orangeFaint} stroke={C.orange} strokeWidth={0.7} opacity={0.5} />;
+      })()}
+      {/* Signage */}
+      {(() => {
+        const [px, py] = iso(-55, 100, 50);
+        const [px2, py2] = iso(-25, 100, 50);
+        const [px3, py3] = iso(-55, 100, 55);
+        const [px4, py4] = iso(-25, 100, 55);
+        return (
+          <polygon
+            points={`${px},${py} ${px2},${py2} ${px4},${py4} ${px3},${py3}`}
+            fill={C.orange}
+            opacity={0.3}
+            stroke={C.orange}
+            strokeWidth={0.5}
+          />
+        );
+      })()}
     </g>
   );
 }
 
-function BuildingScene({ slug, isHovered }: { slug: SegmentSlug; isHovered: boolean }) {
-  const opacity = isHovered ? 0.5 : 0.35;
-  return (
-    <motion.g
-      animate={{ opacity }}
-      transition={{ duration: 0.4 }}
-      style={{ willChange: "opacity" }}
-    >
-      {slug === "enterprises" && <EnterpriseBuilding />}
-      {slug === "hotels" && <HotelHospitalBuilding />}
-      {slug === "government" && <GovernmentBuilding />}
-      {slug === "residential" && <ResidentialBuilding />}
-      {slug === "soho" && <SohoBuilding />}
-    </motion.g>
-  );
-}
-
 /* ═══════════════════════════════════════════════════════════════
-   CONNECTION PATH — smooth quadratic bezier from center to card
+   NETWORK CONNECTION LINES
+   Thin lines connecting buildings along the "ground"
    ═══════════════════════════════════════════════════════════════ */
-function getConnectionPath(to: Segment): string {
-  const dx = to.cx - CENTER.cx;
-  const dy = to.cy - CENTER.cy;
-  const mx = CENTER.cx + dx * 0.45 + dy * 0.12;
-  const my = CENTER.cy + dy * 0.45 - dx * 0.12;
-  return `M ${CENTER.cx} ${CENTER.cy} Q ${mx} ${my} ${to.cx} ${to.cy}`;
-}
+function NetworkLines() {
+  // Ground-level connection points for each building
+  const points: [number, number, number][] = [
+    [-20, 120, 0],   // SOHO
+    [0, 100, 0],     // Government
+    [85, 90, 0],     // Enterprise
+    [187, 85, 0],    // Hotel/Hospital
+    [282, 100, 0],   // Residential
+  ];
 
-/* ═══════════════════════════════════════════════════════════════
-   PULSE DOT — travels along a connection path
-   ═══════════════════════════════════════════════════════════════ */
-function PulseDot({ path, delay, isActive }: { path: string; delay: number; isActive: boolean }) {
-  return (
-    <circle r={isActive ? 3.5 : 2.5} fill={ORANGE} opacity={isActive ? 1 : 0.6}>
-      <animateMotion
-        dur={isActive ? "2s" : "3.5s"}
-        begin={`${delay}s`}
-        repeatCount="indefinite"
-        path={path}
-      />
-      <animate
-        attributeName="opacity"
-        values={isActive ? "1;0.3;1" : "0.6;0.15;0.6"}
-        dur={isActive ? "2s" : "3.5s"}
-        begin={`${delay}s`}
-        repeatCount="indefinite"
-      />
-    </circle>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   TECH ICON — floating icon along connection, gentle pulse
-   ═══════════════════════════════════════════════════════════════ */
-function TechIconPill({ icon, reduced }: { icon: TechIcon; reduced: boolean }) {
-  if (reduced) return null;
+  const projected = points.map(([x, y, z]) => iso(x, y, z));
 
   return (
     <g>
-      <motion.circle
-        cx={icon.cx}
-        cy={icon.cy}
-        r={16}
-        fill={WHITE}
-        stroke={BORDER}
-        strokeWidth={1}
-        animate={{ opacity: [0.7, 1, 0.7] }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: icon.delay,
-        }}
-        style={{ willChange: "opacity" }}
-      />
-      <motion.g
-        transform={`translate(${icon.cx}, ${icon.cy})`}
-        stroke={ORANGE}
-        strokeWidth={1.4}
+      {/* Main backbone line */}
+      <polyline
+        points={projected.map(([x, y]) => `${x},${y}`).join(" ")}
+        fill="none"
+        stroke={C.pale}
+        strokeWidth={1.8}
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+      {/* Orange accent overlay */}
+      <polyline
+        points={projected.map(([x, y]) => `${x},${y}`).join(" ")}
         fill="none"
-        animate={{ opacity: [0.6, 1, 0.6] }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: icon.delay,
-        }}
-        style={{ willChange: "opacity" }}
+        stroke={C.orange}
+        strokeWidth={1.2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity={0.3}
+        strokeDasharray="4 8"
       >
-        <path d={icon.d} transform="scale(0.85)" />
-      </motion.g>
+        <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="3s" repeatCount="indefinite" />
+      </polyline>
+      {/* Connection dots at each building */}
+      {projected.map(([px, py], i) => (
+        <circle key={i} cx={px} cy={py} r={2.5} fill={C.orange} opacity={0.6}>
+          <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.5s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
+        </circle>
+      ))}
     </g>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   ENVIRONMENT CARD — white card with building, label, accent
+   FLOATING TECH ICONS — minimal, placed near relevant buildings
    ═══════════════════════════════════════════════════════════════ */
-function EnvironmentCard({
-  segment,
-  isHovered,
-  onHover,
-  index,
-  reduced,
-}: {
-  segment: Segment;
-  isHovered: boolean;
-  onHover: (slug: SegmentSlug | null) => void;
-  index: number;
-  reduced: boolean;
-}) {
-  const x = segment.cx - CARD_W / 2;
-  const y = segment.cy - CARD_H / 2;
-
+function TechIcon({ x, y, z, d, delay }: { x: number; y: number; z: number; d: string; delay: number }) {
+  const [px, py] = iso(x, y, z);
   return (
-    <motion.g
-      onMouseEnter={() => onHover(segment.slug)}
-      onMouseLeave={() => onHover(null)}
-      style={{ cursor: "pointer" }}
-    >
-      {/* Wider invisible hit area for easier interaction */}
-      <rect
-        x={x - 16}
-        y={y - 20}
-        width={CARD_W + 32}
-        height={CARD_H + 36}
-        fill="transparent"
-      />
-
-      {/* Card shadow (offset) */}
-      <rect
-        x={x + 2}
-        y={y + 3}
-        width={CARD_W}
-        height={CARD_H}
-        rx={CARD_R}
-        fill="#94A3B8"
-        opacity={isHovered ? 0.12 : 0.06}
-        style={{ transition: "opacity 0.3s" }}
-      />
-
-      {/* Card body — lifts on hover */}
-      <motion.rect
-        x={x}
-        y={y}
-        width={CARD_W}
-        height={CARD_H}
-        rx={CARD_R}
-        fill={WHITE}
-        stroke={isHovered ? ORANGE : BORDER}
-        strokeWidth={isHovered ? 1.8 : 1}
-        animate={isHovered ? { y: Number(y) - 8 } : { y: Number(y) }}
-        transition={{ type: "spring", stiffness: 400, damping: 28 }}
-        style={{ willChange: "transform" }}
-      />
-
-      {/* Orange accent top bar — always visible */}
-      <rect
-        x={x + 28}
-        y={y}
-        width={CARD_W - 56}
-        height={3}
-        rx={1.5}
-        fill={ORANGE}
-        opacity={isHovered ? 1 : 0.7}
-        style={{ transition: "opacity 0.3s" }}
-      />
-
-      {/* Building illustration — centered in upper card area */}
-      <g transform={`translate(${segment.cx}, ${segment.cy - 10})`}>
-        <BuildingScene slug={segment.slug} isHovered={isHovered} />
+    <g opacity={0.55}>
+      <circle cx={px} cy={py} r={9} fill={C.white} stroke={C.border} strokeWidth={0.7} />
+      <g transform={`translate(${px},${py})`} stroke={C.orange} strokeWidth={1.1} strokeLinecap="round" strokeLinejoin="round" fill="none">
+        <path d={d} transform="scale(0.55)" />
       </g>
+      <animate
+        attributeName="opacity"
+        values="0.55;0.3;0.55"
+        dur="4s"
+        begin={`${delay}s`}
+        repeatCount="indefinite"
+      />
+    </g>
+  );
+}
 
-      {/* Label — always visible below building */}
-      <text
-        x={segment.cx}
-        y={y + CARD_H - 14}
-        textAnchor="middle"
-        fill={isHovered ? ORANGE_DARK : CHARCOAL}
-        fontSize={12}
-        fontWeight={700}
-        fontFamily="var(--font-heading, system-ui)"
-        letterSpacing="0.02em"
-        style={{ transition: "fill 0.3s", pointerEvents: "none" }}
-      >
-        {segment.label}
-      </text>
-
-      {/* Small tech dot indicators — always visible at bottom of card */}
-      <g transform={`translate(${segment.cx - 12}, ${y + CARD_H - 6})`}>
-        {[0, 1, 2].map((i) => (
-          <circle
-            key={i}
-            cx={i * 12}
-            cy={0}
-            r={2.5}
-            fill={isHovered ? ORANGE : BORDER}
-            style={{ transition: "fill 0.3s" }}
-          />
-        ))}
-      </g>
-
-      {/* Floating animation when not hovered */}
-      {!reduced && !isHovered && (
-        <motion.g
-          custom={index}
-          animate={{
-            y: [0, -3, 0],
-          }}
-          transition={{
-            duration: 5 + index * 0.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: index * 0.4,
-          }}
-          style={{ willChange: "transform" }}
-        >
-          {/* Invisible spacer — parent motion.g handles the float */}
-        </motion.g>
-      )}
-    </motion.g>
+function TechIcons() {
+  return (
+    <g>
+      {/* WiFi near Enterprise antenna */}
+      <TechIcon x={95} y={50} z={132} d="M-8,-4 a10,10 0 0,1 16,0 M-4,-1 a6,6 0 0,1 8,0 M0,3 a2,2 0 1,0 0,0.01" delay={0} />
+      {/* CCTV near Government */}
+      <TechIcon x={-10} y={60} z={40} d="M-5,-5 h6 l3,7 h-12z M7,-3 v2 a2,2 0 1,1 0,0" delay={1.5} />
+      {/* Server near SOHO */}
+      <TechIcon x={-55} y={95} z={30} d="M-6,-8 h12 v16 h-12z M-4,-5 h8 M-4,-1 h8 M-4,3 h8" delay={0.8} />
+      {/* Cloud above center */}
+      <TechIcon x={130} y={30} z={115} d="M-8,2 a5,5 0 0,1 0.5,-9 a6,4 0 0,1 11,0 a5,5 0 0,1 0.5,9z" delay={2.2} />
+      {/* Voice/phone near Hotel */}
+      <TechIcon x={210} y={40} z={50} d="M-4,-7 a6,3 0 0,1 8,0 v4 a6,3 0 0,1-8,0z M-1,3 v2 a3,2 0 0,0 2,0 v-2" delay={0.4} />
+      {/* AV display near Enterprise */}
+      <TechIcon x={145} y={55} z={45} d="M-8,-5 h16 v10 h-16z M0,5 v3 M-3,8 h6" delay={1.8} />
+      {/* Access control near Residential */}
+      <TechIcon x={310} y={70} z={25} d="M-4,-6 v5 a4,4 0 0,0 8,0 v-5z M-2,-1 h4 M-1,2 h2" delay={3.0} />
+      {/* Network switch near SOHO/Enterprise connection */}
+      <TechIcon x={20} y={85} z={8} d="M-6,-2 h12 v8 h-12z M-3,1 a1,1 0 1,0 0,0.01 M1,1 a1,1 0 1,0 0,0.01 M-1,5 a1,1 0 1,0 0,0.01" delay={1.1} />
+    </g>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   CENTER IBS HUB — the engineering hub node
+   GROUND PLANE — subtle isometric ground surface
    ═══════════════════════════════════════════════════════════════ */
-function IbsHub({ hovered, reduced }: { hovered: boolean; reduced: boolean }) {
+function GroundPlane() {
+  const tl = iso(-100, 130, -2);
+  const tr = iso(350, 130, -2);
+  const br = iso(350, -30, -2);
+  const bl = iso(-100, -30, -2);
+
   return (
-    <motion.g
-      animate={
-        hovered
-          ? { scale: 1.06 }
-          : reduced
-            ? {}
-            : { scale: [1, 1.015, 1] }
-      }
-      transition={
-        hovered
-          ? { type: "spring", stiffness: 350, damping: 22 }
-          : { duration: 4, repeat: Infinity, ease: "easeInOut" }
-      }
-      style={{ transformOrigin: `${CENTER.cx}px ${CENTER.cy}px`, willChange: "transform" }}
-    >
-      {/* Outer glow ring */}
-      <circle
-        cx={CENTER.cx}
-        cy={CENTER.cy}
-        r={62}
-        fill="none"
-        stroke={hovered ? ORANGE : BORDER}
-        strokeWidth={1.2}
-        strokeDasharray={hovered ? "none" : "4 4"}
-        opacity={hovered ? 0.8 : 0.4}
-        style={{ transition: "stroke 0.3s, opacity 0.3s" }}
-      />
-
-      {/* Background circle fill */}
-      <circle
-        cx={CENTER.cx}
-        cy={CENTER.cy}
-        r={52}
-        fill={WHITE}
-        stroke={hovered ? ORANGE : CHARCOAL}
-        strokeWidth={hovered ? 2 : 1.5}
-        style={{ transition: "stroke 0.3s, stroke-width 0.3s" }}
-      />
-
-      {/* Orange ring on hover */}
-      <motion.circle
-        cx={CENTER.cx}
-        cy={CENTER.cy}
-        r={52}
-        fill="none"
-        stroke={ORANGE}
-        strokeWidth={2.5}
-        animate={{ opacity: hovered ? 0.3 : 0 }}
-        transition={{ duration: 0.3 }}
-      />
-
-      {/* IBS text */}
-      <text
-        x={CENTER.cx}
-        y={CENTER.cy - 6}
-        textAnchor="middle"
-        dominantBaseline="central"
-        fill={CHARCOAL}
-        fontSize={28}
-        fontWeight={800}
-        fontFamily="var(--font-heading, system-ui)"
-        letterSpacing="0.06em"
-      >
-        IBS
-      </text>
-
-      {/* Subtitle */}
-      <text
-        x={CENTER.cx}
-        y={CENTER.cy + 16}
-        textAnchor="middle"
-        fill={STEEL}
-        fontSize={7.5}
-        fontWeight={600}
-        fontFamily="var(--font-heading, system-ui)"
-        letterSpacing="0.16em"
-      >
-        ENGINEERING HUB
-      </text>
-    </motion.g>
+    <polygon
+      points={`${tl[0]},${tl[1]} ${tr[0]},${tr[1]} ${br[0]},${br[1]} ${bl[0]},${bl[1]}`}
+      fill={C.wash}
+      opacity={0.4}
+    />
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MAIN ILLUSTRATION COMPONENT
+   MAIN ILLUSTRATION
    ═══════════════════════════════════════════════════════════════ */
-export function BuildingIllustration({ onHover }: BuildingIllustrationProps) {
+export function CityscapeIllustration() {
   const ref = useRef<SVGSVGElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.15 });
-  const [hovered, setHovered] = useState<SegmentSlug | null>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const prefersReduced = useReducedMotion();
   const reduced = prefersReduced === true;
-
-  const handleHover = useCallback(
-    (slug: SegmentSlug | null) => {
-      setHovered(slug);
-      onHover?.(slug);
-    },
-    [onHover]
-  );
 
   return (
     <motion.svg
       ref={ref}
-      viewBox="0 0 800 620"
+      viewBox="0 0 700 480"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-full max-w-3xl lg:max-w-4xl"
-      initial={{ opacity: 0, y: 30 }}
+      className="w-full h-auto"
+      initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      aria-label="Interactive diagram showing IBS as the central engineering hub connecting technology solutions across Enterprise, Hotels and Hospitals, Government, Residential, and SOHO environments"
       role="img"
+      aria-label="Premium illustration showing an integrated technology cityscape with enterprise offices, hotels, hospitals, government buildings, residential homes, and small offices connected by network infrastructure"
     >
       <defs>
-        {/* Radial glow behind center */}
-        <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor={ORANGE} stopOpacity={0.08} />
-          <stop offset="60%" stopColor={ORANGE} stopOpacity={0.02} />
-          <stop offset="100%" stopColor={ORANGE} stopOpacity={0} />
-        </radialGradient>
-
-        {/* Glow filter for active connections */}
-        <filter id="connGlow" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation={4} />
-        </filter>
-
-        {/* Subtle card shadow */}
-        <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
-          <feDropShadow dx={0} dy={2} stdDeviation={6} floodColor="#94A3B8" floodOpacity={0.1} />
-        </filter>
+        <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={C.white} stopOpacity={0} />
+          <stop offset="100%" stopColor={C.wash} stopOpacity={0.3} />
+        </linearGradient>
       </defs>
 
-      {/* ── Background: soft radial gradient ── */}
-      <circle cx={CENTER.cx} cy={CENTER.cy} r={280} fill="url(#hubGlow)" />
+      {/* Background gradient */}
+      <rect width="700" height="480" fill="url(#skyFade)" />
 
-      {/* ── Subtle orbit arcs (decorative) ── */}
-      {!reduced && (
-        <g opacity={0.2}>
-          <circle
-            cx={CENTER.cx}
-            cy={CENTER.cy}
-            r={120}
-            fill="none"
-            stroke={BORDER}
-            strokeWidth={0.6}
-            strokeDasharray="3 8"
-          />
-          <circle
-            cx={CENTER.cx}
-            cy={CENTER.cy}
-            r={220}
-            fill="none"
-            stroke={BORDER}
-            strokeWidth={0.5}
-            strokeDasharray="2 10"
-          />
-        </g>
-      )}
+      {/* Floating container — subtle vertical drift */}
+      <motion.g
+        animate={reduced ? {} : { y: [0, -3, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ willChange: "transform" }}
+      >
+        {/* Ground plane */}
+        <GroundPlane />
 
-      {/* ── Connection lines ── */}
-      {SEGMENTS.map((seg, i) => {
-        const path = getConnectionPath(seg);
-        const isActive = hovered === seg.slug;
+        {/* Network backbone */}
+        {!reduced && <NetworkLines />}
 
-        return (
-          <g key={`conn-${seg.slug}`}>
-            {/* Base line — always visible, subtle */}
-            <path
-              d={path}
-              fill="none"
-              stroke={isActive ? ORANGE : STEEL_LIGHT}
-              strokeWidth={isActive ? 1.8 : 1}
-              opacity={isActive ? 0.9 : 0.35}
-              style={{ transition: "stroke 0.35s, stroke-width 0.35s, opacity 0.35s" }}
-            />
+        {/* Buildings — rendered back to front for proper overlap */}
+        <GovernmentBuilding />
+        <SohoOffice />
+        <EnterpriseTower />
+        <HotelHospital />
+        <ResidentialHouse />
 
-            {/* Glow layer on active */}
-            {!reduced && (
-              <path
-                d={path}
-                fill="none"
-                stroke={ORANGE}
-                strokeWidth={5}
-                filter="url(#connGlow)"
-                opacity={isActive ? 0.25 : 0}
-                style={{ transition: "opacity 0.35s" }}
-              />
-            )}
-
-            {/* Animated dash for visual interest */}
-            {!reduced && (
-              <path
-                d={path}
-                fill="none"
-                stroke={ORANGE}
-                strokeWidth={isActive ? 1.5 : 0.8}
-                strokeDasharray={isActive ? "none" : "6 10"}
-                opacity={isActive ? 0 : 0.2}
-                style={{ transition: "opacity 0.35s" }}
-              >
-                <animate
-                  attributeName="stroke-dashoffset"
-                  from="0"
-                  to="-32"
-                  dur="4s"
-                  repeatCount="indefinite"
-                  begin={`${i * 0.5}s`}
-                />
-              </path>
-            )}
-
-            {/* Pulse dot traveling along path */}
-            {!reduced && (
-              <PulseDot path={path} delay={i * 0.7} isActive={isActive} />
-            )}
-          </g>
-        );
-      })}
-
-      {/* ── Tech icons along connections ── */}
-      {TECH_ICONS.map((icon) => (
-        <TechIconPill key={icon.label} icon={icon} reduced={reduced} />
-      ))}
-
-      {/* ── Center IBS hub ── */}
-      <IbsHub hovered={!!hovered} reduced={reduced} />
-
-      {/* ── Environment cards ── */}
-      {SEGMENTS.map((seg, i) => (
-        <EnvironmentCard
-          key={seg.slug}
-          segment={seg}
-          isHovered={hovered === seg.slug}
-          onHover={handleHover}
-          index={i}
-          reduced={reduced}
-        />
-      ))}
+        {/* Tech icons */}
+        {!reduced && <TechIcons />}
+      </motion.g>
     </motion.svg>
   );
 }
