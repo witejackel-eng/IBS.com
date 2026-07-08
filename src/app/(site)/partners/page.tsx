@@ -9,7 +9,7 @@ import { ButtonLink } from "@/components/shared/button-link";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { PartnerEcosystemHero } from "@/components/sections/partners-redesign/partner-ecosystem-hero";
 import { PartnerPhilosophy } from "@/components/sections/partners-redesign/partner-philosophy";
-import { TechnologyCluster } from "@/components/sections/partners-redesign/technology-clusters";
+import { TechnologyEcosystemGrid } from "@/components/sections/partners-redesign/technology-clusters";
 import { IntegrationFlow } from "@/components/sections/partners-redesign/integration-flow";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { CollectionPageJsonLd } from "@/components/seo/collection-page-jsonld";
@@ -79,31 +79,25 @@ export default function PartnersPage() {
         </Container>
       </Section>
 
-      {/* ── TECHNOLOGY ECOSYSTEM (Clusters) ── */}
-      <Section bg="grid" className="bg-background">
+      {/* ── TECHNOLOGY ECOSYSTEM ── */}
+      <Section bg="grid" className="bg-background py-24 lg:py-32">
         <Container>
           <SectionHeading
             eyebrow="Technology ecosystem"
-            title="Every brand, one system."
-            description="Hover each category to see the OEM partners behind it."
+            title="Every brand. One engineering partner."
+            description="Three technology ecosystems, integrated by a single team. Hover any category to explore."
             align="center"
             size="lg"
             className="mb-14"
           />
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-            {partnerCategories.map((cat, i) => {
-              const catPartners = partners.filter((p) => p.category === cat.key);
-              return (
-                <TechnologyCluster
-                  key={cat.key}
-                  title={cat.label.replace(" Partners", "")}
-                  description={categoryDescriptions[cat.key]}
-                  partners={catPartners}
-                  accent={i === 0 ? "left" : "center"}
-                />
-              );
-            })}
-          </div>
+          <TechnologyEcosystemGrid
+            categories={partnerCategories.map((cat) => ({
+              key: cat.key,
+              label: cat.label.replace(" Partners", ""),
+              description: categoryDescriptions[cat.key],
+              partners: partners.filter((p) => p.category === cat.key),
+            }))}
+          />
         </Container>
       </Section>
 
