@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "generate:blur": "node scripts/generate-blur-placeholders.mjs"
+    "generate:blur": "node scripts/generate-blur-placeholders.mjs",
+    "test": "vitest run"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -48,6 +49,7 @@
     "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "^15.5.20",
+    "jsdom": "^29.1.1",
     "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "typescript": "^5",
