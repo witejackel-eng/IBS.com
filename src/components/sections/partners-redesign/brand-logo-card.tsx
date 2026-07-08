@@ -1,69 +1,112 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { brandLogoMap } from "@/lib/content/brand-logo-map";
 
 /* ================================================================== */
-/*  Optical sizing map — per-brand height overrides                    */
-/*  Keeps visual weight consistent across different logo proportions.  */
+/*  Logo shape classification                                           */
+/*  Determines how each logo is sized within its card.                  */
 /* ================================================================== */
 
-const LOGO_SIZING: Record<string, { h: number; maxW?: number }> = {
-  // Wider logos — allow more width
-  Cisco: { h: 52, maxW: 180 },
-  Samsung: { h: 44, maxW: 160 },
-  "Alcatel-Lucent": { h: 44, maxW: 170 },
-  Honeywell: { h: 44, maxW: 160 },
-  CommScope: { h: 44, maxW: 160 },
-  Systimax: { h: 44, maxW: 150 },
-  Logitech: { h: 44, maxW: 160 },
-  Crestron: { h: 44, maxW: 160 },
-  Hikvision: { h: 44, maxW: 160 },
-  Panasonic: { h: 44, maxW: 160 },
-  Harman: { h: 44, maxW: 140 },
+type LogoShape = "wide" | "standard" | "square";
 
-  // Taller/square logos — slightly taller
-  Axis: { h: 50, maxW: 130 },
-  Poly: { h: 50, maxW: 140 },
-  Dell: { h: 50, maxW: 140 },
-  Fortinet: { h: 48, maxW: 140 },
-  Shure: { h: 48, maxW: 130 },
-  QSC: { h: 48, maxW: 130 },
-  HID: { h: 48, maxW: 130 },
-  APC: { h: 48, maxW: 130 },
-  APW: { h: 48, maxW: 130 },
+/**
+ * Wide wordmarks — horizontal logos that need more width than height.
+ * These are brands whose primary identity is a wide text mark or
+ * whose SVG viewBox has a ratio wider than ~2.5:1.
+ */
+const WIDE_LOGOS: ReadonlySet<string> = new Set([
+  "Alcatel-Lucent",
+  "CommScope",
+  "Systimax",
+  "D-Link",
+  "Ruckus",
+  "Logitech",
+  "Honeywell",
+  "Crestron",
+  "Hikvision",
+  "Harman",
+  "Matrix",
+]);
 
-  // Compact brands
-  LG: { h: 50, maxW: 100 },
-  eSSL: { h: 48, maxW: 120 },
-  Zoom: { h: 48, maxW: 140 },
-  Barco: { h: 46, maxW: 130 },
-  Biamp: { h: 46, maxW: 130 },
-  Extron: { h: 46, maxW: 130 },
-  Kramer: { h: 46, maxW: 130 },
-  Draper: { h: 46, maxW: 130 },
-  Morley: { h: 46, maxW: 130 },
-  Pelco: { h: 46, maxW: 130 },
-  Edwards: { h: 46, maxW: 130 },
-  Cooper: { h: 46, maxW: 130 },
-  Notifier: { h: 46, maxW: 140 },
-  Ruckus: { h: 46, maxW: 130 },
-  Vertiv: { h: 46, maxW: 130 },
-  Eaton: { h: 46, maxW: 130 },
-  Sophos: { h: 46, maxW: 130 },
-  "HP Aruba": { h: 46, maxW: 130 },
-  "D-Link": { h: 46, maxW: 130 },
-  Synology: { h: 44, maxW: 150 },
-  Netgear: { h: 46, maxW: 140 },
-  Matrix: { h: 46, maxW: 130 },
-  Epson: { h: 46, maxW: 130 },
-  AVer: { h: 46, maxW: 130 },
-  Dahua: { h: 46, maxW: 130 },
+/**
+ * Square / near-square logos — icon marks or compact logos
+ * (viewBox roughly 1:1 like 24×24).
+ */
+const SQUARE_LOGOS: ReadonlySet<string> = new Set([
+  "Cisco",
+  "Dell",
+  "Fortinet",
+  "LG",
+  "Poly",
+  "Zoom",
+  "Epson",
+  "Netgear",
+  "Samsung",
+  "Panasonic",
+  "Synology",
+]);
+
+function classifyShape(name: string): LogoShape {
+  if (WIDE_LOGOS.has(name)) return "wide";
+  if (SQUARE_LOGOS.has(name)) return "square";
+  return "standard";
+}
+
+/**
+ * Per-brand optical max-height overrides (px).
+ * Fine-tune individual brands that feel too large or too small
+ * within their shape category. `null` = let the shape class handle it.
+ */
+const OPTICAL_MAX_H: Record<string, number | null> = {
+  "Alcatel-Lucent": 38,
+  Cisco: 50,
+  Samsung: 48,
+  Honeywell: 36,
+  CommScope: 36,
+  Systimax: 34,
+  Logitech: 34,
+  Crestron: 34,
+  Hikvision: 36,
+  Panasonic: 48,
+  Harman: 34,
+  Matrix: 36,
+  Ruckus: 34,
+  "D-Link": 34,
+  Synology: 48,
+  Netgear: 48,
+  Axis: 46,
+  Poly: 46,
+  Dell: 50,
+  Fortinet: 48,
+  Shure: 44,
+  QSC: 44,
+  HID: 44,
+  APC: 36,
+  APW: 36,
+  LG: 46,
+  eSSL: 40,
+  Zoom: 46,
+  Barco: 40,
+  Biamp: 40,
+  Extron: 40,
+  Kramer: 40,
+  Draper: 40,
+  Morley: 40,
+  Pelco: 40,
+  Edwards: 40,
+  Cooper: 40,
+  Notifier: 40,
+  Vertiv: 40,
+  Eaton: 40,
+  Sophos: 40,
+  "HP Aruba": 40,
+  AVer: 40,
+  Dahua: 40,
 };
-
-const DEFAULT_SIZING = { h: 46, maxW: 140 };
 
 /* ================================================================== */
 /*  BrandLogoCard                                                      */
@@ -72,20 +115,36 @@ const DEFAULT_SIZING = { h: 46, maxW: 140 };
 interface BrandLogoCardProps {
   name: string;
   index: number;
-  /** When another category is active, dim this card to 40% opacity. */
   dimmed?: boolean;
 }
 
 export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [imgError, setImgError] = useState(false);
   const logoSrc = brandLogoMap[name];
-  const sizing = LOGO_SIZING[name] ?? DEFAULT_SIZING;
+  const shape = classifyShape(name);
+  const opticalMaxH = OPTICAL_MAX_H[name] ?? null;
+
+  const handleImgError = useCallback(() => {
+    setImgError(true);
+  }, []);
+
+  /* Build inline style for shape-adaptive + optical sizing */
+  const logoStyle: React.CSSProperties = {
+    maxWidth: shape === "wide" ? "70%" : shape === "square" ? "46%" : "58%",
+    maxHeight: opticalMaxH ? `${opticalMaxH}px` : shape === "wide" ? "38%" : shape === "square" ? "46%" : "48%",
+    objectFit: "contain",
+    width: "auto",
+    height: "auto",
+  };
 
   return (
     <motion.div
       className={cn(
+        /* Fixed card aspect ratio — identical for every brand */
         "group relative flex items-center justify-center rounded-[18px] border border-border bg-card",
-        "p-5 sm:p-6 lg:p-7 transition-all duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+        "aspect-[4/3] w-full",
+        "transition-all duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
         "cursor-pointer select-none",
         "hover:border-tangerine-500 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.12),0_0_0_1px_rgba(249,115,22,0.08)]",
         "focus-visible:border-tangerine-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tangerine-500/20",
@@ -108,30 +167,31 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
           : undefined
       }
     >
-      {/* Logo — centered, optically sized */}
-      <div className="flex w-full items-center justify-center">
-        {logoSrc ? (
+      {/* Logo container — generous padding, perfectly centered */}
+      <div className="flex w-full h-full items-center justify-center p-4 sm:p-5 lg:p-6">
+        {logoSrc && !imgError ? (
           <Image
             src={logoSrc}
             alt={`${name} logo`}
-            width={sizing.maxW ?? 160}
-            height={sizing.h}
+            width={300}
+            height={100}
+            onError={handleImgError}
+            style={logoStyle}
             className={cn(
-              "h-11 w-auto max-w-[140px] object-contain",
               "transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
-              "group-hover:scale-105",
-              "sm:h-[52px] sm:max-w-[170px]",
-              "lg:h-[56px] lg:max-w-[180px]"
+              "group-hover:scale-105"
             )}
-            style={
-              {
-                "--logo-h": `${sizing.h}px`,
-                "--logo-maxw": `${sizing.maxW ?? 140}px`,
-              } as React.CSSProperties
-            }
           />
         ) : (
-          <span className="text-base sm:text-lg font-bold text-charcoal transition-colors duration-300 group-hover:text-tangerine-600 select-none text-center leading-tight">
+          /* Fallback: company name when logo unavailable or fails to load */
+          <span
+            className={cn(
+              "font-bold text-charcoal transition-colors duration-300 group-hover:text-tangerine-600",
+              "select-none text-center leading-tight px-2",
+              /* Scale fallback text by shape */
+              shape === "wide" ? "text-xs sm:text-sm" : shape === "square" ? "text-base sm:text-lg" : "text-sm sm:text-base"
+            )}
+          >
             {name}
           </span>
         )}
@@ -142,8 +202,5 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
 
 /** Get brand color — exported for use by the partner-logo-wall hover highlighting. */
 export function getBrandColor(name: string): string {
-  if (name in brandLogoMap) {
-    return "#1A1A1A";
-  }
   return "#1A1A1A";
 }
