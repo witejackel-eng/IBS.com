@@ -112,7 +112,7 @@ export function EcosystemOverview({
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
       {categories.map((cat, i) => {
         const meta = CATEGORY_META[cat.key];
         const isActive = activeCategory === cat.key;
@@ -124,10 +124,10 @@ export function EcosystemOverview({
             onHoverStart={() => onHoverChange(cat.key)}
             onHoverEnd={() => onHoverChange(null)}
             className={cn(
-              "relative flex flex-col rounded-2xl border bg-card p-6 sm:p-7 lg:p-8 text-left transition-all duration-300",
-              "hover:shadow-[0_12px_32px_-12px_rgba(234,88,12,0.18)]",
+              "relative flex flex-col rounded-2xl border bg-card p-7 sm:p-8 lg:p-9 text-left transition-all duration-300 cursor-pointer",
+              "hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.14)]",
               isActive
-                ? "border-deep-blue shadow-[0_12px_32px_-12px_rgba(234,88,12,0.18)]"
+                ? "border-deep-blue shadow-[0_16px_40px_-12px_rgba(0,0,0,0.14)]"
                 : "border-border hover:border-deep-blue/60"
             )}
             initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
@@ -140,14 +140,14 @@ export function EcosystemOverview({
             }}
             whileHover={
               !prefersReducedMotion
-                ? { y: -4, transition: { duration: 0.25 } }
+                ? { y: -5, scale: 1.015, transition: { duration: 0.25 } }
                 : undefined
             }
           >
             {/* Icon + Count */}
             <div className="flex items-start justify-between">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-deep-blue/[0.07] text-deep-blue">
-                <CategoryIcon type={meta.icon} className="h-6 w-6" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-deep-blue/[0.07] text-deep-blue">
+                <CategoryIcon type={meta.icon} className="h-7 w-7" />
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold text-steel tabular-nums">
                 {cat.partners.length} Partners
@@ -155,18 +155,18 @@ export function EcosystemOverview({
             </div>
 
             {/* Title */}
-            <h3 className="mt-5 text-xl font-heading font-semibold tracking-tight text-charcoal leading-snug">
+            <h3 className="mt-6 text-[22px] font-heading font-semibold tracking-tight text-charcoal leading-snug">
               {meta.title}
             </h3>
 
             {/* Description */}
-            <p className="mt-2.5 text-sm text-steel leading-relaxed flex-1">
+            <p className="mt-3 text-[15px] text-steel leading-relaxed flex-1">
               {meta.description}
             </p>
 
             {/* CTA */}
-            <div className="mt-5 pt-4 border-t border-border/60">
-              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-deep-blue">
+            <div className="mt-6 pt-5 border-t border-border/50">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-deep-blue">
                 View Partners
                 <ArrowDown className="h-3.5 w-3.5" />
               </span>
@@ -207,22 +207,22 @@ export function PartnerLogoWall({
     >
       {/* Heading */}
       <motion.div
-        className="mb-10 sm:mb-14"
+        className="mb-12 sm:mb-16"
         initial={prefersReducedMotion ? undefined : { opacity: 0, y: 16 }}
         whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: EASE_OUT_EXPO as [number, number, number, number] }}
       >
-        <h2 className="text-display-3 font-heading font-semibold tracking-tight text-charcoal text-balance">
+        <h2 className="text-display-3 font-heading font-semibold tracking-tight text-charcoal">
           {meta.title} Partners
         </h2>
-        <p className="mt-4 max-w-2xl text-lg text-steel leading-relaxed">
+        <p className="mt-4 max-w-xl text-[17px] text-steel leading-relaxed">
           {meta.description}
         </p>
       </motion.div>
 
       {/* Logo Grid — 6-8 desktop, 4 tablet, 2-3 mobile */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-5">
+      <div role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-5">
         {partners.map((partner, i) => (
           <BrandLogoCard
             key={partner.slug}

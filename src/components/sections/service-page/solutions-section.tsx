@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Container } from "@/components/layout/container";
 import { IllustrationFrame } from "@/components/illustrations/illustration-frame";
 import { serviceIllustrationMap } from "@/components/illustrations/services";
 import { EASE_OUT_EXPO, DURATION } from "@/lib/motion";
+import { blurMap } from "@/lib/image-blur-map";
 import type { ServicePageData } from "@/lib/content/service-page-data";
 
 // ---------------------------------------------------------------------------
@@ -37,29 +39,22 @@ function slideVariants(direction: "left" | "right", reduced: boolean): Variants 
 }
 
 // ---------------------------------------------------------------------------
-// Visual placeholder (when serviceImage is provided)
+// Solution image (when serviceImage is provided)
 // ---------------------------------------------------------------------------
 
-function SolutionVisual({ title, index }: { title: string; index: number }) {
+function SolutionImage({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative flex h-full min-h-[320px] items-center justify-center overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-deep-blue/8 via-transparent to-signal-orange/5 bg-engineering-grid lg:min-h-[420px]">
-      {/* Watermark text */}
-      <span
-        aria-hidden="true"
-        className="absolute inset-0 flex items-center justify-center font-heading text-[clamp(2.5rem,5vw,5rem)] font-bold tracking-tight text-charcoal/[0.04] select-none leading-none"
-      >
-        {title}
-      </span>
-      {/* Decorative number */}
-      <span
-        aria-hidden="true"
-        className="absolute left-6 top-6 font-heading text-6xl font-bold text-deep-blue/8 lg:text-8xl"
-      >
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      {/* Subtle corner accent */}
-      <div className="absolute bottom-6 right-6 h-24 w-24 rounded-full bg-signal-orange/5" />
-      <div className="absolute bottom-10 right-10 h-12 w-12 rounded-full bg-deep-blue/8" />
+    <div className="relative h-full min-h-[320px] overflow-hidden rounded-3xl bg-muted lg:min-h-[420px]">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        placeholder={blurMap[src] ? "blur" : "empty"}
+        blurDataURL={blurMap[src]}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/30 via-transparent to-transparent" />
     </div>
   );
 }
@@ -121,9 +116,17 @@ export function SolutionsSection({ data, serviceImage }: SolutionsSectionProps) 
                 variants={variants}
               >
                 {/* Visual side — order flips based on index */}
-                <div className={isEven ? "" : "lg:order-2"}>
-                  {serviceImage ? (
-                    <SolutionVisual title={solution.title} index={i} />
+                <div className={`group ${isEven ? "" : "lg:order-2"}`}>
+                  {solution.image ? (
+                    <SolutionImage
+                      src={solution.image}
+                      alt={`${solution.title}: ${solution.description.split(".")[0]}`}
+                    />
+                  ) : serviceImage ? (
+                    <SolutionImage
+                      src={serviceImage}
+                      alt={`${solution.title}: ${solution.description.split(".")[0]}`}
+                    />
                   ) : (
                     <SolutionIllustration serviceSlug={data.slug} />
                   )}

@@ -20,6 +20,7 @@ export interface ServicePageData {
     benefits: string[];
     typicalDeployment: string;
     oemBrands: string[];
+    image?: string;
   }[];
 
   // INDUSTRIES
@@ -65,6 +66,7 @@ const voiceCommunication: ServicePageData = {
       ],
       typicalDeployment: "Mid-to-large offices consolidating legacy phone systems onto IP.",
       oemBrands: ["Alcatel-Lucent", "Cisco"],
+      image: "/images/services/solutions/voice-communication-ippbx.jpg",
     },
     {
       title: "SIP Phones & Unified Endpoints",
@@ -77,6 +79,7 @@ const voiceCommunication: ServicePageData = {
       ],
       typicalDeployment: "Offices standardizing on SIP trunks and moving away from analog phones.",
       oemBrands: ["Alcatel-Lucent", "Cisco"],
+      image: "/images/services/solutions/voice-communication-sip-phones.jpg",
     },
   ],
 
@@ -160,6 +163,7 @@ const audioVideoBoardroomSolutions: ServicePageData = {
       ],
       typicalDeployment: "Boardrooms, huddle rooms, and training spaces with routine remote participation.",
       oemBrands: ["Biamp", "Shure", "QSC", "Poly"],
+      image: "/images/services/solutions/av-audio-conferencing.jpg",
     },
     {
       title: "Video Conferencing",
@@ -172,6 +176,7 @@ const audioVideoBoardroomSolutions: ServicePageData = {
       ],
       typicalDeployment: "Enterprise boardrooms and huddle rooms standardizing on one video platform.",
       oemBrands: ["Poly", "Cisco", "Logitech", "AVer", "Zoom"],
+      image: "/images/services/solutions/av-video-conferencing.jpg",
     },
     {
       title: "Classroom & Training Room Solutions",
@@ -184,6 +189,7 @@ const audioVideoBoardroomSolutions: ServicePageData = {
       ],
       typicalDeployment: "Corporate training centers, educational institutions, and multi-purpose rooms.",
       oemBrands: ["Epson", "Samsung", "LG", "Panasonic", "Kramer"],
+      image: "/images/services/solutions/av-training-room.jpg",
     },
     {
       title: "Video Walls",
@@ -196,6 +202,7 @@ const audioVideoBoardroomSolutions: ServicePageData = {
       ],
       typicalDeployment: "Auditoriums, lobby displays, command centers, and large-format event spaces.",
       oemBrands: ["Samsung", "LG", "Barco", "Extron"],
+      image: "/images/services/solutions/av-video-wall.jpg",
     },
     {
       title: "Public Address System",
@@ -208,6 +215,7 @@ const audioVideoBoardroomSolutions: ServicePageData = {
       ],
       typicalDeployment: "Hotel banquet halls, auditoriums, places of worship, and public assembly spaces.",
       oemBrands: ["QSC", "Biamp", "Shure", "Harman"],
+      image: "/images/services/solutions/av-pa-system.jpg",
     },
     {
       title: "Room Booking System",
@@ -220,6 +228,7 @@ const audioVideoBoardroomSolutions: ServicePageData = {
       ],
       typicalDeployment: "Multi-room offices, co-working spaces, and hotels with conferencing facilities.",
       oemBrands: ["Crestron", "Extron"],
+      image: "/images/services/solutions/av-room-booking.jpg",
     },
   ],
 
@@ -297,6 +306,7 @@ const itInfrastructure: ServicePageData = {
       ],
       typicalDeployment: "On-premises server rooms and network closets for offices managing their own infrastructure.",
       oemBrands: ["Dell", "Synology", "Cisco", "HP Aruba"],
+      image: "/images/services/solutions/it-data-center.jpg",
     },
     {
       title: "Firewall",
@@ -309,6 +319,7 @@ const itInfrastructure: ServicePageData = {
       ],
       typicalDeployment: "Office internet gateways and inter-VLAN security for networks with sensitive data.",
       oemBrands: ["Fortinet", "Sophos", "Cisco"],
+      image: "/images/services/solutions/it-firewall.jpg",
     },
     {
       title: "Network Rack",
@@ -321,6 +332,7 @@ const itInfrastructure: ServicePageData = {
       ],
       typicalDeployment: "Server rooms, network closets, and IDF/MDF installations.",
       oemBrands: ["APW", "APC"],
+      image: "/images/services/solutions/it-network-rack.jpg",
     },
     {
       title: "Structured Cabling",
@@ -333,6 +345,7 @@ const itInfrastructure: ServicePageData = {
       ],
       typicalDeployment: "New office fit-outs, floor expansions, and cabling refreshes in aging buildings.",
       oemBrands: ["CommScope", "Systimax", "D-Link", "Netgear"],
+      image: "/images/services/solutions/it-structured-cabling.jpg",
     },
     {
       title: "Wi-Fi",
@@ -345,6 +358,7 @@ const itInfrastructure: ServicePageData = {
       ],
       typicalDeployment: "Open-plan offices, multi-floor buildings, hotels, and warehouses.",
       oemBrands: ["Ruckus", "HP Aruba", "D-Link", "Netgear"],
+      image: "/images/services/solutions/it-wifi.jpg",
     },
     {
       title: "Online UPS",
@@ -357,6 +371,7 @@ const itInfrastructure: ServicePageData = {
       ],
       typicalDeployment: "Server rooms and network closets where power loss means data loss or service interruption.",
       oemBrands: ["APC", "Vertiv", "Eaton"],
+      image: "/images/services/solutions/it-online-ups.jpg",
     },
   ],
 
@@ -446,6 +461,7 @@ const securitySolutions: ServicePageData = {
       ],
       typicalDeployment: "Commercial offices, hospitality, residential complexes, and government facilities.",
       oemBrands: ["Hikvision", "Dahua", "Axis", "Pelco"],
+      image: "/images/services/solutions/security-cctv.jpg",
     },
     {
       title: "Access Control & Biometric Solutions",
@@ -458,6 +474,7 @@ const securitySolutions: ServicePageData = {
       ],
       typicalDeployment: "Office entrances, server rooms, restricted areas requiring identity-verified entry.",
       oemBrands: ["eSSL", "HID", "Cooper", "Honeywell"],
+      image: "/images/services/solutions/security-access-control.jpg",
     },
     {
       title: "Fire Alarm System",
@@ -470,6 +487,7 @@ const securitySolutions: ServicePageData = {
       ],
       typicalDeployment: "Commercial buildings, hotels, hospitals, and government facilities.",
       oemBrands: ["Honeywell", "Morley", "Notifier", "Edwards"],
+      image: "/images/services/solutions/security-fire-alarm.jpg",
     },
     {
       title: "Home Automation",
@@ -482,6 +500,7 @@ const securitySolutions: ServicePageData = {
       ],
       typicalDeployment: "Modern residences and luxury apartments where security and convenience coexist.",
       oemBrands: ["Hikvision", "Honeywell"],
+      image: "/images/services/solutions/security-home-automation.jpg",
     },
   ],
 
@@ -565,6 +584,7 @@ const callCenterSolutions: ServicePageData = {
       ],
       typicalDeployment: "Any contact center where agents wear headsets for full shifts.",
       oemBrands: ["Jabra", "Sennheiser"],
+      image: "/images/services/solutions/callcenter-headsets.jpg",
     },
     {
       title: "GSM & PRI Gateways",
@@ -577,6 +597,7 @@ const callCenterSolutions: ServicePageData = {
       ],
       typicalDeployment: "Outbound sales teams and blended inbound/outbound contact centers.",
       oemBrands: ["Alcatel-Lucent", "Cisco", "D-Link"],
+      image: "/images/services/solutions/callcenter-gateways.jpg",
     },
     {
       title: "CRM-Integrated Dialer",
@@ -589,6 +610,7 @@ const callCenterSolutions: ServicePageData = {
       ],
       typicalDeployment: "Sales and support contact centers needing CRM integration and campaign automation.",
       oemBrands: [],
+      image: "/images/services/solutions/callcenter-crm-dialer.jpg",
     },
     {
       title: "Voice Logger & Auto Dialer",
@@ -601,6 +623,7 @@ const callCenterSolutions: ServicePageData = {
       ],
       typicalDeployment: "Regulated contact centers and outbound sales teams requiring compliance recording.",
       oemBrands: [],
+      image: "/images/services/solutions/callcenter-voice-logger.jpg",
     },
   ],
 
@@ -673,6 +696,7 @@ const softwareLicenses: ServicePageData = {
       ],
       typicalDeployment: "Organizations standardizing their collaboration stack or cleaning up license sprawl.",
       oemBrands: ["Zoom", "Microsoft"],
+      image: "/images/services/solutions/software-collaboration.jpg",
     },
     {
       title: "Creative & Enterprise Applications",
@@ -685,6 +709,7 @@ const softwareLicenses: ServicePageData = {
       ],
       typicalDeployment: "Design teams needing current creative tools and operations running ERP software.",
       oemBrands: ["Adobe"],
+      image: "/images/services/solutions/software-creative-apps.jpg",
     },
     {
       title: "Security Software",
@@ -697,6 +722,7 @@ const softwareLicenses: ServicePageData = {
       ],
       typicalDeployment: "Any organization where endpoint protection is required for operational or regulatory compliance.",
       oemBrands: [],
+      image: "/images/services/solutions/software-security.jpg",
     },
   ],
 
@@ -770,6 +796,7 @@ const annualMaintenanceService: ServicePageData = {
       ],
       typicalDeployment: "Any organization with IBS-installed systems needing ongoing reliability.",
       oemBrands: [],
+      image: "/images/services/solutions/amc-preventive.jpg",
     },
     {
       title: "Emergency Response",
@@ -782,6 +809,7 @@ const annualMaintenanceService: ServicePageData = {
       ],
       typicalDeployment: "Mission-critical environments where downtime directly affects operations.",
       oemBrands: [],
+      image: "/images/services/solutions/amc-emergency.jpg",
     },
     {
       title: "Compliance & Documentation",
@@ -794,6 +822,7 @@ const annualMaintenanceService: ServicePageData = {
       ],
       typicalDeployment: "Government facilities, hospitals, and regulated industries requiring documented maintenance.",
       oemBrands: [],
+      image: "/images/services/solutions/amc-compliance.jpg",
     },
   ],
 

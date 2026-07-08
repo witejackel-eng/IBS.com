@@ -68,7 +68,7 @@ const SVG_BRANDS: Record<
   Synology: {
     brandColor: "#005389",
     paths: [
-      "M13.44 8.927l-.889.37.056.117a.623.623 0 01.212-.054c.05 0 .093.017.126.046.034.03.048.07.048.113a.17.17 0 01-.044.118.3.3 0 01-.134.076.594.594 0 01-.199.032.798.798 0 01-.26-.045l-.12-.047-.028.006v.17l.065.02c.107.03.218.048.33.054a.97.97 0 00.35-.048.552.552 0 00.25-.173.47.47 0 00.092-.287.393.393 0 00-.073-.234.482.482 0 00-.202-.154l-.307-.13a.19.19 0 01-.092-.085.138.138 0 01-.004-.1.166.166 0 01.072-.08.368.368 0 01.15-.038c.069 0 .137.012.202.038l.064.028.022-.006v-.152l-.044-.012a1.076 1.076 0 00-.298-.05.718.718 0 00-.28.047.397.397 0 00-.2.16.404.404 0 00-.067.228c0 .09.024.172.07.243a.47.47 0 00.208.16c.07.03.142.056.216.075l.082.023.036.012a.2.2 0 01.1.07.14.14 0 01.025.084.14.14 0 01-.052.093.29.29 0 01-.128.048 1.05 1.05 0 01-.2-.006l-.146-.037zm-2.862.746h.26l.21-1.444h-.26l-.21 1.444zm-1.695-.726a.665.665 0 00-.259-.24.794.794 0 00-.37-.084.76.76 0 00-.36.08.67.67 0 00-.267.222.723.723 0 00-.125.287.76.76 0 00-.006.313.67.67 0 00.128.287.663.663 0 00.257.24.798.798 0 00.374.087.756.756 0 00.358-.08.668.668 0 00.27-.222.726.726 0 00.127-.288.76.76 0 00.005-.314.668.668 0 00-.132-.288m-.297.46a.42.42 0 01-.068.193.343.343 0 01-.14.128.38.38 0 01-.182.045.39.39 0 01-.186-.04.35.35 0 01-.138-.128.425.425 0 01-.066-.195.448.448 0 01.012-.206.422.422 0 01.07-.194.346.346 0 01.14-.128.384.384 0 01.183-.046c.064 0 .127.015.184.042a.35.35 0 01.14.128.424.424 0 01.068.195.446.446 0 01-.013.206m5.326-.814l.02.002c.048.01.094.026.137.048a.357.357 0 01.11.098.327.327 0 01.058.132.35.35 0 01-.004.144.334.334 0 01-.07.127.36.36 0 01-.12.09.41.41 0 01-.158.04.644.644 0 01-.2-.022.89.89 0 01-.188-.072l-.018-.01v.163l.048.018c.078.027.16.045.243.052a.81.81 0 00.26-.016.542.542 0 00.23-.123.447.447 0 00.13-.208.497.497 0 00.006-.258.5.5 0 00-.11-.232.538.538 0 00-.21-.157.782.782 0 00-.275-.066.717.717 0 00-.28.034.547.547 0 00-.238.164.47.47 0 00-.112.247.497.497 0 00.009.262c.04.122.115.228.218.303a.66.66 0 00.35.152l.03.004.15-.577m-2.673.823a.665.665 0 00.258-.24.726.726 0 00.127-.288.76.76 0 00-.005-.314.668.668 0 00-.132-.288.663.663 0 00-.257-.24.798.798 0 00-.374-.087.756.756 0 00-.358.08.668.668 0 00-.27.222.723.723 0 00-.125.287.76.76 0 00.006.313.67.67 0 00.128.287.665.665 0 00.259.24.794.794 0 00.37.084.76.76 0 00.36-.08.67.67 0 00.267-.222.723.723 0 00.125-.287.76.76 0 00-.006-.313.668.668 0 00-.131-.287m-.396.073a.35.35 0 01.14.128.424.424 0 01.068.195.446.446 0 01-.013.206.422.422 0 01-.07.194.346.346 0 01-.14.128.384.384 0 01-.183.046.39.39 0 01-.186-.04.35.35 0 01-.138-.128.425.425 0 01-.066-.195.448.448 0 01.012-.206.42.42 0 01.07-.194.343.343 0 01.14-.128.38.38 0 01.182-.045c.064 0 .127.015.184.042m-3.93.06h-.26v1.444h.696a.59.59 0 00.275-.062.44.44 0 00.182-.174.47.47 0 00.063-.246.478.478 0 00-.062-.248.44.44 0 00-.18-.173.59.59 0 00-.275-.057h-.44v-.484zm0 .656h.438a.27.27 0 01.13.03.18.18 0 01.08.08.24.24 0 01.024.11.237.237 0 01-.025.11.18.18 0 01-.082.078.27.27 0 01-.13.03h-.435v-.438z",
+      "M13.44 8.927l-.889.37.056.117a.623.623 0 01.212-.054c.05 0 .093.017.126.046.034.03.048.07.048.113a.17.17 0 01-.044.118.3.3 0 01-.134.076.594.594 0 01-.199.032.798.798 0 01-.26-.045l-.12-.047-.028.006v.17l.065.02c.107.03.218.048.33.054a.97.97 0 00.35-.048.552.552 0 00.25-.173.47.47 0 00.092-.287.393.393 0 00-.073-.234.482.482 0 00-.202-.154l-.307-.13a.19.19 0 01-.092-.085.138.138 0 01-.004-.1.166.166 0 01.072-.08.368.368 0 01.15-.038c.069 0 .137.012.202.038l.064.028.022-.006v-.152l-.044-.012a1.076 1.076 0 00-.298-.05.718.718 0 00-.28.047.397.397 0 00-.2.16.404.404 0 00-.067.228c0 .09.024.172.07.243a.47.47 0 00.208.16c.07.03.142.056.216.075l.082.023.036.012a.2.2 0 01.1.07.14.14 0 01.025.084.14.14 0 01-.052.093.29.29 0 01-.128.048 1.05 1.05 0 01-.2-.006l-.146-.037zm-2.862.746h.26l.21-1.444h-.26l-.21 1.444zm-1.695-.726a.665.665 0 00-.259-.24.794.794 0 00-.37-.084.76.76 0 00-.36.08.67.67 0 00-.267.222.723.723 0 00-.125.287.76.76 0 00-.006.313.67.67 0 00.128.287.663.663 0 00.257.24.798.798 0 00.374.087.756.756 0 00.358-.08.668.668 0 00.27-.222.726.726 0 00.127-.288.76.76 0 00.005-.314.668.668 0 00-.132-.288m-.297.46a.42.42 0 01-.068.193.343.343 0 01-.14.128.38.38 0 01-.182.045.39.39 0 01-.186-.04.35.35 0 01-.138-.128.425.425 0 01-.066-.195.448.448 0 01.012-.206.422.422 0 01.07-.194.346.346 0 01.14-.128.384.384 0 01.183-.046c.064 0 .127.015.184.042a.35.35 0 01.14.128.424.424 0 01.068.195.446.446 0 01-.013.206om5.326-.814l.02.002c.048.01.094.026.137.048a.357.357 0 01.11.098.327.327 0 01.058.132.35.35 0 01-.004.144.334.334 0 01-.07.127.36.36 0 01-.12.09.41.41 0 01-.158.04.644.644 0 01-.2-.022.89.89 0 01-.188-.072l-.018-.01v.163l.048.018c.078.027.16.045.243.052a.81.81 0 00.26-.016.542.542 0 00.23-.123.447.447 0 00.13-.208.497.497 0 00.006-.258.5.5 0 00-.11-.232.538.538 0 00-.21-.157.782.782 0 00-.275-.066.717.717 0 00-.28.034.547.547 0 00-.238.164.47.47 0 00-.112.247.497.497 0 00.009.262c.04.122.115.228.218.303a.66.66 0 00.35.152l.03.004.15-.577m-2.673.823a.665.665 0 00.258-.24.726.726 0 00.127-.288.76.76 0 00-.005-.314.668.668 0 00-.132-.288.663.663 0 00-.257-.24.798.798 0 00-.374-.087.756.756 0 00-.358.08.668.668 0 00-.27.222.723.723 0 00-.125.287.76.76 0 00.006.313.67.67 0 00.128.287.665.665 0 00.259.24.794.794 0 00.37.084.76.76 0 00.36-.08.67.67 0 00.267-.222.723.723 0 00.125-.287.76.76 0 00-.006-.313.668.668 0 00-.131-.287m-.396.073a.35.35 0 01.14.128.424.424 0 01.068.195.446.446 0 01-.013.206.422.422 0 01-.07.194.346.346 0 01-.14.128.384.384 0 01-.183.046.39.39 0 01-.186-.04.35.35 0 01-.138-.128.425.425 0 01-.066-.195.448.448 0 01.012-.206.42.42 0 01.07-.194.343.343 0 01.14-.128.38.38 0 01.182-.045c.064 0 .127.015.184.042om-3.93.06h-.26v1.444h.696a.59.59 0 00.275-.062.44.44 0 00.182-.174.47.47 0 00.063-.246.478.478 0 00-.062-.248.44.44 0 00-.18-.173.59.59 0 00-.275-.057h-.44v-.484zm0 .656h.438a.27.27 0 01.13.03.18.18 0 01.08.08.24.24 0 01.024.11.237.237 0 01-.025.11.18.18 0 01-.082.078.27.27 0 01-.13.03h-.435v-.438z",
     ],
   },
   Zoom: {
@@ -80,14 +80,24 @@ const SVG_BRANDS: Record<
   Matrix: {
     brandColor: "#000000",
     paths: [
-      "M.632.55v22.9H2.28V24H0V0h2.28v.55zm7.043 7.26v1.157h.033c.309-.443.683-.784 1.1-1.005.428-.227.916-.335 1.407-.313 1.06.052 1.96.81 2.189 1.847.246 1.067.156 2.186-.257 3.2-.38.927-1.29 1.528-2.286 1.544-.5.013-.99-.14-1.393-.436a2.08 2.08 0 01-.792-1.145h-.033V24H5.938V7.81zm1.967 4.493c0 .646.145 1.16.434 1.544.29.384.684.576 1.182.576.498 0 .892-.192 1.182-.576.29-.384.434-.898.434-1.544 0-.646-.145-1.16-.434-1.544-.29-.384-.684-.576-1.182-.576-.498 0-.892.192-1.182.576-.29.384-.434.898-.434 1.544m7.938-4.625h-2.28V24h2.28zm2.804 0h-2.28v1.49h2.28V24h2.28V9.216h2.28V7.726h-2.28z",
+      "M.632.55v22.9H2.28V24H0V0h2.28v.55zm7.043 7.26v1.157h.033c.309-.443.683-.784 1.1-1.005.428-.227.916-.335 1.407-.313 1.06.052 1.96.81 2.189 1.847.246 1.067.156 2.186-.257 3.2-.38.927-1.29 1.528-2.286 1.544-.5.013-.99-.14-1.393-.436a2.08 2.08 0 01-.792-1.145h-.033V24H5.938V7.81zm1.967 4.493c0 .646.145 1.16.434 1.544.29.384.684.576 1.182.576.498 0 .892-.192 1.182-.576.29-.384.434-.898.434-1.544 0-.646-.145-1.16-.434-1.544-.29-.384-.684-.576-1.182-.576-.498 0-.892.192-1.182.576-.29.384-.434.898-.434 1.544pm7.938-4.625h-2.28V24h2.28zm2.804 0h-2.28v1.49h2.28V24h2.28V9.216h2.28V7.726h-2.28z",
     ],
   },
 };
 
 /** Brands rendered as styled wordmarks (SVG text). */
-const WORDMARK_STYLES: Record<string, { label: string; color: string; weight: number; spacing: string; transform?: string; tagline?: string }> = {
-  "AVer": { label: "AVer", color: "#2E8B57", weight: 700, spacing: "0" },
+const WORDMARK_STYLES: Record<
+  string,
+  {
+    label: string;
+    color: string;
+    weight: number;
+    spacing: string;
+    transform?: string;
+    tagline?: string;
+  }
+> = {
+  AVer: { label: "AVer", color: "#2E8B57", weight: 700, spacing: "0" },
   Barco: { label: "BARCO", color: "#00B9F1", weight: 700, spacing: "0.06em", transform: "uppercase" },
   Biamp: { label: "BIAMP", color: "#E2231A", weight: 700, spacing: "0.02em", transform: "uppercase" },
   Extron: { label: "extron", color: "#1A1A1A", weight: 700, spacing: "0.08em", transform: "lowercase" },
@@ -101,10 +111,10 @@ const WORDMARK_STYLES: Record<string, { label: string; color: string; weight: nu
   Sophos: { label: "SOPHOS", color: "#2259A7", weight: 700, spacing: "0.04em", transform: "uppercase" },
   CommScope: { label: "Commscope", color: "#1A1A1A", weight: 700, spacing: "-0.01em" },
   Systimax: { label: "SYSTIMAX", color: "#1A1A1A", weight: 700, spacing: "0.04em", transform: "uppercase" },
-  "HP Aruba": { label: "Aruba", color: "#FF8300", weight: 700, spacing: "-0.01em", tagline: "a Hewlett Packard Enterprise" },
+  "HP Aruba": { label: "Aruba", color: "#FF8300", weight: 700, spacing: "-0.01em", tagline: "HPE" },
   Ruckus: { label: "RUCKUS", color: "#E4002B", weight: 700, spacing: "0.02em", transform: "uppercase" },
   "D-Link": { label: "D-Link", color: "#00A0E2", weight: 700, spacing: "-0.01em" },
-  APC: { label: "APC", color: "#1A1A1A", weight: 700, spacing: "0.06em", tagline: "by Schneider Electric" },
+  APC: { label: "APC", color: "#1A1A1A", weight: 700, spacing: "0.06em", tagline: "Schneider Electric" },
   Vertiv: { label: "VERTIV", color: "#1A1A1A", weight: 700, spacing: "0.08em", transform: "uppercase" },
   Eaton: { label: "EATON", color: "#1A1A1A", weight: 700, spacing: "0.06em", transform: "uppercase" },
   APW: { label: "APW", color: "#1A1A1A", weight: 700, spacing: "0.08em", tagline: "President" },
@@ -148,10 +158,15 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
   return (
     <motion.div
       className={cn(
-        "group relative flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-5 sm:p-6 lg:p-7 transition-all duration-300",
-        "hover:border-deep-blue hover:shadow-[0_8px_24px_-8px_rgba(234,88,12,0.15)]",
-        dimmed && "opacity-40"
+        "group relative flex flex-col items-center justify-between rounded-2xl border border-border bg-card",
+        "p-5 sm:p-6 transition-all duration-300 min-h-[128px] sm:min-h-[136px]",
+        "hover:border-deep-blue/60 hover:shadow-[0_8px_28px_-8px_rgba(0,0,0,0.12)]",
+        "focus-visible:border-deep-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-blue/20",
+        dimmed && "opacity-40 pointer-events-none"
       )}
+      role="listitem"
+      aria-label={`${name} — OEM technology partner`}
+      tabIndex={0}
       initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -162,17 +177,16 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
       }}
       whileHover={
         !prefersReducedMotion
-          ? { y: -4, transition: { duration: 0.25 } }
+          ? { y: -3, transition: { duration: 0.25 } }
           : undefined
       }
     >
-      {/* Logo / Wordmark */}
-      <div className="flex h-12 w-full items-center justify-center">
+      {/* Logo / Wordmark — centered in fixed-height area */}
+      <div className="flex flex-1 w-full items-center justify-center px-2">
         {svgBrand ? (
-          /* Inline SVG icon from simple-icons */
           <svg
             viewBox={svgBrand.viewBox || "0 0 24 24"}
-            className="h-8 w-auto transition-colors duration-300 text-steel group-hover:text-[var(--brand-color)]"
+            className="h-10 sm:h-11 w-auto transition-colors duration-300 text-steel group-hover:text-[var(--brand-color)]"
             style={{ "--brand-color": brandColor } as React.CSSProperties}
             fill="currentColor"
             aria-hidden="true"
@@ -182,9 +196,8 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
             ))}
           </svg>
         ) : wordmark ? (
-          /* Styled text wordmark */
           <span
-            className="text-lg sm:text-xl font-bold tracking-tight transition-colors duration-300 text-steel group-hover:text-[var(--brand-color)] select-none"
+            className="text-base sm:text-[17px] font-bold tracking-tight transition-colors duration-300 text-steel group-hover:text-[var(--brand-color)] select-none text-center leading-tight"
             style={
               {
                 "--brand-color": brandColor,
@@ -197,15 +210,20 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
             {wordmark.label}
           </span>
         ) : (
-          /* Fallback for any unlisted brand */
-          <span className="text-lg sm:text-xl font-bold text-steel transition-colors duration-300 group-hover:text-charcoal select-none">
+          <span className="text-base sm:text-[17px] font-bold text-steel transition-colors duration-300 group-hover:text-charcoal select-none text-center leading-tight">
             {name}
           </span>
         )}
       </div>
 
-      {/* Brand name label (always visible for clarity) */}
-      <span className="mt-2 text-[11px] font-medium text-steel/60 tracking-wide uppercase select-none">
+      {/* Brand name label — subtle by default, more visible on hover */}
+      <span
+        className={cn(
+          "mt-3 pt-3 border-t border-border/40 w-full text-center",
+          "text-[10px] font-semibold text-steel/40 tracking-[0.1em] uppercase select-none",
+          "transition-all duration-300 group-hover:text-steel/70 group-hover:border-border/70"
+        )}
+      >
         {name}
       </span>
     </motion.div>
