@@ -19,7 +19,7 @@ export function CtaSection() {
           </Reveal>
           <Reveal direction="up" delay={0.15}>
             <p className="max-w-xl text-lg text-steel">
-              Tell us what you&apos;re trying to solve — voice, AV, network, security, or all of it — and we&apos;ll get back to you with a plan.
+              Tell us what you&apos;re trying to solve — Voice, AV, Network, Security, or all of it — and we&apos;ll get back to you with a plan.
             </p>
           </Reveal>
           <Reveal direction="up" delay={0.25}>

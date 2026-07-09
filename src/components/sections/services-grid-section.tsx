@@ -19,7 +19,7 @@ export function ServicesGridSection() {
         <SectionHeading
           eyebrow="What we do"
           title="One integrator, six technology domains"
-          description="From the first dial tone to the last camera on the wall — voice, AV, network, security, contact centers, and licensing, delivered and supported by one team."
+          description="From the first dial tone to the last camera on the wall — Voice, AV, Network, Security, contact centers, and licensing, delivered and supported by one team."
           size="lg"
           className="mb-16"
         />
