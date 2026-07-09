@@ -10,6 +10,7 @@ import { SplitText } from "@/components/motion/split-text";
 import { MaskReveal } from "@/components/motion/mask-reveal";
 import { Reveal } from "@/components/motion/reveal";
 import { DisciplinesSection } from "@/components/sections/disciplines-section";
+import { AboutProcessSection } from "@/components/sections/about-process-section";
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { AboutPageJsonLd } from "@/components/seo/about-page-jsonld";
 import { blurMap } from "@/lib/image-blur-map";
@@ -86,6 +87,8 @@ export default function AboutPage() {
       </Section>
 
       <DisciplinesSection />
+
+      <AboutProcessSection />
 
       <Section bg="blueprint">
         <Container className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-16">

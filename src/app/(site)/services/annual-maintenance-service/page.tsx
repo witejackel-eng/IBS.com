@@ -9,7 +9,6 @@ import {
   HeroSection,
   SolutionsSection,
   IndustriesSection,
-  EngineeringProcessSection,
   FaqSection,
   PremiumCtaSection,
   RelatedServicesSection,
@@ -70,10 +69,7 @@ export default function AmcPage() {
       {/* 4. Typical Installations */}
       <TypicalProjectsSection />
 
-      {/* 5. Engineering Process */}
-      <EngineeringProcessSection />
-
-      {/* 6. FAQ */}
+      {/* 5. FAQ */}
       {data.faqs.length > 0 && (
         <>
           <FaqSection data={data} />
@@ -83,10 +79,10 @@ export default function AmcPage() {
         </>
       )}
 
-      {/* 7. Related Services & Internal Links */}
+      {/* 6. Related Services & Internal Links */}
       <RelatedServicesSection currentSlug={amcService.slug} />
 
-      {/* 8. CTA */}
+      {/* 7. CTA */}
       <PremiumCtaSection data={data} />
     </>
   );
