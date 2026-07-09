@@ -56,6 +56,33 @@ function buildWhatsAppMessage(data: {
 }
 
 /**
+ * Safely extract a WhatsApp message ID from a Meta Graph API response.
+ * Meta can return HTTP 200 with an error body (e.g. rate-limit, quota),
+ * so we only consider it a real success when `messages[0].id` is present.
+ */
+function extractMessageId(body: unknown): string | null {
+  if (body && typeof body === "object" && "messages" in body) {
+    const msgs = (body as { messages?: Array<{ id?: string }> }).messages;
+    if (Array.isArray(msgs) && msgs.length > 0 && typeof msgs[0].id === "string") {
+      return msgs[0].id;
+    }
+  }
+  return null;
+}
+
+/** Safely extract Meta error code/message from a non-success response body. */
+function extractMetaError(body: unknown): { code: number | null; message: string } {
+  if (body && typeof body === "object" && "error" in body) {
+    const err = (body as { error?: { code?: number; message?: string; type?: string } }).error;
+    return {
+      code: typeof err?.code === "number" ? err.code : null,
+      message: typeof err?.message === "string" ? err.message.slice(0, 200) : "unknown",
+    };
+  }
+  return { code: null, message: "unknown" };
+}
+
+/**
  * Send the enquiry to the IBS WhatsApp number via the Meta WhatsApp Cloud API.
  *
  * Strategy:
@@ -66,9 +93,11 @@ function buildWhatsAppMessage(data: {
  *      to a plain text message. (Plain text only works if a 24h customer
  *      window is open; in production this is a secondary path.)
  *
- * Returns `{ ok: true }` on success or `{ ok: false }` on any failure.
- * Never throws — failures are surfaced to the caller so the wa.me fallback
- * can kick in.
+ * A send is only considered successful when Meta returns `messages[0].id`.
+ * HTTP 200 alone is NOT enough — Meta can return 200 with an error body.
+ *
+ * Returns `{ ok: true, messageId }` on success or `{ ok: false, reason, ... }` on failure.
+ * Never throws — failures are surfaced to the caller so the wa.me fallback can kick in.
  */
 async function sendWhatsAppCloudApi(data: {
   name: string;
@@ -77,14 +106,14 @@ async function sendWhatsAppCloudApi(data: {
   company?: string;
   serviceInterest?: string;
   message: string;
-}): Promise<{ ok: true } | { ok: false; reason: string }> {
+}): Promise<{ ok: true; messageId: string; usedFallback: boolean } | { ok: false; reason: string; usedFallback: boolean }> {
   const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
   const toNumber = process.env.WHATSAPP_TO_NUMBER ?? WHATSAPP_NUMBER;
   const templateName = process.env.WHATSAPP_TEMPLATE_NAME ?? "website_enquiry_alert";
 
   if (!accessToken || !phoneNumberId) {
-    return { ok: false, reason: "missing-env" };
+    return { ok: false, reason: "missing-env", usedFallback: false };
   }
 
   const now = new Date().toLocaleString("en-IN", {
@@ -142,23 +171,22 @@ async function sendWhatsAppCloudApi(data: {
       cache: "no-store",
     });
 
-    if (res.ok) {
-      return { ok: true };
+    const resBody = await res.json().catch(() => null);
+
+    if (res.ok && extractMessageId(resBody)) {
+      const messageId = extractMessageId(resBody)!;
+      console.info("[contact] WhatsApp template send succeeded", { messageId });
+      return { ok: true, messageId, usedFallback: false };
     }
 
-    // Template not approved / wrong language / param mismatch — log a
-    // sanitized status (no token, no full body) and try the text fallback.
-    const errText = await res.text().catch(() => "");
-    console.warn(
-      "[contact] WhatsApp template send failed — falling back to text",
-      {
-        status: res.status,
-        // Trim to avoid leaking large error payloads into logs.
-        bodyPreview: errText.slice(0, 280),
-      }
-    );
+    // Template send did not produce a message ID — log details and try text.
+    const metaErr = extractMetaError(resBody);
+    console.warn("[contact] WhatsApp template send failed — falling back to text", {
+      templateStatus: res.status,
+      templateErrorCode: metaErr.code,
+      templateErrorMessage: metaErr.message,
+    });
   } catch (err) {
-    // Network error — try the text fallback before giving up entirely.
     console.warn("[contact] WhatsApp template send threw — trying text fallback", {
       err: err instanceof Error ? err.message : String(err),
     });
@@ -184,21 +212,26 @@ async function sendWhatsAppCloudApi(data: {
       cache: "no-store",
     });
 
-    if (res.ok) {
-      return { ok: true };
+    const resBody = await res.json().catch(() => null);
+
+    if (res.ok && extractMessageId(resBody)) {
+      const messageId = extractMessageId(resBody)!;
+      console.info("[contact] WhatsApp text send succeeded (fallback path)", { messageId });
+      return { ok: true, messageId, usedFallback: true };
     }
 
-    const errText = await res.text().catch(() => "");
+    const metaErr = extractMetaError(resBody);
     console.warn("[contact] WhatsApp text send failed", {
-      status: res.status,
-      bodyPreview: errText.slice(0, 280),
+      textStatus: res.status,
+      textErrorCode: metaErr.code,
+      textErrorMessage: metaErr.message,
     });
-    return { ok: false, reason: `whatsapp-api-${res.status}` };
+    return { ok: false, reason: `whatsapp-api-${res.status}`, usedFallback: true };
   } catch (err) {
     console.warn("[contact] WhatsApp text send threw", {
       err: err instanceof Error ? err.message : String(err),
     });
-    return { ok: false, reason: "whatsapp-network" };
+    return { ok: false, reason: "whatsapp-network", usedFallback: true };
   }
 }
 
@@ -312,6 +345,7 @@ export async function POST(request: Request) {
   // Log a sanitized breadcrumb (no token, no PII payload) so ops can see why.
   console.warn("[contact] WhatsApp Cloud API did not deliver — returning wa.me fallback", {
     reason: whatsappResult.reason,
+    usedFallback: whatsappResult.usedFallback,
     savedToDb,
     emailed,
   });
