@@ -118,6 +118,11 @@ interface BrandLogoCardProps {
   dimmed?: boolean;
 }
 
+/** Per-brand alt-text overrides. Defaults to `${name} logo`. */
+const ALT_OVERRIDES: Record<string, string> = {
+  Matrix: "Matrix Comsec logo",
+};
+
 export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
   const prefersReducedMotion = useReducedMotion();
   const [imgError, setImgError] = useState(false);
@@ -172,7 +177,7 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
         {logoSrc && !imgError ? (
           <Image
             src={logoSrc}
-            alt={`${name} logo`}
+            alt={ALT_OVERRIDES[name] ?? `${name} logo`}
             width={300}
             height={100}
             onError={handleImgError}

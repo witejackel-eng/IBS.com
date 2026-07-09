@@ -28,7 +28,7 @@ export const openPositions: OpenPosition[] = [
     title: "Field Service Engineer",
     department: "Engineering",
     location: "Field (India)",
-    experience: "2–5 years",
+    experience: "1+ year",
     type: "Full-time",
     summary:
       "Own the on-site commissioning, handover, and ongoing maintenance of communication, AV, and security systems at client sites across India.",
@@ -39,8 +39,9 @@ export const openPositions: OpenPosition[] = [
       "Documenting site configurations, handover checklists, and maintenance reports.",
     ],
     requirements: [
-      "Diploma or B.Tech in Electronics, Electrical, or Computer Science.",
-      "Hands-on experience with at least one of: IP-PBX (Alcatel, Cisco, Matrix), networking (Cisco, D-Link, Aruba), or CCTV/access control (Hikvision, Dahua, eSSL).",
+      "Graduate.",
+      "Experience: 1+ year.",
+      "Hands-on experience with at least one of: IP-PBX, networking, CCTV, access control, AV systems, or related field systems.",
       "Comfortable travelling to client sites; valid driving licence preferred.",
       "Strong communication — you will be the face of IBS on customer sites.",
     ],
@@ -50,7 +51,7 @@ export const openPositions: OpenPosition[] = [
     title: "AV Installation Engineer",
     department: "Engineering",
     location: "Field (India)",
-    experience: "3–6 years",
+    experience: "1+ year",
     type: "Full-time",
     summary:
       "Lead boardroom and auditorium AV installations end-to-end: from site survey and BOQ through installation, integration, and client handover.",
@@ -61,10 +62,10 @@ export const openPositions: OpenPosition[] = [
       "Client handover, training, and post-installation support.",
     ],
     requirements: [
-      "3+ years installing and commissioning AV systems in corporate environments.",
-      "Familiarity with at least one control system platform (Crestron, Extron, or Kramer).",
-      "Ability to read AV system drawings and signal-flow diagrams.",
-      "Manufacturer certifications (Crestron, Extron, Biamp, etc.) are a strong plus.",
+      "Graduate.",
+      "Experience: 1+ year.",
+      "Hands-on experience with the relevant systems for this role.",
+      "Comfortable working with clients and documenting work clearly.",
     ],
   },
   {
@@ -72,7 +73,7 @@ export const openPositions: OpenPosition[] = [
     title: "Network Engineer",
     department: "Engineering",
     location: "PAN India",
-    experience: "2–5 years",
+    experience: "1+ year",
     type: "Full-time",
     summary:
       "Design, deploy, and support enterprise network infrastructure — switching, routing, Wi-Fi, and firewall — for IBS clients across India.",
@@ -83,10 +84,10 @@ export const openPositions: OpenPosition[] = [
       "Ongoing support, monitoring, and AMC visits for deployed networks.",
     ],
     requirements: [
-      "B.Tech or equivalent; CCNA / CCNP or equivalent hands-on experience.",
-      "Strong understanding of L2/L3, VLANs, routing protocols, and Wi-Fi design.",
-      "Experience with next-generation firewalls (Sophos, Fortinet).",
-      "Ability to independently scope, deploy, and document a small-to-mid office network.",
+      "Graduate.",
+      "Experience: 1+ year.",
+      "Hands-on experience with the relevant systems for this role.",
+      "Comfortable working with clients and documenting work clearly.",
     ],
   },
   {
@@ -94,7 +95,7 @@ export const openPositions: OpenPosition[] = [
     title: "Sales Engineer (Pre-sales)",
     department: "Sales",
     location: "PAN India",
-    experience: "3–6 years",
+    experience: "1+ year",
     type: "Full-time",
     summary:
       "Be the technical bridge between customers and the engineering team: scope requirements, design solutions, prepare BOQs, and close proposals.",
@@ -105,10 +106,10 @@ export const openPositions: OpenPosition[] = [
       "Handover of won projects to the engineering team for execution.",
     ],
     requirements: [
-      "Engineering degree with 3+ years in pre-sales or solution consulting for IT/AV/security systems.",
-      "Ability to translate customer pain points into a concrete technical solution and BOQ.",
-      "Strong written communication — proposals and technical documentation are a core deliverable.",
-      "Existing relationships with facility managers, IT heads, or project consultants is a plus.",
+      "Graduate.",
+      "Experience: 1+ year.",
+      "Hands-on experience with the relevant systems for this role.",
+      "Comfortable working with clients and documenting work clearly.",
     ],
   },
   {
@@ -116,7 +117,7 @@ export const openPositions: OpenPosition[] = [
     title: "AMC Coordinator",
     department: "Operations",
     location: "PAN India",
-    experience: "1–3 years",
+    experience: "1+ year",
     type: "Full-time",
     summary:
       "Run the operational backbone of our Annual Maintenance Contract business: scheduling, ticket tracking, SLA monitoring, and customer communication.",
@@ -127,10 +128,10 @@ export const openPositions: OpenPosition[] = [
       "Be the single point of contact for AMC customers on ticket status.",
     ],
     requirements: [
-      "Bachelor's degree with 1–3 years of coordination or operations experience.",
-      "Highly organised — comfortable managing 50+ open tickets at any time.",
-      "Strong phone and email communication, in English and Hindi.",
-      "Familiarity with ticketing tools (Freshdesk, Zoho, or similar) is a plus.",
+      "Graduate.",
+      "Experience: 1+ year.",
+      "Hands-on experience with the relevant systems for this role.",
+      "Comfortable working with clients and documenting work clearly.",
     ],
   },
   {
@@ -141,7 +142,7 @@ export const openPositions: OpenPosition[] = [
     experience: "0–1 year",
     type: "Internship",
     summary:
-      "A structured 3–6 month internship for fresh engineering graduates: shadow senior engineers across AV, networking, and security deployments and grow into a full-time role.",
+      "A structured 3–6 month internship for fresh graduates: shadow senior engineers across AV, networking, and security deployments and grow into a full-time role.",
     responsibilities: [
       "Shadow senior engineers on site surveys, installations, and commissioning.",
       "Prepare documentation: site drawings, configuration notes, handover checklists.",
@@ -149,10 +150,10 @@ export const openPositions: OpenPosition[] = [
       "Learn one specialisation (AV, networking, or security) in depth by month 3.",
     ],
     requirements: [
-      "Recent B.Tech/Diploma graduate in Electronics, Electrical, or Computer Science.",
-      "Eager to learn on site — this is not a desk-only role.",
-      "Comfortable with basic hand tools and willing to travel to client sites.",
-      "Strong fundamentals in networking or electronics; manufacturer coursework is a plus.",
+      "Graduate.",
+      "Experience: 1+ year.",
+      "Hands-on experience with the relevant systems for this role.",
+      "Comfortable working with clients and documenting work clearly.",
     ],
   },
 ];
@@ -194,9 +195,9 @@ export const careerBenefits: CareerBenefit[] = [
       "Interns grow into engineers. Engineers grow into project leads. Project leads grow into solution architects. The path is real, and several of our senior engineers started as interns.",
   },
   {
-    title: "Health insurance and PF",
+    title: "Health insurance and paid leave",
     description:
-      "Group health insurance for you and your dependents, EPF contribution from day one of full-time employment, and paid leave that actually gets approved.",
+      "Group health insurance for you and your dependents, along with paid leave that actually gets approved.",
   },
 ];
 

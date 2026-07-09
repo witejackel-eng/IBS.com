@@ -33,7 +33,7 @@ export const brandLogoMap: Record<string, string> = {
   Fortinet: "/brands/fortinet.svg",
   Netgear: "/brands/netgear.svg",
   Synology: "/brands/synology.svg",
-  Matrix: "/brands/matrix.svg",
+  Matrix: "/brands/matrix-comsec.png",
   // Communication & IT (wordmarks)
   "Alcatel-Lucent": "/brands/alcatel-lucent.svg",
   Sophos: "/brands/sophos.svg",
