@@ -6,7 +6,7 @@ import { z } from "zod";
  * Limits are tightened for production:
  * - Name: 80 chars (people don't need more)
  * - Company: 120 chars
- * - Phone: 10–15 digits only (international format handled by wa.me)
+ * - Phone: required, 10–15 digits after stripping spaces/hyphens/brackets/+
  * - Message: 1000 chars max
  * - Email: standard email validation
  */
@@ -20,8 +20,14 @@ export const contactFormSchema = z.object({
   phone: z
     .string()
     .trim()
-    .regex(/^[\d\s+()-]{10,15}$/, "Enter a valid phone number (10–15 digits)")
-    .or(z.literal("")),
+    .min(1, "Please enter a valid phone number.")
+    .refine(
+      (val) => {
+        const digits = val.replace(/[^\d]/g, "");
+        return digits.length >= 10 && digits.length <= 15;
+      },
+      "Please enter a valid phone number."
+    ),
   company: z
     .string()
     .trim()

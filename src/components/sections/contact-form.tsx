@@ -230,7 +230,7 @@ export function ContactForm() {
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="phone">Phone</Label>
+          <Label htmlFor="phone">Phone *</Label>
           <Input
             id="phone"
             type="tel"
