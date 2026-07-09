@@ -14,62 +14,92 @@ import { brandLogoMap } from "@/lib/content/brand-logo-map";
 /*  consistent visual weight with its neighbours.                       */
 /* ================================================================== */
 
-/** [maxWidth%, maxHeight%] per brand. Percentages of the padded container. */
+/**
+ * [maxWidth%, maxHeight%] per brand — percentages of the padded logo container.
+ *
+ * Sizing is tuned per-logo based on actual aspect ratio and visual weight:
+ *
+ *   1:1 square icons  (viewBox 24×24) → moderate W, high H
+ *   3:1 wide wordmarks  (viewBox 300×100) → high W (85-95%), moderate H
+ *   1.3:1 Matrix PNG (882×677) → balanced W, higher H
+ *
+ * Math: in a ~1.3:1 container, a 3:1 wordmark's rendered height equals
+ * ~0.433 × maxWidth% of container height.  So maxWidth 90% → ~39% H.
+ * Square icons at maxWidth 42% → ~54% H (height-constrained).
+ */
 const LOGO_SIZING: Record<string, [number, number]> = {
-  /* --- Audio / Video Integration --- */
-  Poly:          [40, 52],
-  Cisco:         [42, 54],
-  Logitech:      [62, 42],
-  AVer:          [52, 48],
-  Epson:         [42, 52],
-  Zoom:          [42, 52],
-  Barco:         [52, 46],
-  Biamp:         [52, 46],
-  Extron:        [52, 46],
-  Crestron:      [62, 40],
-  Samsung:       [42, 52],
-  LG:            [42, 52],
-  Panasonic:     [42, 52],
-  Draper:        [52, 46],
-  Harman:        [62, 40],
-  Kramer:        [52, 46],
-  Shure:         [52, 46],
-  QSC:           [52, 46],
+  /* ================================================================ */
+  /*  AUDIO / VIDEO INTEGRATION                                      */
+  /* ================================================================ */
 
-  /* --- Communication & IT --- */
-  "Alcatel-Lucent": [80, 48],
-  Sophos:        [60, 48],
-  Matrix:        [78, 52],
-  CommScope:     [72, 44],
-  Systimax:      [70, 42],
-  Dell:          [42, 54],
-  "HP Aruba":    [58, 46],
-  Ruckus:        [62, 42],
-  "D-Link":      [62, 42],
-  Netgear:       [42, 52],
-  APC:           [56, 46],
-  Vertiv:        [56, 46],
-  Eaton:         [56, 46],
-  Fortinet:      [42, 52],
-  Synology:      [42, 52],
-  APW:           [56, 46],
+  /* --- Square simple-icons (1:1, viewBox 24×24) --- */
+  Cisco:         [42, 54],   // ← REFERENCE — do not change
+  Poly:          [42, 54],   // match Cisco
+  Epson:         [44, 54],   // slight bump over Cisco
+  Zoom:          [44, 54],
+  Samsung:       [44, 54],
+  LG:            [44, 54],
+  Panasonic:     [48, 56],   // taller to compensate for busy icon
 
-  /* --- Security --- */
-  Hikvision:     [62, 42],
-  Dahua:         [52, 46],
-  Axis:          [52, 48],
-  eSSL:          [52, 46],
-  Cooper:        [52, 46],
-  Honeywell:     [68, 40],
-  HID:           [52, 46],
-  Notifier:      [52, 46],
-  Morley:        [52, 46],
-  Pelco:         [52, 46],
-  Edwards:       [52, 46],
+  /* --- Wide wordmarks (3:1, viewBox 300×100) --- */
+  Logitech:      [90, 52],   // long wordmark — fill width
+  AVer:          [85, 52],
+  Barco:         [85, 52],
+  Biamp:         [85, 52],
+  Extron:        [88, 52],   // slightly wider text
+  Crestron:      [85, 52],
+  Draper:        [85, 52],
+  Harman:        [85, 52],
+  Kramer:        [88, 52],
+  Shure:         [80, 52],   // shorter text
+  QSC:           [68, 52],   // very short text, almost icon-like
+
+  /* ================================================================ */
+  /*  COMMUNICATION & IT                                             */
+  /* ================================================================ */
+
+  /* --- Square simple-icons (1:1, viewBox 24×24) --- */
+  Dell:          [42, 54],   // already acceptable
+  Fortinet:      [42, 54],
+  Netgear:       [48, 56],   // was too small
+
+  /* --- Wide wordmarks (3:1, viewBox 300×100) --- */
+  "Alcatel-Lucent": [95, 52], // 4:1 ratio (320×80), widest logo
+  Sophos:        [82, 52],
+  CommScope:     [90, 52],
+  Systimax:      [90, 52],
+  "HP Aruba":    [85, 52],
+  Ruckus:        [82, 52],
+  "D-Link":      [78, 52],
+  APC:           [78, 52],
+  Vertiv:        [82, 52],
+  Eaton:         [82, 52],
+  APW:           [68, 52],   // very short text
+  Synology:      [48, 56],   // 1:1 simple-icon, was too small
+
+  /* --- Non-standard ratio --- */
+  Matrix:        [75, 65],   // PNG 882×677 (≈1.3:1), increase significantly
+
+  /* ================================================================ */
+  /*  SECURITY                                                        */
+  /* ================================================================ */
+
+  /* --- All wordmarks (3:1, viewBox 300×100) --- */
+  Hikvision:     [90, 52],   // long wordmark
+  Dahua:         [85, 52],
+  Axis:          [82, 52],
+  eSSL:          [72, 52],   // short text
+  Cooper:        [82, 52],
+  Honeywell:     [90, 52],   // long wordmark
+  HID:           [68, 52],   // very short text
+  Notifier:      [85, 52],
+  Morley:        [82, 52],
+  Pelco:         [78, 52],
+  Edwards:       [85, 52],
 };
 
-/** Fallback sizing for any brand not explicitly listed. */
-const DEFAULT_SIZING: [number, number] = [52, 48];
+/** Fallback for unlisted brands — assumes 3:1 wordmark. */
+const DEFAULT_SIZING: [number, number] = [85, 52];
 
 function getLogoSizing(name: string): [number, number] {
   return LOGO_SIZING[name] ?? DEFAULT_SIZING;
@@ -160,7 +190,7 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
               "font-bold text-charcoal transition-colors duration-300 group-hover:text-tangerine-600",
               "select-none text-center leading-tight px-2",
               /* Scale fallback text proportionally to logo sizing */
-              maxW >= 65 ? "text-xs sm:text-sm" : maxW <= 45 ? "text-base sm:text-lg" : "text-sm sm:text-base"
+              maxW >= 85 ? "text-xs sm:text-sm" : maxW <= 50 ? "text-base sm:text-lg" : "text-sm sm:text-base"
             )}
           >
             {name}
