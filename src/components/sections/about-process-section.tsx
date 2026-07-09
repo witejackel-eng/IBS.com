@@ -109,11 +109,9 @@ function MobileConnector() {
 
 function StepCard({
   step,
-  index,
   isLast,
 }: {
   step: (typeof steps)[number];
-  index: number;
   isLast: boolean;
 }) {
   return (
@@ -165,7 +163,7 @@ export function AboutProcessSection() {
         >
           {steps.map((step, i) => (
             <div key={step.number} className="group flex items-center">
-              <StepCard step={step} index={i} isLast={i === steps.length - 1} />
+              <StepCard step={step} isLast={i === steps.length - 1} />
               {i < steps.length - 1 && <Connector />}
             </div>
           ))}
@@ -177,7 +175,6 @@ export function AboutProcessSection() {
             <StepCard
               key={step.number}
               step={step}
-              index={i}
               isLast={i === steps.length - 1}
             />
           ))}

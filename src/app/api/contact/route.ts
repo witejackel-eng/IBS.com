@@ -9,6 +9,49 @@ import { getClientIp, rateLimit } from "@/lib/rate-limit";
 const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 
+/** WhatsApp number for IBS enquiries (without + or spaces). */
+const WHATSAPP_NUMBER = "918368561919";
+
+/**
+ * Build a clean, human-readable WhatsApp message from the form data.
+ * Server-side to keep the phone number and message format out of the frontend bundle.
+ */
+function buildWhatsAppMessage(data: {
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  serviceInterest?: string;
+  message: string;
+}): string {
+  const now = new Date().toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+
+  const lines = [
+    "🌐 *NEW WEBSITE ENQUIRY*",
+    "",
+    "A client submitted an enquiry from the IBS website.",
+    "",
+    `*Name:* ${data.name}`,
+    data.company ? `*Company:* ${data.company}` : null,
+    `*Email:* ${data.email}`,
+    data.phone ? `*Phone:* ${data.phone}` : null,
+    data.serviceInterest ? `*Service:* ${data.serviceInterest}` : null,
+    "",
+    `*Message:* ${data.message}`,
+    "",
+    "━━━━━━━━━━━━━━━━━━",
+    `Source: IBS Website Contact Form`,
+    `Website: ibsinfra.com`,
+    `Submitted At: ${now}`,
+  ];
+
+  return lines.filter((l) => l !== null).join("\n");
+}
+
 export async function POST(request: Request) {
   const ip = getClientIp(request);
   const { success, resetAt } = rateLimit(`contact:${ip}`, RATE_LIMIT, RATE_WINDOW_MS);
@@ -38,6 +81,7 @@ export async function POST(request: Request) {
 
   const { name, email, phone, company: companyName, serviceInterest, message } = parsed.data;
 
+  // --- Best-effort: save to database ---
   let savedToDb = false;
   if (prisma) {
     try {
@@ -50,6 +94,7 @@ export async function POST(request: Request) {
     }
   }
 
+  // --- Best-effort: send notification email ---
   let emailed = false;
   const resendApiKey = process.env.RESEND_API_KEY;
   if (resendApiKey) {
@@ -78,16 +123,18 @@ export async function POST(request: Request) {
     }
   }
 
+  // --- Always build WhatsApp URL (minimum viable delivery path) ---
+  const whatsappText = buildWhatsAppMessage({ name, email, phone: phone || undefined, company: companyName || undefined, serviceInterest: serviceInterest || undefined, message });
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`;
+
+  // Log if neither persistence channel worked — but still return the
+  // WhatsApp URL so the user can always send their enquiry.
   if (!savedToDb && !emailed) {
     console.warn(
-      "Contact submission could not be persisted or emailed (DATABASE_URL/RESEND_API_KEY unset or unreachable).",
+      "Contact submission could not be persisted or emailed (DATABASE_URL/RESEND_API_KEY unset or unreachable). WhatsApp URL provided as fallback.",
       { name, email }
-    );
-    return NextResponse.json(
-      { error: "Unable to deliver your message right now. Please call or email us directly." },
-      { status: 503 }
     );
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, whatsappUrl });
 }

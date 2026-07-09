@@ -28,11 +28,12 @@ export default function CreditsPage() {
               </p>
               <p className="mt-1 text-steel">
                 By {credit.author}, licensed under{" "}
-                <a href={credit.licenseUrl} className="underline underline-offset-2 hover:text-charcoal" target="_blank" rel="noreferrer">
+                <a href={credit.licenseUrl} className="underline underline-offset-2 hover:text-charcoal" target="_blank"
+                rel="noopener noreferrer">
                   {credit.license}
                 </a>
                 .{" "}
-                <a href={credit.source} className="underline underline-offset-2 hover:text-charcoal" target="_blank" rel="noreferrer">
+                <a href={credit.source} className="underline underline-offset-2 hover:text-charcoal" target="_blank" rel="noopener noreferrer">
                   Source
                 </a>
               </p>

@@ -23,7 +23,7 @@ export function Footer() {
               <a
                 href={company.social.facebook}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-steel transition-colors hover:border-deep-blue/40 hover:text-deep-blue"
               >
@@ -32,7 +32,7 @@ export function Footer() {
               <a
                 href={company.social.linkedin}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-steel transition-colors hover:border-deep-blue/40 hover:text-deep-blue"
               >

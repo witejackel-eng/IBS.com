@@ -15,7 +15,7 @@ const contentSecurityPolicy = [
   // <Environment preset="city" /> fetches at runtime (@react-three/drei
   // ships no bundled preset assets) -- without it, the hero falls back to
   // flat lighting with no reflections.
-  "connect-src 'self' https://vitals.vercel-insights.com https://vitals.vercel-analytics.com https://raw.githack.com",
+  "connect-src 'self' https://vitals.vercel-insights.com https://vitals.vercel-analytics.com https://raw.githack.com https://wa.me",
   // Allow the Google Maps embed used on /contact (ViewOnMap component).
   // Without an explicit frame-src, the browser falls back to default-src
   // 'self' and blocks the maps.google.com iframe with a "This content is
