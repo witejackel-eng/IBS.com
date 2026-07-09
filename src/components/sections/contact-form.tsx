@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -43,6 +43,11 @@ export function ContactForm() {
     defaultValues: { name: "", email: "", phone: "", company: "", serviceInterest: "", message: "" },
   });
 
+  // The outcome returned by the API route — drives which success/fallback UI
+  // we render. `delivered` = Cloud API succeeded; `fallback` = Cloud API
+  // failed but we still have a wa.me link; `error` = everything failed.
+  const [outcome, setOutcome] = useState<"delivered" | "fallback" | "error">("delivered");
+
   async function onSubmit(values: ContactFormValues) {
     try {
       // Keep a copy of the form data so we can retry WhatsApp if needed.
@@ -55,21 +60,39 @@ export function ContactForm() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => null);
-        toast.error(data?.error ?? "Something went wrong. Please try again or call us directly.");
+        toast.error(
+          data?.error ?? "Something went wrong. Please contact us directly on +91 83685 61919."
+        );
         return;
       }
 
       const data = await res.json().catch(() => null);
 
-      // Open WhatsApp with the pre-filled message in a new tab.
-      if (data?.whatsappUrl) {
-        window.open(data.whatsappUrl, "_blank", "noopener,noreferrer");
+      if (!data || data.ok !== true) {
+        setOutcome("error");
+        setSubmitted(true);
+        return;
       }
 
+      // Cloud API succeeded — enquiry delivered to the business WhatsApp.
+      if (data.delivered === true) {
+        setOutcome("delivered");
+        setSubmitted(true);
+        reset();
+        return;
+      }
+
+      // Cloud API failed — open WhatsApp with the prefilled message so the
+      // visitor can complete the enquiry themselves with one tap.
+      setOutcome("fallback");
+      if (data.fallbackUrl) {
+        window.open(data.fallbackUrl, "_blank", "noopener,noreferrer");
+      }
       setSubmitted(true);
       reset();
     } catch {
-      toast.error("Something went wrong. Please try again or call us directly.");
+      setOutcome("error");
+      setSubmitted(true);
     }
   }
 
@@ -106,6 +129,20 @@ export function ContactForm() {
   }
 
   if (submitted) {
+    // Pick the right headline + body copy for each outcome.
+    const headline =
+      outcome === "delivered"
+        ? "Enquiry sent"
+        : outcome === "fallback"
+        ? "Enquiry ready in WhatsApp"
+        : "Something went wrong";
+    const body =
+      outcome === "delivered"
+        ? "Thank you. Your enquiry has been sent. Our team will contact you shortly."
+        : outcome === "fallback"
+        ? "Your enquiry is ready in WhatsApp. Please press Send to complete it."
+        : "Something went wrong. Please contact us directly on +91 83685 61919.";
+
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
@@ -120,15 +157,31 @@ export function ContactForm() {
         >
           <CheckCircle2 className="h-14 w-14 text-deep-blue" />
         </motion.div>
-        <h3 className="text-xl font-semibold text-charcoal font-heading">Enquiry prepared</h3>
-        <p className="max-w-sm text-sm text-steel">
-          Thank you. Your enquiry has been prepared for WhatsApp. Please press send in the WhatsApp window to complete your enquiry.
-        </p>
+        <h3 className="text-xl font-semibold text-charcoal font-heading">{headline}</h3>
+        <p className="max-w-sm text-sm text-steel">{body}</p>
         <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
-          <Button variant="outline" className="rounded-full" onClick={retryWhatsApp}>
-            Open WhatsApp again
-          </Button>
-          <Button variant="ghost" className="rounded-full" onClick={() => { setSubmitted(false); setFormData(null); }}>
+          {outcome === "fallback" && (
+            <Button variant="outline" className="rounded-full" onClick={retryWhatsApp}>
+              Open WhatsApp again
+            </Button>
+          )}
+          {outcome === "error" && (
+            <a
+              href="tel:+918368561919"
+              className={buttonVariants({ variant: "outline", className: "rounded-full" })}
+            >
+              Call +91 83685 61919
+            </a>
+          )}
+          <Button
+            variant="ghost"
+            className="rounded-full"
+            onClick={() => {
+              setSubmitted(false);
+              setFormData(null);
+              setOutcome("delivered");
+            }}
+          >
             Send another message
           </Button>
         </div>
