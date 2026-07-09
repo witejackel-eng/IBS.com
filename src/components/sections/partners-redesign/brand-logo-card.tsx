@@ -7,106 +7,73 @@ import { cn } from "@/lib/utils";
 import { brandLogoMap } from "@/lib/content/brand-logo-map";
 
 /* ================================================================== */
-/*  Logo shape classification                                           */
-/*  Determines how each logo is sized within its card.                  */
+/*  Per-brand optical sizing                                             */
+/*  Each entry: [maxWidth %, maxHeight %] — both relative to the       */
+/*  logo container (the padded area inside the card).                   */
+/*  Values are tuned so every logo is readable, centered, and has       */
+/*  consistent visual weight with its neighbours.                       */
 /* ================================================================== */
 
-type LogoShape = "wide" | "standard" | "square";
+/** [maxWidth%, maxHeight%] per brand. Percentages of the padded container. */
+const LOGO_SIZING: Record<string, [number, number]> = {
+  /* --- Audio / Video Integration --- */
+  Poly:          [40, 52],
+  Cisco:         [42, 54],
+  Logitech:      [62, 42],
+  AVer:          [52, 48],
+  Epson:         [42, 52],
+  Zoom:          [42, 52],
+  Barco:         [52, 46],
+  Biamp:         [52, 46],
+  Extron:        [52, 46],
+  Crestron:      [62, 40],
+  Samsung:       [42, 52],
+  LG:            [42, 52],
+  Panasonic:     [42, 52],
+  Draper:        [52, 46],
+  Harman:        [62, 40],
+  Kramer:        [52, 46],
+  Shure:         [52, 46],
+  QSC:           [52, 46],
 
-/**
- * Wide wordmarks — horizontal logos that need more width than height.
- * These are brands whose primary identity is a wide text mark or
- * whose SVG viewBox has a ratio wider than ~2.5:1.
- */
-const WIDE_LOGOS: ReadonlySet<string> = new Set([
-  "Alcatel-Lucent",
-  "CommScope",
-  "Systimax",
-  "D-Link",
-  "Ruckus",
-  "Logitech",
-  "Honeywell",
-  "Crestron",
-  "Hikvision",
-  "Harman",
-  "Matrix",
-]);
+  /* --- Communication & IT --- */
+  "Alcatel-Lucent": [80, 48],
+  Sophos:        [60, 48],
+  Matrix:        [78, 52],
+  CommScope:     [72, 44],
+  Systimax:      [70, 42],
+  Dell:          [42, 54],
+  "HP Aruba":    [58, 46],
+  Ruckus:        [62, 42],
+  "D-Link":      [62, 42],
+  Netgear:       [42, 52],
+  APC:           [56, 46],
+  Vertiv:        [56, 46],
+  Eaton:         [56, 46],
+  Fortinet:      [42, 52],
+  Synology:      [42, 52],
+  APW:           [56, 46],
 
-/**
- * Square / near-square logos — icon marks or compact logos
- * (viewBox roughly 1:1 like 24×24).
- */
-const SQUARE_LOGOS: ReadonlySet<string> = new Set([
-  "Cisco",
-  "Dell",
-  "Fortinet",
-  "LG",
-  "Poly",
-  "Zoom",
-  "Epson",
-  "Netgear",
-  "Samsung",
-  "Panasonic",
-  "Synology",
-]);
-
-function classifyShape(name: string): LogoShape {
-  if (WIDE_LOGOS.has(name)) return "wide";
-  if (SQUARE_LOGOS.has(name)) return "square";
-  return "standard";
-}
-
-/**
- * Per-brand optical max-height overrides (px).
- * Fine-tune individual brands that feel too large or too small
- * within their shape category. `null` = let the shape class handle it.
- */
-const OPTICAL_MAX_H: Record<string, number | null> = {
-  "Alcatel-Lucent": 38,
-  Cisco: 50,
-  Samsung: 48,
-  Honeywell: 36,
-  CommScope: 36,
-  Systimax: 34,
-  Logitech: 34,
-  Crestron: 34,
-  Hikvision: 36,
-  Panasonic: 48,
-  Harman: 34,
-  Matrix: 36,
-  Ruckus: 34,
-  "D-Link": 34,
-  Synology: 48,
-  Netgear: 48,
-  Axis: 46,
-  Poly: 46,
-  Dell: 50,
-  Fortinet: 48,
-  Shure: 44,
-  QSC: 44,
-  HID: 44,
-  APC: 36,
-  APW: 36,
-  LG: 46,
-  eSSL: 40,
-  Zoom: 46,
-  Barco: 40,
-  Biamp: 40,
-  Extron: 40,
-  Kramer: 40,
-  Draper: 40,
-  Morley: 40,
-  Pelco: 40,
-  Edwards: 40,
-  Cooper: 40,
-  Notifier: 40,
-  Vertiv: 40,
-  Eaton: 40,
-  Sophos: 40,
-  "HP Aruba": 40,
-  AVer: 40,
-  Dahua: 40,
+  /* --- Security --- */
+  Hikvision:     [62, 42],
+  Dahua:         [52, 46],
+  Axis:          [52, 48],
+  eSSL:          [52, 46],
+  Cooper:        [52, 46],
+  Honeywell:     [68, 40],
+  HID:           [52, 46],
+  Notifier:      [52, 46],
+  Morley:        [52, 46],
+  Pelco:         [52, 46],
+  Edwards:       [52, 46],
 };
+
+/** Fallback sizing for any brand not explicitly listed. */
+const DEFAULT_SIZING: [number, number] = [52, 48];
+
+function getLogoSizing(name: string): [number, number] {
+  return LOGO_SIZING[name] ?? DEFAULT_SIZING;
+}
 
 /* ================================================================== */
 /*  BrandLogoCard                                                      */
@@ -127,17 +94,16 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
   const prefersReducedMotion = useReducedMotion();
   const [imgError, setImgError] = useState(false);
   const logoSrc = brandLogoMap[name];
-  const shape = classifyShape(name);
-  const opticalMaxH = OPTICAL_MAX_H[name] ?? null;
+  const [maxW, maxH] = getLogoSizing(name);
 
   const handleImgError = useCallback(() => {
     setImgError(true);
   }, []);
 
-  /* Build inline style for shape-adaptive + optical sizing */
+  /* Build inline style — per-brand optical sizing with aspect-ratio preservation */
   const logoStyle: React.CSSProperties = {
-    maxWidth: shape === "wide" ? "70%" : shape === "square" ? "46%" : "58%",
-    maxHeight: opticalMaxH ? `${opticalMaxH}px` : shape === "wide" ? "38%" : shape === "square" ? "46%" : "48%",
+    maxWidth: `${maxW}%`,
+    maxHeight: `${maxH}%`,
     objectFit: "contain",
     width: "auto",
     height: "auto",
@@ -193,8 +159,8 @@ export function BrandLogoCard({ name, index, dimmed }: BrandLogoCardProps) {
             className={cn(
               "font-bold text-charcoal transition-colors duration-300 group-hover:text-tangerine-600",
               "select-none text-center leading-tight px-2",
-              /* Scale fallback text by shape */
-              shape === "wide" ? "text-xs sm:text-sm" : shape === "square" ? "text-base sm:text-lg" : "text-sm sm:text-base"
+              /* Scale fallback text proportionally to logo sizing */
+              maxW >= 65 ? "text-xs sm:text-sm" : maxW <= 45 ? "text-base sm:text-lg" : "text-sm sm:text-base"
             )}
           >
             {name}
