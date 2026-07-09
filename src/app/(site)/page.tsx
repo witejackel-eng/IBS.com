@@ -39,8 +39,7 @@ export const metadata: Metadata = {
     "IP-PBX",
     "fire safety",
     "India",
-    "Delhi",
-    "New Delhi",
+    "PAN India",
   ],
   alternates: { canonical: "/" },
   openGraph: {

@@ -21,24 +21,22 @@ export const metadata: Metadata = {
   keywords: [
     "contact IBS",
     "get a quote",
-    "IT consultation Delhi",
+    "IT consultation India",
     "project inquiry",
     "systems integrator contact",
     "support request",
     "infrastructure consultation",
-    "India",
-    "Dwarka",
-    "New Delhi",
+    "PAN India",
   ],
   alternates: { canonical: "/contact" },
   openGraph: {
     url: "/contact",
     title: "Contact Our Engineering Team — Insight Business Solutions",
-    description: `Get in touch with ${company.legalName} for communication, AV, network, and security system requirements. Office in Dwarka, New Delhi.`,
+    description: `Get in touch with ${company.legalName} for communication, AV, network, and security system requirements. PAN India.`,
   },
   twitter: {
     title: "Contact IBS — Get a Quote",
-    description: `Reach IBS engineers for communication, AV, network, and security system requirements. Based in Dwarka, New Delhi.`,
+    description: `Reach IBS engineers for communication, AV, network, and security system requirements. PAN India.`,
   },
 };
 

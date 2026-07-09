@@ -93,7 +93,7 @@ export function RelatedServicesSection({ currentSlug }: RelatedServicesSectionPr
                 <ul className="flex flex-col gap-2 text-xs text-steel/80">
                   <li>Authorized OEM partner for 40+ technology brands</li>
                   <li>Certified engineers for professional installation</li>
-                  <li>Delhi headquarters with PAN India deployment</li>
+                  <li>PAN India deployment with dedicated project teams</li>
                   <li>Long-term AMC with defined SLAs</li>
                 </ul>
               </div>

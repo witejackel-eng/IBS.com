@@ -195,7 +195,7 @@ export function CareerForm() {
           <Label htmlFor="career-location">Current location (optional)</Label>
           <Input
             id="career-location"
-            placeholder="e.g. Dwarka, New Delhi"
+            placeholder="e.g. Your city, State"
             {...register("location")}
           />
         </div>

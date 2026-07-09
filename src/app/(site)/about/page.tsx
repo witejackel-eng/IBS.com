@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "systems integrator India",
     "infrastructure engineering team",
     "company overview",
-    "technology partner Delhi",
+    "technology partner India",
     "OEM partnerships",
     "integration services India",
     "IT solutions company",

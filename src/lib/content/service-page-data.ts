@@ -142,9 +142,9 @@ const voiceCommunication: ServicePageData = {
         "A straightforward system for 50–100 users typically takes two to three weeks from delivery to commissioning, including cabling, configuration, and user training. Larger or multi-site deployments take longer depending on scope.",
     },
     {
-      question: "Do you work on projects outside Delhi/NCR?",
+      question: "Do you work on projects across India?",
       answer:
-        "Yes. IBS is based in Dwarka, New Delhi, but handles installation and commissioning at client sites across India. Travel and logistics are factored into project planning.",
+        "Yes. IBS handles installation and commissioning at client sites PAN India. Travel and logistics are factored into project planning.",
     },
     {
       question: "Which brands do you typically recommend for IP telephony?",
@@ -320,9 +320,9 @@ const audioVideoBoardroomSolutions: ServicePageData = {
         "A single boardroom typically takes one to two weeks for installation and commissioning, including DSP tuning and control system programming. Multi-room projects are phased to minimize disruption.",
     },
     {
-      question: "Do you work on projects outside Delhi/NCR?",
+      question: "Do you work on projects across India?",
       answer:
-        "Yes. IBS handles AV installations at client sites across India. For large or multi-site projects, we plan logistics and staging to keep timelines on track.",
+        "Yes. IBS handles AV installations at client sites PAN India. For large or multi-site projects, we plan logistics and staging to keep timelines on track.",
     },
     {
       question: "Which brands do you recommend for conferencing equipment?",
@@ -515,9 +515,9 @@ const itInfrastructure: ServicePageData = {
         "It depends on floor area and outlet density. A typical 5,000 sq ft office with 80–100 drops takes roughly two to three weeks including conduit, cable pulling, termination, testing, and documentation. Larger spaces are phased by floor or zone.",
     },
     {
-      question: "Do you work on projects outside Delhi/NCR?",
+      question: "Do you work on projects across India?",
       answer:
-        "Yes. IBS handles network infrastructure projects at client sites across India. Staging and pre-configuration are done at our facility to minimize on-site time.",
+        "Yes. IBS handles network infrastructure projects at client sites PAN India. Staging and pre-configuration are done at our facility to minimize on-site time.",
     },
     {
       question: "How do you handle a multi-floor office cabling project?",
@@ -688,9 +688,9 @@ const securitySolutions: ServicePageData = {
         "A standard commercial CCTV and access control deployment for a mid-size office takes two to three weeks. Fire alarm systems take additional time due to zone mapping, panel programming, and regulatory coordination. Timelines are provided after the site survey.",
     },
     {
-      question: "Do you work on projects outside Delhi/NCR?",
+      question: "Do you work on projects across India?",
       answer:
-        "Yes. IBS handles security installations at client sites across India. We coordinate logistics and schedule on-site work to minimize disruption.",
+        "Yes. IBS handles security installations at client sites PAN India. We coordinate logistics and schedule on-site work to minimize disruption.",
     },
     {
       question: "Which camera and access control brands do you recommend?",
@@ -822,7 +822,7 @@ const callCenterSolutions: ServicePageData = {
     {
       question: "Do you provide installation, training, and ongoing support across India?",
       answer:
-        "Yes. Based in Dwarka, New Delhi, IBS handles installation and commissioning at client sites across India, with training for your team during handover. Post-installation, our AMC covers scheduled maintenance, firmware updates, and on-call troubleshooting so the system stays current.",
+        "Yes. IBS handles installation and commissioning at client sites PAN India, with training for your team during handover. Post-installation, our AMC covers scheduled maintenance, firmware updates, and on-call troubleshooting so the system stays current.",
     },
     {
       question: "What is the difference between predictive and progressive dialing?",
@@ -1170,9 +1170,9 @@ const annualMaintenanceService: ServicePageData = {
         "Yes. If you install new systems — whether by IBS or another vendor — they can be added to the existing AMC. We update the asset inventory and adjust the service schedule and pricing accordingly.",
     },
     {
-      question: "Do you work outside Delhi/NCR?",
+      question: "Do you provide AMC support across India?",
       answer:
-        "Yes. IBS provides AMC support at client sites across India from our base in Dwarka, New Delhi.",
+        "Yes. IBS provides AMC support at client sites PAN India.",
     },
     {
       question: "How quickly do you respond to emergency calls?",

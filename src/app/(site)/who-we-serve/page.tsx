@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "segment solutions",
     "commercial AV",
     "India",
-    "Delhi",
+    "PAN India",
   ],
   alternates: { canonical: "/who-we-serve" },
   openGraph: {

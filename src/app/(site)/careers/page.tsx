@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "network engineer",
     "field service engineer",
     "sales engineer",
-    "IT jobs Delhi",
+    "IT jobs India",
     "systems integrator careers",
     "AMC coordinator",
     "internship",
@@ -71,7 +71,7 @@ export default function CareersPage() {
           />
           <Reveal direction="up" delay={0.2}>
             <p className="mt-8 max-w-xl md:max-w-2xl text-lg text-steel">
-              We are an engineering-led systems integrator based in Dwarka, New Delhi, and our project
+              We are an engineering-led systems integrator, and our project
               pipeline across India is growing. We hire engineers who want to design, install,
               and maintain communication, AV, IT, and security systems — not just hand off to
               someone else after the install.

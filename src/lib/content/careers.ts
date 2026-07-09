@@ -8,7 +8,7 @@ export interface OpenPosition {
   slug: string;
   title: string;
   department: "Engineering" | "Sales" | "Operations" | "Support" | "Administration";
-  location: "Dwarka, New Delhi" | "Field (India)" | "Remote (India)";
+  location: "PAN India" | "Field (India)" | "Remote (India)";
   experience: string;
   type: "Full-time" | "Contract" | "Internship";
   summary: string;
@@ -71,7 +71,7 @@ export const openPositions: OpenPosition[] = [
     slug: "network-engineer",
     title: "Network Engineer",
     department: "Engineering",
-    location: "Dwarka, New Delhi",
+    location: "PAN India",
     experience: "2–5 years",
     type: "Full-time",
     summary:
@@ -93,7 +93,7 @@ export const openPositions: OpenPosition[] = [
     slug: "sales-engineer",
     title: "Sales Engineer (Pre-sales)",
     department: "Sales",
-    location: "Dwarka, New Delhi",
+    location: "PAN India",
     experience: "3–6 years",
     type: "Full-time",
     summary:
@@ -115,7 +115,7 @@ export const openPositions: OpenPosition[] = [
     slug: "amc-coordinator",
     title: "AMC Coordinator",
     department: "Operations",
-    location: "Dwarka, New Delhi",
+    location: "PAN India",
     experience: "1–3 years",
     type: "Full-time",
     summary:
@@ -137,7 +137,7 @@ export const openPositions: OpenPosition[] = [
     slug: "project-engineer-intern",
     title: "Project Engineer Intern",
     department: "Engineering",
-    location: "Dwarka, New Delhi",
+    location: "PAN India",
     experience: "0–1 year",
     type: "Internship",
     summary:
@@ -186,7 +186,7 @@ export const careerBenefits: CareerBenefit[] = [
   {
     title: "Pan-India projects, home most evenings",
     description:
-      "Based in Dwarka, New Delhi, our projects span across India. Field engineers typically return home the same day — no multi-week outstation deployments that take over your life.",
+      "Our projects span PAN India. Field engineers typically return home the same day — no multi-week outstation deployments that take over your life.",
   },
   {
     title: "Structured growth path",
