@@ -111,6 +111,8 @@ async function sendWhatsAppCloudApi(data: {
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
   const toNumber = process.env.WHATSAPP_TO_NUMBER ?? WHATSAPP_NUMBER;
   const templateName = process.env.WHATSAPP_TEMPLATE_NAME ?? "website_enquiry_alert";
+  const templateLanguage =
+    process.env.WHATSAPP_TEMPLATE_LANGUAGE ?? "en";
 
   if (!accessToken || !phoneNumberId) {
     return { ok: false, reason: "missing-env", usedFallback: false };
@@ -149,7 +151,7 @@ async function sendWhatsAppCloudApi(data: {
     type: "template",
     template: {
       name: templateName,
-      language: { code: "en_US" },
+      language: { code: templateLanguage },
       components: [
         {
           type: "body",
@@ -182,6 +184,8 @@ async function sendWhatsAppCloudApi(data: {
     // Template send did not produce a message ID — log details and try text.
     const metaErr = extractMetaError(resBody);
     console.warn("[contact] WhatsApp template send failed — falling back to text", {
+      templateName,
+      templateLanguage,
       templateStatus: res.status,
       templateErrorCode: metaErr.code,
       templateErrorMessage: metaErr.message,
